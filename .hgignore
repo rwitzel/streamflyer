@@ -1,0 +1,8 @@
+
+syntax: regexp
+target*
+syntax: glob
+.project
+streamflyer-core/.classpath
+streamflyer-experimental/.classpath
+streamflyer-fastregex/.classpath

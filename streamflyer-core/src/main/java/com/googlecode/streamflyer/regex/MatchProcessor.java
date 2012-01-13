@@ -1,0 +1,53 @@
+/**
+ * Copyright (C) 2011 rwoo@gmx.de
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.googlecode.streamflyer.regex;
+
+import java.util.regex.MatchResult;
+
+/**
+ * Processes a match provided by {@link RegexModifier}.
+ * 
+ * @author rwoo
+ * 
+ * @since 18.06.2011
+ */
+public interface MatchProcessor {
+
+    /**
+     * Processes the given match. The match processor is allowed to modify the
+     * given character buffer but it must not modify the characters before the
+     * first modifiable character in the buffer because the characters before
+     * that position are considered unmodifiable.
+     * 
+     * @param characterBuffer Must not be <code>null</code>.
+     * @param firstModifiableCharacterInBuffer TODO
+     * @param matchResult The match that is found in the given character buffer.
+     *        Must not be <code>null</code>.
+     * @return Returns
+     *         <ol>
+     *         <li>a position in the character buffer. This position must not be
+     *         smaller than the first modifiable character in the buffer. The
+     *         characters before the returned position shall be considered
+     *         unmodifiable by the {@link RegexModifier}.
+     *         <li>true if the matching shall be continued using the characters
+     *         already available in the buffer.
+     *         </ol>
+     */
+    public MatchProcessorResult process(StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, MatchResult matchResult);
+
+}

@@ -1,0 +1,326 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.googlecode.streamflyer</groupId>
+  <artifactId>streamflyer-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Streamflyer Parent</name>
+  <description>Allows editing an input stream</description>
+  <url>http://code.google.com/p/streamflyer/</url>
+  <inceptionYear>2011</inceptionYear><!-- used by maven-license-plugin -->
+
+  <!--  required by Sonatype OOS hosting -->
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <properties>
+    <!-- Prevents "[WARNING] Using platform encoding (Cp1252 actually) to copy filtered 
+      resources, i.e. build is platform dependent! See http://maven.apache.org/general.html#encoding-warning -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- needed for javadoc, license and so on -->
+    <streamflyer.parent>${project.basedir}</streamflyer.parent>
+  </properties>
+  
+  
+  <dependencies>
+    <!-- required runtime scope dependencies +++++++++++++++++++++++++++++++ -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.0</version>
+    </dependency>
+
+    <!-- required test scope dependencies ++++++++++++++++++++++++++++++++++ -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+
+    <plugins>
+    
+      <!-- define the target JVM -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <!-- @override annotation works for interface implementation from 1.6 oder higher -->
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      
+      <!-- define the version of the surefire-plugin (why?) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.7.2</version>
+      </plugin>
+      
+      <!-- http://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
+         mvn javadoc:jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8</version>
+        <!-- Default configuration for all reports -->
+        <configuration>
+          <show>private</show>
+          <use>true</use>
+          <overview>${streamflyer.parent}/src/main/javadoc/overview/overview.html</overview>
+          <linksource>true</linksource>
+          <docfilessubdirs>true</docfilessubdirs>
+          <stylesheetfile>${streamflyer.parent}/src/main/javadoc/stylesheet/stylesheet-modified.css</stylesheetfile>
+        </configuration>
+        <!--  http://maven.apache.org/plugins/maven-javadoc-plugin/examples/aggregate.html#Using_The_aggregate_Goals 
+          # generate the aggregated javadoc manually:
+          mvn site
+         -->
+        <executions>
+          <execution>
+            <id>aggregate</id>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+            <phase>site</phase>
+            <!-- Specific configuration for the aggregate report -->
+            <configuration>
+              <show>private</show>
+              <use>true</use>
+              <overview>${basedir}/src/main/javadoc/overview/overview.html</overview>
+              <linksource>true</linksource>
+              <!-- is obviously redundant (but why?) <javadocDirectory>${basedir}/src/main/javadoc</javadocDirectory> -->
+              <docfilessubdirs>true</docfilessubdirs>
+              <stylesheetfile>${basedir}/src/main/javadoc/stylesheet/stylesheet-modified.css</stylesheetfile>
+              <footer xml:space="preserve"><![CDATA[
+     
+<script type='text/javascript'>
+/* TODO move this code to a property file or something similar */
+
+/**
+  * @author http://www.javascriptkit.com/javatutors/loadjavascriptcss.shtml
+  */
+function loadjscssfile(filename, filetype){
+ if (filetype=='js') { /* if filename is a external JavaScript file */
+   var fileref=document.createElement('script');
+   fileref.setAttribute('type','text/javascript');
+   fileref.setAttribute('src', filename);
+ }
+ else if (filetype=='css') { /* if filename is an external CSS file */
+   var fileref=document.createElement('link');
+   fileref.setAttribute('rel', 'stylesheet');
+   fileref.setAttribute('type', 'text/css');
+   fileref.setAttribute('href', filename);
+ }
+ if (typeof fileref!='undefined') {
+   document.getElementsByTagName('head')[0].appendChild(fileref);
+ }
+}
+
+function pathToRoot(belowroot, url) {
+   var result = new RegExp('(.*[\\/])' + belowroot + '[\\/].*').exec(url);
+   if (result == null) {
+     return null; /* nothing found */
+   }
+   else {
+     return RegExp.$1;
+   }
+}
+
+/* prettyPrint(); does not work (as the code is not loaded yet?) */
+var tryToRunPrettyPrint = 5;
+function runPrettyPrint() {
+  if (typeof prettyPrint == 'function') {
+    if (console) {
+       console.log("prettyPrint is available and will be started now");
+    }
+    prettyPrint();
+    if (console) {
+        console.log("prettyPrint has been successfully applied");
+    }
+  }
+  else if (tryToRunPrettyPrint > 0) {
+    tryToRunPrettyPrint = tryToRunPrettyPrint - 1;
+    if (console) {
+        console.log("we sleep a bit before we try to run prettyPrint again");
+    }
+    window.setTimeout('runPrettyPrint();',500);
+  }
+}
+
+/* test: alert('roopath test:' + pathToRoot('org', 'http://apache.org/doc/org/2011/org/apache/xmlbeans/org-package.html')); */
+var rootpath = pathToRoot('com', '' + window.location.href );
+
+if (rootpath != null) {
+  /* var rootpath =  '../../../'; */
+  /* such an alert breaks the code. why? alert('rootpath: ' + rootpath); */
+  loadjscssfile(rootpath + 'doc-files/google-code-prettify/prettify.js', 'js');
+  loadjscssfile(rootpath + 'doc-files/google-code-prettify/prettify.css', 'css');
+
+  window.setTimeout('runPrettyPrint();',500);
+}
+else {
+    if (console) {
+        console.log("no rootpath found by analysing " + window.location.href);
+    }
+}
+</script>     
+      ]]>
+              </footer><!-- footer or bottom makes no difference for javascript -->
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+       <!-- 
+         add headers if "maven verify" fails (due to license:check) 
+        mvn license:format   -->
+        <plugin>
+          <groupId>com.google.code.maven-license-plugin</groupId>
+          <artifactId>maven-license-plugin</artifactId>
+          <version>1.4.0</version>
+          <configuration>
+            <header>${streamflyer.parent}/src/etc/license/header.txt</header>
+            <includes>
+              <include>src/**</include>
+            </includes>
+            <excludes>
+              <!--  exclude third-party files -->
+              <exclude>**/thirdparty/**</exclude>
+              <exclude>src/main/javadoc/doc-files/google-code-prettify/**</exclude>
+              <!--  stylesheet-modified.css excluded as most of the code is from the original doclet -->
+              <exclude>src/main/javadoc/stylesheet/stylesheet-modified.css</exclude>
+              <!-- automatically excluded :-) <exclude>src/license/header.txt</exclude>  -->
+            </excludes>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <useDefaultMapping>true</useDefaultMapping>
+            <properties>
+              <year>${project.inceptionYear}</year>
+              <email>rwoo@gmx.de</email>
+            </properties>
+            <encoding>UTF-8</encoding>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- automatic signing of created artifacts (at least the classes jar)
+           https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+           Then simply deploy your artifacts use normal maven command:
+           $ mvn clean deploy -Dgpg.passphrase=yourpassphrase
+           If you don’t specify the passphrase, you will be prompted for one.
+            -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      
+    </plugins>
+    
+    
+    <pluginManagement>
+    
+      <plugins>
+      
+        <!-- phase "package" should create the test.jar as well  -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>test-jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+   
+        <!-- phase "verify" should create the sources.jar and test-sources.jar as well  -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.1.2</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>jar-no-fork</goal>
+                <goal>test-jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      
+      </plugins>
+    
+    </pluginManagement>
+    
+  </build>
+
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+      <!-- 
+      "The Free Software Foundation considers the Apache License, Version 2.0
+       to be a free software license, compatible with version 3 of the GPL. 
+      
+       Apache 2 software can [...] be included in GPLv3 projects, 
+       because the GPLv3 license accepts our software into GPLv3 works."
+ 
+        [Source: http://www.apache.org/licenses/GPL-compatibility.html ]
+       -->
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>rwoo</id>
+      <name>Rod Woo</name>
+      <email>rwoo@gmx.de</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:hg:https://code.google.com/p/streamflyer/</connection>
+    <developerConnection>scm:hg:https://code.google.com/p/streamflyer/</developerConnection>
+    <url>http://code.google.com/p/streamflyer/source/browse/</url>
+  </scm>
+  
+  <modules>
+    <module>streamflyer-core</module>
+    <module>streamflyer-fastregex</module>
+    <module>streamflyer-experimental</module>
+  </modules>
+
+</project>
