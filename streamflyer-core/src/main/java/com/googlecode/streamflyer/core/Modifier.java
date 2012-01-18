@@ -33,9 +33,9 @@ package com.googlecode.streamflyer.core;
  * {@link Modifier#modify(StringBuilder, int, boolean) calls} the modifier the
  * next time.
  * <p>
- * Implementations of this interface should should inform the user about its
- * specific memory consumption because the most important feature of modifiers
- * should be their small memory foot-print.
+ * Implementations of this interface should inform the user about its specific
+ * memory consumption because the most important feature of modifiers should be
+ * their small memory foot-print.
  * 
  * @author rwoo
  * @since 06.05.2011
