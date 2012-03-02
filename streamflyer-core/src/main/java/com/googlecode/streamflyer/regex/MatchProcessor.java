@@ -18,6 +18,8 @@ package com.googlecode.streamflyer.regex;
 
 import java.util.regex.MatchResult;
 
+import com.googlecode.streamflyer.core.Modifier;
+
 /**
  * This interface is used by {@link RegexModifier}. This interface defines what
  * to do if the regular expression matches some text in the stream.
@@ -34,7 +36,8 @@ public interface MatchProcessor {
      * that position are considered unmodifiable.
      * 
      * @param characterBuffer Must not be <code>null</code>.
-     * @param firstModifiableCharacterInBuffer TODO
+     * @param firstModifiableCharacterInBuffer See the parameter with the same
+     *        name in {@link Modifier#modify(StringBuilder, int, boolean)}.
      * @param matchResult The match that is found in the given character buffer.
      *        Must not be <code>null</code>.
      * @return Returns

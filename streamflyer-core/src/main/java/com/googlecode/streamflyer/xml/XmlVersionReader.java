@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
  * available.
  * 
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public class XmlVersionReader extends BufferedReader {
@@ -55,7 +54,9 @@ public class XmlVersionReader extends BufferedReader {
 
     private String xmlVersion(String prolog) {
 
-        // FIXME should we do aware of BOMs here? yes because people don't care
+        // (Should we do aware of BOMs here? no. I know many people do not care
+        // but I consider it the responsibility of the caller to provide
+        // characters without the BOM.)
 
         Matcher matcher = Pattern.compile(
                 "<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*")

@@ -161,5 +161,5 @@ Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
  * @since 13.09.2011
  */
 public class Documentation {
-
+    // nothing to do here
 }
