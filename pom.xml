@@ -319,7 +319,6 @@ else {
   
   <modules>
     <module>streamflyer-core</module>
-    <module>streamflyer-fastregex</module>
     <module>streamflyer-experimental</module>
   </modules>
 
