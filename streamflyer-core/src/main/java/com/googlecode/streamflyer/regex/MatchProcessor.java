@@ -19,10 +19,10 @@ package com.googlecode.streamflyer.regex;
 import java.util.regex.MatchResult;
 
 /**
- * Processes a match provided by {@link RegexModifier}.
+ * This interface is used by {@link RegexModifier}. This interface defines what
+ * to do if the regular expression matches some text in the stream.
  * 
  * @author rwoo
- * 
  * @since 18.06.2011
  */
 public interface MatchProcessor {

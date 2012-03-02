@@ -30,10 +30,6 @@ import org.apache.commons.io.IOUtils;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.core.ModifyingWriter;
-import com.googlecode.streamflyer.regex.OnStreamMatcher;
-import com.googlecode.streamflyer.regex.OnStreamStandardMatcher;
-import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.ReplacingProcessor;
 
 /**
  * Tests {@link RegexModifier}.
@@ -43,24 +39,126 @@ import com.googlecode.streamflyer.regex.ReplacingProcessor;
  */
 public class RegexModifierTest extends TestCase {
 
-    public void testExampleFromHomepage() throws Exception {
+    public void testExampleFromHomepage_usage() throws Exception {
 
         // choose the character stream to modify
-        Reader originalReader = new StringReader(
-                " 1edit stream  2 edit \t \n stream 3 editstream");
+        Reader originalReader = new StringReader("edit stream");
 
         // select the modifier
-        @SuppressWarnings("deprecation")
-        Modifier myModifier = new RegexModifier("(?<=\\s)edit(\\s+?stream)",
-                Pattern.DOTALL, "modify$1", 1, 2048);
+        Modifier myModifier = new RegexModifier("edit stream", 0,
+                "modify stream");
 
         // create the modifying reader that wraps the original reader
         Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
 
         // use the modifying reader instead of the original reader
         String output = IOUtils.toString(modifyingReader);
-        assertEquals(" 1edit stream  2 modify \t \n stream 3 editstream",
-                output);
+        assertEquals("modify stream", output);
+    }
+
+    private String modify(String input, Modifier myModifier) throws Exception {
+        // choose the character stream to modify
+        Reader originalReader = new StringReader(input);
+
+        // create the modifying reader that wraps the original reader
+        Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
+
+        // use the modifying reader instead of the original reader
+        String output = IOUtils.toString(modifyingReader);
+
+        return output;
+    }
+
+    /**
+     * Asserts that two objects are not equals. Otherwise an
+     * AssertionFailedError is thrown.
+     */
+    static public void assertNotEquals(Object expected, Object actual) {
+        assertTrue(expected != actual || !expected.equals(actual));
+    }
+
+    public void testExampleFromHomepage_advancedExample_firstImprovement()
+            throws Exception {
+
+        // select the modifier
+        Modifier myModifier = new RegexModifier("edit stream", 0,
+                "modify stream");
+
+        // test: does not support other whitespace characters
+        assertNotEquals("modify\tstream", modify("edit\tstream", myModifier));
+        // test: does not support new line characters
+        assertNotEquals("modify\nstream", modify("edit\nstream", myModifier));
+
+        // first improvement
+        Modifier myModifier1 = new RegexModifier("edit\\sstream",
+                Pattern.DOTALL, "modify stream");
+
+        // test: supports other whitespace characters
+        assertEquals("modify stream", modify("edit\tstream", myModifier1));
+        // test: supports new line characters
+        assertEquals("modify stream", modify("edit\nstream", myModifier1));
+
+    }
+
+    public void testExampleFromHomepage_advancedExample_secondImprovement()
+            throws Exception {
+
+        // first improvement
+        Modifier myModifier1 = new RegexModifier("edit\\sstream",
+                Pattern.DOTALL, "modify stream");
+
+
+        // test: does not preserve type of whitespace characters
+        assertNotEquals("modify\tstream", modify("edit\tstream", myModifier1));
+        // test: does not support many whitespace characters
+        assertNotEquals("modify  stream", modify("edit  stream", myModifier1));
+
+        // second improvement
+        Modifier myModifier2 = new RegexModifier("edit(\\s++stream)",
+                Pattern.DOTALL, "modify$1");
+
+        // test: preserves type of whitespace characters
+        assertEquals("modify\tstream", modify("edit\tstream", myModifier2));
+        // test: supports many whitespace characters
+        assertEquals("modify  stream", modify("edit  stream", myModifier2));
+    }
+
+    public void testExampleFromHomepage_advancedExample_thirdImprovement()
+            throws Exception {
+
+        // second improvement
+        Modifier myModifier2 = new RegexModifier("edit(\\s++stream)",
+                Pattern.DOTALL, "modify$1");
+
+        // test: does not use look-behind
+        assertNotEquals("credit stream", modify("credit stream", myModifier2));
+
+        // third and final improvement
+        Modifier myModifier3 = new RegexModifier("(?<=\\s)edit(\\s++stream)",
+                Pattern.DOTALL, "modify$1", 1, 2048);
+
+        // test: uses look-behind
+        assertEquals("credit stream", modify("credit stream", myModifier3));
+    }
+
+    public void testExampleFromHomepage_advancedExample_greedyQuantifierOnDot()
+            throws Exception {
+
+        // Don't do this! This example uses a greedy quantifier on a dot
+        Modifier myModifier4 = new RegexModifier("edit.*stream", 0,
+                "modify stream");
+
+        // test: does not find the nearest match
+        assertNotEquals("modify stream modify stream",
+                modify("edit stream edit stream", myModifier4));
+
+        // modifier with greedy quantifier on whitespace
+        Modifier myModifier5 = new RegexModifier("edit\\s*stream", 0,
+                "modify stream");
+
+        // test: finds the nearest match
+        assertNotEquals("modify stream modify stream",
+                modify("edit stream edit stream", myModifier5));
     }
 
     public void learningTest_matchingAtZeroLengthRegion() {

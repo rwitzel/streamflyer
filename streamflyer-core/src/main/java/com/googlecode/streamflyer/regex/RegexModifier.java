@@ -24,6 +24,7 @@ import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.util.ModifyingReaderFactory;
+import com.googlecode.streamflyer.util.ModifyingWriterFactory;
 
 /**
  * Finds text that matches a given regular expression. The match is processed by
@@ -60,14 +61,46 @@ public class RegexModifier implements Modifier {
     //
 
     //
+    // constructors
     //
-    //
+
     /**
-     * @deprecated Use
-     *             {@link #RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
-     *             or {@link ModifyingReaderFactory} instead.
+     * Like {@link RegexModifier#RegexModifier(String, int, String, int, int)}
+     * but uses defaults for <code>minimumLengthOfLookBehind</code> (zero) and
+     * <code>newNumberOfChars</code> (2048).
      */
-    @Deprecated
+    public RegexModifier(String regex, int flags, String replacement) {
+        this(regex, flags, replacement, 0, 2048);
+    }
+
+    /**
+     * Creates a modifier that matches a regular expression on character streams
+     * and replaces the matches.
+     * <p>
+     * This modifier uses {@link OnStreamStandardMatcher} which is not the
+     * fastest implementation of {@link OnStreamMatcher}. If you want to use a
+     * faster matcher, use
+     * {@link #RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
+     * instead.
+     * <p>
+     * A more convenient use of a {@link RegexModifier} is provided by the
+     * {@link ModifyingReaderFactory} respectively
+     * {@link ModifyingWriterFactory}.
+     * 
+     * @param regex the regular expression that describe the text that shall be
+     *        replaced. See {@link Pattern#compile(String, int)}.
+     * @param flags the flags that are to use when the regex is applied on the
+     *        character stream. See {@link Pattern#compile(String, int)}.
+     * @param replacement the replacement for the text that is matched via
+     *        <code>regex</code>. See
+     *        {@link Matcher#appendReplacement(StringBuffer, String)}.
+     * @param minimumLengthOfLookBehind See
+     *        {@link RegexModifier#RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
+     *        .
+     * @param newNumberOfChars See
+     *        {@link RegexModifier#RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
+     *        .
+     */
     public RegexModifier(String regex, int flags, String replacement,
             int minimumLengthOfLookBehind, int newNumberOfChars) {
 
@@ -78,13 +111,20 @@ public class RegexModifier implements Modifier {
     }
 
     /**
-     * @param matcher
-     * @param replacement
-     * @param minimumLengthOfLookBehind
-     * @param newNumberOfChars This should not be smaller than the length of the
-     *        characters sequence the {@link #pattern} needs to match properly.
-     *        In case you want to match more than once, the value should be
-     *        higher.
+     * Creates a modifier that matches a regular expression on character streams
+     * and does 'something' if matches are found.
+     * <p>
+     * 
+     * @param matcher Matches a regular expression on a {@link CharSequence}.
+     * @param matchProcessor Defines what to do if the regular expression
+     *        matches some text in the stream.
+     * @param minimumLengthOfLookBehind See
+     *        {@link AfterModification#getNewMinimumLengthOfLookBehind()}.
+     * @param newNumberOfChars See
+     *        {@link AfterModification#getNewNumberOfChars()}. This should not
+     *        be smaller than the length of the characters sequence the
+     *        {@link #pattern} needs to match properly. In case you want to
+     *        match more than once, the value should be higher.
      */
     public RegexModifier(OnStreamMatcher matcher,
             MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
