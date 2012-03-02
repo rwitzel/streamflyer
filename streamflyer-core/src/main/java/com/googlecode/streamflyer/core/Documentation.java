@@ -60,6 +60,13 @@ import com.googlecode.streamflyer.xml.XmlVersionModifier;
  * character streams.
  * <p>
  * Use this library only if you use Java 6 or higher.
+ * <p>
+ * If you want to optimize the speed of the stream modifications and you don't
+ * care of memory consumption (assuming you are in the cloud), then load the
+ * entire content of the stream into the memory and modify the stream content
+ * there. In this case this library is not the right choice for you because this
+ * library minimizes the use of memory at the expense of a reduced speed of the
+ * stream modifications.
  * <h3 id="g3">2. How do I modify character streams?</h3>
  * <p>
  * First you have to implement a callback that makes the desired modifications
