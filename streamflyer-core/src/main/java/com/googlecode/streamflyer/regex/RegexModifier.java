@@ -65,6 +65,13 @@ public class RegexModifier implements Modifier {
     //
 
     /**
+     * Only for subclasses.
+     */
+    protected RegexModifier() {
+        super();
+    }
+
+    /**
      * Like {@link RegexModifier#RegexModifier(String, int, String, int, int)}
      * but uses defaults for <code>minimumLengthOfLookBehind</code> (zero) and
      * <code>newNumberOfChars</code> (2048).
