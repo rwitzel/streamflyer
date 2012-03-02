@@ -21,17 +21,10 @@ import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
-import com.googlecode.streamflyer.core.AfterModification;
-import com.googlecode.streamflyer.regex.OnStreamMatcher;
-import com.googlecode.streamflyer.regex.OnStreamStandardMatcher;
-import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.ReplacingProcessor;
-
 /**
  * Tests {@link RegexModifier}.
  * 
  * @author rwoo
- * 
  * @since 23.06.2011
  */
 public class RegexModifierUnitTest extends TestCase {
@@ -89,28 +82,20 @@ public class RegexModifierUnitTest extends TestCase {
     }
 
 
-    private void assertModify(StringBuilder in_characterBuffer,
-            int in_firstModifiableCharacterInBuffer, boolean in_endOfStreamHit,
-            AfterModification expectedResult,
-            String expectedCharacterBufferContent,
-            String expectedCharacterBufferCapacity) {
-        // TODO
-    }
-
     protected OnStreamMatcher createMatcher(String regex) {
         Matcher matcher = Pattern.compile(regex).matcher("");
         matcher.useTransparentBounds(true);
         return new OnStreamStandardMatcher(matcher);
     }
 
-    protected RegexModifierWithStatistics createModifier(String regex,
-            String replacement, int minimumLengthOfLookBehind,
+    protected RegexModifier createModifier(String regex, String replacement,
+            int minimumLengthOfLookBehind,
             int requestedCapacityOfCharacterBuffer) {
         // create matcher
         OnStreamMatcher matcher = createMatcher(regex);
 
         // create modifier
-        RegexModifierWithStatistics modifier = new RegexModifierWithStatistics( //
+        RegexModifier modifier = new RegexModifier( //
                 matcher, //
                 new ReplacingProcessor(replacement), //
                 minimumLengthOfLookBehind, //

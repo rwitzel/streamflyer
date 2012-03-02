@@ -314,14 +314,14 @@ public class RegexModifierTest extends TestCase {
         return new OnStreamStandardMatcher(matcher);
     }
 
-    protected RegexModifierWithStatistics createModifier(String regex,
-            String replacement, int minimumLengthOfLookBehind,
+    protected RegexModifier createModifier(String regex, String replacement,
+            int minimumLengthOfLookBehind,
             int requestedCapacityOfCharacterBuffer) {
         // create matcher
         OnStreamMatcher matcher = createMatcher(regex);
 
         // create modifier
-        RegexModifierWithStatistics modifier = new RegexModifierWithStatistics( //
+        RegexModifier modifier = new RegexModifier( //
                 matcher, //
                 new ReplacingProcessor(replacement), //
                 minimumLengthOfLookBehind, //
@@ -336,9 +336,8 @@ public class RegexModifierTest extends TestCase {
             throws Exception {
 
         // create modifier
-        RegexModifierWithStatistics modifier = createModifier(regex,
-                replacement, minimumLengthOfLookBehind,
-                requestedCapacityOfCharacterBuffer);
+        RegexModifier modifier = createModifier(regex, replacement,
+                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
 
         // create reader
         Reader reader = new ModifyingReader(new BufferedReader(
@@ -368,9 +367,8 @@ public class RegexModifierTest extends TestCase {
             throws Exception {
 
         // create modifier
-        RegexModifierWithStatistics modifier = createModifier(regex,
-                replacement, minimumLengthOfLookBehind,
-                requestedCapacityOfCharacterBuffer);
+        RegexModifier modifier = createModifier(regex, replacement,
+                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
 
         // setup: create modifier and writer
         StringWriter stringWriter = new StringWriter();

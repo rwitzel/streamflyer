@@ -15,8 +15,6 @@
  */
 package com.googlecode.streamflyer.core;
 
-import com.googlecode.streamflyer.core.AfterModification;
-import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.util.statistics.StatisticsModificationFactory;
 
@@ -28,7 +26,6 @@ import com.googlecode.streamflyer.util.statistics.StatisticsModificationFactory;
  * rename the modifier
  * 
  * @author rwoo
- * 
  * @since 28.06.2011
  */
 class IdleModifier implements Modifier {
