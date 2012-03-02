@@ -21,17 +21,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.input.XmlStreamReader;
 
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
-import com.googlecode.streamflyer.regex.OnStreamMatcher;
-import com.googlecode.streamflyer.regex.OnStreamStandardMatcher;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.ReplacingProcessor;
 import com.googlecode.streamflyer.xml.InvalidXmlCharacterModifier;
 import com.googlecode.streamflyer.xml.XmlVersionModifier;
 import com.googlecode.streamflyer.xml.XmlVersionReader;
@@ -41,7 +36,6 @@ import com.googlecode.streamflyer.xml.XmlVersionReader;
  * defaults.
  * 
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public class ModifyingReaderFactory {
@@ -113,17 +107,9 @@ public class ModifyingReaderFactory {
             input = new BufferedReader(input);
         }
 
-        // create matcher
-        Matcher matcher2 = Pattern.compile(regex, flags).matcher("");
-        matcher2.useTransparentBounds(true);
-        OnStreamMatcher matcher = new OnStreamStandardMatcher(matcher2);
-
         // create modifier
-        Modifier modifier = new RegexModifier( //
-                matcher, //
-                new ReplacingProcessor(replacement), //
-                minimumLengthOfLookBehind, //
-                requestedCapacityOfCharacterBuffer);
+        Modifier modifier = new RegexModifier(regex, flags, replacement,
+                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
 
         // create and return reader
         return new ModifyingReader(input, modifier);

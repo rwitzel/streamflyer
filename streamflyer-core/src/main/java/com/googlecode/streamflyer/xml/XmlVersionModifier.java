@@ -40,7 +40,6 @@ import com.googlecode.streamflyer.util.ModificationFactory;
  * is given by {@link #INITIAL_NUMBER_OF_CHARACTERS}.
  * 
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public class XmlVersionModifier implements Modifier {
@@ -132,7 +131,8 @@ public class XmlVersionModifier implements Modifier {
 
         case PROLOG_REQUEST:
 
-            // TODO test for BOM because people don't care ...
+            // (Should we do aware of BOMs here? No. I consider it the
+            // responsibility of the caller to provide characters without BOM.)
 
             Matcher matcher = Pattern.compile(
                     "<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*")

@@ -31,10 +31,6 @@ import java.util.regex.Pattern;
  */
 public class XmlVersionReader extends BufferedReader {
 
-    //
-    // injected properties
-    //
-
     private String xmlVersion;
 
     //
@@ -54,9 +50,8 @@ public class XmlVersionReader extends BufferedReader {
 
     private String xmlVersion(String prolog) {
 
-        // (Should we do aware of BOMs here? no. I know many people do not care
-        // but I consider it the responsibility of the caller to provide
-        // characters without the BOM.)
+        // (Should we do aware of BOMs here? No. I consider it the
+        // responsibility of the caller to provide characters without BOM.)
 
         Matcher matcher = Pattern.compile(
                 "<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*")
@@ -65,7 +60,7 @@ public class XmlVersionReader extends BufferedReader {
             return matcher.group(1);
         }
         else {
-            // TODO default?
+            // the default, see class comment.
             return "1.0";
         }
     }
@@ -97,7 +92,8 @@ public class XmlVersionReader extends BufferedReader {
     //
 
     /**
-     * @return Returns the {@link #xmlVersion}.
+     * @return Returns the XML version read from the character stream. If there
+     *         is XML prolog given, then version "1.0" is assumed and returned.
      */
     public String getXmlVersion() {
         return xmlVersion;

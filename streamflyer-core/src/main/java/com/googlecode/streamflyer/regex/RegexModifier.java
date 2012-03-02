@@ -30,7 +30,7 @@ import com.googlecode.streamflyer.util.ModifyingWriterFactory;
  * Finds text that matches a given regular expression. The match is processed by
  * the given {@link MatchProcessor}.
  * <p>
- * TODO Memory consumption in detail including greedy operators
+ * TODO please doc memory consumption in detail including greedy operators
  * <p>
  * TODO explain lethal regex like "(look-behind expression)()".
  * 
