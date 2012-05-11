@@ -20,10 +20,9 @@ package com.googlecode.streamflyer.regex;
 /**
  * Result of
  * {@link MatchProcessor#process(StringBuilder, int, java.util.regex.MatchResult)}
- * . The type is documented there. .
+ * . The type is documented there.
  * 
  * @author rwoo
- * 
  * @since 18.06.2011
  */
 public class MatchProcessorResult {

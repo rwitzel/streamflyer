@@ -54,10 +54,11 @@ import com.googlecode.streamflyer.thirdparty.ZzzValidate;
  * {@link #getNewNumberOfChars() input} is requested.
  * <li>STOP - Do not skip any character - This requires that the end of stream
  * is hit and no modifiable characters are left in the buffer.
+ * <li>(FETCH_MORE_INPUT - is a synonym for SKIP if some characters can be
+ * skipped. Otherwise it is a MODIFY AGAIN IMMEDIATELY.)
  * </ol>
  * 
  * @author rwoo
- * 
  * @since 03.06.2011
  */
 public class AfterModification {

@@ -16,19 +16,222 @@
 
 package com.googlecode.streamflyer.regex;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import junit.framework.TestCase;
+import com.googlecode.streamflyer.core.AfterModification;
+import com.googlecode.streamflyer.util.StringUtils;
 
 /**
- * Tests {@link RegexModifier}.
+ * Tests {@link RegexModifier} (white-box tests).
  * 
  * @author rwoo
  * @since 23.06.2011
  */
-public class RegexModifierUnitTest extends TestCase {
+public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
+    public class RegexModifierWithCheckpoints extends RegexModifier {
+
+        protected List<Object[]> __passedCheckpoints = new ArrayList<Object[]>();
+
+        public RegexModifierWithCheckpoints(OnStreamMatcher matcher,
+                MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
+                int newNumberOfChars) {
+            super(matcher, matchProcessor, minimumLengthOfLookBehind,
+                    newNumberOfChars);
+        }
+
+        /**
+         * This method is called if a certain line of code is reached
+         * ("checkpoint").
+         * <p>
+         * This method should be called only if the modifier is tested.
+         * Otherwise you might experience a severe performance penalties.
+         * 
+         * @param checkpointDescription A list of objects describing the
+         *        checkpoint. The objects should be given as name-value-pairs.
+         * @return Returns true. This allows you to use this method as
+         *         side-effect in Java assertions.
+         */
+        @Override
+        protected boolean __checkpoint(Object... checkpointDescription) {
+            for (int index = 0; index < checkpointDescription.length; index = index + 2) {
+                if (checkpointDescription[index + 1] instanceof StringBuilder) {
+                    checkpointDescription[index + 1] = ((StringBuilder) checkpointDescription[index + 1])
+                            .toString();
+                }
+            }
+            return __passedCheckpoints.add(checkpointDescription);
+        }
+
+        /**
+         * @return Returns the {@link #__passedCheckpoints}.
+         */
+        public List<Object[]> __passedCheckpoints() {
+            return __passedCheckpoints;
+        }
+
+        /**
+         * @see java.lang.Object#toString()
+         */
+        @Override
+        public String toString() {
+            return super.toString() + "[sizeOf(__passedCheckpoints)="
+                    + __passedCheckpoints.size() + "]";
+        }
+
+    }
+
+    @Override
+    protected RegexModifier createModifier(String regex, String replacement,
+            int minimumLengthOfLookBehind,
+            int requestedCapacityOfCharacterBuffer) {
+        // create matcher
+        OnStreamMatcher matcher = createMatcher(regex);
+
+        // create modifier
+        RegexModifier modifier = new RegexModifierWithCheckpoints( //
+                matcher, //
+                new ReplacingProcessor(replacement), //
+                minimumLengthOfLookBehind, //
+                requestedCapacityOfCharacterBuffer);
+
+        return modifier;
+    }
+
+    /**
+     * @see com.googlecode.streamflyer.regex.AbstractRegexModifierTest#assertReplacementByReader(java.lang.String,
+     *      java.lang.String, java.lang.String, int, int, java.lang.String)
+     */
+    @Override
+    protected RegexModifierWithCheckpoints assertReplacementByReader(
+            String input, String regex, String replacement,
+            int minimumLengthOfLookBehind,
+            int requestedCapacityOfCharacterBuffer, String expectedOutput)
+            throws Exception {
+        return (RegexModifierWithCheckpoints) super.assertReplacementByReader(
+                input, regex, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer, expectedOutput);
+    }
+
+    public void playground() throws Exception {
+
+        List<Object[]> passedCheckpoints = assertReplacementByReader("abcdedg",
+                "de", "DE", 0, 2, "abcDEdg").__passedCheckpoints();
+        print(passedCheckpoints);
+
+    }
+
+    private void print(List<Object[]> passedCheckpoints) {
+        // printXml(passedCheckpoints);
+        // printYaml(passedCheckpoints);
+        printNice(passedCheckpoints);
+    }
+
+    @SuppressWarnings("unused")
+    private void printXml(List<Object[]> passedCheckpoints) {
+
+        // XML:
+        int checkpointIndex = 0;
+        for (Object[] passedCheckpoint : passedCheckpoints) {
+
+            checkpointIndex++;
+            System.out.println( //
+                    "<checkpoint index=\"" + checkpointIndex + "\">");
+
+            for (int index = 0; index < passedCheckpoint.length; index = index + 2) {
+                String name = "" + passedCheckpoint[index];
+                String value = "" + passedCheckpoint[index + 1];
+
+                System.out.println("  <" + name + ">" + value + "</" + name
+                        + ">");
+            }
+
+            System.out.println("</checkpoint>");
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private void printYaml(List<Object[]> passedCheckpoints) {
+
+        // YAML-like:
+        int checkpointIndex = 0;
+        for (Object[] passedCheckpoint : passedCheckpoints) {
+
+            checkpointIndex++;
+            System.out.println( //
+                    "checkpoint: &" + checkpointIndex);
+
+            for (int index = 0; index < passedCheckpoint.length; index = index + 2) {
+                String name = "" + passedCheckpoint[index];
+                String value = "" + passedCheckpoint[index + 1];
+
+                System.out.println("  " + name + ": " + value);
+            }
+        }
+    }
+
+    private void printNice(List<Object[]> passedCheckpoints) {
+
+        //
+        int checkpointIndex = 0;
+        for (Object[] passedCheckpoint : passedCheckpoints) {
+
+            checkpointIndex++;
+
+            Map<String, Object> data = new HashMap<String, Object>();
+            for (int index = 0; index < passedCheckpoint.length; index = index + 2) {
+                String name = "" + passedCheckpoint[index];
+                Object value = passedCheckpoint[index + 1];
+                data.put(name, value);
+            }
+
+            // first line:
+            // checkpoint number,
+            // checkpoint name,
+            // look-behind width,
+            // total character size,
+            // buffer content,
+            // "EOS" if end of stream hit
+            String name = (String) data.get("name");
+            Integer minLen = (Integer) data.get("minLen");
+            String characterBuffer = (String) data.get("characterBuffer");
+            // System.out.println(characterBuffer + " " + minLen + " " + );
+            Boolean endOfStreamHit = (Boolean) data.get("endOfStreamHit");
+            System.out.println(String.format("%3d %16s | %3d %5d '%s' %s",
+                    checkpointIndex, name, minLen, characterBuffer.length(),
+                    characterBuffer.toString(), endOfStreamHit ? "EOS" : "")); //
+
+            // second line for 'AfterModification':
+            AfterModification mod = (AfterModification) data
+                    .get("afterModification");
+            String newBuffer;
+            Integer newMinLen;
+            Integer newCharLen;
+            String modificationType;
+            if (mod == null) {
+                newBuffer = StringUtils.repeat(" ", characterBuffer.length());
+                newMinLen = -1;
+                newCharLen = -1;
+                modificationType = "-";
+            }
+            else {
+                newBuffer = StringUtils.repeat("_",
+                        mod.getNewMinimumLengthOfLookBehind())
+                        + StringUtils.repeat("X",
+                                mod.getNumberOfCharactersToSkip())
+                        + StringUtils.repeat("?", characterBuffer.length()
+                                - mod.getNumberOfCharactersToSkip() - minLen);
+                newMinLen = mod.getNewMinimumLengthOfLookBehind();
+                newCharLen = mod.getNewNumberOfChars();
+                modificationType = mod.getMessageType();
+            }
+            System.out.println(String.format("%3s %16s | %3d %5d '%s'", "",
+                    modificationType, newMinLen, newCharLen, newBuffer)); //
+        }
+    }
 
     public void ttttestInit_optimalCapacity() throws Exception {
         // expected: after the first modification, the capacity of the buffer
@@ -81,27 +284,5 @@ public class RegexModifierUnitTest extends TestCase {
         // TODO
     }
 
-
-    protected OnStreamMatcher createMatcher(String regex) {
-        Matcher matcher = Pattern.compile(regex).matcher("");
-        matcher.useTransparentBounds(true);
-        return new OnStreamStandardMatcher(matcher);
-    }
-
-    protected RegexModifier createModifier(String regex, String replacement,
-            int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer) {
-        // create matcher
-        OnStreamMatcher matcher = createMatcher(regex);
-
-        // create modifier
-        RegexModifier modifier = new RegexModifier( //
-                matcher, //
-                new ReplacingProcessor(replacement), //
-                minimumLengthOfLookBehind, //
-                requestedCapacityOfCharacterBuffer);
-
-        return modifier;
-    }
 
 }

@@ -30,9 +30,49 @@ import com.googlecode.streamflyer.util.ModifyingWriterFactory;
  * Finds text that matches a given regular expression. The match is processed by
  * the given {@link MatchProcessor}.
  * <p>
- * TODO please doc memory consumption in detail including greedy operators
+ * <h6>Memory consumption</h6>
  * <p>
- * TODO explain lethal regex like "(look-behind expression)()".
+ * The memory consumption of this modifier does not exceed the size of the
+ * longest match by factor three. EXAMPLE: Assume in your stream the longest
+ * match contains 100K characters. Then the internally used buffer is at no time
+ * larger than 300K characters. But this rule does not apply if you use greedy
+ * operators. If you use greedy operators, the entire stream content might be
+ * loaded into the memory at once. The web page of this project gives <a href=
+ * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions"
+ * >more details</a>.
+ * <p>
+ * <h6>A summary of the internal algorithm</h6>
+ * <p>
+ * Is there a match in the buffer?
+ * <ul>
+ * <li>we found a match
+ * <ul>
+ * <li>entire buffer matches and end of stream not hit yet -> the match might
+ * change with more input -> FETCH_MORE_INPUT (<i>match_open</i>)
+ * <li>replace the matched content, and then
+ * <ul>
+ * <li>the match processor decides that no skip is needed yet -> continue with
+ * the existing buffer content -> try another match (<i>match_n_continue</i>)
+ * <li>skip needed but no characters left in the buffer after the replacement ->
+ * MODIFY_AGAIN_IMMEDIATELY is only thing we can do (<i>match_n_refill</i>)
+ * <li>skip needed and there are characters left in the buffer -> SKIP
+ * (<i>match_n_skip</i>)
+ * </ul>
+ * </ul>
+ * <li>we haven't found a match.
+ * <ul>
+ * <li>By looking for matches (including the empty string) that start in the
+ * range [from, maxFrom], the end of the buffer is hit.
+ * <ul>
+ * <li>end of stream hit -> no match possible -> SKIP the entire buffer
+ * (<i>nomatch_eos</i>)
+ * <li>end of stream not hit -> match might be possible or end of buffer is hit
+ * -> FETCH_MORE_INPUT cannot be wrong (<i>nomatch_fetch</i>)
+ * </ul>
+ * <li>We did not match a single character or the empty string -> SKIP the
+ * entire buffer (<i>nomatch_skip</i>)
+ * </ul>
+ * </ul>
  * 
  * @author rwoo
  * @since 18.06.2011
@@ -54,7 +94,6 @@ public class RegexModifier implements Modifier {
     protected OnStreamMatcher matcher;
 
     protected int newNumberOfChars = -1;
-
 
     //
     // state
@@ -177,11 +216,12 @@ public class RegexModifier implements Modifier {
                 minFrom = firstModifiableCharacterInBuffer;
             }
 
+            // we have to restrict maxFrom in order to prevent that the
+            // requested number of characters increases more and more
             int maxFrom = firstModifiableCharacterInBuffer + newNumberOfChars;
-            if (maxFrom > characterBuffer.length()) {
-                // we have to restrict maxFrom in order to prevent that the
-                // requested number of characters increases more and more
 
+            // adjust maxFrom if it is bigger than the given buffer
+            if (maxFrom > characterBuffer.length()) {
                 // this is NOT set to characterBuffer.length() -1 by intention
                 // as a regular expression might match on the zero length string
                 // (but with positive look-behind)!
@@ -201,18 +241,29 @@ public class RegexModifier implements Modifier {
                 // (matcher.requireEnd()) or into a longer one (greedy
                 // operator)?
                 if (matcher.hitEnd() && !endOfStreamHit) {
-                    // (UC11000) yes, it could -> we need more input
+                    // (match_open) yes, it could -> we need more input
+
 
                     int numberOfCharactersToSkip = matcher.lastFrom()
                             - firstModifiableCharacterInBuffer;
 
+
                     // read more input (skip some characters if possible)
-                    return factory.fetchMoreInput(numberOfCharactersToSkip,
-                            characterBuffer, firstModifiableCharacterInBuffer,
-                            endOfStreamHit);
+                    AfterModification mod = factory.fetchMoreInput(
+                            numberOfCharactersToSkip, characterBuffer,
+                            firstModifiableCharacterInBuffer, endOfStreamHit);
+
+                    assert __checkpoint( //
+                            "name", "match_open", //
+                            "minLen", firstModifiableCharacterInBuffer, //
+                            "characterBuffer", characterBuffer, //
+                            "endOfStreamHit", endOfStreamHit, //
+                            "afterModification", mod);
+
+                    return mod;
                 }
                 else {
-                    // no -> thus we can use this match
+                    // no -> thus we can use this match -> process the match
 
                     // process the match
                     MatchResult matchResult = matcher; // TODO .toMatchResult()?
@@ -223,10 +274,22 @@ public class RegexModifier implements Modifier {
                     minFrom = matchProcessorResult
                             .getFirstModifiableCharacterInBuffer();
 
-                    // match again? (even for minFrom == maxFrom we try a match)
+                    // match again without skip? (even for minFrom == maxFrom we
+                    // try a match) (minFrom <= maxFrom is needed so that the
+                    // buffer does not increase if the replacement is longer
+                    // than the replaced string, i.e. minFrom <= maxFrom means
+                    // that a SKIP is needed)
                     if (minFrom <= maxFrom
                             && matchProcessorResult.isContinueMatching()) {
-                        // (UC12100)
+                        // (match_n_continue) no skip needed yet -> continue
+                        // matching on the existing buffer content
+
+                        assert __checkpoint( //
+                                "name", "match_n_continue", //
+                                "minLen", firstModifiableCharacterInBuffer, //
+                                "characterBuffer", characterBuffer, //
+                                "endOfStreamHit", endOfStreamHit, //
+                                "afterModification", null);
 
                         // We try the next match on the modified input, i.e.
                         // not match only once -> next loop
@@ -234,29 +297,56 @@ public class RegexModifier implements Modifier {
                     }
                     else {
 
-                        // (UC12200)
-
-                        // TODO please doc, this is IMPORTANT!
+                        // we shall not continue matching on the
+                        // existing buffer content but skip (keep the buffer
+                        // small)
 
                         int numberOfCharactersToSkip = minFrom
                                 - firstModifiableCharacterInBuffer;
 
                         if (numberOfCharactersToSkip == 0) {
+                            // (match_n_refill) there are no characters left in
+                            // the buffer after the replacement ->
+                            // MODIFY_AGAIN_IMMEDIATELY is only thing we can do
+                            // (the match processor implementation must not
+                            // cause an endless loop)
+
                             // TODO passing false for endOfStreamHit is ugly!!!
                             // we should offer a new method in
                             // ModificationFactory, something like
                             // continueAfterModification(...) that chooses the
                             // appropriate action. the following code is always
                             // a MODIFY_AGAIN_IMMEDIATELY
-                            return factory.fetchMoreInput(
+                            AfterModification mod = factory.fetchMoreInput(
                                     numberOfCharactersToSkip, characterBuffer,
                                     firstModifiableCharacterInBuffer, false);
+
+                            assert __checkpoint( //
+                                    "name", "match_n_refill", //
+                                    "minLen", firstModifiableCharacterInBuffer, //
+                                    "characterBuffer", characterBuffer, //
+                                    "endOfStreamHit", endOfStreamHit, //
+                                    "afterModification", mod);
+
+                            return mod;
                         }
                         else {
-                            return factory.skipOrStop(numberOfCharactersToSkip,
-                                    characterBuffer,
+                            // (match_n_skip) there are characters left in
+                            // the buffer -> SKIP
+
+                            AfterModification mod = factory.skipOrStop(
+                                    numberOfCharactersToSkip, characterBuffer,
                                     firstModifiableCharacterInBuffer,
                                     endOfStreamHit);
+
+                            assert __checkpoint( //
+                                    "name", "match_n_skip", //
+                                    "minLen", firstModifiableCharacterInBuffer, //
+                                    "characterBuffer", characterBuffer, //
+                                    "endOfStreamHit", endOfStreamHit, //
+                                    "afterModification", mod);
+
+                            return mod;
                         }
                     }
 
@@ -265,60 +355,105 @@ public class RegexModifier implements Modifier {
             else {
                 // we haven't found a match
 
-                // did we match at least one character in range [from, maxFrom]?
-                // TODO matcher.lastFrom() < maxFrom or matcher.lastFrom() <=
-                // maxFrom? add a test!
+                // By looking for matches (including the empty string) that
+                // start in the range [from, maxFrom], is the end of the buffer
+                // hit?
                 if (matcher.lastFrom() <= maxFrom) {
-                    // yes, we are matching something (at least one character)
-
-                    // we did no match and we hit the end of the input from a
-                    // position that is not the at the end of the input.
-                    // Therefore, we must assume that more input could find a
-                    // match
+                    // yes, the end of the buffer was hit
 
                     // can we get more input?
                     if (endOfStreamHit) {
-                        // (UC21100) no, in the entire stream we will not found
-                        // more matches that start in range [from,
+                        // (nomatch_eos) no, in the entire stream we will not
+                        // found more matches that start in range [from,
                         // maxFrom] -> skip the characters from range [from,
                         // maxFrom]
 
                         int numberOfCharactersToSkip = maxFrom
                                 - firstModifiableCharacterInBuffer;
-                        return factory.skipOrStop(numberOfCharactersToSkip,
-                                characterBuffer,
+                        AfterModification mod = factory.skipOrStop(
+                                numberOfCharactersToSkip, characterBuffer,
                                 firstModifiableCharacterInBuffer,
                                 endOfStreamHit);
+
+                        assert __checkpoint( //
+                                "name", "nomatch_eos", //
+                                "minLen", firstModifiableCharacterInBuffer, //
+                                "characterBuffer", characterBuffer, //
+                                "endOfStreamHit", endOfStreamHit, //
+                                "afterModification", mod);
+
+                        return mod;
 
                     }
                     else {
-                        // yes > we should fetch more input (because end
-                        // of stream is not hit yet)
+                        // (nomatch_fetch) yes > we should fetch more input
+                        // (because end of stream is not hit yet)
+
+                        // if maxFrom == characterBuffer.length() and lastFrom()
+                        // == maxFrom we cannot decide whether this is really an
+                        // open match or rather a not a match at all. But by
+                        // skipping the characters in front of lastFrom() and
+                        // fetching more input we cannot do anything wrong
+
 
                         int numberOfCharactersToSkip = matcher.lastFrom()
                                 - firstModifiableCharacterInBuffer;
-                        return factory.fetchMoreInput(numberOfCharactersToSkip,
-                                characterBuffer,
+                        AfterModification mod = factory.fetchMoreInput(
+                                numberOfCharactersToSkip, characterBuffer,
                                 firstModifiableCharacterInBuffer,
                                 endOfStreamHit);
 
+                        assert __checkpoint( //
+                                "name", "nomatch_fetch", //
+                                "minLen", firstModifiableCharacterInBuffer, //
+                                "characterBuffer", characterBuffer, //
+                                "endOfStreamHit", endOfStreamHit, //
+                                "afterModification", mod);
+
+                        return mod;
                     }
 
                 }
                 else { // matcher.lastFrom() == maxFrom + 1
 
-                    // (UC22000) no, we are matching not a single character
+                    // (nomatch_skip) no, we are matching not a single character
 
                     // -> skip the characters from range [from, maxFrom]
                     int numberOfCharactersToSkip = maxFrom
                             - firstModifiableCharacterInBuffer;
-                    return factory.skipOrStop(numberOfCharactersToSkip,
-                            characterBuffer, firstModifiableCharacterInBuffer,
-                            endOfStreamHit);
+                    AfterModification mod = factory.skipOrStop(
+                            numberOfCharactersToSkip, characterBuffer,
+                            firstModifiableCharacterInBuffer, endOfStreamHit);
+
+                    assert __checkpoint( //
+                            "name", "nomatch_skip", //
+                            "minLen", firstModifiableCharacterInBuffer, //
+                            "characterBuffer", characterBuffer, //
+                            "endOfStreamHit", endOfStreamHit, //
+                            "afterModification", mod);
+
+                    return mod;
                 }
             }
         }
 
+    }
+
+    /**
+     * This method is called if a certain line of code is reached
+     * ("checkpoint").
+     * <p>
+     * This method should be called only if the modifier is tested. Otherwise
+     * you might experience performance penalties.
+     * 
+     * @param checkpointDescription A list of objects describing the checkpoint.
+     *        The objects should be given as name-value-pairs.
+     * @return Returns true. This allows you to use this method as side-effect
+     *         in Java assertions.
+     */
+    protected boolean __checkpoint(Object... checkpointDescription) {
+        // nothing to do here
+        return true;
     }
 
     /**

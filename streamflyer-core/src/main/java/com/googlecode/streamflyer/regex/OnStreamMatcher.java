@@ -65,7 +65,6 @@ import java.util.regex.Matcher;
  * stream including the method {@link #findUnlessHitEnd(int, int)}.
  * 
  * @author rwoo
- * 
  * @since 20.06.2011
  */
 public interface OnStreamMatcher extends MatchResult {
@@ -107,8 +106,13 @@ public interface OnStreamMatcher extends MatchResult {
      * This property is set by calling {@link #findUnlessHitEnd(int, int)} .
      * <p>
      * ATTENTION! This property returns maxFrom + 1, if
-     * {@link #findUnlessHitEnd(int, int)} neither has found a match nor does it
-     * hit the end of input.
+     * {@link #findUnlessHitEnd(int, int)} neither has found a match nor has hit
+     * the end of input as long it looked for matches that started somewhere in
+     * the interval [minFrom, maxFrom].
+     * <p>
+     * ATTENTION! This information is not really helpful when the buffer size is
+     * equal to maxFrom. In this case you cannot say whether the position of
+     * lastFrom is the start of a potential match or not.
      * 
      * @return Returns the last position {@link #findUnlessHitEnd(int, int)} has
      *         investigated before it returned.
