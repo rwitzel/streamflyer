@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.streamflyer</groupId>
   <artifactId>streamflyer-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>Streamflyer Parent</name>
   <description>Allows editing an input stream</description>
