@@ -22,10 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.googlecode.streamflyer.core.AfterModification;
+import com.googlecode.streamflyer.thirdparty.ZzzAssert;
 import com.googlecode.streamflyer.util.StringUtils;
 
 /**
- * Tests {@link RegexModifier} (white-box tests).
+ * Tests {@link RegexModifier} (white-box tests). These tests may fail if the
+ * implementation of {@link RegexModifier} is changed.
  * 
  * @author rwoo
  * @since 23.06.2011
@@ -111,6 +113,13 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
             int minimumLengthOfLookBehind,
             int requestedCapacityOfCharacterBuffer, String expectedOutput)
             throws Exception {
+
+        System.out.println(String.format("Replacing '%s' " + "with '%s' with "
+                + "buffer size %s (look-behind %s) shall convert\n %s to "
+                + "\n %s", regex, replacement,
+                requestedCapacityOfCharacterBuffer, minimumLengthOfLookBehind,
+                input, expectedOutput));
+
         return (RegexModifierWithCheckpoints) super.assertReplacementByReader(
                 input, regex, replacement, minimumLengthOfLookBehind,
                 requestedCapacityOfCharacterBuffer, expectedOutput);
@@ -175,6 +184,11 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
     private void printNice(List<Object[]> passedCheckpoints) {
 
+        System.out
+                .println(String.format("%3s %16s | %3s %5s %s %s", "num",
+                        "name/afterMod", "loB", "buLe", "buffer/skipped chars",
+                        "eos?")); //
+
         //
         int checkpointIndex = 0;
         for (Object[] passedCheckpoint : passedCheckpoints) {
@@ -189,12 +203,12 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
             }
 
             // first line:
-            // checkpoint number,
-            // checkpoint name,
-            // look-behind width,
-            // total character size,
-            // buffer content,
-            // "EOS" if end of stream hit
+            // - checkpoint number,
+            // - checkpoint name,
+            // - look-behind width,
+            // - total character size,
+            // - buffer content,
+            // - "EOS" if end of stream hit
             String name = (String) data.get("name");
             Integer minLen = (Integer) data.get("minLen");
             String characterBuffer = (String) data.get("characterBuffer");
@@ -204,32 +218,55 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
                     checkpointIndex, name, minLen, characterBuffer.length(),
                     characterBuffer.toString(), endOfStreamHit ? "EOS" : "")); //
 
-            // second line for 'AfterModification':
-            AfterModification mod = (AfterModification) data
-                    .get("afterModification");
-            String newBuffer;
-            Integer newMinLen;
-            Integer newCharLen;
-            String modificationType;
-            if (mod == null) {
-                newBuffer = StringUtils.repeat(" ", characterBuffer.length());
-                newMinLen = -1;
-                newCharLen = -1;
-                modificationType = "-";
+            // second line
+            if (name.equals("match_n_continue")) {
+                // second line: "continue"
+                // - empty,
+                // - empty,
+                // - empty,
+                // - empty,
+                // - "_" for the characters that are in the look-behind area,
+                // ">" for the characters that are already processed, "?" for
+                // the characters behind
+                // - "EOS" if end of stream hit
+
+                Integer minFrom = (Integer) data.get("minFrom");
+                ZzzAssert.notNull(minFrom);
+
+                String bufferDescription = StringUtils.repeat("_", minLen)
+                        + StringUtils.repeat(">", minFrom - minLen)
+                        + StringUtils.repeat("?", characterBuffer.length()
+                                - minFrom - minLen);
+                System.out.println(String.format("%3s %16s | %3s %5s '%s'", "",
+                        " ", " ", " ", bufferDescription)); //
             }
             else {
-                newBuffer = StringUtils.repeat("_",
-                        mod.getNewMinimumLengthOfLookBehind())
+                // second line: 'AfterModification' is returned
+                // - empty,
+                // - type of AfterModification,
+                // - requested look-behind width,
+                // - requested total character size,
+                // - "_" for the characters that are in the look-behind area,
+                // "X" for the characters that are to skip, "?" for
+                // the characters behind
+                // - "EOS" if end of stream hit
+
+                AfterModification mod = (AfterModification) data
+                        .get("afterModification");
+                ZzzAssert.notNull(mod);
+
+                String bufferDescription = StringUtils.repeat("_", minLen)
                         + StringUtils.repeat("X",
                                 mod.getNumberOfCharactersToSkip())
                         + StringUtils.repeat("?", characterBuffer.length()
                                 - mod.getNumberOfCharactersToSkip() - minLen);
-                newMinLen = mod.getNewMinimumLengthOfLookBehind();
-                newCharLen = mod.getNewNumberOfChars();
-                modificationType = mod.getMessageType();
+                Integer newMinLen = mod.getNewMinimumLengthOfLookBehind();
+                Integer newCharLen = mod.getNewNumberOfChars();
+                String modificationType = mod.getMessageType();
+                System.out.println(String.format("%3s %16s | %3d %5d '%s'", "",
+                        modificationType, newMinLen, newCharLen,
+                        bufferDescription)); //
             }
-            System.out.println(String.format("%3s %16s | %3d %5d '%s'", "",
-                    modificationType, newMinLen, newCharLen, newBuffer)); //
         }
     }
 

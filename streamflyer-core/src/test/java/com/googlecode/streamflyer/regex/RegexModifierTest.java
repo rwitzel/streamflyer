@@ -261,6 +261,36 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 "XYZfcDEXYZfXYZfDE");
     }
 
+    public void testReplacement_endOfStream() throws Exception {
+
+        String regex = "Y$";
+        String replacement = "YY";
+        String input = "YYY";
+        String expectedOutput = "YYYY";
+
+        // Java:
+        assertEquals(expectedOutput, input.replaceAll(regex, replacement));
+
+        // Streamflyer:
+        assertReplacement(input, regex, replacement, expectedOutput);
+    }
+
+    public void testReplacement_endOfStream_noEndlessLoop() throws Exception {
+
+        String regex = "((XXX)|$)";
+        String replacement = "YYY";
+        String input = "XXX";
+        String expectedOutput = "YYYYYY";
+
+        // Java:
+        System.out.println("Java...");
+        assertEquals(expectedOutput, input.replaceAll(regex, replacement));
+
+        // Streamflyer:
+        System.out.println("Streamflyer...");
+        assertReplacement(input, regex, replacement, expectedOutput);
+    }
+
     /**
      * Defaults: Varies requestedMinimumLengthsOfLookBehind and
      * requestedCapacityOfCharacterBuffers.
@@ -302,5 +332,8 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
                 expectedOutput);
 
+        // test that if Java applies the regex on the input we get the same
+        // output
+        assertEquals(expectedOutput, input.replaceAll(regex, replacement));
     }
 }

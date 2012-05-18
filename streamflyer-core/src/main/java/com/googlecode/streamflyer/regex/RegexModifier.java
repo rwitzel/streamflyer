@@ -95,6 +95,8 @@ public class RegexModifier implements Modifier {
 
     protected int newNumberOfChars = -1;
 
+    boolean noFurtherMatching = false;
+
     //
     // state
     //
@@ -204,6 +206,13 @@ public class RegexModifier implements Modifier {
     public AfterModification modify(StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
+        // TODO please doc
+        if (noFurtherMatching) {
+            return factory.stop(characterBuffer,
+                    firstModifiableCharacterInBuffer, endOfStreamHit);
+        }
+
+
         // the first position we will match from.
         Integer minFrom = null;
 
@@ -265,6 +274,10 @@ public class RegexModifier implements Modifier {
                 else {
                     // no -> thus we can use this match -> process the match
 
+                    // this variable is needed to avoid endless loops
+                    boolean matchOnEmptyString = minFrom == characterBuffer
+                            .length();
+
                     // process the match
                     MatchResult matchResult = matcher; // TODO .toMatchResult()?
                     // TODO please review: should I pass
@@ -277,8 +290,11 @@ public class RegexModifier implements Modifier {
                     // match again without skip? (even for minFrom == maxFrom we
                     // try a match) (minFrom <= maxFrom is needed so that the
                     // buffer does not increase if the replacement is longer
-                    // than the replaced string, i.e. minFrom <= maxFrom means
+                    // than the replaced string, i.e. minFrom > maxFrom means
                     // that a SKIP is needed)
+                    // TODO I (rwoo) think an earlier SKIP (minFrom < maxFrom)
+                    // would also be possible (this affects only the
+                    // performance)
                     if (minFrom <= maxFrom
                             && matchProcessorResult.isContinueMatching()) {
                         // (match_n_continue) no skip needed yet -> continue
@@ -289,13 +305,19 @@ public class RegexModifier implements Modifier {
                                 "minLen", firstModifiableCharacterInBuffer, //
                                 "characterBuffer", characterBuffer, //
                                 "endOfStreamHit", endOfStreamHit, //
-                                "afterModification", null);
+                                "minFrom", minFrom);
 
                         // We try the next match on the modified input, i.e.
                         // not match only once -> next loop
                         continue;
                     }
                     else {
+
+                        // TODO please doc!
+                        if (endOfStreamHit && matchOnEmptyString
+                                && minFrom == characterBuffer.length()) {
+                            noFurtherMatching = true;
+                        }
 
                         // we shall not continue matching on the
                         // existing buffer content but skip (keep the buffer
