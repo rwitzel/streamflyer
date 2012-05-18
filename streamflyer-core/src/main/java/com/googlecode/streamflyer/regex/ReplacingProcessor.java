@@ -214,8 +214,8 @@ public class ReplacingProcessor implements MatchProcessor {
         else {
 
             // (1) create replacement
-            // TODO set a reasonable value for the initial size. should this
-            // be injected? -> performance tests should be written
+            // (one could set a reasonable value for the initial size of the
+            // string builder somewhere)
             StringBuilder replacement = new StringBuilder();
 
             for (Object part : parts) {

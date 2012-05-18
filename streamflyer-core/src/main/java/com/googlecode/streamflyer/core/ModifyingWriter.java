@@ -39,7 +39,6 @@ import java.util.Map;
  * subsequent flushing will write only these 25 confirmed characters.
  * 
  * @author rwoo
- * 
  * @since 06.05.2011
  */
 public class ModifyingWriter extends Writer {
@@ -397,7 +396,6 @@ public class ModifyingWriter extends Writer {
      */
     @Override
     public String toString() {
-        // TODO update this method if new properties are added
         StringBuilder builder = new StringBuilder();
         builder.append("ModifyingWriter [\ndelegate=");
         builder.append(delegate);

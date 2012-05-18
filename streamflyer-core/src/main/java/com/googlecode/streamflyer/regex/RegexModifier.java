@@ -306,9 +306,9 @@ public class RegexModifier implements Modifier {
                     // no -> thus we can use this match -> process the match
 
                     // process the match
-                    MatchResult matchResult = matcher; // TODO .toMatchResult()?
-                    // TODO please review: should I pass
-                    // firstModifiableCharacterInBuffer instead of minFrom?
+                    MatchResult matchResult = matcher; // .toMatchResult()?
+                    // (I could pass firstModifiableCharacterInBuffer instead of
+                    // minFrom as well)
                     MatchProcessorResult matchProcessorResult = matchProcessor
                             .process(characterBuffer, minFrom, matchResult);
                     minFrom = matchProcessorResult
@@ -319,9 +319,10 @@ public class RegexModifier implements Modifier {
                     // buffer does not increase if the replacement is longer
                     // than the replaced string, i.e. minFrom > maxFrom means
                     // that a SKIP is needed)
-                    // TODO I (rwoo) think an earlier SKIP (minFrom < maxFrom)
-                    // would also be possible (this affects only the
-                    // performance)
+                    // (I (rwoo) think an earlier SKIP (minFrom < maxFrom
+                    // instead of minFrom <= maxFrom) would also be possible.
+                    // This has no impact on the matching and only minimal
+                    // impact on the performance)
                     if (minFrom <= maxFrom
                             && matchProcessorResult.isContinueMatching()) {
                         // (match_n_continue) no skip needed yet -> continue
@@ -363,13 +364,14 @@ public class RegexModifier implements Modifier {
 
 
                         if (numberOfCharactersToSkip == 0) {
+
                             // (match_n_refill) there are no characters left in
                             // the buffer after the replacement ->
                             // MODIFY_AGAIN_IMMEDIATELY is only thing we can do
                             // (the match processor implementation must not
                             // cause an endless loop)
 
-                            // TODO passing false for endOfStreamHit is ugly!!!
+                            // (passing false for endOfStreamHit is ugly!!!)
                             // we should offer a new method in
                             // ModificationFactory, something like
                             // continueAfterModification(...) that chooses the

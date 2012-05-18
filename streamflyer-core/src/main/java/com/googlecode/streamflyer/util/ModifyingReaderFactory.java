@@ -49,7 +49,7 @@ public class ModifyingReaderFactory {
             InputStream xmlStream, String replacement) throws IOException {
 
         // buffer stream
-        // TODO is this really necessary to get optimal performance?
+        // (is this really necessary to get optimal performance?)
         if (!(xmlStream instanceof BufferedInputStream)) {
             xmlStream = new BufferedInputStream(xmlStream);
         }
@@ -78,7 +78,7 @@ public class ModifyingReaderFactory {
             InputStream xmlStream, String newXmlVersion) throws IOException {
 
         // buffer stream
-        // TODO is this really necessary to get optimal performance?
+        // (is this really necessary to get optimal performance?)
         if (!(xmlStream instanceof BufferedInputStream)) {
             xmlStream = new BufferedInputStream(xmlStream);
         }
@@ -102,7 +102,7 @@ public class ModifyingReaderFactory {
             int requestedCapacityOfCharacterBuffer) {
 
         // buffer stream
-        // TODO is this really necessary to get optimal performance?
+        // (is this really necessary to get optimal performance?)
         if (!(input instanceof BufferedReader)) {
             input = new BufferedReader(input);
         }

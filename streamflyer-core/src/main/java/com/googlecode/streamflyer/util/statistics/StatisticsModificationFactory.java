@@ -20,18 +20,10 @@ import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**
  * Records some statistics of the usage of the underlying
- * {@link ModificationFactory}.
- * <ul>
- * <li>the number of SKIPs,
- * <li>the number of SKIPs,
- * <li>TODO
- * </ul>
- * <p>
- * This might be useful for reporting modifications.
- * <p>
+ * {@link ModificationFactory}. This might be useful for reporting
+ * modifications.
  * 
  * @author rwoo
- * 
  * @since 28.06.2011
  */
 public class StatisticsModificationFactory extends ModificationFactoryDecorator {

@@ -115,8 +115,8 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
             throws Exception {
 
         System.out.println(String.format("Replacing '%s' " + "with '%s' with "
-                + "buffer size %s (look-behind %s) shall convert\n %s to "
-                + "\n %s", regex, replacement,
+                + "buffer size %s (look-behind %s) shall convert\n '%s' to "
+                + "\n '%s'", regex, replacement,
                 requestedCapacityOfCharacterBuffer, minimumLengthOfLookBehind,
                 input, expectedOutput));
 
@@ -136,7 +136,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     private void print(List<Object[]> passedCheckpoints) {
         // printXml(passedCheckpoints);
         // printYaml(passedCheckpoints);
-        printNice(passedCheckpoints);
+        // printNice(passedCheckpoints);
     }
 
     @SuppressWarnings("unused")
@@ -182,6 +182,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         }
     }
 
+    @SuppressWarnings("unused")
     private void printNice(List<Object[]> passedCheckpoints) {
 
         System.out
@@ -263,6 +264,9 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
                 Integer newMinLen = mod.getNewMinimumLengthOfLookBehind();
                 Integer newCharLen = mod.getNewNumberOfChars();
                 String modificationType = mod.getMessageType();
+                if (modificationType.equals("MODIFY AGAIN IMMEDIATELY")) {
+                    modificationType = "MODIFY AGAIN"; // shorten the string
+                }
                 System.out.println(String.format("%3s %16s | %3d %5d '%s'", "",
                         modificationType, newMinLen, newCharLen,
                         bufferDescription)); //
@@ -270,56 +274,45 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         }
     }
 
-    public void ttttestInit_optimalCapacity() throws Exception {
-        // expected: after the first modification, the capacity of the buffer
-        // should be calculated like this:
-        // capacity = lookBehind + numberOfCharsForMatching +
-        // maxNumberOfCharactersInsertedByAllMatchings
-        // Although this is not really important for performance, we should test
-        // this because it illuminates the functionality of the
-        // RegExModifier
-        // TODO
-    }
-
-    public void ttttestModify_UC1X_matchAndReplaceOnceThenNoMatch()
+    public void testReplacement_matchEmptyString_ReplaceWithNothingSoThatNothingToSkip_AtEndStream()
             throws Exception {
-        // expected: skip all chars
-        // TODO
+        String regex = "";
+        String replacement = "";
+        String input = "";
+        String expectedOutput = "";
+
+        // System.out.println("Java...");
+        assertEquals(expectedOutput, input.replaceAll(regex, replacement));
+
+        // System.out.println("Streamflyer...");
+        List<Object[]> passedCheckpoints = assertReplacementByReader(input,
+                regex, replacement, 0, 2, expectedOutput).__passedCheckpoints();
+        print(passedCheckpoints);
     }
 
-
-    public void ttttestModify_UC21100_noMatch_matchStartOfRegex_endOfStreamHit()
+    /**
+     * We cannot test this case with the {@link ReplacingProcessor} because it
+     * always skips at least one character (even if no one is left in the
+     * buffer).
+     * 
+     * @throws Exception
+     */
+    public void testReplacement_matchEmptyString_ReplaceWithNothingSoThatNothingToSkip_SomewhereInTheEndStream()
             throws Exception {
-        // expected: skip all chars in the buffer
-        // TODO
-    }
+        // something like this:
+        // String regex = "^";
+        // String replacement = "";
+        // String input = "XX";
+        // String expectedOutput = "XX";
+        //
+        // // System.out.println("Java...");
+        // assertEquals(expectedOutput, input.replaceAll(regex, replacement));
+        //
+        // // System.out.println("Streamflyer...");
+        // List<Object[]> passedCheckpoints = assertReplacementByReader(input,
+        // regex, replacement, 0, 1, expectedOutput).__passedCheckpoints();
+        // print(passedCheckpoints);
 
-    public void ttttestModify_UC21211_noMatch_matchStartOfRegex_endOfStreamNotHit_matchStartsAfterFirstModifiableCharacter_expand()
-            throws Exception {
-        // expected: skip chars before the first matching character (as by
-        // skipping the chars we get automatically more input)
-        // TODO
     }
-
-    public void ttttestModify_UC21212_noMatch_matchStartOfRegex_endOfStreamNotHit_matchStartsAfterFirstModifiableCharacter_doNotExpand()
-            throws Exception {
-        // expected: skip chars before the first matching character AND expand
-        // the requested content of the buffer (as skipping the chars alone
-        // would not provide new chars in the buffer)
-        // TODO
-    }
-
-    public void ttttestModify_UC21200_noMatch_matchStartOfRegex_endOfStreamNotHit_matchStartsAtFirstModifiableCharacter()
-            throws Exception {
-        // expected: modify again with more characters in the buffer (this must
-        // not involve expanding the capacity of the buffer!)
-        // TODO
-    }
-
-    public void ttttestModify_UC22000_noMatch() throws Exception {
-        // expected: skip all chars
-        // TODO
-    }
-
 
 }

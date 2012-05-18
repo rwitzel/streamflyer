@@ -50,7 +50,7 @@ public class ModifyingWriterFactory {
             int requestedCapacityOfCharacterBuffer) {
 
         // buffer stream
-        // TODO is this really necessary to get optimal performance?
+        // (is this really necessary to get optimal performance?)
         if (!(output instanceof BufferedWriter)) {
             output = new BufferedWriter(output);
         }
