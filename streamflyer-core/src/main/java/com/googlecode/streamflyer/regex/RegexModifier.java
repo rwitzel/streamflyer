@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
+import com.googlecode.streamflyer.thirdparty.ZzzAssert;
 import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.util.ModifyingReaderFactory;
 import com.googlecode.streamflyer.util.ModifyingWriterFactory;
@@ -95,7 +96,16 @@ public class RegexModifier implements Modifier {
 
     protected int newNumberOfChars = -1;
 
-    boolean noFurtherMatching = false;
+    /**
+     * The number of characters that shall be skipped automatically if the
+     * modifier is called the next time.
+     * <p>
+     * This property is either zero or one (not greater). If this property is
+     * one, then the modifier tries to match behind the first modifiable
+     * character. If this property is zero, then the modifier tries to match
+     * before the first modifiable character.
+     */
+    private int unseenCharactersToSkip = 0;
 
     //
     // state
@@ -206,13 +216,6 @@ public class RegexModifier implements Modifier {
     public AfterModification modify(StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        // TODO please doc
-        if (noFurtherMatching) {
-            return factory.stop(characterBuffer,
-                    firstModifiableCharacterInBuffer, endOfStreamHit);
-        }
-
-
         // the first position we will match from.
         Integer minFrom = null;
 
@@ -223,6 +226,34 @@ public class RegexModifier implements Modifier {
 
             if (minFrom == null) {
                 minFrom = firstModifiableCharacterInBuffer;
+
+                if (unseenCharactersToSkip > 0) {
+
+                    // is there at least one modifiable character in the buffer?
+                    if (minFrom + unseenCharactersToSkip > characterBuffer
+                            .length()) {
+                        // no -> we need more input to skip the characters
+
+                        if (endOfStreamHit) {
+                            // -> stop
+                            return factory.stop(characterBuffer,
+                                    firstModifiableCharacterInBuffer,
+                                    endOfStreamHit);
+                        }
+                        else {
+                            // -> fetch more input
+                            return factory.fetchMoreInput(0, characterBuffer,
+                                    firstModifiableCharacterInBuffer,
+                                    endOfStreamHit);
+                        }
+
+                    }
+                    else {
+                        // yes -> increase the *minFrom*
+                        minFrom += unseenCharactersToSkip;
+                        unseenCharactersToSkip = 0;
+                    }
+                }
             }
 
             // we have to restrict maxFrom in order to prevent that the
@@ -274,10 +305,6 @@ public class RegexModifier implements Modifier {
                 else {
                     // no -> thus we can use this match -> process the match
 
-                    // this variable is needed to avoid endless loops
-                    boolean matchOnEmptyString = minFrom == characterBuffer
-                            .length();
-
                     // process the match
                     MatchResult matchResult = matcher; // TODO .toMatchResult()?
                     // TODO please review: should I pass
@@ -313,18 +340,27 @@ public class RegexModifier implements Modifier {
                     }
                     else {
 
-                        // TODO please doc!
-                        if (endOfStreamHit && matchOnEmptyString
-                                && minFrom == characterBuffer.length()) {
-                            noFurtherMatching = true;
-                        }
-
                         // we shall not continue matching on the
                         // existing buffer content but skip (keep the buffer
                         // small)
 
-                        int numberOfCharactersToSkip = minFrom
-                                - firstModifiableCharacterInBuffer;
+                        int numberOfCharactersToSkip;
+                        if (minFrom > characterBuffer.length()) {
+                            // this happens when we avoid endless loops after
+                            // we matched an empty string
+                            unseenCharactersToSkip = minFrom
+                                    - characterBuffer.length();
+                            ZzzAssert.isTrue(unseenCharactersToSkip == 1,
+                                    "unseenCharactersToSkip must be one but was "
+                                            + unseenCharactersToSkip);
+                            numberOfCharactersToSkip = characterBuffer.length()
+                                    - firstModifiableCharacterInBuffer;
+                        }
+                        else {
+                            numberOfCharactersToSkip = minFrom
+                                    - firstModifiableCharacterInBuffer;
+                        }
+
 
                         if (numberOfCharactersToSkip == 0) {
                             // (match_n_refill) there are no characters left in

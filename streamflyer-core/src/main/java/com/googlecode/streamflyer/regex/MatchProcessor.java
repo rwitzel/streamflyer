@@ -40,15 +40,8 @@ public interface MatchProcessor {
      *        name in {@link Modifier#modify(StringBuilder, int, boolean)}.
      * @param matchResult The match that is found in the given character buffer.
      *        Must not be <code>null</code>.
-     * @return Returns
-     *         <ol>
-     *         <li>a position in the character buffer. This position must not be
-     *         smaller than the first modifiable character in the buffer. The
-     *         characters before the returned position shall be considered
-     *         unmodifiable by the {@link RegexModifier}.
-     *         <li>true if the matching shall be continued using the characters
-     *         already available in the buffer.
-     *         </ol>
+     * @return Returns an {@link MatchProcessorResult object} that describes
+     *         where to continue the matching.
      */
     public MatchProcessorResult process(StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult);

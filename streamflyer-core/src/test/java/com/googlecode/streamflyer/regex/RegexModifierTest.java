@@ -275,19 +275,33 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertReplacement(input, regex, replacement, expectedOutput);
     }
 
-    public void testReplacement_endOfStream_noEndlessLoop() throws Exception {
+    public void testReplacement_endOfStream_matchOnEmptyString_noEndlessLoop()
+            throws Exception {
 
         String regex = "((XXX)|$)";
         String replacement = "YYY";
         String input = "XXX";
         String expectedOutput = "YYYYYY";
 
-        // Java:
-        System.out.println("Java...");
+        // System.out.println("Java...");
         assertEquals(expectedOutput, input.replaceAll(regex, replacement));
 
-        // Streamflyer:
-        System.out.println("Streamflyer...");
+        // System.out.println("Streamflyer...");
+        assertReplacement(input, regex, replacement, expectedOutput);
+    }
+
+    public void testReplacement_matchOnEmptyString_noEndlessLoop()
+            throws Exception {
+
+        String regex = "()";
+        String replacement = "Y";
+        String input = "XX";
+        String expectedOutput = "YXYXY";
+
+        // System.out.println("Java...");
+        assertEquals(expectedOutput, input.replaceAll(regex, replacement));
+
+        // System.out.println("Streamflyer...");
         assertReplacement(input, regex, replacement, expectedOutput);
     }
 
