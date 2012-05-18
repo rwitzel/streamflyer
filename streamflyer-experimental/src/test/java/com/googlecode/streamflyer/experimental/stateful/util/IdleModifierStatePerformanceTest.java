@@ -154,7 +154,7 @@ takes roughly
 				+ " Found seconds %s shall not exceed"
 				+ " expected maximum of seconds %s but did exceed",
 				foundSeconds, expectedMaxSeconds);
-		System.out.println(message);
+		// System.out.println(message);
 		assertTrue(message, foundSeconds <= expectedMaxSeconds);
 	}
 }
