@@ -122,21 +122,27 @@ Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
  * <h3 id="g7">5. Can I use regular expressions to modify streams?</h3>
  * <p>
  * Yes. Use the {@link RegexModifier} directly or, more convenient, use the
- * {@link ModifyingReaderFactory}.
+ * {@link ModifyingReaderFactory} or the {@link ModifyingWriterFactory}.
  * <h3 id="g8">6. How much memory does a modifying reader or writer consume?</h3>
  * <p>
  * This depends entirely on the used {@link Modifier} and the task the modifier
  * has to fulfill. Basically the modifier defines the number of characters to
  * process at once by {@link AfterModification#getNewNumberOfChars()}. This is
- * the minimum of characters in the memory but in many cases the maximum as
- * well. The API documentation of each modifier implementation should make clear
- * how much memory the modifier consumes.
- * <h3 id="g9">7. How big is the performance overhead of an idle modifying
- * reader or modifying writer?</h3>
+ * the minimum of characters in the memory. The API documentation of each
+ * modifier implementation should make clear how much memory the modifier
+ * consumes at most. Double that number (the maximum number of characters to be
+ * processed at once), then you got the maximum capacity of the used character
+ * buffer, i.e. the number of characters in the memory. Hint: The number must be
+ * doubled due to the internal implementation of Java's
+ * {@link StringBuilder#ensureCapacity(int)}.
+ * <h3 id="g9">7. How big is the performance overhead of a modifying reader or
+ * modifying writer that does nothing (no modification, no logging etc.) in
+ * comparison to the use of a reader or writer that reads its data directly from
+ * memory?</h3>
  * <p>
- * If you use an idle modifier to process 10 million characters using a buffer
- * of 500 characters, then the overhead is 0.2 seconds using a modifying reader
- * and 0.4 seconds using a modifying writer (normal PC, 2011).
+ * If you use such an idle modifier to process 10 million characters using a
+ * buffer of 500 characters, then the overhead is 0.2 seconds using a modifying
+ * reader and 0.4 seconds using a modifying writer (normal PC, 2011).
  * <p>
  * <h3 id="g10">8. How do I process regex patterns found in the character
  * stream?</h3>

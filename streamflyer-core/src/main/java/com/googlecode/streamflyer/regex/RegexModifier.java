@@ -33,7 +33,7 @@ import com.googlecode.streamflyer.util.ModifyingWriterFactory;
  * <p>
  * <h6>Memory consumption</h6>
  * <p>
- * The memory consumption of this modifier does not exceed the size of the
+ * The maximum buffer size used by this modifier does not exceed the size of the
  * longest match by factor three. EXAMPLE: Assume in your stream the longest
  * match contains 100K characters. Then the internally used buffer is at no time
  * larger than 300K characters. But this rule does not apply if you use greedy
@@ -42,7 +42,7 @@ import com.googlecode.streamflyer.util.ModifyingWriterFactory;
  * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions"
  * >more details</a>.
  * <p>
- * <h6>A summary of the internal algorithm</h6>
+ * <h6>A summary of the internal algorithm (some details are left out)</h6>
  * <p>
  * Is there a match in the buffer?
  * <ul>
