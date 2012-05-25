@@ -19,7 +19,7 @@ package com.googlecode.streamflyer.experimental.stateful.util;
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.experimental.stateful.State;
 import com.googlecode.streamflyer.experimental.stateful.StatefulAfterModification;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
  * This state has exactly one other succeeding state.

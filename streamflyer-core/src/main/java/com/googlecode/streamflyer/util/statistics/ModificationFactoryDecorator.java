@@ -17,7 +17,7 @@
 package com.googlecode.streamflyer.util.statistics;
 
 import com.googlecode.streamflyer.core.AfterModification;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**

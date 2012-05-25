@@ -18,7 +18,7 @@ package com.googlecode.streamflyer.experimental.stateful;
 
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
  * This modifier has a state. The actual work of the modifier is delegated to

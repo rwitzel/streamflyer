@@ -19,18 +19,42 @@ package com.googlecode.streamflyer.xml;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.input.XmlStreamReader;
+
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**
  * Replaces the XML version in the XML prolog with the given XML version.
+ * ATTENTION! You must use BOM skipping reader when modifying an input stream
+ * like Apache's Commons IO {@link XmlStreamReader}.
  * <p>
- * TODO please test: must this work on a BOM skipping reader / writer?
+ * EXAMPLE:
+ * <code><pre class="prettyprint lang-java">// choose the input stream to modify
+ByteArrayInputStream inputStream = new ByteArrayInputStream(
+        bytesWithBom);
+
+// wrap the input stream by BOM skipping reader
+Reader reader = new XmlStreamReader(inputStream);
+
+// create the reader that changes the XML version to 1.1
+ModifyingReader modifyingReader = new ModifyingReader(reader,
+        new XmlVersionModifier("1.1", 8192));
+
+// use the modifying reader instead of the original reader
+String xml = IOUtils.toString(modifyingReader);
+
+assertTrue(xml.startsWith("<?xml version='1.1'"));
+</pre></code>
  * <p>
- * TODO should this implemented in a way so that the number of whitespace in the
- * prolog cannot break the logic of this class?
+ * ATTENTION! This modifier does not work properly if the prolog of the XML
+ * document contains more than {@link #INITIAL_NUMBER_OF_CHARACTERS} characters.
+ * This can only happen if there is a lot of whitespace within the prolog, which
+ * is highly unlikely but not impossible. You should know that even the
+ * <code>XmlReader</code> of Apache Commons which you probably use to detect the
+ * encoding cannot deal with such a kind of prolog.
  * <p>
  * This is an alternative to {@link InvalidXmlCharacterModifier}.
  * <p>

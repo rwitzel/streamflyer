@@ -22,16 +22,74 @@ import java.util.regex.Pattern;
 
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
-import com.googlecode.streamflyer.thirdparty.ZzzAssert;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
 import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.util.ModifyingReaderFactory;
 import com.googlecode.streamflyer.util.ModifyingWriterFactory;
+import com.googlecode.streamflyer.util.statistics.LineColumnAwareModificationFactory;
+import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFactory;
 
 /**
  * Finds text that matches a given regular expression. The match is processed by
- * the given {@link MatchProcessor}.
+ * the given {@link MatchProcessor}. The default match processor replaces the
+ * matched texts with the configured replacements.
  * <p>
- * <h6>Memory consumption</h6>
+ * <h1>Contents</h1>
+ * <p>
+ * <b> <a href="#g1">1. How do I use this class?</a><br/>
+ * <a href="#g2">2. Instead of replacing text I want to do something else when
+ * the regular expression matches. How can I do this?</a><br/>
+ * <a href="#g3">3. How can I find out the position of the matches within the
+ * stream?</a> <br/>
+ * <a href="#g4">4. How much memory does the modifier consume?</a><br/>
+ * </b> <!-- ++++++++++++++++++++++++++++++ -->
+ * <p>
+ * <h3 id="g1">1. How do I use this class?</h3>
+ * <p>
+ * EXAMPLE:
+ * <code><pre class="prettyprint lang-java">// choose the character stream to modify
+Reader originalReader = new StringReader("edit stream");
+
+// define the regular expression and the replacement
+Modifier myModifier = new RegexModifier("edit stream", 0, "modify stream");
+
+// create the modifying reader that wraps the original reader
+Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
+
+// use the modifying reader instead of the original reader
+String output = IOUtils.toString(modifyingReader);
+assertEquals("modify stream", output);</pre></code>
+ * <h3 id="g2">2. Instead of replacing text I want to do something else when the
+ * regular expression matches. How can I do this?</h3>
+ * <p>
+ * Implement your own {@link MatchProcessor}. In the following example the
+ * processor prints the matched text on the console.
+ * <p>
+ * EXAMPLE:
+ * <code><pre class="prettyprint lang-java">class MatchPrinter implements MatchProcessor {
+
+    public MatchProcessorResult process(StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+
+        // print the matches text
+        System.out.println("match: " + matchResult.group());
+
+        // continue matching behind the end of the matched text
+        return new MatchProcessorResult(matchResult.end(), true);
+    }
+}
+// ...
+Modifier myModifier = new RegexModifier("^.*ERROR.*$", Pattern.MULTILINE, new MatchPrinter(), 0, 2048);</pre></code>
+ * <h3 id="g3">3. How can I find out the position of the matches within the
+ * stream?</h3>
+ * <p>
+ * You must count the characters that you skip. You can do this by subclassing
+ * {@link RegexModifier} and overwrite
+ * {@link Modifier#modify(StringBuilder, int, boolean)}.
+ * <p>
+ * You might find {@link LineColumnAwareModificationFactory} and
+ * {@link PositionAwareModificationFactory} helpful as well.
+ * <h3 id="g4">4. How much memory does the modifier consume?</h3>
  * <p>
  * The maximum buffer size used by this modifier does not exceed the size of the
  * longest match by factor three. EXAMPLE: Assume in your stream the longest
@@ -41,44 +99,53 @@ import com.googlecode.streamflyer.util.ModifyingWriterFactory;
  * loaded into the memory at once. The web page of this project gives <a href=
  * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions"
  * >more details</a>.
- * <p>
- * <h6>A summary of the internal algorithm (some details are left out)</h6>
- * <p>
- * Is there a match in the buffer?
- * <ul>
- * <li>we found a match
- * <ul>
- * <li>entire buffer matches and end of stream not hit yet -> the match might
- * change with more input -> FETCH_MORE_INPUT (<i>match_open</i>)
- * <li>replace the matched content, and then
- * <ul>
- * <li>the match processor decides that no skip is needed yet -> continue with
- * the existing buffer content -> try another match (<i>match_n_continue</i>)
- * <li>skip needed but no characters left in the buffer after the replacement ->
- * MODIFY_AGAIN_IMMEDIATELY is only thing we can do (<i>match_n_refill</i>)
- * <li>skip needed and there are characters left in the buffer -> SKIP
- * (<i>match_n_skip</i>)
- * </ul>
- * </ul>
- * <li>we haven't found a match.
- * <ul>
- * <li>By looking for matches (including the empty string) that start in the
- * range [from, maxFrom], the end of the buffer is hit.
- * <ul>
- * <li>end of stream hit -> no match possible -> SKIP the entire buffer
- * (<i>nomatch_eos</i>)
- * <li>end of stream not hit -> match might be possible or end of buffer is hit
- * -> FETCH_MORE_INPUT cannot be wrong (<i>nomatch_fetch</i>)
- * </ul>
- * <li>We did not match a single character or the empty string -> SKIP the
- * entire buffer (<i>nomatch_skip</i>)
- * </ul>
- * </ul>
  * 
  * @author rwoo
  * @since 18.06.2011
  */
 public class RegexModifier implements Modifier {
+
+    // * <p>
+    // * <h2>A summary of the internal algorithm (some details are left
+    // out)</h2>
+    // * <p>
+    // * Is there a match in the buffer?
+    // * <ul>
+    // * <li>we found a match
+    // * <ul>
+    // * <li>entire buffer matches and end of stream not hit yet -> the match
+    // might
+    // * change with more input -> FETCH_MORE_INPUT (<i>match_open</i>)
+    // * <li>replace the matched content, and then
+    // * <ul>
+    // * <li>the match processor decides that no skip is needed yet -> continue
+    // with
+    // * the existing buffer content -> try another match
+    // (<i>match_n_continue</i>)
+    // * <li>skip needed but no characters left in the buffer after the
+    // replacement ->
+    // * MODIFY_AGAIN_IMMEDIATELY is only thing we can do
+    // (<i>match_n_refill</i>)
+    // * <li>skip needed and there are characters left in the buffer -> SKIP
+    // * (<i>match_n_skip</i>)
+    // * </ul>
+    // * </ul>
+    // * <li>we haven't found a match.
+    // * <ul>
+    // * <li>By looking for matches (including the empty string) that start in
+    // the
+    // * range [from, maxFrom], the end of the buffer is hit.
+    // * <ul>
+    // * <li>end of stream hit -> no match possible -> SKIP the entire buffer
+    // * (<i>nomatch_eos</i>)
+    // * <li>end of stream not hit -> match might be possible or end of buffer
+    // is hit
+    // * -> FETCH_MORE_INPUT cannot be wrong (<i>nomatch_fetch</i>)
+    // * </ul>
+    // * <li>We did not match a single character or the empty string -> SKIP the
+    // * entire buffer (<i>nomatch_skip</i>)
+    // * </ul>
+    // * </ul>
 
     //
     // injected
@@ -161,11 +228,18 @@ public class RegexModifier implements Modifier {
      */
     public RegexModifier(String regex, int flags, String replacement,
             int minimumLengthOfLookBehind, int newNumberOfChars) {
+        this(regex, flags, new ReplacingProcessor(replacement),
+                minimumLengthOfLookBehind, newNumberOfChars);
+    }
+
+    public RegexModifier(String regex, int flags,
+            MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
+            int newNumberOfChars) {
 
         Matcher jdkMatcher = Pattern.compile(regex, flags).matcher("");
         jdkMatcher.useTransparentBounds(true);
-        init(new OnStreamStandardMatcher(jdkMatcher), new ReplacingProcessor(
-                replacement), minimumLengthOfLookBehind, newNumberOfChars);
+        init(new OnStreamStandardMatcher(jdkMatcher), matchProcessor,
+                minimumLengthOfLookBehind, newNumberOfChars);
     }
 
     /**

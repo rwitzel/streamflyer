@@ -22,10 +22,10 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzReflectionUtils;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.OnStreamStandardMatcher;
-import com.googlecode.streamflyer.thirdparty.ZzzAssert;
-import com.googlecode.streamflyer.thirdparty.ZzzReflectionUtils;
 
 /**
  * Implements {@link OnStreamMatcher} knowing internal fields, methods, and

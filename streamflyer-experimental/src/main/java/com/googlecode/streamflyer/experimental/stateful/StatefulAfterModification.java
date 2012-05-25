@@ -17,7 +17,7 @@
 package com.googlecode.streamflyer.experimental.stateful;
 
 import com.googlecode.streamflyer.core.AfterModification;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
  * A plain container for a {@link AfterModification} and a {@link State}.

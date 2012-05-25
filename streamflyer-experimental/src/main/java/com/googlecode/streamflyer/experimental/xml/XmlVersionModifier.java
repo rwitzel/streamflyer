@@ -25,7 +25,7 @@ import com.googlecode.streamflyer.experimental.stateful.State;
 import com.googlecode.streamflyer.experimental.stateful.StatefulModifier;
 import com.googlecode.streamflyer.experimental.stateful.util.IdleModifierState;
 import com.googlecode.streamflyer.experimental.stateful.util.OneTransitionState;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**

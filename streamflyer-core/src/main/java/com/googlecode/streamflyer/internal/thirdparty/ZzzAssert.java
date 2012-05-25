@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.googlecode.streamflyer.thirdparty;
+package com.googlecode.streamflyer.internal.thirdparty;
 
 /**
  * The code of this class is copied from class <code>org.springframework.util.Assert</code>

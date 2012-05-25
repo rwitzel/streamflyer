@@ -19,7 +19,7 @@ package com.googlecode.streamflyer.util;
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
  * This class creates {@link AfterModification} instances for the use cases that

@@ -16,7 +16,7 @@
 
 package com.googlecode.streamflyer.core;
 
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 
 /**
@@ -37,26 +37,26 @@ import com.googlecode.streamflyer.thirdparty.ZzzValidate;
  * <li>{@link AfterModification#isModifyAgainImmediately() whether} modifiable
  * characters shall be shall be made unmodifiable, and if so, how many
  * {@link AfterModification#getNewMinimumLengthOfLookBehind() modifiable
- * characters} shall be shall be made unmodifiable.
+ * characters} shall be made unmodifiable.
  * </ul>
  * <p>
- * {@link AfterModification afterModifications} can divided into three types of
- * messages - depending on how many characters shall be skipped and how many
- * characters are left in the buffer and how many characters are left in the
- * entire stream.
- * <ol>
- * <li>SKIP - Skip at least one modifiable character in the buffer, or do not
+ * If you want to implement your own modifier, then you should distinct three
+ * different types of {@link AfterModification} messages - depending on how many
+ * characters shall be skipped and how many characters are left in the buffer
+ * and how many characters are left in the entire stream:
+ * <ul>
+ * <li>SKIP: Skip at least one modifiable character in the buffer, or do not
  * skip any character if there are no modifiable characters are left in the
  * buffer but the end of stream is not hit yet. A synonym for SKIP could be
  * CONTINUE.
- * <li>MODIFY AGAIN IMMEDIATELY - Do not skip any character. This type is useful
- * only if the end of stream is not hit yet and more
- * {@link #getNewNumberOfChars() input} is requested.
- * <li>STOP - Do not skip any character - This requires that the end of stream
- * is hit and no modifiable characters are left in the buffer.
- * <li>(FETCH_MORE_INPUT - is a synonym for SKIP if some characters can be
+ * <li>MODIFY AGAIN IMMEDIATELY: Do not skip any character. This type is useful
+ * only if the end of stream is not hit yet and the modifier needs more
+ * {@link #getNewNumberOfChars() input} to do its job.
+ * <li>STOP: Do not skip any character. This requires that the end of stream is
+ * hit and no modifiable characters are left in the buffer.
+ * <li>(FETCH_MORE_INPUT: This is a synonym for SKIP if some characters can be
  * skipped. Otherwise it is a MODIFY AGAIN IMMEDIATELY.)
- * </ol>
+ * </ul>
  * 
  * @author rwoo
  * @since 03.06.2011

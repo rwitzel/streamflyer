@@ -25,13 +25,11 @@ import org.apache.commons.io.IOUtils;
 
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
-import com.googlecode.streamflyer.xml.InvalidXmlCharacterModifier;
 
 /**
  * Tests {@link InvalidXmlCharacterModifier}.
  * 
  * @author rwoo
- * 
  * @since 23.06.2011
  */
 public class InvalidXmlCharacterModifierTest extends TestCase {
@@ -122,4 +120,42 @@ public class InvalidXmlCharacterModifierTest extends TestCase {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    public void testExampleFromHomepage_removeInvalidCharacters()
+            throws Exception {
+
+        // choose the character stream to modify
+        Reader reader = new StringReader("foo\uD8FFbar");
+
+        // define what and how to replace
+        Modifier modifier = new InvalidXmlCharacterModifier("",
+                InvalidXmlCharacterModifier.XML_11_VERSION);
+
+        // create the modifying reader that wraps the original reader
+        ModifyingReader modifyingReader = new ModifyingReader(reader, modifier);
+
+        // use the modifying reader instead of the original reader
+        String actualOutput = IOUtils.toString(modifyingReader);
+
+        assertEquals("foobar", actualOutput);
+    }
+
+    public void testExampleFromHomepage_replaceWithErrorMessage()
+            throws Exception {
+
+        // choose the character stream to modify
+        Reader reader = new StringReader("foo\uD8FFbar");
+
+        // define what and how to replace
+        Modifier modifier = new InvalidXmlCharacterModifier(
+                "[INVALID XML CHAR FOUND: $0]",
+                InvalidXmlCharacterModifier.XML_11_VERSION);
+
+        // create the modifying reader that wraps the original reader
+        ModifyingReader modifyingReader = new ModifyingReader(reader, modifier);
+
+        // use the modifying reader instead of the original reader
+        String actualOutput = IOUtils.toString(modifyingReader);
+
+        assertEquals("foo[INVALID XML CHAR FOUND: U+D8FF]bar", actualOutput);
+    }
 }

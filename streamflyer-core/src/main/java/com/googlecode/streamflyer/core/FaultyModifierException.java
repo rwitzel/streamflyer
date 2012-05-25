@@ -21,10 +21,10 @@ import java.util.Map;
 
 /**
  * Thrown if an implementation of a {@link Modifier} returns invalid
- * {@link AfterModification modifications}.
+ * {@link AfterModification messages} to the {@link ModifyingReader} or
+ * {@link ModifyingWriter}.
  * 
  * @author rwoo
- * 
  * @since 17.06.2011
  */
 public class FaultyModifierException extends RuntimeException {

@@ -23,12 +23,12 @@ import java.util.regex.Pattern;
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.experimental.stateful.State;
 import com.googlecode.streamflyer.experimental.stateful.StatefulAfterModification;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.OnStreamStandardMatcher;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
 
 /**
  * This state refers to a token (described by a regular expression). If that

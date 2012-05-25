@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.googlecode.streamflyer.core.AfterModification;
-import com.googlecode.streamflyer.thirdparty.ZzzAssert;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
 import com.googlecode.streamflyer.util.StringUtils;
 
 /**

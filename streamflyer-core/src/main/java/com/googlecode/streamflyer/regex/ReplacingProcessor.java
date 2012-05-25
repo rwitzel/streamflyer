@@ -21,16 +21,16 @@ import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 
-import com.googlecode.streamflyer.thirdparty.ZzzValidate;
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
- * This {@link MatchProcessor} replaces the matching string (given by the
+ * This {@link MatchProcessor} replaces the matching text (given by the
  * {@link MatchResult}) with the configured replacement.
  * <p>
  * The replacement can be defined with the same syntax as defined by
  * {@link Matcher#appendReplacement(StringBuffer, String)}
  * <p>
- * EXAMPLE: <code><pre>
+ * EXAMPLES: <code><pre class="prettyprint lang-java">
 new ReplacingProcessor("aaa") // replaces each match with "aaa"
 new ReplacingProcessor("$2") // replaces each match with the content of the second {@link MatchResult#group() group} of the match
 new ReplacingProcessor("aaa$2bbb$1ccc") // replaces each match with "aaa$2bbb$1ccc"

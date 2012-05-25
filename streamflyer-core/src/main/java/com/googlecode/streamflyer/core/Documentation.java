@@ -29,7 +29,8 @@ import com.googlecode.streamflyer.xml.InvalidXmlCharacterModifier;
 import com.googlecode.streamflyer.xml.XmlVersionModifier;
 
 /**
- * This Javadoc content is also available on the <a
+ * Read this first, before you use Streamflyer. This Javadoc content is also
+ * available on the <a
  * href="http://code.google.com/p/streamflyer/">Streamflyer</a> web page.
  * <p>
  * <h1>Contents</h1>

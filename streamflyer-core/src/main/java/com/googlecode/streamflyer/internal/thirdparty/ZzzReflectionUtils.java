@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.streamflyer.thirdparty;
+package com.googlecode.streamflyer.internal.thirdparty;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

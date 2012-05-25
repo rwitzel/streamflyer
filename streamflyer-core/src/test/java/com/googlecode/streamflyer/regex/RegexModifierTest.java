@@ -18,6 +18,7 @@ package com.googlecode.streamflyer.regex;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,43 @@ import com.googlecode.streamflyer.core.ModifyingWriter;
  * @since 23.06.2011
  */
 public class RegexModifierTest extends AbstractRegexModifierTest {
+
+    private class MatchPrinter implements MatchProcessor {
+
+        @Override
+        public MatchProcessorResult process(StringBuilder characterBuffer,
+                int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+
+            // print the matches text
+            System.out.println("match: " + matchResult.group());
+
+            // continue matching behind the end of the matched text
+            return new MatchProcessorResult(matchResult.end(), true);
+        }
+
+    }
+
+    public void testExampleFromRegexModifierJavadoc_OwnMatchProcessor()
+            throws Exception {
+
+        String fakeErrorLog = "1 ERROR aa\n2 WARN bb\n3 ERROR cc";
+
+        // choose the character stream to modify
+        Reader originalReader = new StringReader( //
+                fakeErrorLog);
+
+        // select the modifier
+        Modifier myModifier = new RegexModifier("^.*ERROR.*$",
+                Pattern.MULTILINE, new MatchPrinter(), 0, 2048);
+
+        // create the modifying reader that wraps the original reader
+        Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
+
+        // use the modifying reader instead of the original reader
+        String output = IOUtils.toString(modifyingReader);
+        // stream content is not modified
+        assertEquals(fakeErrorLog, output);
+    }
 
     public void testExampleFromHomepage_usage() throws Exception {
 
