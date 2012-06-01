@@ -16,17 +16,19 @@
 
 package com.googlecode.streamflyer.regex;
 
+import static com.googlecode.catchexception.CatchException.catchException;
+import static com.googlecode.catchexception.CatchException.caughtException;
+
 import java.util.List;
 
-import com.googlecode.streamflyer.regex.ReplacingProcessor;
-
 import junit.framework.TestCase;
+
+import com.googlecode.catchexception.CatchException;
 
 /**
  * Tests {@link ReplacingProcessor}.
  * 
  * @author rwoo
- * 
  * @since 18.06.2011
  */
 public class ReplacingProcessorUnitTest extends TestCase {
@@ -70,14 +72,13 @@ public class ReplacingProcessorUnitTest extends TestCase {
 
     public void testCompileReplacement_groupReference_invalid()
             throws Exception {
-        try {
-            assertCompiledReplacement("hossa$", "anything");
-            fail("IllegalArgumentException expected");
-        }
-        catch (IllegalArgumentException e) {
-            assertEquals("group reference $ without number at the end of the"
-                    + " replacement string (hossa$)", e.getMessage());
-        }
+
+        catchException(new ReplacingProcessor()).parseReplacement("hossa$");
+
+        assertTrue(caughtException() instanceof IllegalArgumentException);
+        assertEquals("group reference $ without number at the end of the"
+                + " replacement string (hossa$)", CatchException
+                .caughtException().getMessage());
     }
 
     /**
