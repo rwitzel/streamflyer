@@ -159,11 +159,21 @@ public class XmlVersionModifierTest extends TestCase {
      * 
      * @throws Exception
      */
-    public void testXmlVersion_manyWhitespaceCharacters() throws Exception {
+    public void testXmlVersion_XmlPrologTooLong_manyWhitespaceCharacters()
+            throws Exception {
 
-        String prefix = "<?xml " + StringUtils.repeat("      ", 100);
-        assertXmlVersionInProlog(prefix + " version='1.0'>", "1.1", prefix
-                + " version='1.1'>");
+        String prefix = "<?xml " + StringUtils.repeat("      ", 1000);
+        try {
+            assertXmlVersionInProlog(prefix + " version='1.0'>", "1.1", prefix
+                    + " version='1.1'>");
+            fail("XmlPrologRidiculouslyLongException expected");
+        }
+        catch (XmlPrologRidiculouslyLongException e) {
+            assertTrue(e.getMessage().contains(
+                    "the XML prolog of an XML document is too long:"));
+            assertTrue(e.getMessage().contains(
+                    "<?xml                                         "));
+        }
     }
 
     private void assertXmlVersionInProlog(String input, String newXmlVersion,

@@ -27,9 +27,24 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**
- * Replaces the XML version in the XML prolog with the given XML version.
- * ATTENTION! You must use BOM skipping reader when modifying an input stream
- * like Apache's Commons IO {@link XmlStreamReader}.
+ * Replaces the XML version in the XML prolog with the given XML version. Adds
+ * an XML prolog if the stream does not contain an XML prolog.
+ * <p>
+ * <h1>Contents</h1>
+ * <p>
+ * <b> <a href="#g1">1. How and when do I use this modifier?</a><br/>
+ * <a href="#g2">2. Do I have to care about BOMs at the beginning of the
+ * stream?</a> <br/>
+ * <a href="g3">3. Is there any known limitation?</a> <br/>
+ * <a href="#g4">4. How much memory does the modifier consume?</a><br/>
+ * </b> <!-- ++++++++++++++++++++++++++++++ -->
+ * <p>
+ * <h3 id="g1">1. How and when do I use this modifier?</h3>
+ * <p>
+ * This modifier is an alternative to {@link InvalidXmlCharacterModifier} if you
+ * a have characters in an XML stream that are valid for XML 1.1 documents but
+ * invalid for XML 1.1 documents. In this case you use this modifier to change
+ * the XML version in the prolog of the document.
  * <p>
  * EXAMPLE:
  * <code><pre class="prettyprint lang-java">// choose the input stream to modify
@@ -46,17 +61,22 @@ ModifyingReader modifyingReader = new ModifyingReader(reader,
 // use the modifying reader instead of the original reader
 String xml = IOUtils.toString(modifyingReader);
 
-assertTrue(xml.startsWith("<?xml version='1.1'"));
+assertTrue(xml.startsWith("&lt;?xml version='1.1'"));
 </pre></code>
+ * <h3 id="g2">2. Do I have to care about BOMs at the beginning of the stream?</h3>
  * <p>
- * ATTENTION! This modifier does not work properly if the prolog of the XML
- * document contains more than {@link #INITIAL_NUMBER_OF_CHARACTERS} characters.
- * This can only happen if there is a lot of whitespace within the prolog, which
- * is highly unlikely but not impossible. You should know that even the
+ * Yes, you must use a BOM skipping reader that wraps the input stream. Apache's
+ * Commons IO {@link XmlStreamReader} does this for you.
+ * <h3 id="g3">3. Is there any known limitation?</h3>
+ * <p>
+ * Yes, this modifier throws a {@link XmlPrologRidiculouslyLongException} if the
+ * prolog of the XML document contains more than
+ * {@link #INITIAL_NUMBER_OF_CHARACTERS} characters. This can only happen if
+ * there is a lot of whitespace within the prolog, which is highly unlikely but
+ * not forbidden by the XML specification. You should know that even the
  * <code>XmlReader</code> of Apache Commons which you probably use to detect the
  * encoding cannot deal with such a kind of prolog.
- * <p>
- * This is an alternative to {@link InvalidXmlCharacterModifier}.
+ * <h3 id="#g4">4. How much memory does the modifier consume?</h3>
  * <p>
  * The memory consumption of this modifier during the stream processing is
  * roughly given by the second argument of
@@ -168,6 +188,15 @@ public class XmlVersionModifier implements Modifier {
                         xmlVersion);
             }
             else {
+                // is there a prolog that is too long?
+                Matcher matcher2 = Pattern.compile("<\\?xml.*").matcher(
+                        characterBuffer);
+                if (matcher2.matches()) {
+                    // this is not normal at all -> throw exception
+                    throw new XmlPrologRidiculouslyLongException(
+                            characterBuffer.toString());
+                }
+
                 // insert prolog
                 characterBuffer
                         .insert(0, "<?xml version='" + xmlVersion + "'>");
