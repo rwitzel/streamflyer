@@ -34,7 +34,7 @@ import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFacto
  * <p>
  * <h1>Contents</h1>
  * <p>
- * <b> <a href="#g1">1. How do I use this class?</a><br/>
+ * <b> <a href="#g1">1. How do I use this modifier?</a><br/>
  * <a href="#g2">2. In addition to the replacement of the invalid characters I
  * want to record the replacements and sent notifications. How can I do
  * this?</a> <br/>
@@ -45,7 +45,7 @@ import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFacto
  * <a href="#g6">6. When should I not use this modifier?</a><br/>
  * </b> <!-- ++++++++++++++++++++++++++++++ -->
  * <p>
- * <h3 id="g1">1. How do I use this class?</h3>
+ * <h3 id="g1">1. How do I use this modifier?</h3>
  * <p>
  * EXAMPLE 1. This example shows how to remove the invalid characters:
  * <code><pre class="prettyprint lang-java">// choose the character stream to modify

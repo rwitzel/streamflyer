@@ -36,7 +36,7 @@ import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFacto
  * <p>
  * <h1>Contents</h1>
  * <p>
- * <b> <a href="#g1">1. How do I use this class?</a><br/>
+ * <b> <a href="#g1">1. How do I use this modifier?</a><br/>
  * <a href="#g2">2. Instead of replacing text I want to do something else when
  * the regular expression matches. How can I do this?</a><br/>
  * <a href="#g3">3. How can I find out the position of the matches within the
@@ -52,7 +52,7 @@ import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFacto
  * <code>newNumberOfChars</code>?</a><br/>
  * </b> <!-- ++++++++++++++++++++++++++++++ -->
  * <p>
- * <h3 id="g1">1. How do I use this class?</h3>
+ * <h3 id="g1">1. How do I use this modifier?</h3>
  * <p>
  * EXAMPLE:
  * <code><pre class="prettyprint lang-java">// choose the character stream to modify
