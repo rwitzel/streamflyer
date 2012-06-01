@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 
-
 /**
  * Tests {@link OnStreamJava6Matcher}.
  * 
@@ -30,13 +29,14 @@ import com.googlecode.streamflyer.regex.OnStreamMatcher;
  * @since 28.06.2011
  */
 public class RegexModifierJava6Test extends
-        com.googlecode.streamflyer.regex.RegexModifierTest {
+		com.googlecode.streamflyer.regex.RegexModifierTest {
 
-    @Override
-    protected OnStreamMatcher createMatcher(String regex) {
-        Matcher matcher = Pattern.compile(regex).matcher("");
-        matcher.useTransparentBounds(true);
-        return new OnStreamJava6Matcher(matcher);
-    }
+	@Override
+	protected OnStreamMatcher createMatcher(String regex, int flags) {
+		Matcher matcher = Pattern.compile(regex).matcher("");
+		matcher.useTransparentBounds(true);
+		matcher.useAnchoringBounds(false);
+		return new OnStreamJava6Matcher(matcher);
+	}
 
 }

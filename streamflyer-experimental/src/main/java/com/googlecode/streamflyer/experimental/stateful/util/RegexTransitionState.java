@@ -50,129 +50,127 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  */
 public class RegexTransitionState implements State, MatchProcessor {
 
-    private RegexModifier nextTokensRegexModifier;
+	private RegexModifier nextTokensRegexModifier;
 
-    /**
-     * The next state determined by evaluating the result of a match. Null if
-     * there was no match.
-     */
-    private State nextState;
+	/**
+	 * The next state determined by evaluating the result of a match. Null if
+	 * there was no match.
+	 */
+	private State nextState;
 
-    /**
-     * @param nextTokensRegexModifier
-     */
-    public RegexTransitionState(String nextTokensRegex) {
-        super();
+	/**
+	 * @param nextTokensRegexModifier
+	 */
+	public RegexTransitionState(String nextTokensRegex) {
+		super();
 
-        ZzzValidate
-                .notNull(nextTokensRegex, "nextTokensRegex must not be null");
+		ZzzValidate
+				.notNull(nextTokensRegex, "nextTokensRegex must not be null");
 
-        // create onStreamMatcher
-        // TODO inject matcher instead of regex
-        Matcher matcher = Pattern.compile(nextTokensRegex).matcher("");
-        matcher.useTransparentBounds(true);
-        OnStreamMatcher onStreamMatcher = new OnStreamStandardMatcher(matcher);
+		// create onStreamMatcher
+		// TODO inject matcher instead of regex
+		Matcher matcher = Pattern.compile(nextTokensRegex).matcher("");
+		matcher.useTransparentBounds(true);
+		matcher.useAnchoringBounds(false);
+		OnStreamMatcher onStreamMatcher = new OnStreamStandardMatcher(matcher);
 
-        // create nextTokensRegexModifier using 'this' as match processor
-        // TODO remove magic numbers
-        this.nextTokensRegexModifier = new RegexModifier(onStreamMatcher, this,
-                12, 345);
-    }
+		// create nextTokensRegexModifier using 'this' as match processor
+		// TODO remove magic numbers
+		this.nextTokensRegexModifier = new RegexModifier(onStreamMatcher, this,
+				12, 345);
+	}
 
-    /**
-     * @see com.googlecode.streamflyer.experimental.stateful.State#modify(java.lang.StringBuilder,
-     *      int, boolean)
-     */
-    @Override
-    public StatefulAfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+	/**
+	 * @see com.googlecode.streamflyer.experimental.stateful.State#modify(java.lang.StringBuilder,
+	 *      int, boolean)
+	 */
+	@Override
+	public StatefulAfterModification modify(StringBuilder characterBuffer,
+			int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = nextTokensRegexModifier.modify(
-                characterBuffer, firstModifiableCharacterInBuffer,
-                endOfStreamHit);
+		AfterModification afterModification = nextTokensRegexModifier.modify(
+				characterBuffer, firstModifiableCharacterInBuffer,
+				endOfStreamHit);
 
-        StatefulAfterModification result;
-        if (nextState != null) {
-            // there was a match -> use the next state
-            result = new StatefulAfterModification(afterModification, nextState);
-            nextState = null;
-        }
-        else {
-            // there was no match -> use the existing state
-            afterModification = processWithoutMatch(characterBuffer,
-                    firstModifiableCharacterInBuffer, endOfStreamHit,
-                    afterModification);
-            result = new StatefulAfterModification(afterModification, this);
-        }
+		StatefulAfterModification result;
+		if (nextState != null) {
+			// there was a match -> use the next state
+			result = new StatefulAfterModification(afterModification, nextState);
+			nextState = null;
+		} else {
+			// there was no match -> use the existing state
+			afterModification = processWithoutMatch(characterBuffer,
+					firstModifiableCharacterInBuffer, endOfStreamHit,
+					afterModification);
+			result = new StatefulAfterModification(afterModification, this);
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * @see com.googlecode.streamflyer.regex.MatchProcessor#process(java.lang.StringBuilder,
-     *      int, java.util.regex.MatchResult)
-     */
-    @Override
-    public MatchProcessorResult process(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+	/**
+	 * @see com.googlecode.streamflyer.regex.MatchProcessor#process(java.lang.StringBuilder,
+	 *      int, java.util.regex.MatchResult)
+	 */
+	@Override
+	public MatchProcessorResult process(StringBuilder characterBuffer,
+			int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
-        // (1) find the next state (this depends on the match result)
-        // TODO use the content of the top-level groups
-        nextState = findState(characterBuffer,
-                firstModifiableCharacterInBuffer, matchResult);
+		// (1) find the next state (this depends on the match result)
+		// TODO use the content of the top-level groups
+		nextState = findState(characterBuffer,
+				firstModifiableCharacterInBuffer, matchResult);
 
-        // (2) modify the buffer
-        firstModifiableCharacterInBuffer = modifyBuffer(characterBuffer,
-                firstModifiableCharacterInBuffer, matchResult);
+		// (2) modify the buffer
+		firstModifiableCharacterInBuffer = modifyBuffer(characterBuffer,
+				firstModifiableCharacterInBuffer, matchResult);
 
-        // do we have to change the state?
-        if (!nextState.equals(this)) {
-            // yes, state must be changed -> we must not continue to match with
-            // this object
-            return new MatchProcessorResult(firstModifiableCharacterInBuffer,
-                    false);
-        }
-        else {
-            // no, state must not be changed -> we continue to match with this
-            // object
-            return new MatchProcessorResult(firstModifiableCharacterInBuffer,
-                    true);
-        }
-    }
+		// do we have to change the state?
+		if (!nextState.equals(this)) {
+			// yes, state must be changed -> we must not continue to match with
+			// this object
+			return new MatchProcessorResult(firstModifiableCharacterInBuffer,
+					false);
+		} else {
+			// no, state must not be changed -> we continue to match with this
+			// object
+			return new MatchProcessorResult(firstModifiableCharacterInBuffer,
+					true);
+		}
+	}
 
-    /**
-     * Finds the next state (evaluating the given match result).
-     * <p>
-     * The default implementation returns 'this' state.
-     */
-    protected State findState(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
-        return this;
-    }
+	/**
+	 * Finds the next state (evaluating the given match result).
+	 * <p>
+	 * The default implementation returns 'this' state.
+	 */
+	protected State findState(StringBuilder characterBuffer,
+			int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+		return this;
+	}
 
-    /**
-     * Modifies the character buffer if the token was found. Returns the
-     * position of the first character that is modifiable.
-     * <p>
-     * The default implementation does not modify the buffer. Returns the end of
-     * the match as new first modifiable character in the buffer.
-     */
-    protected int modifyBuffer(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
-        return matchResult.end();
-    }
+	/**
+	 * Modifies the character buffer if the token was found. Returns the
+	 * position of the first character that is modifiable.
+	 * <p>
+	 * The default implementation does not modify the buffer. Returns the end of
+	 * the match as new first modifiable character in the buffer.
+	 */
+	protected int modifyBuffer(StringBuilder characterBuffer,
+			int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+		return matchResult.end();
+	}
 
-    /**
-     * Modifies the character buffer if no token is found.
-     * <p>
-     * The default implementation returns the given {@link AfterModification}.
-     */
-    protected AfterModification processWithoutMatch(
-            StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit,
-            AfterModification afterModification) {
-        return afterModification;
-    }
-
+	/**
+	 * Modifies the character buffer if no token is found.
+	 * <p>
+	 * The default implementation returns the given {@link AfterModification}.
+	 */
+	protected AfterModification processWithoutMatch(
+			StringBuilder characterBuffer,
+			int firstModifiableCharacterInBuffer, boolean endOfStreamHit,
+			AfterModification afterModification) {
+		return afterModification;
+	}
 
 }

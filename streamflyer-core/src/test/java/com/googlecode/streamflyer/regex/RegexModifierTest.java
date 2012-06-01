@@ -207,6 +207,65 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertEquals(true, matcher.hitEnd());
     }
 
+    /**
+     * See <a
+     * href="http://ex-parrot.com/~pdw/Mail-RFC822-Address.html">Mail::RFC822
+     * ::Address: regexp-based address validation</a>
+     * 
+     * @throws Exception
+     */
+    public void learningTest_mailPattern() throws Exception {
+        String input = "rodrigo.witzel@gmx.de";
+
+        // @ "
+
+        String $lwsp = "(?:(?:\\r\\n)?[ \\t])";
+        // String $char = "[\\000-\\177]";
+        String $specials = "()<>@,;:\\\\\".\\[\\]";
+        // String $controls = "\\000-\\037\\177";
+        String $controls = "\\000-\\037\\0177";
+        String $dtext = "[^\\[\\]\\r\\\\]";
+        String $domain_literal = "\\[(?:" + $dtext + "|\\\\.)*\\]" + $lwsp
+                + "*";
+        String $quoted_string = "\"(?:[^\\\"\\r\\\\]|\\\\.|" + $lwsp + ")*\""
+                + $lwsp + "*";
+        // \\[ replaced with [
+        String $atom = "[^" + $specials + " " + $controls + "]+(?:" + $lwsp
+                + "+|\\Z|(?=[\\[\"" + $specials + "]))";
+        String $word = "(?:" + $atom + "|" + $quoted_string + ")";
+        String $localpart = $word + "(?:\\." + $lwsp + "*" + $word + ")*";
+        String $sub_domain = "(?:" + $atom + "|" + $domain_literal + ")";
+        String $domain = $sub_domain + "(?:\\." + $lwsp + "*" + $sub_domain
+                + ")*";
+        String $addr_spec = $localpart + "@" + $lwsp + "*" + $domain;
+        String $phrase = $word + "*";
+        String $route = "(?:@" + $domain + "(?:,@" + $lwsp + "*" + $domain
+                + ")*:" + $lwsp + "*)";
+        String $route_addr = "\\<" + $lwsp + "*" + $route + "?" + $addr_spec
+                + "\\>" + $lwsp + "*";
+        String $mailbox = "(?:" + $addr_spec + "|" + $phrase + $route_addr
+                + ")";
+        String $group = "" + $phrase + ":" + $lwsp + "*(?:" + $mailbox
+                + "(?:,\\s*" + $mailbox + ")*)?;\\s*";
+        String $address = "(?:" + $mailbox + "|" + $group + ")";
+        String regex = $lwsp + "*" + $address;
+
+        Pattern.compile($lwsp);
+        Pattern.compile("[" + $specials + "]");
+        Pattern.compile("[" + $controls + "]");
+        Pattern.compile($dtext);
+        Pattern.compile($domain_literal);
+        Pattern.compile($quoted_string);
+        Pattern.compile($atom);
+        Pattern.compile($word);
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        assertTrue(matcher.matches());
+
+        assertReplacement(input, regex, "<email>", "<email>");
+    }
+
     public void temptestReplacement_OneCharacterReplacedWithAnother()
             throws Exception {
 

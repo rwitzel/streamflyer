@@ -36,17 +36,18 @@ import com.googlecode.streamflyer.core.ModifyingWriter;
  */
 public abstract class AbstractRegexModifierTest extends TestCase {
 
-    protected OnStreamMatcher createMatcher(String regex) {
-        Matcher matcher = Pattern.compile(regex).matcher("");
+    protected OnStreamMatcher createMatcher(String regex, int flags) {
+        Matcher matcher = Pattern.compile(regex, flags).matcher("");
         matcher.useTransparentBounds(true);
+        matcher.useAnchoringBounds(false);
         return new OnStreamStandardMatcher(matcher);
     }
 
     protected RegexModifier createModifier(String regex, String replacement,
             int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer) {
+            int requestedCapacityOfCharacterBuffer, int flags) {
         // create matcher
-        OnStreamMatcher matcher = createMatcher(regex);
+        OnStreamMatcher matcher = createMatcher(regex, flags);
 
         // create modifier
         RegexModifier modifier = new RegexModifier( //
@@ -65,7 +66,8 @@ public abstract class AbstractRegexModifierTest extends TestCase {
 
         // create modifier
         RegexModifier modifier = createModifier(regex, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
+                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
+                0);
 
         // create reader
         Reader reader = new ModifyingReader(new BufferedReader(
@@ -95,7 +97,8 @@ public abstract class AbstractRegexModifierTest extends TestCase {
 
         // create modifier
         RegexModifier modifier = createModifier(regex, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
+                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
+                0);
 
         // setup: create modifier and writer
         StringWriter stringWriter = new StringWriter();

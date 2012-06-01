@@ -21,53 +21,59 @@ import java.util.regex.Matcher;
 
 
 /**
- * Similar to {@link Matcher}, implementations of this interface allow to match
- * regular expressions on a {@link CharSequence}.
+ * A reduced variant of a {@link Matcher}. Implementations of this interface
+ * match a regular expression on a {@link CharSequence}.
  * <p>
  * In comparison to {@link Matcher}, this type provides the method
  * {@link #findUnlessHitEnd(int, int)} that is particularly useful when you want
- * to match a regular expression on character streams.
- * <p>
- * What is the technical idea behind this matcher? The purpose of this matcher
- * is too extend the class {@link Matcher} with the following code. <code><pre>
-    private int lastFrom;
-
-    public boolean findUntilMatchOrHitEnd(int from, int to) {
-        this.hitEnd = false;
-        this.requireEnd = false;
-        from        = from < 0 ? 0 : from;
-        this.first  = from;
-        this.oldLast = oldLast < 0 ? from : oldLast;
-        for (int i = 0; i < groups.length; i++)
-            groups[i] = -1;
-        acceptMode = NOANCHOR;
-        boolean result = false;
-        for (this.lastFrom = from; lastFrom <= to; lastFrom++) {
-            result = parentPattern.matchRoot.match(this, lastFrom, text);
-            if (result || hitEnd()) {
-                break;
-            }
-        }
-        if (!result)
-            this.first = -1;
-        this.oldLast = this.last;
-        return result;
-    }
-
-     public int lastFrom() {
-        return lastFrom;
-    }
-</pre></code>
- * <p>
- * Unfortunately, {@link Matcher} cannot by extended via subclassing because
- * {@link Matcher} is a final type. The new interface {@link OnStreamMatcher}
- * provides all methods necessary to do match regular expresions on character
- * stream including the method {@link #findUnlessHitEnd(int, int)}.
+ * to match a regular expression on a character stream.
  * 
  * @author rwoo
  * @since 20.06.2011
  */
 public interface OnStreamMatcher extends MatchResult {
+
+    // * <p>
+    // * What is the technical idea behind this matcher? The purpose of this
+    // matcher
+    // * is too extend the class {@link Matcher} with the following code.
+    // <code><pre>
+    // private int lastFrom;
+    //
+    // public boolean findUntilMatchOrHitEnd(int from, int to) {
+    // this.hitEnd = false;
+    // this.requireEnd = false;
+    // from = from < 0 ? 0 : from;
+    // this.first = from;
+    // this.oldLast = oldLast < 0 ? from : oldLast;
+    // for (int i = 0; i < groups.length; i++)
+    // groups[i] = -1;
+    // acceptMode = NOANCHOR;
+    // boolean result = false;
+    // for (this.lastFrom = from; lastFrom <= to; lastFrom++) {
+    // result = parentPattern.matchRoot.match(this, lastFrom, text);
+    // if (result || hitEnd()) {
+    // break;
+    // }
+    // }
+    // if (!result)
+    // this.first = -1;
+    // this.oldLast = this.last;
+    // return result;
+    // }
+    //
+    // public int lastFrom() {
+    // return lastFrom;
+    // }
+    // </pre></code>
+    // * <p>
+    // * Unfortunately, {@link Matcher} cannot by extended via subclassing
+    // because
+    // * {@link Matcher} is a final type. The new interface {@link
+    // OnStreamMatcher}
+    // * provides all methods necessary to do match regular expresions on
+    // character
+    // * stream including the method {@link #findUnlessHitEnd(int, int)}.
 
     /**
      * @see Matcher#reset(CharSequence)

@@ -42,6 +42,14 @@ import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFacto
  * <a href="#g3">3. How can I find out the position of the matches within the
  * stream?</a> <br/>
  * <a href="#g4">4. How much memory does the modifier consume?</a><br/>
+ * <a href="#g5">5. Which features of Java's Pattern are not supported yet?</a><br/>
+ * <a href="#g6">6. Which features of Java's Matcher are not supported yet?</a><br/>
+ * <a href="#g7">7. How do I configure RegexModifier if my pattern contains ^ or
+ * \b or \B?</a><br/>
+ * <a href="#g8">8. What value to choose for the constructor parameter
+ * <code>minimumLengthOfLookBehind</code>?</a><br/>
+ * <a href="#g9">9. What value to choose for the constructor parameter
+ * <code>newNumberOfChars</code>?</a><br/>
  * </b> <!-- ++++++++++++++++++++++++++++++ -->
  * <p>
  * <h3 id="g1">1. How do I use this class?</h3>
@@ -99,6 +107,50 @@ Modifier myModifier = new RegexModifier("^.*ERROR.*$", Pattern.MULTILINE, new Ma
  * loaded into the memory at once. The web page of this project gives <a href=
  * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions"
  * >more details</a>.
+ * <h3 id="#g5">5. Which features of Java's Pattern are not supported yet?</h3>
+ * <p>
+ * Apart from \G (the boundary matcher that matches the end of the previous
+ * match) all other features mentioned in {@link Pattern} are supported.
+ * <h3 id="#g6">6. Which features of Java's Matcher are not supported yet?</h3>
+ * <p>
+ * Java's {@link Matcher} allows the user to {@link Matcher#usePattern(Pattern)
+ * change} the used pattern. RegexModifier does not enables this out-of-the-box.
+ * To implement this feature you must subclass an existing
+ * {@link OnStreamMatcher} implementation and connect it to your
+ * {@link MatchProcessor}.
+ * <p>
+ * Features that are region-related (like anchoring bounds, transparent bounds)
+ * and features that determine how to continue the matching are not configurable
+ * because they are already setup in an appropriate way by the RegexModifier.
+ * <h3 id="#g7">7. How do I configure RegexModifier if my pattern contains ^ or
+ * \b or \B?</h3>
+ * <p>
+ * These pattern constructs require a look-behind. Therefore, set
+ * <code>minimumLengthOfLookBehind</code> at least to one.
+ * <h3 id="#g8">8. What value to choose for the constructor parameter
+ * <code>minimumLengthOfLookBehind</code>?</h3>
+ * <p>
+ * If your pattern does not contain zero-width look-behind constructs, then you
+ * can choose any value. Zero is recommended.
+ * <p>
+ * Choose one if your pattern contains zero-width look-behind constructs like ^
+ * or \b or \B but not constructs like <code>(?&lt;=X)</code> or
+ * <code>(?&lt;!X)</code>.
+ * <p>
+ * If your pattern contains zero-width look-behind constructs like
+ * <code>(?&lt;=X)</code> or <code>(?&lt;!X)</code>, you have to find out how
+ * many characters the matcher needs at least to match properly by looking
+ * behind. Use this number as value for <code>minimumLengthOfLookBehind</code>.
+ * EXAMPLE: Let's say your pattern might check for <code>(?&lt;=a{3})</code> and
+ * <code>(?&lt;=b{5})</code> in front of the actual match. Then the appropriate
+ * value is five. If you set the value to a lower value, then there is no
+ * guarantee that the modifier matches properly.
+ * <h3 id="#g9">9. What value to choose for the constructor parameter
+ * <code>newNumberOfChars</code>?</h3>
+ * <p>
+ * This value determines how many characters are usually processed at once. If
+ * the value is too high or too low, the performance decreases. The optimal
+ * value depends on the length and number of matches in the stream.
  * 
  * @author rwoo
  * @since 18.06.2011
@@ -191,11 +243,11 @@ public class RegexModifier implements Modifier {
 
     /**
      * Like {@link RegexModifier#RegexModifier(String, int, String, int, int)}
-     * but uses defaults for <code>minimumLengthOfLookBehind</code> (zero) and
+     * but uses defaults for <code>minimumLengthOfLookBehind</code> (1) and
      * <code>newNumberOfChars</code> (2048).
      */
     public RegexModifier(String regex, int flags, String replacement) {
-        this(regex, flags, replacement, 0, 2048);
+        this(regex, flags, replacement, 1, 2048);
     }
 
     /**
@@ -232,12 +284,16 @@ public class RegexModifier implements Modifier {
                 minimumLengthOfLookBehind, newNumberOfChars);
     }
 
+    /**
+     * See {@link #RegexModifier(String, int, String, int, int)}.
+     */
     public RegexModifier(String regex, int flags,
             MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
             int newNumberOfChars) {
 
         Matcher jdkMatcher = Pattern.compile(regex, flags).matcher("");
         jdkMatcher.useTransparentBounds(true);
+        jdkMatcher.useAnchoringBounds(false);
         init(new OnStreamStandardMatcher(jdkMatcher), matchProcessor,
                 minimumLengthOfLookBehind, newNumberOfChars);
     }

@@ -27,7 +27,6 @@ import java.util.regex.Matcher;
  * an character stream that is read entirely into a {@link CharSequence}.
  * 
  * @author rwoo
- * 
  * @since 20.06.2011
  */
 public class OnStreamStandardMatcher implements OnStreamMatcher {
@@ -54,7 +53,10 @@ public class OnStreamStandardMatcher implements OnStreamMatcher {
     //
 
     /**
-     * @param matcher
+     * @param matcher This matcher SHOULD NOT use
+     *        {@link Matcher#hasAnchoringBounds() anchoring bounds} and SHOULD
+     *        use {@link Matcher#hasTransparentBounds() transparent bounds}.
+     *        Otherwise the desired matching behavior cannot be ensured.
      */
     public OnStreamStandardMatcher(Matcher matcher) {
         super();

@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import junit.framework.ComparisonFailure;
 
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
@@ -86,12 +90,16 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
     }
 
+    /**
+     * @see com.googlecode.streamflyer.regex.AbstractRegexModifierTest#createModifier(java.lang.String,
+     *      java.lang.String, int, int)
+     */
     @Override
     protected RegexModifier createModifier(String regex, String replacement,
             int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer) {
+            int requestedCapacityOfCharacterBuffer, int flags) {
         // create matcher
-        OnStreamMatcher matcher = createMatcher(regex);
+        OnStreamMatcher matcher = createMatcher(regex, flags);
 
         // create modifier
         RegexModifier modifier = new RegexModifierWithCheckpoints( //
@@ -315,4 +323,331 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
     }
 
+    public void testBoundaryMatchers1_caret_TheBeginningOfALine_multiline_correctUsage_withLookBehind()
+            throws Exception {
+
+        // test: match "^bar" in "foobar" - with look-behind
+        RegexModifier modifier = createModifier("^bar", "boom", 1, 100,
+                Pattern.MULTILINE);
+        StringBuilder charBuf = new StringBuilder("obar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("obar", charBuf.toString()); // assert no match
+
+        // test: match "^bar" in "foo\nbar" - with look-behind
+        modifier = createModifier("^bar", "boom", 1, 100, Pattern.MULTILINE);
+        charBuf = new StringBuilder("\nbar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("\nboom", charBuf.toString()); // assert match
+
+        // test: match "^bar" in "bar" - with look-behind
+        modifier = createModifier("^bar", "boom", 1, 100, 0);
+        charBuf = new StringBuilder("bar");
+        modifier.modify(charBuf, 0, false);
+        assertEquals("boom", charBuf.toString()); // assert match
+    }
+
+    public void testBoundaryMatchers1_caret_TheBeginningOfALine_noMultiline_correctUsage_withLookBehind()
+            throws Exception {
+
+        // test: match "^bar" in "foobar" - with look-behind
+        RegexModifier modifier = createModifier("^bar", "boom", 1, 100, 0);
+        StringBuilder charBuf = new StringBuilder("obar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("obar", charBuf.toString()); // assert no match
+
+        // test: match "^bar" in "foo\nbar" - with look-behind
+        modifier = createModifier("^bar", "boom", 1, 100, 0);
+        charBuf = new StringBuilder("\nbar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("\nbar", charBuf.toString()); // assert no match
+
+        // test: match "^bar" in "bar" - with look-behind
+        modifier = createModifier("^bar", "boom", 1, 100, 0);
+        charBuf = new StringBuilder("bar");
+        modifier.modify(charBuf, 0, false);
+        assertEquals("boom", charBuf.toString()); // assert match
+    }
+
+    public void testBoundaryMatchers2_dollar_TheEndOfALine_multiline()
+            throws Exception {
+
+        // test: match "foo$" in "foobar"
+        RegexModifier modifier = createModifier("foo$", "hoo", 0, 100,
+                Pattern.MULTILINE);
+        StringBuilder charBuf = new StringBuilder("foo");
+        AfterModification modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertTrue(modification.isModifyAgainImmediately());
+        assertEquals(0, modification.getNumberOfCharactersToSkip());
+        assertEquals("foo", charBuf.toString()); // not changed
+
+        charBuf = new StringBuilder("foob");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("foob", charBuf.toString()); // not changed
+
+        // test: match "foo$" in "foo\nbar"
+        charBuf = new StringBuilder("foo\n");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("hoo\n", charBuf.toString()); // changed
+    }
+
+    public void testBoundaryMatchers3_b_AWordBoundary_AtTheBeginning_correctUsage_withLookBehind()
+            throws Exception {
+
+        // test: match "\bbar" in "foobar" - with look-behind
+        RegexModifier modifier = createModifier("\\bbar", "boom", 1, 100, 0);
+        StringBuilder charBuf = new StringBuilder("obar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("obar", charBuf.toString()); // assert no match
+
+        // test: match "\bbar" in "foo bar" - with look-behind
+        modifier = createModifier("\\bbar", "boom", 1, 100, 0);
+        charBuf = new StringBuilder(" bar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals(" boom", charBuf.toString()); // assert match
+
+        // test: match "\bbar" in "bar" - with look-behind
+        modifier = createModifier("\\bbar", "boom", 1, 100, 0);
+        charBuf = new StringBuilder("bar");
+        modifier.modify(charBuf, 0, false);
+        assertEquals("boom", charBuf.toString()); // assert match
+    }
+
+    public void testBoundaryMatchers3_b_AWordBoundary_AtTheEnd()
+            throws Exception {
+
+        // test: match "foo\b" in "foobar"
+        RegexModifier modifier = createModifier("foo\\b", "hoo", 0, 100, 0);
+        StringBuilder charBuf = new StringBuilder("foo");
+        AfterModification modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertTrue(modification.isModifyAgainImmediately());
+        assertEquals(0, modification.getNumberOfCharactersToSkip());
+        assertEquals("foo", charBuf.toString()); // not changed
+
+        charBuf = new StringBuilder("foob");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("foob", charBuf.toString()); // not changed
+
+        // test: match "foo\b" in "foo bar"
+        charBuf = new StringBuilder("foo ");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        // four characters are skipped because the modifier continues matching
+        // so that finally all characters are skipped
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("hoo ", charBuf.toString()); // changed
+    }
+
+    public void testBoundaryMatchers3_B_ANonWordBoundary_AtTheBeginning_correctUsage_withLookBehind()
+            throws Exception {
+
+        // test: match "\B,,," in "x,,," - with look-behind
+        RegexModifier modifier = createModifier("\\B,,,", "boom", 1, 100, 0);
+        StringBuilder charBuf = new StringBuilder("x,,,");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("x,,,", charBuf.toString()); // assert no match
+
+        // test: match "\B,,," in "-,,," - with look-behind
+        modifier = createModifier("\\B,,,", "boom", 1, 100, 0);
+        charBuf = new StringBuilder("-,,,");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("-boom", charBuf.toString()); // assert match
+
+        // test: match "\B,,," in ",,," - with look-behind
+        modifier = createModifier("\\B,,,", "boom", 1, 100, 0);
+        charBuf = new StringBuilder(",,,");
+        modifier.modify(charBuf, 0, false);
+        assertEquals("boom", charBuf.toString()); // assert match
+    }
+
+    public void testBoundaryMatchers4_B_ANonWordBoundary_AtTheEnd()
+            throws Exception {
+
+        // test: match "foo\B" in ",,,x"
+        RegexModifier modifier = createModifier(",,,\\B", "hoo", 0, 100, 0);
+        StringBuilder charBuf = new StringBuilder(",,,");
+        AfterModification modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertTrue(modification.isModifyAgainImmediately());
+        assertEquals(0, modification.getNumberOfCharactersToSkip());
+        assertEquals(",,,", charBuf.toString()); // not changed
+
+        charBuf = new StringBuilder(",,,x");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals(",,,x", charBuf.toString()); // not changed
+
+        // test: match "foo\B" in ",,,-"
+        charBuf = new StringBuilder(",,,-");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        // four characters are skipped because the modifier continues matching
+        // so that finally all characters are skipped
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("hoo-", charBuf.toString()); // changed
+    }
+
+    public void testBoundaryMatchers5_A_TheBeginningOfTheInput_correctUsage_withLookBehind()
+            throws Exception {
+
+        // test: match "\Abar" in "foobar" - with look-behind
+        RegexModifier modifier = createModifier("\\Abar", "boom", 1, 100, 0);
+        StringBuilder charBuf = new StringBuilder("obar");
+        modifier.modify(charBuf, 1, false);
+        assertEquals("obar", charBuf.toString()); // assert no match
+
+        // test: match "\Abar" in "bar" - with look-behind
+        modifier = createModifier("\\Abar", "boom", 1, 100, 0);
+        charBuf = new StringBuilder("bar");
+        modifier.modify(charBuf, 0, false);
+        assertEquals("boom", charBuf.toString()); // assert match
+    }
+
+    /**
+     * See <a href="http://www.regular-expressions.info/continue.html>Continuing
+     * at The End of The Previous Match</a>
+     * 
+     * @throws Exception
+     */
+    public void testBoundaryMatchers6_G_TheEndOfThePreviousMatch_MISSINGE_FEATURE()
+            throws Exception {
+
+        // it's nice that this works here but this is because it matches at
+        // EVERY position here
+        assertReplacementByReader("yzyz", "\\G(y|z)", "x", 1, 1024, "xxxx");
+        assertReplacementByReader("yzyzyzyzyzyz", "\\G(y|z)", "x", 1, 2,
+                "xxxxxxxxxxxx");
+
+        // there are other cases that are not supported:
+        try {
+            assertReplacementByReader("azyzazyz", "(y)|(\\Gz)", "x", 1, 2,
+                    "azxxazxx");
+            fail("ComparisonFailure expected");
+        }
+        catch (ComparisonFailure e) {
+            assertEquals("expected:<a[zxxaz]xx> but was:<a[xxxax]xx>",
+                    e.getMessage());
+        }
+    }
+
+    /**
+     * See <a href="http://www.regular-expressions.info/anchors.html">Strings
+     * Ending with a Line Break</a>
+     * 
+     * @throws Exception
+     */
+    public void testBoundaryMatchers7_Z_TheEndOfTheInput() throws Exception {
+
+        // test: match "foo\Z" in "foobar"
+        RegexModifier modifier = createModifier("foo\\Z", "hoo", 0, 100, 0);
+        StringBuilder charBuf = new StringBuilder("foo");
+        AfterModification modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertTrue(modification.isModifyAgainImmediately());
+        assertEquals(0, modification.getNumberOfCharactersToSkip());
+        assertEquals("foo", charBuf.toString()); // not changed
+
+        charBuf = new StringBuilder("foob");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("foob", charBuf.toString()); // not changed
+
+        // test: match "foo\Z" in "foo"
+        charBuf = new StringBuilder("foo");
+        modification = modifier.modify(charBuf, 0, true);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        // four characters are skipped because the modifier continues matching
+        // so that finally all characters are skipped
+        assertEquals(3, modification.getNumberOfCharactersToSkip());
+        assertEquals("hoo", charBuf.toString()); // changed
+
+        // test: match "foo\Z" in "foo\n"
+        charBuf = new StringBuilder("foo\n");
+        modification = modifier.modify(charBuf, 0, true);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        // four characters are skipped because the modifier continues matching
+        // so that finally all characters are skipped
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("hoo\n", charBuf.toString()); // changed
+    }
+
+    public void testBoundaryMatchers8_Z_TheEndOfTheInput() throws Exception {
+
+        // test: match "foo\z" in "foobar"
+        RegexModifier modifier = createModifier("foo\\z", "hoo", 0, 100, 0);
+        StringBuilder charBuf = new StringBuilder("foo");
+        AfterModification modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertTrue(modification.isModifyAgainImmediately());
+        assertEquals(0, modification.getNumberOfCharactersToSkip());
+        assertEquals("foo", charBuf.toString()); // not changed
+
+        charBuf = new StringBuilder("foob");
+        modification = modifier.modify(charBuf, 0, false);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("foob", charBuf.toString()); // not changed
+
+        // test: match "foo\z" in "foo"
+        charBuf = new StringBuilder("foo");
+        modification = modifier.modify(charBuf, 0, true);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        // four characters are skipped because the modifier continues matching
+        // so that finally all characters are skipped
+        assertEquals(3, modification.getNumberOfCharactersToSkip());
+        assertEquals("hoo", charBuf.toString()); // changed
+
+        // test: match "foo\z" in "foo\n"
+        charBuf = new StringBuilder("foo\n");
+        modification = modifier.modify(charBuf, 0, true);
+        // System.out.println(modification);
+        assertFalse(modification.isModifyAgainImmediately());
+        // four characters are skipped because the modifier continues matching
+        // so that finally all characters are skipped
+        assertEquals(4, modification.getNumberOfCharactersToSkip());
+        assertEquals("foo\n", charBuf.toString()); // not changed
+    }
+
+    public void learningtestYYY() throws Exception {
+
+        Pattern pattern = Pattern.compile("\\bbar", 0);
+        String input = "bar";
+        Matcher matcher = pattern.matcher(input);
+        matcher.useTransparentBounds(true);
+        matcher.useAnchoringBounds(false);
+        matcher.region(0, input.length());
+        assertTrue(matcher.lookingAt());
+    }
+
+    public void learningtestBoundaryMatchers_caret_TheBeginningOfALine()
+            throws Exception {
+
+        Pattern pattern = Pattern.compile("^bar", Pattern.MULTILINE);
+        String input = "\nbar";
+        Matcher matcher = pattern.matcher(input);
+        matcher.useTransparentBounds(true);
+        matcher.useAnchoringBounds(false);
+        matcher.region(1, input.length());
+        assertTrue(matcher.lookingAt());
+    }
 }
