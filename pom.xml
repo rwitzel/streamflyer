@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.streamflyer</groupId>
   <artifactId>streamflyer-parent</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
   <name>Streamflyer Parent</name>
   <description>Allows editing an input stream</description>
@@ -224,25 +224,9 @@ else {
           </executions>
         </plugin>
 
-        <!-- automatic signing of created artifacts (at least the classes jar)
-           https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
-           Then simply deploy your artifacts use normal maven command:
-           $ mvn clean deploy -Dgpg.passphrase=yourpassphrase
-           If you don’t specify the passphrase, you will be prompted for one.
-            -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.4</version>
-          <executions>
-            <execution>
-              <id>sign-artifacts</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>sign</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
       
     </plugins>
@@ -284,6 +268,27 @@ else {
           </executions>
         </plugin>
       
+        <!-- automatic signing of created artifacts (at least the classes jar)
+           https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+           Then simply deploy your artifacts use normal maven command:
+           $ mvn clean deploy -Dgpg.passphrase=yourpassphrase
+           If you don’t specify the passphrase, you will be prompted for one.
+            -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
       </plugins>
     
     </pluginManagement>

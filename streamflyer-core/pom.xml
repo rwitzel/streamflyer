@@ -3,7 +3,7 @@
   <parent>
 	<groupId>com.googlecode.streamflyer</groupId>
 	<artifactId>streamflyer-parent</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>streamflyer-core</artifactId>
@@ -43,6 +43,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+
+      <!-- the last thing to do during the verify phase: -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
       </plugin>
 
     </plugins>
