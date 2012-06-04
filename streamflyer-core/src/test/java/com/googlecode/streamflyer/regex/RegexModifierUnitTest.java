@@ -628,17 +628,6 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("foo\n", charBuf.toString()); // not changed
     }
 
-    public void learningtestYYY() throws Exception {
-
-        Pattern pattern = Pattern.compile("\\bbar", 0);
-        String input = "bar";
-        Matcher matcher = pattern.matcher(input);
-        matcher.useTransparentBounds(true);
-        matcher.useAnchoringBounds(false);
-        matcher.region(0, input.length());
-        assertTrue(matcher.lookingAt());
-    }
-
     public void learningtestBoundaryMatchers_caret_TheBeginningOfALine()
             throws Exception {
 

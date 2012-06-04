@@ -23,14 +23,11 @@ import junit.framework.TestCase;
 
 import org.apache.commons.io.output.NullWriter;
 
-import com.googlecode.streamflyer.core.ModifyingWriter;
-
 
 /**
  * Tests {@link ModifyingWriter}.
  * 
  * @author rwoo
- * 
  * @since 17.06.2011
  */
 public class ModifiableWriterUnitTest extends TestCase {

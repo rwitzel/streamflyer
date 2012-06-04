@@ -18,15 +18,12 @@ package com.googlecode.streamflyer.xml;
 
 import java.io.StringReader;
 
-import com.googlecode.streamflyer.xml.XmlVersionReader;
-
 import junit.framework.TestCase;
 
 /**
  * Tests {@link XmlVersionReader}.
  * 
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public class XmlVersionReaderTest extends TestCase {

@@ -28,16 +28,11 @@ import junit.framework.TestCase;
 
 import org.apache.commons.io.IOUtils;
 
-import com.googlecode.streamflyer.core.FaultyModifierException;
-import com.googlecode.streamflyer.core.ModifyingReader;
-import com.googlecode.streamflyer.core.ModifyingWriter;
-
 
 /**
  * Tests {@link ModifyingReader}.
  * 
  * @author rwoo
- * 
  * @since 17.06.2011
  */
 public class ModifiableReaderUnitTest extends TestCase {

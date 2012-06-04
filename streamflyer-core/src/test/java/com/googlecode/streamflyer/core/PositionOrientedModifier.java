@@ -17,9 +17,6 @@ package com.googlecode.streamflyer.core;
 
 import java.util.Map;
 
-import com.googlecode.streamflyer.core.AfterModification;
-import com.googlecode.streamflyer.core.FaultyModifierException;
-import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFactory;

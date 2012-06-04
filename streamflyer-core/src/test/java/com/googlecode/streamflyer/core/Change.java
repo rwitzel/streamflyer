@@ -18,7 +18,6 @@ package com.googlecode.streamflyer.core;
 
 /**
  * @author rwoo
- * 
  * @since 28.06.2011
  */
 class Change {

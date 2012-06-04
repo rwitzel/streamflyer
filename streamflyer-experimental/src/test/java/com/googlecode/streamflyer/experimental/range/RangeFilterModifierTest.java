@@ -26,7 +26,6 @@ import org.apache.commons.io.IOUtils;
 
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
-import com.googlecode.streamflyer.experimental.range.RangeFilterModifier;
 
 /**
  * Tests {@link RangeFilterModifier}.
@@ -37,60 +36,60 @@ import com.googlecode.streamflyer.experimental.range.RangeFilterModifier;
  */
 public class RangeFilterModifierTest extends TestCase {
 
-    public void testRangeFiltered_1_initiallyOff() throws Exception {
-        assertRangeFilter("aaaXbbbYccc", "XbbbY", "X", "Y", true, true, false);
-        assertRangeFilter("aaaXbbbYccc", "Xbbb", "X", "Y", true, false, false);
-        assertRangeFilter("aaaXbbbYccc", "bbbY", "X", "Y", false, true, false);
-        assertRangeFilter("aaaXbbbYccc", "bbb", "X", "Y", false, false, false);
-    }
+	public void testRangeFiltered_1_initiallyOff() throws Exception {
+		assertRangeFilter("aaaXbbbYccc", "XbbbY", "X", "Y", true, true, false);
+		assertRangeFilter("aaaXbbbYccc", "Xbbb", "X", "Y", true, false, false);
+		assertRangeFilter("aaaXbbbYccc", "bbbY", "X", "Y", false, true, false);
+		assertRangeFilter("aaaXbbbYccc", "bbb", "X", "Y", false, false, false);
+	}
 
-    public void testRangeFiltered_2_initiallyOn() throws Exception {
-        assertRangeFilter("aaXbbbYccc", "aaXbbbY", "X", "Y", true, true, true);
-        assertRangeFilter("aaXbbbYccc", "aaXbbb", "X", "Y", true, false, true);
-        assertRangeFilter("aaXbbbYccc", "aaXbbbY", "X", "Y", false, true, true);
-        assertRangeFilter("aaXbbbYccc", "aaXbbb", "X", "Y", false, false, true);
-    }
+	public void testRangeFiltered_2_initiallyOn() throws Exception {
+		assertRangeFilter("aaXbbbYccc", "aaXbbbY", "X", "Y", true, true, true);
+		assertRangeFilter("aaXbbbYccc", "aaXbbb", "X", "Y", true, false, true);
+		assertRangeFilter("aaXbbbYccc", "aaXbbbY", "X", "Y", false, true, true);
+		assertRangeFilter("aaXbbbYccc", "aaXbbb", "X", "Y", false, false, true);
+	}
 
-    public void testRangeFiltered_3_twoRangesFound() throws Exception {
-        assertRangeFilter("aaXbYcXdYee", "XbYXdY", "X", "Y", true, true, false);
-        assertRangeFilter("aaXbYcXdYee", "XbXd", "X", "Y", true, false, false);
-        assertRangeFilter("aaXbYcXdYee", "bYdY", "X", "Y", false, true, false);
-        assertRangeFilter("aaXbYcXdYee", "bd", "X", "Y", false, false, false);
+	public void testRangeFiltered_3_twoRangesFound() throws Exception {
+		assertRangeFilter("aaXbYcXdYee", "XbYXdY", "X", "Y", true, true, false);
+		assertRangeFilter("aaXbYcXdYee", "XbXd", "X", "Y", true, false, false);
+		assertRangeFilter("aaXbYcXdYee", "bYdY", "X", "Y", false, true, false);
+		assertRangeFilter("aaXbYcXdYee", "bd", "X", "Y", false, false, false);
 
-        assertRangeFilter("aaXbYcXdYee", "aaXbYXdY", "X", "Y", true, true, true);
-        assertRangeFilter("aaXbYcXdYee", "aaXbXd", "X", "Y", true, false, true);
-        assertRangeFilter("aaXbYcXdYee", "aaXbYdY", "X", "Y", false, true, true);
-        assertRangeFilter("aaXbYcXdYee", "aaXbd", "X", "Y", false, false, true);
-    }
+		assertRangeFilter("aaXbYcXdYee", "aaXbYXdY", "X", "Y", true, true, true);
+		assertRangeFilter("aaXbYcXdYee", "aaXbXd", "X", "Y", true, false, true);
+		assertRangeFilter("aaXbYcXdYee", "aaXbYdY", "X", "Y", false, true, true);
+		assertRangeFilter("aaXbYcXdYee", "aaXbd", "X", "Y", false, false, true);
+	}
 
-    private void assertRangeFilter(String input, String expectedOutput,
-            String startTag, String endTag, boolean includeStart,
-            boolean includeEnd, boolean initiallyOn) throws Exception {
+	private void assertRangeFilter(String input, String expectedOutput,
+			String startTag, String endTag, boolean includeStart,
+			boolean includeEnd, boolean initiallyOn) throws Exception {
 
-        assertOutputByReader(
-                input,
-                expectedOutput,
-                createModifier(startTag, endTag, initiallyOn, includeStart,
-                        includeEnd));
-    }
+		assertOutputByReader(
+				input,
+				expectedOutput,
+				createModifier(startTag, endTag, initiallyOn, includeStart,
+						includeEnd));
+	}
 
-    private RangeFilterModifier createModifier(String startTag, String endTag,
-            boolean initiallyOn, boolean includeStart, boolean includeEnd) {
-        return new RangeFilterModifier(startTag, endTag, includeStart,
-                includeEnd, initiallyOn);
-    }
+	private RangeFilterModifier createModifier(String startTag, String endTag,
+			boolean initiallyOn, boolean includeStart, boolean includeEnd) {
+		return new RangeFilterModifier(startTag, endTag, includeStart,
+				includeEnd, initiallyOn);
+	}
 
-    private void assertOutputByReader(String input, String expectedOutput,
-            Modifier modifier) throws Exception {
+	private void assertOutputByReader(String input, String expectedOutput,
+			Modifier modifier) throws Exception {
 
-        // create reader
-        Reader reader = new ModifyingReader(new BufferedReader(
-                new StringReader(input)), modifier);
+		// create reader
+		Reader reader = new ModifyingReader(new BufferedReader(
+				new StringReader(input)), modifier);
 
-        // read the stream into an output stream
-        String foundOutput = IOUtils.toString(reader);
+		// read the stream into an output stream
+		String foundOutput = IOUtils.toString(reader);
 
-        assertEquals(expectedOutput, foundOutput);
-    }
+		assertEquals(expectedOutput, foundOutput);
+	}
 
 }

@@ -34,12 +34,6 @@ import com.googlecode.streamflyer.core.ModifyingReader;
  */
 public class InvalidXmlCharacterModifierTest extends TestCase {
 
-    public void learningtestModify() throws Exception {
-        assertTrue("\uD8FF".matches("[^\\u0020-\\uD7FF\\u0009\\u000A\\u000D"
-                + "\\uE000-\\uFFFD\\u10000-\\u10FFFF]"));
-    }
-
-
     public void testModify_dollarZero() throws Exception {
 
         assertModify("<INVALID XML CHAR $0>", "a\uD8FFb",

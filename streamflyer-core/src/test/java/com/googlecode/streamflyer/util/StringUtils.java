@@ -18,7 +18,6 @@ package com.googlecode.streamflyer.util;
 
 /**
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public class StringUtils {
