@@ -24,6 +24,8 @@ import com.googlecode.streamflyer.experimental.stateful.util.RegexTransitionStat
 import com.googlecode.streamflyer.regex.RegexModifier;
 
 /**
+ * An internal class used by {@link RangeFilterModifier}.
+ * <p>
  * This state has exactly one other succeeding state. That state will be the
  * next state if the token this state refers to is found.
  * <p>

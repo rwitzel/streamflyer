@@ -21,9 +21,10 @@ import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
- * This modifier has a state. The actual work of the modifier is delegated to
- * the state object. The state object processes the buffer content, then it
- * returns the new state and the {@link AfterModification message} to the
+ * This modifier has a {@link #currentState state}. The actual work of the
+ * modifier is delegated to this state object. The state object processes the
+ * buffer content, then it {@link State#modify(StringBuilder, int, boolean)
+ * returns} the new state and the {@link AfterModification message} to the
  * modifying reader or writer.
  * 
  * @author rwoo
@@ -31,36 +32,36 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
  */
 public class StatefulModifier implements Modifier {
 
-	private State currentState;
+    private State currentState;
 
-	/**
-	 * @param initialState
-	 *            the initial state of the modifier
-	 */
-	public StatefulModifier(State initialState) {
-		super();
+    /**
+     * @param initialState
+     *            the initial state of the modifier
+     */
+    public StatefulModifier(State initialState) {
+        super();
 
-		ZzzValidate.notNull(initialState, "initialState must not be null");
+        ZzzValidate.notNull(initialState, "initialState must not be null");
 
-		this.currentState = initialState;
-	}
+        this.currentState = initialState;
+    }
 
-	/**
-	 * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-	 *      int, boolean)
-	 */
-	@Override
-	public AfterModification modify(StringBuilder characterBuffer,
-			int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    /**
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
+     *      int, boolean)
+     */
+    @Override
+    public AfterModification modify(StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-		// delegate the work to the state object
-		StatefulAfterModification result = currentState.modify(characterBuffer,
-				firstModifiableCharacterInBuffer, endOfStreamHit);
+        // delegate the work to the state object
+        StatefulAfterModification result = currentState.modify(characterBuffer,
+                firstModifiableCharacterInBuffer, endOfStreamHit);
 
-		// update the state
-		currentState = result.getNextState();
+        // update the state
+        currentState = result.getNextState();
 
-		// return the result
-		return result.getAfterModification();
-	}
+        // return the result
+        return result.getAfterModification();
+    }
 }

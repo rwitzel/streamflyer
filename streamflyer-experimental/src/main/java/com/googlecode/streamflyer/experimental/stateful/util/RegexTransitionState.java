@@ -30,18 +30,17 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  * This state refers to a token (described by a regular expression). If that
  * token is found, then the state might be changed.
  * <p>
- * The default behavior of this class never changes the state nor does it modify
- * the character buffer. Override
+ * The default behavior of this class neither changes the state nor the
+ * character buffer. Override
  * <ul>
  * <li>{@link #findState(StringBuilder, int, MatchResult)},
  * <li> {@link #modifyBuffer(StringBuilder, int, MatchResult)},
  * <li>
  * {@link #processWithoutMatch(StringBuilder, int, boolean, AfterModification)}
  * </ul>
- * in order to modify the behavior.
+ * in order to modify the default behavior.
  * 
  * @author rwoo
- * 
  * @since 14.09.2011
  */
 public class RegexTransitionState implements State, MatchProcessor {

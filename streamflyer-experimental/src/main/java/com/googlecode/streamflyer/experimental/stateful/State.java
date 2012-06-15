@@ -18,14 +18,13 @@ package com.googlecode.streamflyer.experimental.stateful;
 
 import com.googlecode.streamflyer.core.Modifier;
 
-
 /**
  * Represents the state of a {@link StatefulModifier}. It carries out the actual
- * work of the {@link StatefulModifier}. Additionally, it defines the next state
- * of the {@link StatefulModifier}.
+ * work of the {@link StatefulModifier}. Additionally, the return value of
+ * {@link #modify(StringBuilder, int, boolean)} defines the next state of the
+ * {@link StatefulModifier}.
  * 
  * @author rwoo
- * 
  * @since 14.09.2011
  */
 public interface State {
@@ -37,6 +36,5 @@ public interface State {
      */
     public StatefulAfterModification modify(StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit);
-
 
 }
