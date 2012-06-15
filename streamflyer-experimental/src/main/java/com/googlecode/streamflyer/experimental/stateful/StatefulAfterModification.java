@@ -20,45 +20,51 @@ import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
- * A plain container for a {@link AfterModification} and a {@link State}.
+ * The return value of {@link State#modify(StringBuilder, int, boolean)} which
+ * contains an {@link AfterModification} and a {@link State}.
  * 
  * @author rwoo
- * 
  * @since 14.09.2011
  */
 public class StatefulAfterModification {
 
-    private AfterModification afterModification;
+	/**
+	 * The message that is to pass to the modifying reader or writer.
+	 */
+	private AfterModification afterModification;
 
-    private State nextState;
+	/**
+	 * The state that should be used by the {@link StatefulModifier}.
+	 */
+	private State nextState;
 
-    /**
-     * @param afterModification
-     * @param nextState
-     */
-    public StatefulAfterModification(AfterModification afterModification,
-            State nextState) {
-        super();
+	/**
+	 * @param afterModification
+	 * @param nextState
+	 */
+	public StatefulAfterModification(AfterModification afterModification,
+			State nextState) {
+		super();
 
-        ZzzValidate.notNull(nextState, "nextState must not be null");
-        ZzzValidate.notNull(afterModification,
-                "afterModification must not be null");
+		ZzzValidate.notNull(nextState, "nextState must not be null");
+		ZzzValidate.notNull(afterModification,
+				"afterModification must not be null");
 
-        this.afterModification = afterModification;
-        this.nextState = nextState;
-    }
+		this.afterModification = afterModification;
+		this.nextState = nextState;
+	}
 
-    /**
-     * @return Returns the {@link #afterModification}.
-     */
-    public AfterModification getAfterModification() {
-        return afterModification;
-    }
+	/**
+	 * @return Returns the {@link #afterModification}.
+	 */
+	public AfterModification getAfterModification() {
+		return afterModification;
+	}
 
-    /**
-     * @return Returns the {@link #nextState}.
-     */
-    public State getNextState() {
-        return nextState;
-    }
+	/**
+	 * @return Returns the {@link #nextState}.
+	 */
+	public State getNextState() {
+		return nextState;
+	}
 }

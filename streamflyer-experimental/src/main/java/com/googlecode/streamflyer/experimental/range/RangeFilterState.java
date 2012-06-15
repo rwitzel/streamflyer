@@ -21,6 +21,7 @@ import java.util.regex.MatchResult;
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.experimental.stateful.State;
 import com.googlecode.streamflyer.experimental.stateful.util.RegexTransitionState;
+import com.googlecode.streamflyer.regex.RegexModifier;
 
 /**
  * This state has exactly one other succeeding state. That state will be the
@@ -33,7 +34,6 @@ import com.googlecode.streamflyer.experimental.stateful.util.RegexTransitionStat
  * <li>whether the token itself shall be deleted from the stream.
  * 
  * @author rwoo
- * 
  * @since 14.09.2011
  */
 public class RangeFilterState extends RegexTransitionState {
@@ -55,16 +55,10 @@ public class RangeFilterState extends RegexTransitionState {
      */
     private boolean deleteToken;
 
-    /**
-     * A description for this state. This is useful for debugging.
-     */
-    private String description;
-
-    public RangeFilterState(String nextTokenRegex,
+    public RangeFilterState(RegexModifier nextTokensRegexModifier,
             boolean deleteCharactersBeforeToken, boolean deleteToken) {
-        super(nextTokenRegex);
+        super(nextTokensRegexModifier);
 
-        this.description = nextTokenRegex;
         this.deleteCharactersBeforeToken = deleteCharactersBeforeToken;
         this.deleteToken = deleteToken;
     }
@@ -131,8 +125,7 @@ public class RangeFilterState extends RegexTransitionState {
             return new AfterModification(0, true,
                     firstModifiableCharacterInBuffer,
                     afterModification.getNewNumberOfChars());
-        }
-        else {
+        } else {
             return afterModification;
         }
     }
@@ -142,7 +135,8 @@ public class RangeFilterState extends RegexTransitionState {
     //
 
     /**
-     * @param state The {@link #nextState} to set.
+     * @param state
+     *            The {@link #nextState} to set.
      */
     public void setNextState(State state) {
         this.nextState = state;
@@ -152,12 +146,22 @@ public class RangeFilterState extends RegexTransitionState {
     // override Object.*
     //
 
-
     /**
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return description;
+        StringBuilder builder = new StringBuilder();
+        builder.append("RangeFilterState [nextState=");
+        // builder.append(nextState);
+        builder.append("<nextState>"); // no endless loop, please
+        builder.append(", \ndeleteCharactersBeforeToken=");
+        builder.append(deleteCharactersBeforeToken);
+        builder.append(", \ndeleteToken=");
+        builder.append(deleteToken);
+        builder.append(", \ntoString()=");
+        builder.append(super.toString());
+        builder.append("]");
+        return builder.toString();
     }
 }

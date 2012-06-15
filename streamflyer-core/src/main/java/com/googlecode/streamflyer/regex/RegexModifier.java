@@ -215,6 +215,10 @@ public class RegexModifier implements Modifier {
 
     protected int newNumberOfChars = -1;
 
+    //
+    // state
+    //
+
     /**
      * The number of characters that shall be skipped automatically if the
      * modifier is called the next time.
@@ -225,10 +229,6 @@ public class RegexModifier implements Modifier {
      * before the first modifiable character.
      */
     private int unseenCharactersToSkip = 0;
-
-    //
-    // state
-    //
 
     //
     // constructors
@@ -646,6 +646,10 @@ public class RegexModifier implements Modifier {
         return true;
     }
 
+    //
+    // override Object.*
+    //
+
     /**
      * @see java.lang.Object#toString()
      */
@@ -664,5 +668,15 @@ public class RegexModifier implements Modifier {
         return builder.toString();
     }
 
+    //
+    // injected
+    //
+
+    /**
+     * @param matchProcessor The {@link #matchProcessor} to set.
+     */
+    public void setMatchProcessor(MatchProcessor matchProcessor) {
+        this.matchProcessor = matchProcessor;
+    }
 
 }
