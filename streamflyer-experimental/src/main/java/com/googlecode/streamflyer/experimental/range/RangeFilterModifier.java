@@ -31,15 +31,18 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  * Additionally, you can choose whether the start or end tags shall be removed
  * from the input as well.
  * <p>
- * EXAMPLES: <code><pre>
-  start tag   end tag     init. input                modified input
-  ----------- ----------- ----- -------------------- --------------
-  STA (excl.) END (excl.) END   "from STA to END."   " to " 
-  STA (incl.) END (incl.) END   "from STA to END."   "STA to END"
-  STA (incl.) END (incl.) STA   "from STA to END."   "from STA to END"
-  S (excl.)   E (excl.)   E     "a S, E, S, E, ..."  ", , "  
-  S (incl.)   E (incl.)   E     "a S, E, S, E, ..."  "S, ES, E" 
-  
+ * EXAMPLES: These three examples show the impact of the parameters
+ * <i>includeStart</i>, <i>includeEnd</i>, and <i>initiallyBeforeEnd</i>.
+ * <code><pre>
+                start end   keep  starts original                    modified 
+                tag   tag   tags? open?  input                       input
+--------------- ----- ----- ----- ------ --------------------------- --------------
+strip comments  &lt;%    %>    no    no     "my &lt% comment %> text"     "my  text" 
+
+clear comments  &lt;%    %>    yes   no     "my &lt% comment %> text"     "my &lt%%> text" 
+
+deal with open
+comment         &lt;%    %>    no    yes    "... %> my &lt% ... %> text"  " my  text"
   </pre></code>
  * 
  * @author rwoo
