@@ -44,6 +44,24 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  */
 public class RangeFilterModifierTest extends TestCase {
 
+    public void testRangeFiltered_0_examplesFromJavadoc() throws Exception {
+        // extract text of comments
+        assertRangeFilter("my <% comment %> text", " comment ", "<%", "%>",
+                false, false, false);
+
+        // extract comment tags
+        assertRangeFilter("my <% comment %> text", "<% comment %>", "<%", "%>",
+                true, true, false);
+
+        // strip comments
+        assertRangeFilter("my <% comment %> text", "my  text", "%>", "<%",
+                false, false, true);
+
+        // clear comments
+        assertRangeFilter("my <% comment %> text", "my <%%> text", "%>", "<%",
+                true, true, true);
+    }
+
     public void testRangeFiltered_1_initiallyOff() throws Exception {
         assertRangeFilter("aaaXbbbYccc", "XbbbY", "X", "Y", true, true, false);
         assertRangeFilter("aaaXbbbYccc", "Xbbb", "X", "Y", true, false, false);
