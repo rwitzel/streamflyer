@@ -523,7 +523,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
      * 
      * @throws Exception
      */
-    public void testBoundaryMatchers6_G_TheEndOfThePreviousMatch_MISSINGE_FEATURE()
+    public void testBoundaryMatchers6_G_TheEndOfThePreviousMatch_MISSING_FEATURE()
             throws Exception {
 
         // it's nice that this works here but this is because it matches at
