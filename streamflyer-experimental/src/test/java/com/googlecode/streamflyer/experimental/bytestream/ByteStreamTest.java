@@ -257,4 +257,64 @@ public class ByteStreamTest extends TestCase {
 		}
 		assertEquals(conversionErrorsExpected, conversionErrorsFound);
 	}
+
+	public void testHomepageExample_InputStream() throws Exception {
+
+		String charsetName = "ISO-8859-1";
+
+		byte[] originalBytes = new byte[] { 1, 2,
+				"\r".getBytes("ISO-8859-1")[0], 4, 5 };
+
+		// get byte stream
+		InputStream originalByteStream = new ByteArrayInputStream(originalBytes);
+
+		// byte stream as character stream
+		Reader originalReader = new InputStreamReader(originalByteStream,
+				charsetName);
+
+		// create the modifying reader
+		Reader modifyingReader = new ModifyingReader(originalReader,
+				new RegexModifier("\r", 0, ""));
+
+		// character stream as byte stream
+		InputStream modifyingByteStream = new ReaderInputStream(
+				modifyingReader, charsetName);
+
+		byte[] expectedBytes = new byte[] { 1, 2, 4, 5 };
+
+		assertBytes(expectedBytes, IOUtils.toByteArray(modifyingByteStream),
+				false);
+	}
+
+	public void testHomepageExample_OutputStream() throws Exception {
+
+		String charsetName = "ISO-8859-1";
+
+		byte[] originalBytes = new byte[] { 1, 2,
+				"\r".getBytes("ISO-8859-1")[0], 4, 5 };
+
+		// get byte stream
+		ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
+
+		// byte stream as character stream
+		Writer targetWriter = new OutputStreamWriter(targetByteStream,
+				charsetName);
+
+		// create the modifying writer
+		Writer modifyingWriter = new ModifyingWriter(targetWriter,
+				new RegexModifier("\r", 0, ""));
+
+		// character stream as byte stream
+		OutputStream modifyingByteStream = new WriterOutputStream(
+				modifyingWriter, charsetName);
+
+		modifyingByteStream.write(originalBytes);
+		// modifyingByteStream.flush();
+		modifyingByteStream.close();
+
+		byte[] expectedBytes = new byte[] { 1, 2, 4, 5 };
+
+		assertBytes(expectedBytes, targetByteStream.toByteArray(), false);
+	}
+
 }
