@@ -57,6 +57,16 @@ public class ByteStreamTest extends TestCase {
 	private void assertBytes(byte[] original, byte[] converted,
 			boolean differenceExpected) throws Exception {
 
+		if (original.length != converted.length) {
+			if (differenceExpected) {
+				// OK, we got our difference
+				return;
+			} else {
+				// this will always fail
+				assertEquals(original.length, converted.length);
+			}
+		}
+
 		int conversionErrors = 0;
 		for (int index = 0; index < original.length; index++) {
 
