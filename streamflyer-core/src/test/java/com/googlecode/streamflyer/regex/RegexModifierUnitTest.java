@@ -298,31 +298,6 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         print(passedCheckpoints);
     }
 
-    /**
-     * We cannot test this case with the {@link ReplacingProcessor} because it
-     * always skips at least one character (even if no one is left in the
-     * buffer).
-     * 
-     * @throws Exception
-     */
-    public void testReplacement_matchEmptyString_ReplaceWithNothingSoThatNothingToSkip_SomewhereInTheEndStream()
-            throws Exception {
-        // something like this:
-        // String regex = "^";
-        // String replacement = "";
-        // String input = "XX";
-        // String expectedOutput = "XX";
-        //
-        // // System.out.println("Java...");
-        // assertEquals(expectedOutput, input.replaceAll(regex, replacement));
-        //
-        // // System.out.println("Streamflyer...");
-        // List<Object[]> passedCheckpoints = assertReplacementByReader(input,
-        // regex, replacement, 0, 1, expectedOutput).__passedCheckpoints();
-        // print(passedCheckpoints);
-
-    }
-
     public void testBoundaryMatchers1_caret_TheBeginningOfALine_multiline_correctUsage_withLookBehind()
             throws Exception {
 
