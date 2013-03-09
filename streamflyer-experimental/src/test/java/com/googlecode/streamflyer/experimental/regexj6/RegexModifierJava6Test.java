@@ -33,7 +33,7 @@ public class RegexModifierJava6Test extends
 
 	@Override
 	protected OnStreamMatcher createMatcher(String regex, int flags) {
-		Matcher matcher = Pattern.compile(regex).matcher("");
+		Matcher matcher = Pattern.compile(regex, flags).matcher("");
 		matcher.useTransparentBounds(true);
 		matcher.useAnchoringBounds(false);
 		return new OnStreamJava6Matcher(matcher);
