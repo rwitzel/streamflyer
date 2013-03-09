@@ -16,14 +16,14 @@
 
 package com.googlecode.streamflyer.regex;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import junit.framework.TestCase;
 
 import org.apache.commons.io.IOUtils;
 
@@ -34,7 +34,7 @@ import com.googlecode.streamflyer.core.ModifyingWriter;
  * @author rwoo
  * @since 04.05.2012
  */
-public abstract class AbstractRegexModifierTest extends TestCase {
+public abstract class AbstractRegexModifierTest {
 
     protected OnStreamMatcher createMatcher(String regex, int flags) {
         Matcher matcher = Pattern.compile(regex, flags).matcher("");
@@ -92,8 +92,8 @@ public abstract class AbstractRegexModifierTest extends TestCase {
 
     protected RegexModifier assertReplacementByWriter(String input,
             String regex, String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput, int flags)
-            throws Exception {
+            int requestedCapacityOfCharacterBuffer, String expectedOutput,
+            int flags) throws Exception {
 
         // create modifier
         RegexModifier modifier = createModifier(regex, replacement,

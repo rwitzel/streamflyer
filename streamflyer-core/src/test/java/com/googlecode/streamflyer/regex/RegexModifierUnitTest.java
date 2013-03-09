@@ -16,14 +16,20 @@
 
 package com.googlecode.streamflyer.regex;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import junit.framework.ComparisonFailure;
+
+import org.junit.Test;
 
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
@@ -131,14 +137,6 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         return (RegexModifierWithCheckpoints) super.assertReplacementByReader(
                 input, regex, replacement, minimumLengthOfLookBehind,
                 requestedCapacityOfCharacterBuffer, expectedOutput, flags);
-    }
-
-    public void playground() throws Exception {
-
-        List<Object[]> passedCheckpoints = assertReplacementByReader("abcdedg",
-                "de", "DE", 0, 2, "abcDEdg", 0).__passedCheckpoints();
-        print(passedCheckpoints);
-
     }
 
     private void print(List<Object[]> passedCheckpoints) {
@@ -282,6 +280,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         }
     }
 
+    @Test
     public void testReplacement_matchEmptyString_ReplaceWithNothingSoThatNothingToSkip_AtEndStream()
             throws Exception {
         String regex = "";
@@ -299,6 +298,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         print(passedCheckpoints);
     }
 
+    @Test
     public void testBoundaryMatchers1_caret_TheBeginningOfALine_multiline_correctUsage_withLookBehind()
             throws Exception {
 
@@ -322,6 +322,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("boom", charBuf.toString()); // assert match
     }
 
+    @Test
     public void testBoundaryMatchers1_caret_TheBeginningOfALine_noMultiline_correctUsage_withLookBehind()
             throws Exception {
 
@@ -344,6 +345,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("boom", charBuf.toString()); // assert match
     }
 
+    @Test
     public void testBoundaryMatchers2_dollar_TheEndOfALine_multiline()
             throws Exception {
 
@@ -373,6 +375,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("hoo\n", charBuf.toString()); // changed
     }
 
+    @Test
     public void testBoundaryMatchers3_b_AWordBoundary_AtTheBeginning_correctUsage_withLookBehind()
             throws Exception {
 
@@ -395,6 +398,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("boom", charBuf.toString()); // assert match
     }
 
+    @Test
     public void testBoundaryMatchers3_b_AWordBoundary_AtTheEnd()
             throws Exception {
 
@@ -425,6 +429,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("hoo ", charBuf.toString()); // changed
     }
 
+    @Test
     public void testBoundaryMatchers3_B_ANonWordBoundary_AtTheBeginning_correctUsage_withLookBehind()
             throws Exception {
 
@@ -447,6 +452,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("boom", charBuf.toString()); // assert match
     }
 
+    @Test
     public void testBoundaryMatchers4_B_ANonWordBoundary_AtTheEnd()
             throws Exception {
 
@@ -477,6 +483,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("hoo-", charBuf.toString()); // changed
     }
 
+    @Test
     public void testBoundaryMatchers5_A_TheBeginningOfTheInput_correctUsage_withLookBehind()
             throws Exception {
 
@@ -499,6 +506,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
      * 
      * @throws Exception
      */
+    @Test
     public void testBoundaryMatchers6_G_TheEndOfThePreviousMatch_MISSING_FEATURE()
             throws Exception {
 
@@ -526,6 +534,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
      * 
      * @throws Exception
      */
+    @Test
     public void testBoundaryMatchers7_Z_TheEndOfTheInput() throws Exception {
 
         // test: match "foo\Z" in "foobar"
@@ -565,6 +574,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals("hoo\n", charBuf.toString()); // changed
     }
 
+    @Test
     public void testBoundaryMatchers8_Z_TheEndOfTheInput() throws Exception {
 
         // test: match "foo\z" in "foobar"
@@ -602,17 +612,5 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         // so that finally all characters are skipped
         assertEquals(4, modification.getNumberOfCharactersToSkip());
         assertEquals("foo\n", charBuf.toString()); // not changed
-    }
-
-    public void learningtestBoundaryMatchers_caret_TheBeginningOfALine()
-            throws Exception {
-
-        Pattern pattern = Pattern.compile("^bar", Pattern.MULTILINE);
-        String input = "\nbar";
-        Matcher matcher = pattern.matcher(input);
-        matcher.useTransparentBounds(true);
-        matcher.useAnchoringBounds(false);
-        matcher.region(1, input.length());
-        assertTrue(matcher.lookingAt());
     }
 }

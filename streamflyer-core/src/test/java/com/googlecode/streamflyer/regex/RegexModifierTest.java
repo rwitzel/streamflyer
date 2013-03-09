@@ -16,13 +16,17 @@
 
 package com.googlecode.streamflyer.regex;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
@@ -52,6 +56,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
 
     }
 
+    @Test
     public void testExampleFromRegexModifierJavadoc_OwnMatchProcessor()
             throws Exception {
 
@@ -74,6 +79,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertEquals(fakeErrorLog, output);
     }
 
+    @Test
     public void testExampleFromHomepage_usage() throws Exception {
 
         // choose the character stream to modify
@@ -91,6 +97,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertEquals("modify stream", output);
     }
 
+    @Test
     public void testExampleFromHomepage_usage2() throws Exception {
 
         // choose the character stream to modify
@@ -129,6 +136,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertTrue(expected != actual || !expected.equals(actual));
     }
 
+    @Test
     public void testExampleFromHomepage_advancedExample_firstImprovement()
             throws Exception {
 
@@ -152,6 +160,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
 
     }
 
+    @Test
     public void testExampleFromHomepage_advancedExample_secondImprovement()
             throws Exception {
 
@@ -175,6 +184,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertEquals("modify  stream", modify("edit  stream", myModifier2));
     }
 
+    @Test
     public void testExampleFromHomepage_advancedExample_thirdImprovement()
             throws Exception {
 
@@ -193,6 +203,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertEquals("credit stream", modify("credit stream", myModifier3));
     }
 
+    @Test
     public void testExampleFromHomepage_advancedExample_greedyQuantifierOnDot()
             throws Exception {
 
@@ -213,18 +224,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 modify("edit stream edit stream", myModifier5));
     }
 
-    public void learningTest_matchingAtZeroLengthRegion() {
-        String input = "abcdeghi";
-        Matcher matcher = Pattern.compile("x").matcher(input);
-
-        matcher.region(4, 4);
-        boolean result = matcher.lookingAt();
-        // System.out.println("result: " + result);
-        // System.out.println("hitEnd: " + matcher.hitEnd());
-        assertEquals(false, result);
-        assertEquals(true, matcher.hitEnd());
-    }
-
+    @Test
     public void testReplacement_OneCharacterReplacedWithAnother()
             throws Exception {
 
@@ -237,6 +237,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
 
+    @Test
     public void testReplacement_TwoCharactersReplacedWithThreeOthers()
             throws Exception {
 
@@ -248,6 +249,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertReplacement("DEbcDEDEfDEgDE", "DE", "XYZ", "XYZbcXYZXYZfXYZgXYZ");
     }
 
+    @Test
     public void testReplacement_ThreeCharactersReplacedWithTwoOthers()
             throws Exception {
 
@@ -260,22 +262,26 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 "XYbcXYXYgXYhiXY");
     }
 
+    @Test
     public void testReplacement_GroupsReplaced() throws Exception {
 
         assertReplacement("abcDEFFghi", "D(E)(FF)", "X$2$1Y", "abcXFFEYghi");
     }
 
+    @Test
     public void testReplacement_ReluctantOp() throws Exception {
 
         assertReplacement("abcDEEFFghi", "D(.*?)F", "X$1Y", "abcXEEYFghi");
     }
 
+    @Test
     public void testReplacement_GreedyOp_AttentionThisLoadsTheEntireInputIntoMemory()
             throws Exception {
 
         assertReplacement("abcDEEFFghi", "D(.*)F", "X$1Y", "abcXEEFYghi");
     }
 
+    @Test
     public void testReplacement_GreedyOp_Vs_ReluctantOp() throws Exception {
 
         // greedy
@@ -286,6 +292,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 "<y/>...</x>", 0);
     }
 
+    @Test
     public void testReplacement_lookBehind() throws Exception {
         // (?<=X) X, via zero-width positive lookbehind
 
@@ -298,6 +305,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 "DEbcXYZDEcXYZgDE");
     }
 
+    @Test
     public void testReplacement_lookAhead() throws Exception {
         // (?=X) X, via zero-width positive lookahead
 
@@ -310,6 +318,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 "XYZfcDEXYZfXYZfDE");
     }
 
+    @Test
     public void testReplacement_endOfStream() throws Exception {
 
         String regex = "Y$";
@@ -324,6 +333,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertReplacement(input, regex, replacement, expectedOutput);
     }
 
+    @Test
     public void testReplacement_endOfStream_matchOnEmptyString_noEndlessLoop()
             throws Exception {
 
@@ -339,6 +349,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertReplacement(input, regex, replacement, expectedOutput);
     }
 
+    @Test
     public void testReplacement_matchOnEmptyString_noEndlessLoop()
             throws Exception {
 
@@ -418,6 +429,8 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
 
+    @Ignore
+    @Test
     public void testLookBehindAfterReplacement() throws Exception {
 
         String regex = "(?<=foo)bar";
@@ -436,6 +449,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     // Q and A - tests that result from questions asked in the discussion group
     //
 
+    @Test
     public void testRemovalAtTheEndOfStream_notUsingMultiLineFlag()
             throws Exception {
 
@@ -455,6 +469,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 capacityCharBuf, expectedOutput, flags);
     }
 
+    @Test
     public void testRemovalAtTheEndOfLine_usingMultiLineFlag() throws Exception {
 
         String endlessAbc = StringUtils.repeat("abc", 10000);
@@ -473,6 +488,8 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 capacityCharBuf, expectedOutput, flags);
     }
 
+    @Ignore
+    @Test
     public void testRemovalAtTheStartOfStream_notUsingMultiLineFlag()
             throws Exception {
 
@@ -493,12 +510,12 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 capacityCharBuf, expectedOutput, flags);
     }
 
+    @Ignore
+    @Test
     public void testRemovalAtTheStartOfLine_usingMultiLineFlag()
             throws Exception {
 
         String endlessAbc = StringUtils.repeat("abc", 10000);
-        String inputSuffix = "\n" + endlessAbc + "\nabc" + endlessAbc + "\nabc"
-                + endlessAbc;
 
         String regex = "^abc";
         int flags = Pattern.MULTILINE;
@@ -518,6 +535,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     // ...
     //
 
+    @Test
     public void testMatchEmptyStringAtTheEndOfStream_replaceWithNonEmptyString()
             throws Exception {
 
@@ -533,6 +551,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 capacityCharBuf, expectedOutput, flags);
     }
 
+    @Test
     public void testMatchEmptyStringAtTheEndOfStream_replaceWithEmptyString()
             throws Exception {
 
