@@ -61,13 +61,13 @@ public abstract class AbstractRegexModifierTest extends TestCase {
 
     protected RegexModifier assertReplacementByReader(String input,
             String regex, String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput)
-            throws Exception {
+            int requestedCapacityOfCharacterBuffer, String expectedOutput,
+            int flags) throws Exception {
 
         // create modifier
         RegexModifier modifier = createModifier(regex, replacement,
                 minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                0);
+                flags);
 
         // create reader
         Reader reader = new ModifyingReader(new BufferedReader(
@@ -92,13 +92,13 @@ public abstract class AbstractRegexModifierTest extends TestCase {
 
     protected RegexModifier assertReplacementByWriter(String input,
             String regex, String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput)
+            int requestedCapacityOfCharacterBuffer, String expectedOutput, int flags)
             throws Exception {
 
         // create modifier
         RegexModifier modifier = createModifier(regex, replacement,
                 minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                0);
+                flags);
 
         // setup: create modifier and writer
         StringWriter stringWriter = new StringWriter();

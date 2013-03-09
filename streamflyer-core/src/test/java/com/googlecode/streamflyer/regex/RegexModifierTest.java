@@ -27,6 +27,7 @@ import org.apache.commons.io.IOUtils;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.core.ModifyingWriter;
+import com.googlecode.streamflyer.util.StringUtils;
 
 /**
  * Tests {@link RegexModifier}.
@@ -279,10 +280,10 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
 
         // greedy
         assertReplacement("<x>...</x>...</x>", "<x>(.*)</x>", "<y/>", 0, 6,
-                "<y/>");
+                "<y/>", 0);
         // reluctant
         assertReplacement("<x>...</x>...</x>", "<x>(.*?)</x>", "<y/>", 0, 6,
-                "<y/>...</x>");
+                "<y/>...</x>", 0);
     }
 
     public void testReplacement_lookBehind() throws Exception {
@@ -364,39 +365,188 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
 
             for (int capacityCharBuf = 1; capacityCharBuf <= 18; capacityCharBuf++) {
 
-                if (regex.contains("(?<=") && lookBehind == 0) {
+                if (containsLookBehind(regex) && lookBehind == 0) {
                     // for a regex with look-behind we need look-behind > 0.
                     // Therefore, we skip this test as the parameter is not
                     // appropriate
                 }
                 else {
                     assertReplacement(input, regex, replacement, lookBehind,
-                            capacityCharBuf, expectedOutput);
+                            capacityCharBuf, expectedOutput, 0);
                 }
             }
         }
     }
 
     /**
+     * @param regex regular expression
+     * @return Returns true if the regular expression contains a look-behind
+     *         construct (rule of thumb applied).
+     */
+    private boolean containsLookBehind(String regex) {
+        return regex.contains("(?<=") //
+                || regex.startsWith("^") //
+                || regex.contains("\\b") //
+                || regex.contains("\\B");
+    }
+
+    /**
      * Defaults: Combines tests for {@link ModifyingReader} and
      * {@link ModifyingWriter}.
+     * 
+     * @param flags TODO
      */
     protected void assertReplacement(String input, String regex,
             String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput)
-            throws Exception {
+            int requestedCapacityOfCharacterBuffer, String expectedOutput,
+            int flags) throws Exception {
 
+        // Java: (do we get the same result with Java's Regex package?)
+        assertEquals(
+                expectedOutput,
+                Pattern.compile(regex, flags).matcher(input)
+                        .replaceAll(replacement));
+
+        // Streamflyer:
         assertReplacementByReader(input, regex, replacement,
                 minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                expectedOutput);
+                expectedOutput, flags);
 
         assertReplacementByWriter(input, regex, replacement,
                 minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                expectedOutput);
-
-        // test that if Java applies the regex on the input we get the same
-        // output
-        assertEquals(expectedOutput, input.replaceAll(regex, replacement));
+                expectedOutput, flags);
     }
+
+
+    public void testLookBehindAfterReplacement() throws Exception {
+
+        String regex = "(?<=foo)bar";
+        int flags = 0;
+        String replacement = "foo";
+        String input = "foobarbar";
+        String expectedOutput = "foofoobar";
+        int lookBehind = 3;
+        int capacityCharBuf = 10;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
+    //
+    // Q and A - tests that result from questions asked in the discussion group
+    //
+
+    public void testRemovalAtTheEndOfStream_notUsingMultiLineFlag()
+            throws Exception {
+
+        String endlessAbc = StringUtils.repeat("abc", 10000);
+        String inputPrefix = endlessAbc + "abc\n" + endlessAbc + "abc\n"
+                + endlessAbc;
+
+        String regex = "abc$";
+        int flags = 0;
+        String replacement = "";
+        String input = inputPrefix + "abc";
+        String expectedOutput = inputPrefix;
+        int lookBehind = 0;
+        int capacityCharBuf = 3;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
+    public void testRemovalAtTheEndOfLine_usingMultiLineFlag() throws Exception {
+
+        String endlessAbc = StringUtils.repeat("abc", 10000);
+
+        String regex = "abc$";
+        int flags = Pattern.MULTILINE;
+        String replacement = "";
+        String input = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc
+                + "abc";
+        String expectedOutput = endlessAbc + "\n" + endlessAbc + "\n"
+                + endlessAbc;
+        int lookBehind = 0;
+        int capacityCharBuf = 3;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
+    public void testRemovalAtTheStartOfStream_notUsingMultiLineFlag()
+            throws Exception {
+
+        String endlessAbc = StringUtils.repeat("abc", 10000);
+        String inputSuffix = "\n" + endlessAbc + "\nabc" + endlessAbc + "\nabc"
+                + endlessAbc;
+
+        String regex = "^abc";
+        int flags = 0;
+        String replacement = "";
+        String input = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc
+                + "abc";
+        String expectedOutput = inputSuffix;
+        int lookBehind = 1;
+        int capacityCharBuf = 3;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
+    public void testRemovalAtTheStartOfLine_usingMultiLineFlag()
+            throws Exception {
+
+        String endlessAbc = StringUtils.repeat("abc", 10000);
+        String inputSuffix = "\n" + endlessAbc + "\nabc" + endlessAbc + "\nabc"
+                + endlessAbc;
+
+        String regex = "^abc";
+        int flags = Pattern.MULTILINE;
+        String replacement = "";
+        String input = "\nabc" + endlessAbc + "\nabc" + endlessAbc + "\nabc"
+                + endlessAbc;
+        String expectedOutput = "\n" + endlessAbc + "\n" + endlessAbc + "\n"
+                + endlessAbc;
+        int lookBehind = 1;
+        int capacityCharBuf = 3;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
+    //
+    // ...
+    //
+
+    public void testMatchEmptyStringAtTheEndOfStream_replaceWithNonEmptyString()
+            throws Exception {
+
+        String regex = "$";
+        String replacement = "yyy";
+        String input = "barbarbar";
+        String expectedOutput = "barbarbaryyy";
+        int flags = 0;
+        int lookBehind = 0;
+        int capacityCharBuf = 3;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
+    public void testMatchEmptyStringAtTheEndOfStream_replaceWithEmptyString()
+            throws Exception {
+
+        String regex = "$";
+        String replacement = "";
+        String input = "barbarbar";
+        String expectedOutput = "barbarbar";
+        int flags = 0;
+        int lookBehind = 0;
+        int capacityCharBuf = 3;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
+
 
 }

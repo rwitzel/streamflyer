@@ -113,14 +113,14 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
     /**
      * @see com.googlecode.streamflyer.regex.AbstractRegexModifierTest#assertReplacementByReader(java.lang.String,
-     *      java.lang.String, java.lang.String, int, int, java.lang.String)
+     *      java.lang.String, java.lang.String, int, int, java.lang.String, int)
      */
     @Override
     protected RegexModifierWithCheckpoints assertReplacementByReader(
             String input, String regex, String replacement,
             int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput)
-            throws Exception {
+            int requestedCapacityOfCharacterBuffer, String expectedOutput,
+            int flags) throws Exception {
 
         System.out.println(String.format("Replacing '%s' " + "with '%s' with "
                 + "buffer size %s (look-behind %s) shall convert\n '%s' to "
@@ -130,13 +130,13 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
         return (RegexModifierWithCheckpoints) super.assertReplacementByReader(
                 input, regex, replacement, minimumLengthOfLookBehind,
-                requestedCapacityOfCharacterBuffer, expectedOutput);
+                requestedCapacityOfCharacterBuffer, expectedOutput, flags);
     }
 
     public void playground() throws Exception {
 
         List<Object[]> passedCheckpoints = assertReplacementByReader("abcdedg",
-                "de", "DE", 0, 2, "abcDEdg").__passedCheckpoints();
+                "de", "DE", 0, 2, "abcDEdg", 0).__passedCheckpoints();
         print(passedCheckpoints);
 
     }
@@ -294,7 +294,8 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
         // System.out.println("Streamflyer...");
         List<Object[]> passedCheckpoints = assertReplacementByReader(input,
-                regex, replacement, 0, 2, expectedOutput).__passedCheckpoints();
+                regex, replacement, 0, 2, expectedOutput, 0)
+                .__passedCheckpoints();
         print(passedCheckpoints);
     }
 
@@ -503,14 +504,14 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
         // it's nice that this works here but this is because it matches at
         // EVERY position here
-        assertReplacementByReader("yzyz", "\\G(y|z)", "x", 1, 1024, "xxxx");
+        assertReplacementByReader("yzyz", "\\G(y|z)", "x", 1, 1024, "xxxx", 0);
         assertReplacementByReader("yzyzyzyzyzyz", "\\G(y|z)", "x", 1, 2,
-                "xxxxxxxxxxxx");
+                "xxxxxxxxxxxx", 0);
 
         // there are other cases that are not supported:
         try {
             assertReplacementByReader("azyzazyz", "(y)|(\\Gz)", "x", 1, 2,
-                    "azxxazxx");
+                    "azxxazxx", 0);
             fail("ComparisonFailure expected");
         }
         catch (ComparisonFailure e) {
