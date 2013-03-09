@@ -90,6 +90,23 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertEquals("modify stream", output);
     }
 
+    public void testExampleFromHomepage_usage2() throws Exception {
+
+        // choose the character stream to modify
+        Reader originalReader = new StringReader("edit\n\nstream");
+
+        // select the modifier
+        Modifier myModifier = new RegexModifier("edit\\s+stream", 0,
+                "modify stream");
+
+        // create the modifying reader that wraps the original reader
+        Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
+
+        // use the modifying reader instead of the original reader
+        String output = IOUtils.toString(modifyingReader);
+        assertEquals("modify stream", output);
+    }
+
     private String modify(String input, Modifier myModifier) throws Exception {
         // choose the character stream to modify
         Reader originalReader = new StringReader(input);
@@ -314,10 +331,10 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         String input = "XXX";
         String expectedOutput = "YYYYYY";
 
-        // System.out.println("Java...");
+        // Java:
         assertEquals(expectedOutput, input.replaceAll(regex, replacement));
 
-        // System.out.println("Streamflyer...");
+        // Streamflyer:
         assertReplacement(input, regex, replacement, expectedOutput);
     }
 
@@ -329,10 +346,10 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         String input = "XX";
         String expectedOutput = "YXYXY";
 
-        // System.out.println("Java...");
+        // Java:
         assertEquals(expectedOutput, input.replaceAll(regex, replacement));
 
-        // System.out.println("Streamflyer...");
+        // Streamflyer:
         assertReplacement(input, regex, replacement, expectedOutput);
     }
 
@@ -381,4 +398,5 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         // output
         assertEquals(expectedOutput, input.replaceAll(regex, replacement));
     }
+
 }
