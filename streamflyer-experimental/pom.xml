@@ -60,12 +60,6 @@
         <artifactId>maven-source-plugin</artifactId>
       </plugin>
 
-      <!-- the last thing to do during the verify phase: -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-      </plugin>
-
     </plugins>
 
   </build>
