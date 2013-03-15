@@ -6,3 +6,6 @@ syntax: glob
 streamflyer-core/.classpath
 streamflyer-experimental/.classpath
 streamflyer-fastregex/.classpath
+streamflyer-support/.settings/org.eclipse.jdt.core.prefs
+streamflyer-support/.settings/org.eclipse.m2e.core.prefs
+streamflyer-support/.classpath

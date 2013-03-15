@@ -308,6 +308,13 @@ else {
   
   <profiles>
   
+    <profile>
+        <id>support</id>
+		<modules>
+			<module>streamflyer-support</module>
+		</modules>
+    </profile>
+  
     <!-- automatic signing of created artifacts (at least the classes jar) -->
     <profile>
         <id>sign</id>

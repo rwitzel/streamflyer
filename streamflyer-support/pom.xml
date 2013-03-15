@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>streamflyer-parent</artifactId>
+    <groupId>com.googlecode.streamflyer</groupId>
+    <version>1.0.2-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>streamflyer-support</artifactId>
+  <name>streamflyer support</name>
+  <description>
+	This module documents scenarios that are described
+	by users of the streamflyer discussion group.
+  </description>
+
+  <properties>
+    <!-- needed for javadoc, license and so on -->
+    <streamflyer.parent>${project.parent.basedir}</streamflyer.parent>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.googlecode.streamflyer</groupId>
+      <artifactId>streamflyer-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- add dependency to the tests  -->
+    <dependency>
+      <groupId>com.googlecode.streamflyer</groupId>
+      <artifactId>streamflyer-core</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+      <classifier>tests</classifier>
+    </dependency>
+	<dependency>
+	    <groupId>com.googlecode.streamflyer-regex-fast</groupId>
+	    <artifactId>streamflyer-regex-fast</artifactId>
+	    <version>1.0.1</version>
+	</dependency>
+
+  </dependencies>
+
+
+  <build>
+
+    <plugins>
+      <!-- phase "package" should create the test.jar as well  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+
+      <!-- phase "verify" should create the sources.jar and test-sources.jar as well  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>
