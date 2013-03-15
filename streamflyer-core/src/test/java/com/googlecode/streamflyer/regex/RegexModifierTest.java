@@ -428,10 +428,27 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 expectedOutput, flags);
     }
 
+    @Ignore
+    @Test
+    public void testLookBehindAfterReplacement_ExampleFromWebpage1()
+            throws Exception {
+
+        String regex = "^a";
+        int flags = 0;
+        String replacement = "";
+        String input = "aaabb";
+        String expectedOutput = "aabb";
+        int lookBehind = 3;
+        int capacityCharBuf = 10;
+
+        assertReplacement(input, regex, replacement, lookBehind,
+                capacityCharBuf, expectedOutput, flags);
+    }
 
     @Ignore
     @Test
-    public void testLookBehindAfterReplacement() throws Exception {
+    public void testLookBehindAfterReplacement_ExampleFromWebpage2()
+            throws Exception {
 
         String regex = "(?<=foo)bar";
         int flags = 0;
@@ -444,6 +461,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertReplacement(input, regex, replacement, lookBehind,
                 capacityCharBuf, expectedOutput, flags);
     }
+
 
     //
     // Q and A - tests that result from questions asked in the discussion group
