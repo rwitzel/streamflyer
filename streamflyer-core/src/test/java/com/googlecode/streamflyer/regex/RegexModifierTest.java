@@ -48,7 +48,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
             // print the matches text
-            System.out.println("match: " + matchResult.group());
+            // System.out.println("match: " + matchResult.group());
 
             // continue matching behind the end of the matched text
             return new MatchProcessorResult(matchResult.end(), true);

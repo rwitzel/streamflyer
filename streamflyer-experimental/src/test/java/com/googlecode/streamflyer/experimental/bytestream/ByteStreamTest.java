@@ -44,287 +44,246 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  */
 public class ByteStreamTest extends TestCase {
 
-	private byte[] createBytes() {
-		byte[] bytes = new byte[256];
-		byte value = -128;
-		for (int index = 0; index < bytes.length; index++) {
-			bytes[index] = value;
-			value++;
-		}
-		return bytes;
-	}
+    private byte[] createBytes() {
+        byte[] bytes = new byte[256];
+        byte value = -128;
+        for (int index = 0; index < bytes.length; index++) {
+            bytes[index] = value;
+            value++;
+        }
+        return bytes;
+    }
 
-	private void assertBytes(byte[] original, byte[] converted,
-			boolean differenceExpected) throws Exception {
+    private void assertBytes(byte[] original, byte[] converted, boolean differenceExpected) throws Exception {
 
-		if (original.length != converted.length) {
-			if (differenceExpected) {
-				// OK, we got our difference
-				return;
-			} else {
-				// this will always fail
-				assertEquals(original.length, converted.length);
-			}
-		}
+        if (original.length != converted.length) {
+            if (differenceExpected) {
+                // OK, we got our difference
+                return;
+            } else {
+                // this will always fail
+                assertEquals(original.length, converted.length);
+            }
+        }
 
-		int conversionErrors = 0;
-		for (int index = 0; index < original.length; index++) {
+        int conversionErrors = 0;
+        for (int index = 0; index < original.length; index++) {
 
-			if (original[index] != converted[index]) {
-				System.out.println(index + ": " + original[index] + " <=> "
-						+ converted[index]);
-				conversionErrors++;
-			}
-		}
+            if (original[index] != converted[index]) {
+                conversionErrors++;
+            }
+        }
 
-		System.out.println(conversionErrors + " conversionErrors");
+        assertEquals(differenceExpected, conversionErrors > 0);
+    }
 
-		assertEquals(differenceExpected, conversionErrors > 0);
-	}
+    public void testConvert_utf8_errors() throws Exception {
+        assertInputConversion_viaCharsetName("UTF-8", true);
+        assertInputConversion_viaCharsetDecoder("UTF-8", true);
+        // ArrayIndexOutOfBoundException
+        // assertOutputConversion_viaCharsetName("UTF-8", true);
+        // assertOutputConversion_viaCharsetEncoder("UTF-8", true);
+    }
 
-	public void testConvert_utf8_errors() throws Exception {
-		assertInputConversion_viaCharsetName("UTF-8", true);
-		assertInputConversion_viaCharsetDecoder("UTF-8", true);
-		// ArrayIndexOutOfBoundException
-		// assertOutputConversion_viaCharsetName("UTF-8", true);
-		// assertOutputConversion_viaCharsetEncoder("UTF-8", true);
-	}
+    public void testConvert_ascii_errors() throws Exception {
+        // uh, the test does not finish when the called with charset name
+        // assertInputConversion_viaCharsetName("ASCII", true);
+        assertInputConversion_viaCharsetDecoder("ASCII", true);
+        assertOutputConversion_viaCharsetName("ASCII", true);
+        // uh, the charset encoding cannot be configured properly
+        // assertOutputConversion_viaCharsetEncoder("ASCII", true);
+    }
 
-	public void testConvert_ascii_errors() throws Exception {
-		// uh, the test does not finish when the called with charset name
-		// assertInputConversion_viaCharsetName("ASCII", true);
-		assertInputConversion_viaCharsetDecoder("ASCII", true);
-		assertOutputConversion_viaCharsetName("ASCII", true);
-		// uh, the charset encoding cannot be configured properly
-		// assertOutputConversion_viaCharsetEncoder("ASCII", true);
-	}
+    public void testConvert_utf16e_errors() throws Exception {
+        assertInputConversion_viaCharsetName("UTF-16", true);
+        assertInputConversion_viaCharsetDecoder("UTF-16", true);
+        assertOutputConversion_viaCharsetName("UTF-16", true);
+        // assertOutputConversion_viaCharsetEncoder("UTF-16", true);
+    }
 
-	public void testConvert_utf16e_errors() throws Exception {
-		assertInputConversion_viaCharsetName("UTF-16", true);
-		assertInputConversion_viaCharsetDecoder("UTF-16", true);
-		assertOutputConversion_viaCharsetName("UTF-16", true);
-		// assertOutputConversion_viaCharsetEncoder("UTF-16", true);
-	}
+    public void testConvert_iso88591_NoErrors() throws Exception {
+        assertConvert("ISO-8859-1", false);
+    }
 
-	public void testConvert_iso88591_NoErrors() throws Exception {
-		assertConvert("ISO-8859-1", false);
-	}
+    private void assertConvert(String charsetName, boolean conversionErrorsExpected) throws Exception {
+        assertInputConversion_viaCharsetName(charsetName, conversionErrorsExpected);
+        assertInputConversion_viaCharsetDecoder(charsetName, conversionErrorsExpected);
+        assertOutputConversion_viaCharsetName(charsetName, conversionErrorsExpected);
+        assertOutputConversion_viaCharsetEncoder(charsetName, conversionErrorsExpected);
+    }
 
-	private void assertConvert(String charsetName,
-			boolean conversionErrorsExpected) throws Exception {
-		assertInputConversion_viaCharsetName(charsetName,
-				conversionErrorsExpected);
-		assertInputConversion_viaCharsetDecoder(charsetName,
-				conversionErrorsExpected);
-		assertOutputConversion_viaCharsetName(charsetName,
-				conversionErrorsExpected);
-		assertOutputConversion_viaCharsetEncoder(charsetName,
-				conversionErrorsExpected);
-	}
+    private void assertOutputConversion_viaCharsetName(String charsetName, boolean conversionErrorsExpected)
+            throws Exception {
 
-	private void assertOutputConversion_viaCharsetName(String charsetName,
-			boolean conversionErrorsExpected) throws Exception {
-		System.out
-				.println("+++ test out: charset name " + charsetName + " +++");
+        byte[] originalBytes = createBytes();
 
-		byte[] originalBytes = createBytes();
+        {
+            // byte array as byte stream
+            ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
+            // byte stream as character stream
+            Writer targetWriter = new OutputStreamWriter(targetByteStream, charsetName);
+            // modifying writer (we don't modify here)
+            Writer modifyingWriter = new ModifyingWriter(targetWriter, new RegexModifier("a", 0, "a"));
+            // character stream as byte stream
+            OutputStream modifyingByteStream = new WriterOutputStream(modifyingWriter, charsetName);
+            // byte stream as byte array
+            IOUtils.write(originalBytes, modifyingByteStream);
+            modifyingByteStream.close();
 
-		{
-			// byte array as byte stream
-			ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
-			// byte stream as character stream
-			Writer targetWriter = new OutputStreamWriter(targetByteStream,
-					charsetName);
-			// modifying writer (we don't modify here)
-			Writer modifyingWriter = new ModifyingWriter(targetWriter,
-					new RegexModifier("a", 0, "a"));
-			// character stream as byte stream
-			OutputStream modifyingByteStream = new WriterOutputStream(
-					modifyingWriter, charsetName);
-			// byte stream as byte array
-			IOUtils.write(originalBytes, modifyingByteStream);
-			modifyingByteStream.close();
+            assertBytes(originalBytes, targetByteStream.toByteArray(), conversionErrorsExpected);
+        }
+    }
 
-			assertBytes(originalBytes, targetByteStream.toByteArray(),
-					conversionErrorsExpected);
-		}
-	}
+    private void assertOutputConversion_viaCharsetEncoder(String charsetName, boolean conversionErrorsExpected)
+            throws Exception {
 
-	private void assertOutputConversion_viaCharsetEncoder(String charsetName,
-			boolean conversionErrorsExpected) throws Exception {
-		System.out.println("+++ test out: charset encoder " + charsetName
-				+ " +++");
+        // find charset
+        Charset charset = Charset.forName(charsetName);
 
-		// find charset
-		Charset charset = Charset.forName(charsetName);
+        // // configure decoder
+        // CharsetDecoder decoder = charset.newDecoder();
+        // decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
 
-		// // configure decoder
-		// CharsetDecoder decoder = charset.newDecoder();
-		// decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+        // configure encoder
+        CharsetEncoder encoder = charset.newEncoder();
+        encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
 
-		// configure encoder
-		CharsetEncoder encoder = charset.newEncoder();
-		encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+        byte[] originalBytes = createBytes();
+        boolean conversionErrorsFound;
+        try {
+            // byte array as byte stream
+            ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
+            // byte stream as character stream
+            Writer targetWriter = new OutputStreamWriter(targetByteStream, encoder);
+            // modifying writer (we don't modify here)
+            Writer modifyingWriter = new ModifyingWriter(targetWriter, new RegexModifier("a", 0, "a"));
+            // character stream as byte stream
+            OutputStream modifyingByteStream = new WriterOutputStream(modifyingWriter, charset); // encoder
+                                                                                                 // not
+                                                                                                 // supported
+                                                                                                 // here!!!
+            // byte stream as byte array
+            IOUtils.write(originalBytes, modifyingByteStream);
+            modifyingByteStream.close();
 
-		byte[] originalBytes = createBytes();
-		boolean conversionErrorsFound;
-		try {
-			// byte array as byte stream
-			ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
-			// byte stream as character stream
-			Writer targetWriter = new OutputStreamWriter(targetByteStream,
-					encoder);
-			// modifying writer (we don't modify here)
-			Writer modifyingWriter = new ModifyingWriter(targetWriter,
-					new RegexModifier("a", 0, "a"));
-			// character stream as byte stream
-			OutputStream modifyingByteStream = new WriterOutputStream(
-					modifyingWriter, charset); // encoder not supported here!!!
-			// byte stream as byte array
-			IOUtils.write(originalBytes, modifyingByteStream);
-			modifyingByteStream.close();
+            assertBytes(originalBytes, targetByteStream.toByteArray(), conversionErrorsExpected);
 
-			assertBytes(originalBytes, targetByteStream.toByteArray(),
-					conversionErrorsExpected);
+            conversionErrorsFound = false;
+        } catch (MalformedInputException e) {
+            conversionErrorsFound = true;
+        }
+        assertEquals(conversionErrorsExpected, conversionErrorsFound);
+    }
 
-			System.out.println("no conversion error");
-			conversionErrorsFound = false;
-		} catch (MalformedInputException e) {
-			System.out.println("conversion error expected: " + e.getMessage());
-			conversionErrorsFound = true;
-		}
-		assertEquals(conversionErrorsExpected, conversionErrorsFound);
-	}
+    private void assertInputConversion_viaCharsetName(String charsetName, boolean conversionErrorsExpected)
+            throws Exception {
 
-	private void assertInputConversion_viaCharsetName(String charsetName,
-			boolean conversionErrorsExpected) throws Exception {
-		System.out.println("+++ test in: charset name " + charsetName + " +++");
+        byte[] originalBytes = createBytes();
 
-		byte[] originalBytes = createBytes();
+        {
+            // byte array as byte stream
+            InputStream originalByteStream = new ByteArrayInputStream(originalBytes);
+            // byte stream as character stream
+            Reader originalReader = new InputStreamReader(originalByteStream, charsetName);
+            // modifying reader (we don't modify here)
+            Reader modifyingReader = new ModifyingReader(originalReader, new RegexModifier("a", 0, "a"));
+            // character stream as byte stream
+            InputStream modifyingByteStream = new ReaderInputStream(modifyingReader, charsetName);
+            // byte stream as byte array
+            byte[] modifiedBytes = IOUtils.toByteArray(modifyingByteStream);
 
-		{
-			// byte array as byte stream
-			InputStream originalByteStream = new ByteArrayInputStream(
-					originalBytes);
-			// byte stream as character stream
-			Reader originalReader = new InputStreamReader(originalByteStream,
-					charsetName);
-			// modifying reader (we don't modify here)
-			Reader modifyingReader = new ModifyingReader(originalReader,
-					new RegexModifier("a", 0, "a"));
-			// character stream as byte stream
-			InputStream modifyingByteStream = new ReaderInputStream(
-					modifyingReader, charsetName);
-			// byte stream as byte array
-			byte[] modifiedBytes = IOUtils.toByteArray(modifyingByteStream);
+            assertBytes(originalBytes, modifiedBytes, conversionErrorsExpected);
+        }
+    }
 
-			assertBytes(originalBytes, modifiedBytes, conversionErrorsExpected);
-		}
-	}
+    private void assertInputConversion_viaCharsetDecoder(String charsetName, boolean conversionErrorsExpected)
+            throws Exception {
 
-	private void assertInputConversion_viaCharsetDecoder(String charsetName,
-			boolean conversionErrorsExpected) throws Exception {
-		System.out.println("+++ test in: charset decoder" + charsetName
-				+ " +++");
+        // find charset
+        Charset charset = Charset.forName(charsetName);
 
-		// find charset
-		Charset charset = Charset.forName(charsetName);
+        // configure decoder
+        CharsetDecoder decoder = charset.newDecoder();
+        decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
 
-		// configure decoder
-		CharsetDecoder decoder = charset.newDecoder();
-		decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+        // // configure encoder
+        // CharsetEncoder encoder = charset.newEncoder();
+        // encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
 
-		// // configure encoder
-		// CharsetEncoder encoder = charset.newEncoder();
-		// encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+        byte[] originalBytes = createBytes();
 
-		byte[] originalBytes = createBytes();
+        boolean conversionErrorsFound;
+        try {
+            // byte array as byte stream
+            InputStream originalByteStream = new ByteArrayInputStream(originalBytes);
+            // byte stream as character stream
+            Reader originalReader = new InputStreamReader(originalByteStream, decoder);
+            // modifying reader (we don't modify anything here)
+            Reader modifyingReader = new ModifyingReader(originalReader, new RegexModifier("a", 0, "a"));
+            // character stream as byte stream
+            InputStream modifyingByteStream = new ReaderInputStream(modifyingReader, charset); // encoder
+                                                                                               // not
+                                                                                               // supported
+            // byte stream as byte array
+            byte[] modifiedBytes = IOUtils.toByteArray(modifyingByteStream);
 
-		boolean conversionErrorsFound;
-		try {
-			// byte array as byte stream
-			InputStream originalByteStream = new ByteArrayInputStream(
-					originalBytes);
-			// byte stream as character stream
-			Reader originalReader = new InputStreamReader(originalByteStream,
-					decoder);
-			// modifying reader (we don't modify anything here)
-			Reader modifyingReader = new ModifyingReader(originalReader,
-					new RegexModifier("a", 0, "a"));
-			// character stream as byte stream
-			InputStream modifyingByteStream = new ReaderInputStream(
-					modifyingReader, charset); // encoder not supported
-			// byte stream as byte array
-			byte[] modifiedBytes = IOUtils.toByteArray(modifyingByteStream);
+            assertBytes(originalBytes, modifiedBytes, conversionErrorsExpected);
 
-			assertBytes(originalBytes, modifiedBytes, conversionErrorsExpected);
+            conversionErrorsFound = false;
+        } catch (MalformedInputException e) {
+            conversionErrorsFound = true;
+        }
+        assertEquals(conversionErrorsExpected, conversionErrorsFound);
+    }
 
-			System.out.println("no conversion error");
-			conversionErrorsFound = false;
-		} catch (MalformedInputException e) {
-			System.out.println("conversion error expected: " + e.getMessage());
-			conversionErrorsFound = true;
-		}
-		assertEquals(conversionErrorsExpected, conversionErrorsFound);
-	}
+    public void testHomepageExample_InputStream() throws Exception {
 
-	public void testHomepageExample_InputStream() throws Exception {
+        String charsetName = "ISO-8859-1";
 
-		String charsetName = "ISO-8859-1";
+        byte[] originalBytes = new byte[] { 1, 2, "\r".getBytes("ISO-8859-1")[0], 4, 5 };
 
-		byte[] originalBytes = new byte[] { 1, 2,
-				"\r".getBytes("ISO-8859-1")[0], 4, 5 };
+        // get byte stream
+        InputStream originalByteStream = new ByteArrayInputStream(originalBytes);
 
-		// get byte stream
-		InputStream originalByteStream = new ByteArrayInputStream(originalBytes);
+        // byte stream as character stream
+        Reader originalReader = new InputStreamReader(originalByteStream, charsetName);
 
-		// byte stream as character stream
-		Reader originalReader = new InputStreamReader(originalByteStream,
-				charsetName);
+        // create the modifying reader
+        Reader modifyingReader = new ModifyingReader(originalReader, new RegexModifier("\r", 0, ""));
 
-		// create the modifying reader
-		Reader modifyingReader = new ModifyingReader(originalReader,
-				new RegexModifier("\r", 0, ""));
+        // character stream as byte stream
+        InputStream modifyingByteStream = new ReaderInputStream(modifyingReader, charsetName);
 
-		// character stream as byte stream
-		InputStream modifyingByteStream = new ReaderInputStream(
-				modifyingReader, charsetName);
+        byte[] expectedBytes = new byte[] { 1, 2, 4, 5 };
 
-		byte[] expectedBytes = new byte[] { 1, 2, 4, 5 };
+        assertBytes(expectedBytes, IOUtils.toByteArray(modifyingByteStream), false);
+    }
 
-		assertBytes(expectedBytes, IOUtils.toByteArray(modifyingByteStream),
-				false);
-	}
+    public void testHomepageExample_OutputStream() throws Exception {
 
-	public void testHomepageExample_OutputStream() throws Exception {
+        String charsetName = "ISO-8859-1";
 
-		String charsetName = "ISO-8859-1";
+        byte[] originalBytes = new byte[] { 1, 2, "\r".getBytes("ISO-8859-1")[0], 4, 5 };
 
-		byte[] originalBytes = new byte[] { 1, 2,
-				"\r".getBytes("ISO-8859-1")[0], 4, 5 };
+        // get byte stream
+        ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
 
-		// get byte stream
-		ByteArrayOutputStream targetByteStream = new ByteArrayOutputStream();
+        // byte stream as character stream
+        Writer targetWriter = new OutputStreamWriter(targetByteStream, charsetName);
 
-		// byte stream as character stream
-		Writer targetWriter = new OutputStreamWriter(targetByteStream,
-				charsetName);
+        // create the modifying writer
+        Writer modifyingWriter = new ModifyingWriter(targetWriter, new RegexModifier("\r", 0, ""));
 
-		// create the modifying writer
-		Writer modifyingWriter = new ModifyingWriter(targetWriter,
-				new RegexModifier("\r", 0, ""));
+        // character stream as byte stream
+        OutputStream modifyingByteStream = new WriterOutputStream(modifyingWriter, charsetName);
 
-		// character stream as byte stream
-		OutputStream modifyingByteStream = new WriterOutputStream(
-				modifyingWriter, charsetName);
+        modifyingByteStream.write(originalBytes);
+        // modifyingByteStream.flush();
+        modifyingByteStream.close();
 
-		modifyingByteStream.write(originalBytes);
-		// modifyingByteStream.flush();
-		modifyingByteStream.close();
+        byte[] expectedBytes = new byte[] { 1, 2, 4, 5 };
 
-		byte[] expectedBytes = new byte[] { 1, 2, 4, 5 };
-
-		assertBytes(expectedBytes, targetByteStream.toByteArray(), false);
-	}
+        assertBytes(expectedBytes, targetByteStream.toByteArray(), false);
+    }
 
 }
