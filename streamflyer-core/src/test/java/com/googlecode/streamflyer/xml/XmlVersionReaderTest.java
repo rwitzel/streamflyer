@@ -65,6 +65,8 @@ public class XmlVersionReaderTest extends TestCase {
         XmlVersionReader reader = new XmlVersionReader(new StringReader(xml));
 
         assertEquals(expectedXmlVersion, reader.getXmlVersion());
+
+        reader.close();
     }
 
 }
