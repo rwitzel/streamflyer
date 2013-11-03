@@ -1,18 +1,13 @@
 package com.googlecode.streamflyer.support.tokens;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
-import com.googlecode.streamflyer.support.tokens.MatchResultWithOffset;
-import com.googlecode.streamflyer.support.tokens.Token;
-import com.googlecode.streamflyer.support.tokens.TokenProcessor;
 
 /**
- * Stores the found tokens and replaces text in tokens with type
- * <code>SectionTitle</code> and <code>ListItem</code>.
+ * Stores the found tokens and replaces text in tokens with type <code>SectionTitle</code> and <code>ListItem</code>.
  * 
  * @author rwoo
  * 
@@ -20,18 +15,18 @@ import com.googlecode.streamflyer.support.tokens.TokenProcessor;
 public class MyTokenProcessor extends TokenProcessor {
 
     /**
-     * The list of all found tokens. Each element contains the name of the token
-     * and the content of the token.
+     * The list of all found tokens. Each element contains the name of the token and the content of the token.
      */
-    private List<String> foundTokens = new ArrayList<String>();
+    private List<String> foundTokens;
 
     /**
      * True if the parser is between the tokens "SectionStart" and "SectionEnd".
      */
     private boolean insideSection = false;
 
-    public MyTokenProcessor(List<Token> tokens) {
+    public MyTokenProcessor(List<Token> tokens, List<String> foundTokens) {
         super(tokens);
+        this.foundTokens = foundTokens;
     }
 
     @Override
@@ -70,9 +65,5 @@ public class MyTokenProcessor extends TokenProcessor {
         }
 
         return new MatchProcessorResult(behindToken, true);
-    }
-
-    public List<String> getFoundTokens() {
-        return foundTokens;
     }
 }

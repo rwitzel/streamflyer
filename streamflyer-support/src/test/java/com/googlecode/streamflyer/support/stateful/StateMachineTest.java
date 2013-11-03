@@ -1,10 +1,11 @@
-package com.googlecode.streamflyer.support.tokens;
+package com.googlecode.streamflyer.support.stateful;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -15,12 +16,12 @@ import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.regex.RegexModifier;
 
 /**
- * Tests {@link MyTokenProcessor} and {@link TokenProcessor}.
+ * Tests {@link StateMachine}.
  * 
  * @author rwoo
  * 
  */
-public class MyTokenProcessorTest {
+public class StateMachineTest {
 
     /**
      * Rather an integration test than a unit test.
@@ -30,24 +31,26 @@ public class MyTokenProcessorTest {
     @Test
     public void testProcess() throws Exception {
 
-        // +++ define the tokens we are looking for
-        List<Token> tokenList = new ArrayList<Token>();
-        // we assume the whitespace is normalized so that we can use rather
-        // simple regular expressions
-        String regexPlainText = "[^<>]*";
-        tokenList.add(new Token("SectionStart", "<section class='abc'>"));
-        tokenList.add(new Token("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)"));
-        tokenList.add(new Token("ListItem", "(<li>)(" + regexPlainText + ")(</li>)"));
-        tokenList.add(new Token("SectionEnd", "</section>"));
-        Tokens tokens = new Tokens(tokenList);
-
-        // +++ create a token processor that stores the found tokens
-        // and replaces some text
         List<String> foundTokens = new ArrayList<String>();
-        MyTokenProcessor tokenProcessor = new MyTokenProcessor(tokenList, foundTokens);
+
+        // +++ define the states
+        // (remember: (1) title and item are optional + (2) a list of items is possible)
+        String regexPlainText = "[^<>]*";
+        State state1 = new State("SectionStart", "<section class='abc'>", "$0");
+        State state2 = new State("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3");
+        State state3 = new State("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3");
+        State state4 = new State("SectionEnd", "</section>", "$0");
+        state1.defineNextStates(Arrays.asList(state2, state3, state4), foundTokens);
+        state2.defineNextStates(Arrays.asList(state3, state4), foundTokens);
+        state3.defineNextStates(Arrays.asList(state3, state4), foundTokens);
+        state4.defineNextStates(Arrays.asList(state1), foundTokens);
+
+        // +++ create a processor that stores the found states and replaces some text
+        DelegatingMatcher delegatingMatcher = new DelegatingMatcher();
+        StateMachine stateMachine = new StateMachine(state4, delegatingMatcher);
 
         // +++ create the modifier
-        Modifier modifier = new RegexModifier(tokens.getMatcher(), tokenProcessor, 1, 2048);
+        Modifier modifier = new RegexModifier(delegatingMatcher, stateMachine, 1, 2048);
 
         String input = "";
         input += "text <section class='abc'>";
@@ -64,14 +67,12 @@ public class MyTokenProcessorTest {
         Reader reader = new ModifyingReader(new StringReader(input), modifier);
         String foundOutput = IOUtils.toString(reader);
 
-        assertEquals(7, foundTokens.size());
+        assertEquals(5, foundTokens.size());
         assertEquals("SectionStart:<section class='abc'>", foundTokens.get(0));
         assertEquals("SectionTitle:<h1>my title</h1>", foundTokens.get(1));
         assertEquals("ListItem:<li>my first list item</li>", foundTokens.get(2));
         assertEquals("ListItem:<li>my second list item</li>", foundTokens.get(3));
         assertEquals("SectionEnd:</section>", foundTokens.get(4));
-        assertEquals("SectionTitle:<h1>title outside section</h1>", foundTokens.get(5));
-        assertEquals("ListItem:<li>list item outside section</li>", foundTokens.get(6));
 
         String output = "";
         output += "text <section class='abc'>";
