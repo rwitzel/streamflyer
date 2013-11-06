@@ -32,6 +32,7 @@ public class StateMachineTest {
     public void testProcess() throws Exception {
 
         List<String> foundTokens = new ArrayList<String>();
+        TokenCollector tokenCollector = new TokenCollector(foundTokens);
 
         // +++ define the states
         // (remember: (1) title and item are optional + (2) a list of items is possible)
@@ -40,10 +41,10 @@ public class StateMachineTest {
         State state2 = new State("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3");
         State state3 = new State("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3");
         State state4 = new State("SectionEnd", "</section>", "$0");
-        state1.defineNextStates(Arrays.asList(state2, state3, state4), foundTokens);
-        state2.defineNextStates(Arrays.asList(state3, state4), foundTokens);
-        state3.defineNextStates(Arrays.asList(state3, state4), foundTokens);
-        state4.defineNextStates(Arrays.asList(state1), foundTokens);
+        state1.defineNextStates(Arrays.asList(state2, state3, state4), tokenCollector);
+        state2.defineNextStates(Arrays.asList(state3, state4), tokenCollector);
+        state3.defineNextStates(Arrays.asList(state3, state4), tokenCollector);
+        state4.defineNextStates(Arrays.asList(state1), tokenCollector);
 
         // +++ create a processor that stores the found states and replaces some text
         DelegatingMatcher delegatingMatcher = new DelegatingMatcher();

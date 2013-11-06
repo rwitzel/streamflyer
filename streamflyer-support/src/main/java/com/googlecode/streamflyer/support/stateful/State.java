@@ -4,82 +4,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
+import com.googlecode.streamflyer.regex.ReplacingProcessor;
 import com.googlecode.streamflyer.support.tokens.Token;
 import com.googlecode.streamflyer.support.tokens.Tokens;
 
 /**
  * A state of the match process. The state is reached if the corresponding {@link #getToken() token} is matched.
  * <p>
- * The subsequent states are given by {@link #defineNextStates(List, List)}.
+ * The state transitions are given by {@link #defineNextStates(List, TransitionGuard)}.
  * 
  * @author rwoo
  * 
  */
 public class State {
 
-    /**
-     * A unique name of the state.
-     */
-    private String stateName;
-
-    /**
-     * A regular expression
-     */
-    private String regex;
-
-    /**
-     * The replacement defines how the text that is matched via {@link #regex} shall be replaced.
-     */
-    private String replacement;
+    private Token token;
 
     private OnStreamMatcher matcher;
 
     private Transition transition;
 
+    /**
+     * This constructor defines a state so that text of the matched state token is replaced with the given replacement.
+     * 
+     * @param stateName
+     *            A unique name for the state.
+     * @param regex
+     *            In order to reach this state, this regular expression must be matched.
+     * @param replacement
+     *            The replacement defines how the text that is matched via {@link #regex} shall be replaced.
+     */
     public State(String stateName, String regex, String replacement) {
         super();
-        this.stateName = stateName;
-        this.regex = regex;
-        this.replacement = replacement;
+        this.token = new Token(stateName, regex, new ReplacingProcessor(replacement));
     }
 
     public String getStateName() {
-        return stateName;
-    }
-
-    public String getReplacement() {
-        return replacement;
+        return token.getName();
     }
 
     /**
      * 
      * @param nextStates
      *            the states that can be reached from the this state.
-     * @param foundTokens
-     *            only for testing
+     * @param transitionGuard
      */
-    public void defineNextStates(List<State> nextStates, List<String> foundTokens) {
+    public void defineNextStates(List<State> nextStates, TransitionGuard transitionGuard) {
 
         // +++ create tokens for the given states
-        List<Token> tokenList = new ArrayList<Token>();
+        List<Token> nextTokenList = new ArrayList<Token>();
         for (State nextState : nextStates) {
-            tokenList.add(nextState.getToken());
+            nextTokenList.add(nextState.getToken());
         }
 
         // +++ create matcher
-        Tokens tokens = new Tokens(tokenList);
-        matcher = tokens.getMatcher();
+        Tokens nextTokens = new Tokens(nextTokenList);
+        matcher = nextTokens.getMatcher();
 
         // +++ create a token processor that logs the found tokens
         // and replaces some text
-        transition = new Transition(tokenList, foundTokens, nextStates);
+        transition = new Transition(nextTokenList, nextStates, transitionGuard);
     }
 
     /**
      * @return Returns the token that must be matched to reach this state.
      */
     public Token getToken() {
-        return new Token(stateName, regex);
+        return token;
     }
 
     /**
@@ -100,7 +91,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "State [stateName=" + stateName + ", regex=" + regex + ", replacement=" + replacement + "]";
+        return "State [stateName=" + token.getName() + ", token=" + token + "]";
     }
 
 }
