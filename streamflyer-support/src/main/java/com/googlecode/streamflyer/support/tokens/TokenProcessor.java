@@ -7,14 +7,16 @@ import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 
 /**
- * This {@link MatchProcessor} processes a matched token (defined by a list of
- * {@link Token tokens}). Must be used together with the matcher produced by
- * {@link Tokens#getMatcher()}.
+ * This {@link MatchProcessor} processes a matched token (defined by a list of {@link Token tokens}). Must be used
+ * together with the matcher produced by {@link Tokens#getMatcher()}.
+ * <p>
+ * If you want to adjust the matching behaviour, please overwrite
+ * {@link #processToken(Token, int, StringBuilder, int, MatchResult)} in subclasses.
  * 
  * @author rwoo
  * 
  */
-public abstract class TokenProcessor implements MatchProcessor {
+public class TokenProcessor implements MatchProcessor {
 
     /**
      * The tokens to process.
@@ -49,11 +51,14 @@ public abstract class TokenProcessor implements MatchProcessor {
     }
 
     /**
-     * Processes the matched token. The token can be found in the match result
+     * Processes the matched token using {@link Token#getMatchProcessor()}. The token can be found in the match result
      * at the given group offset.
-     * 
      */
-    protected abstract MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult);
+    protected MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+
+        return token.getMatchProcessor().process(characterBuffer, firstModifiableCharacterInBuffer,
+                new MatchResultWithOffset(matchResult, groupOffset));
+    }
 
 }

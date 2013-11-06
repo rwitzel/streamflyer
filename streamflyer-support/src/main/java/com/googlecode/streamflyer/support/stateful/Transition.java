@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
-import com.googlecode.streamflyer.support.tokens.MatchResultWithOffset;
 import com.googlecode.streamflyer.support.tokens.Token;
 import com.googlecode.streamflyer.support.tokens.TokenProcessor;
 
@@ -56,10 +55,9 @@ public class Transition extends TokenProcessor {
 
                 nextState = state;
 
-                // replace and return
-                return token.getMatchProcessor().process(characterBuffer, firstModifiableCharacterInBuffer,
-                        new MatchResultWithOffset(matchResult, groupOffset));
-
+                // delegate to the default token-specific match processors.
+                return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer,
+                        matchResult);
             }
         }
 

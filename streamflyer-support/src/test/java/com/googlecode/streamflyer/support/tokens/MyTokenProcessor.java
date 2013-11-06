@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
-import com.googlecode.streamflyer.regex.ReplacingProcessor;
 
 /**
  * Stores the found tokens and replaces text in tokens with type <code>SectionTitle</code> and <code>ListItem</code>.
@@ -38,8 +37,6 @@ public class MyTokenProcessor extends TokenProcessor {
         foundTokens.add(foundToken);
 
         // +++ process the token
-        int behindToken = matchResult.end(groupOffset);
-
         if (token.getName().equals("SectionStart")) {
 
             insideSection = true;
@@ -48,22 +45,15 @@ public class MyTokenProcessor extends TokenProcessor {
 
             insideSection = false;
 
-        } else if (token.getName().equals("SectionTitle") && insideSection) {
+        } else if (!insideSection) {
 
-            // replace the title with "TITLE_FOUND"
-            ReplacingProcessor processor = new ReplacingProcessor("$1TITLE_FOUND$3");
-            return processor.process(characterBuffer, firstModifiableCharacterInBuffer, new MatchResultWithOffset(
-                    matchResult, groupOffset));
-
-        } else if (token.getName().equals("ListItem") && insideSection) {
-
-            // replace the content of the list item with "LIST_ITEM_FOUND"
-            ReplacingProcessor processor = new ReplacingProcessor("$1LIST_ITEM_FOUND$3");
-            return processor.process(characterBuffer, firstModifiableCharacterInBuffer, new MatchResultWithOffset(
-                    matchResult, groupOffset));
+            // do nothing if not inside section!
+            return new DoNothingProcessor().process(characterBuffer, firstModifiableCharacterInBuffer,
+                    new MatchResultWithOffset(matchResult, groupOffset));
 
         }
 
-        return new MatchProcessorResult(behindToken, true);
+        // delegate to the default token-specific match processors.
+        return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 }

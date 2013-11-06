@@ -4,9 +4,11 @@ import java.util.regex.Pattern;
 
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.regex.MatchProcessor;
+import com.googlecode.streamflyer.regex.ReplacingProcessor;
 
 /**
- * A token that shall be matched in a stream.
+ * A token that shall be matched via a regular expression in a stream. Each token is associated with a
+ * {@link MatchProcessor} which defines how a {@link TokenProcessor} shall process the matched token.
  * 
  * @author rwoo
  * 
@@ -33,14 +35,43 @@ public class Token {
      */
     private MatchProcessor matchProcessor;
 
+    /**
+     * This constructor should be used only in tests!
+     * 
+     * @param regex
+     */
     public Token(String regex) {
         this("" + System.currentTimeMillis(), regex, new DoNothingProcessor());
     }
 
+    /**
+     * This token matches the given regex but the match processor does {@link DoNothingProcessor nothing}.
+     * 
+     * @param name
+     * @param regex
+     */
     public Token(String name, String regex) {
         this(name, regex, new DoNothingProcessor());
     }
 
+    /**
+     * This token matches the given regex and {@link ReplacingProcessor replaces} the match with the replacement.
+     * 
+     * @param name
+     * @param regex
+     * @param replacement
+     */
+    public Token(String name, String regex, String replacement) {
+        this(name, regex, new ReplacingProcessor(replacement));
+    }
+
+    /**
+     * This token matches the given regex and the match will be processed with the given {@link MatchProcessor}.
+     * 
+     * @param name
+     * @param regex
+     * @param matchProcessor
+     */
     public Token(String name, String regex, MatchProcessor matchProcessor) {
         super();
 

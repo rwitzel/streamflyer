@@ -36,8 +36,8 @@ public class MyTokenProcessorTest {
         // simple regular expressions
         String regexPlainText = "[^<>]*";
         tokenList.add(new Token("SectionStart", "<section class='abc'>"));
-        tokenList.add(new Token("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)"));
-        tokenList.add(new Token("ListItem", "(<li>)(" + regexPlainText + ")(</li>)"));
+        tokenList.add(new Token("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3"));
+        tokenList.add(new Token("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3"));
         tokenList.add(new Token("SectionEnd", "</section>"));
         Tokens tokens = new Tokens(tokenList);
 
