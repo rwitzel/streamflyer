@@ -8,8 +8,7 @@
   </parent>
   <artifactId>streamflyer-core</artifactId>
   <packaging>jar</packaging>
-  <name>Streamflyer Core</name>
-  <description>Allows editing an input stream</description>
+  <description>Streamflyer Core - Allows editing an input stream</description>
 
   <properties>
     <!-- needed for javadoc, license and so on -->
@@ -39,7 +38,7 @@
         <artifactId>maven-jar-plugin</artifactId>
       </plugin>
 
-      <!-- phase "verify" should create the sources.jar and test-sources.jar as well  -->
+      <!-- phase "package" should create the sources.jar and test-sources.jar as well  -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>

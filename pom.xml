@@ -4,7 +4,6 @@
   <artifactId>streamflyer-parent</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Streamflyer Parent</name>
   <description>Allows editing an input stream</description>
   <url>http://code.google.com/p/streamflyer/</url>
   <inceptionYear>2011</inceptionYear><!-- used by maven-license-plugin -->
@@ -245,7 +244,7 @@ else {
         </plugin>
 
    
-        <!-- phase "verify" should create the sources.jar and test-sources.jar as well  -->
+        <!-- phase "package" should create the sources.jar and test-sources.jar as well  -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
@@ -253,7 +252,7 @@ else {
           <executions>
             <execution>
               <id>attach-sources</id>
-              <phase>verify</phase>
+              <phase>package</phase>
               <goals>
                 <goal>jar-no-fork</goal>
                 <goal>test-jar-no-fork</goal>

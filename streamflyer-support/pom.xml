@@ -7,7 +7,6 @@
     <relativePath>..</relativePath>
   </parent>
   <artifactId>streamflyer-support</artifactId>
-  <name>streamflyer support</name>
   <description>
 	This module documents scenarios that are described
 	by users of the streamflyer discussion group.
@@ -59,7 +58,7 @@
         <artifactId>maven-jar-plugin</artifactId>
       </plugin>
 
-      <!-- phase "verify" should create the sources.jar and test-sources.jar as well  -->
+      <!-- phase "package" should create the sources.jar and test-sources.jar as well  -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
