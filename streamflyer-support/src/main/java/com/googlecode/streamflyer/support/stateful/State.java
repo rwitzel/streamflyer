@@ -3,8 +3,10 @@ package com.googlecode.streamflyer.support.stateful;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
+import com.googlecode.streamflyer.support.tokens.DoNothingProcessor;
 import com.googlecode.streamflyer.support.tokens.Token;
 import com.googlecode.streamflyer.support.tokens.TokensMatcher;
 
@@ -25,6 +27,18 @@ public class State {
     private Transition transition;
 
     /**
+     * If the constructed state is reached the stream is {@link DoNothingProcessor not modified}.
+     * 
+     * @param stateName
+     *            A unique name for the state.
+     * @param regex
+     *            In order to reach this state, this regular expression must be matched.
+     */
+    public State(String stateName, String regex) {
+        this(stateName, regex, new DoNothingProcessor());
+    }
+
+    /**
      * This constructor defines a state so that text of the matched state token is replaced with the given replacement.
      * 
      * @param stateName
@@ -35,8 +49,23 @@ public class State {
      *            The replacement defines how the text that is matched via {@link #regex} shall be replaced.
      */
     public State(String stateName, String regex, String replacement) {
+        this(stateName, regex, new ReplacingProcessor(replacement));
+    }
+
+    /**
+     * If the constructed state is reached the stream then the given {@link MatchProcessor} modifies the stream.
+     * 
+     * @param stateName
+     *            A unique name for the state.
+     * @param regex
+     *            In order to reach this state, this regular expression must be matched.
+     * @param matchProcessor
+     *            If the constructed state is reached the stream then the given {@link MatchProcessor} modifies the
+     *            stream.
+     */
+    public State(String stateName, String regex, MatchProcessor matchProcessor) {
         super();
-        this.token = new Token(stateName, regex, new ReplacingProcessor(replacement));
+        this.token = new Token(stateName, regex, matchProcessor);
     }
 
     public String getStateName() {

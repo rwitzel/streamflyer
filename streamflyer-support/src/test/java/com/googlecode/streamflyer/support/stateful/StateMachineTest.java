@@ -38,10 +38,10 @@ public class StateMachineTest {
         // +++ define the states
         // (remember: (1) title and item are optional + (2) a list of items is possible)
         String regexPlainText = "[^<>]*";
-        State state1 = new State("SectionStart", "<section class='abc'>", "$0");
+        State state1 = new State("SectionStart", "<section class='abc'>");
         State state2 = new State("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3");
         State state3 = new State("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3");
-        State state4 = new State("SectionEnd", "</section>", "$0");
+        State state4 = new State("SectionEnd", "</section>");
         state1.defineNextStates(Arrays.asList(state2, state3, state4), tokenCollector);
         state2.defineNextStates(Arrays.asList(state3, state4), tokenCollector);
         state3.defineNextStates(Arrays.asList(state3, state4), tokenCollector);
