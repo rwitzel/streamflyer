@@ -57,7 +57,7 @@ public class Transitions extends TokenProcessor {
 
                 newState = endState;
 
-                // delegate to the default token-specific match processors.
+                // delegate to the token-specific match processors
                 return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer,
                         matchResult);
             }

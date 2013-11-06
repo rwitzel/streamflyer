@@ -3,7 +3,7 @@ package com.googlecode.streamflyer.support.util;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 
 /**
- * Delegates to another matcher.
+ * This {@link OnStreamMatcher} delegates to another matcher.
  * 
  * @author rwoo
  * 
