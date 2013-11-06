@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.OnStreamStandardMatcher;
 import com.googlecode.streamflyer.regex.RegexModifier;
+import com.googlecode.streamflyer.support.util.DelegatingMatcher;
 
 /**
  * An {@link OnStreamMatcher} that matches a {@link Token token} of a list of tokens.

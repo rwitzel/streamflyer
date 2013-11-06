@@ -1,11 +1,11 @@
 package com.googlecode.streamflyer.support.stateful;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -14,7 +14,7 @@ import org.junit.Test;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.support.tokens.DelegatingMatcher;
+import com.googlecode.streamflyer.support.util.DelegatingMatcher;
 
 /**
  * Tests {@link StateMachine}.
@@ -42,10 +42,10 @@ public class StateMachineTest {
         State state2 = new State("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3");
         State state3 = new State("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3");
         State state4 = new State("SectionEnd", "</section>");
-        state1.defineNextStates(Arrays.asList(state2, state3, state4), tokenCollector);
-        state2.defineNextStates(Arrays.asList(state3, state4), tokenCollector);
-        state3.defineNextStates(Arrays.asList(state3, state4), tokenCollector);
-        state4.defineNextStates(Arrays.asList(state1), tokenCollector);
+        state1.transitionsTo(asList(state2, state3, state4), tokenCollector);
+        state2.transitionsTo(asList(state3, state4), tokenCollector);
+        state3.transitionsTo(asList(state3, state4), tokenCollector);
+        state4.transitionsTo(asList(state1), tokenCollector);
 
         // +++ create a processor that stores the found states and replaces some text
         DelegatingMatcher delegatingMatcher = new DelegatingMatcher();

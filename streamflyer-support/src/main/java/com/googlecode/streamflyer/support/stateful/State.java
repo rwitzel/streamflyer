@@ -6,25 +6,34 @@ import java.util.List;
 import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
-import com.googlecode.streamflyer.support.tokens.DoNothingProcessor;
 import com.googlecode.streamflyer.support.tokens.Token;
 import com.googlecode.streamflyer.support.tokens.TokensMatcher;
+import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 
 /**
  * A state of the match process. The state is reached if the corresponding {@link #getToken() token} is matched.
  * <p>
- * The state transitions are given by {@link #defineNextStates(List, TransitionGuard)}.
+ * The state transitions are given by {@link #transitionsTo(List, TransitionGuard)}.
  * 
  * @author rwoo
  * 
  */
 public class State {
 
+    /**
+     * The token is must matched to reach this state.
+     */
     private Token token;
 
+    /**
+     * The matcher that must match to apply a transition to another state.
+     */
     private OnStreamMatcher matcher;
 
-    private Transition transition;
+    /**
+     * The transitions that can be applied.
+     */
+    private Transitions transitions;
 
     /**
      * If the constructed state is reached the stream is {@link DoNothingProcessor not modified}.
@@ -73,25 +82,26 @@ public class State {
     }
 
     /**
+     * Defines which transitions are possible.
      * 
-     * @param nextStates
+     * @param endStates
      *            the states that can be reached from the this state.
      * @param transitionGuard
+     *            this guard can stop the transition or add additional logic to the transition.
      */
-    public void defineNextStates(List<State> nextStates, TransitionGuard transitionGuard) {
+    public void transitionsTo(List<State> endStates, TransitionGuard transitionGuard) {
 
-        // +++ create tokens for the given states
+        // create tokens for the given states
         List<Token> nextTokenList = new ArrayList<Token>();
-        for (State nextState : nextStates) {
-            nextTokenList.add(nextState.getToken());
+        for (State endState : endStates) {
+            nextTokenList.add(endState.getToken());
         }
 
-        // +++ create matcher
+        // create matcher
         matcher = new TokensMatcher(nextTokenList);
 
-        // +++ create a token processor that logs the found tokens
-        // and replaces some text
-        transition = new Transition(nextTokenList, nextStates, transitionGuard);
+        // create the token processor
+        transitions = new Transitions(nextTokenList, endStates, transitionGuard);
     }
 
     /**
@@ -113,8 +123,8 @@ public class State {
      * 
      * @return Returns the token processor that must be used to switch to the next state.
      */
-    public Transition getTransition() {
-        return transition;
+    public Transitions getTransitions() {
+        return transitions;
     }
 
     @Override

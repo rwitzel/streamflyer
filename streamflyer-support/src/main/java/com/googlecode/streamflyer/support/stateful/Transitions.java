@@ -8,33 +8,35 @@ import com.googlecode.streamflyer.support.tokens.Token;
 import com.googlecode.streamflyer.support.tokens.TokenProcessor;
 
 /**
- * Must be used in conjunction with {@link StateMachine}.
+ * Represents the transitions that lead away from a {@link State start state} to the end states.
+ * <p>
+ * This class is used in conjunction with {@link StateMachine}.
  * 
  * @author rwoo
  * 
  */
-public class Transition extends TokenProcessor {
+public class Transitions extends TokenProcessor {
 
     /**
      * If the transition is applied, this property contains the end state of the transition.
      * <p>
      * This property is reset to null by the state machine as soon as the state machine updates its current state.
      */
-    private State nextState;
+    private State newState;
 
     /**
-     * This guard is asked to find out whether the transition shall be applied.
+     * This guard is asked to find out whether a transition shall be applied.
      */
     private TransitionGuard transitionGuard;
 
     /**
      * This list must contain a state for each token that can be matched by this token processor.
      */
-    private List<State> states;
+    private List<State> endStates;
 
-    public Transition(List<Token> tokens, List<State> states, TransitionGuard transitionGuard) {
+    public Transitions(List<Token> tokens, List<State> endStates, TransitionGuard transitionGuard) {
         super(tokens);
-        this.states = states;
+        this.endStates = endStates;
         this.transitionGuard = transitionGuard;
     }
 
@@ -43,17 +45,17 @@ public class Transition extends TokenProcessor {
             int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
         // +++ process the token
-        for (State state : states) {
+        for (State endState : endStates) {
 
-            if (state.getStateName().equals(token.getName())) {
+            if (endState.getStateName().equals(token.getName())) {
 
-                MatchProcessorResult stop = transitionGuard.stopTransition(state, groupOffset, characterBuffer,
+                MatchProcessorResult stop = transitionGuard.stopTransition(endState, groupOffset, characterBuffer,
                         firstModifiableCharacterInBuffer, matchResult);
                 if (stop != null) {
                     return stop;
                 }
 
-                nextState = state;
+                newState = endState;
 
                 // delegate to the default token-specific match processors.
                 return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer,
@@ -64,11 +66,11 @@ public class Transition extends TokenProcessor {
         throw new RuntimeException("never to happen if the class is used according to the class comment");
     }
 
-    public State getNextState() {
-        return nextState;
-    }
-
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
+    public State pollNewState() {
+        try {
+            return newState;
+        } finally {
+            newState = null;
+        }
     }
 }

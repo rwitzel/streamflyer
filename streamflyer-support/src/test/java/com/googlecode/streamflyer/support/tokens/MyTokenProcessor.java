@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
+import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 
 /**
  * Stores the found tokens and replaces text in tokens with type <code>SectionTitle</code> and <code>ListItem</code>.

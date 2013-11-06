@@ -1,4 +1,4 @@
-package com.googlecode.streamflyer.support.tokens;
+package com.googlecode.streamflyer.support.util;
 
 import java.util.regex.MatchResult;
 

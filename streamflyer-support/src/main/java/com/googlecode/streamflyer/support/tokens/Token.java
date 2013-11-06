@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
+import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 
 /**
  * A token that shall be matched via a regular expression in a stream. Each token is associated with a
