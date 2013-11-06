@@ -1,4 +1,4 @@
-package com.googlecode.streamflyer.support.stateful;
+package com.googlecode.streamflyer.support.tokens;
 
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 

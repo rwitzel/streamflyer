@@ -39,7 +39,7 @@ public class MyTokenProcessorTest {
         tokenList.add(new Token("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3"));
         tokenList.add(new Token("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3"));
         tokenList.add(new Token("SectionEnd", "</section>"));
-        Tokens tokens = new Tokens(tokenList);
+        TokensMatcher tokensMatcher = new TokensMatcher(tokenList);
 
         // +++ create a token processor that stores the found tokens
         // and replaces some text
@@ -47,7 +47,7 @@ public class MyTokenProcessorTest {
         MyTokenProcessor tokenProcessor = new MyTokenProcessor(tokenList, foundTokens);
 
         // +++ create the modifier
-        Modifier modifier = new RegexModifier(tokens.getMatcher(), tokenProcessor, 1, 2048);
+        Modifier modifier = new RegexModifier(tokensMatcher, tokenProcessor, 1, 2048);
 
         String input = "";
         input += "text <section class='abc'>";

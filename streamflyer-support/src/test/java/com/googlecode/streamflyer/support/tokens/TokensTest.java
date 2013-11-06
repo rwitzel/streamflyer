@@ -8,11 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.googlecode.streamflyer.support.tokens.Token;
-import com.googlecode.streamflyer.support.tokens.Tokens;
-
 /**
- * Tests {@link Tokens}.
+ * Tests {@link TokensMatcher}.
  * 
  * @author rwoo
  * 
@@ -20,15 +17,15 @@ import com.googlecode.streamflyer.support.tokens.Tokens;
 public class TokensTest {
 
     @Test
-    public void testCreateRegexThatMatchesAllTokens() throws Exception {
+    public void testCreateRegexThatMatchesAnyToken() throws Exception {
 
         List<Token> tokenList = new ArrayList<Token>();
         tokenList.add(new Token("abc"));
         tokenList.add(new Token("def"));
         tokenList.add(new Token("ghi"));
 
-        Tokens tokens = new Tokens(tokenList);
-        String regex = tokens.createRegexThatMatchesAllTokens();
+        TokensMatcher tokensMatcher = new TokensMatcher();
+        String regex = tokensMatcher.createRegexThatMatchesAnyToken(tokenList);
         assertTrue("abc".matches(regex));
         assertTrue("def".matches(regex));
         assertTrue("ghi".matches(regex));

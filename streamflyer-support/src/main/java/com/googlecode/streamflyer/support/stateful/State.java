@@ -6,7 +6,7 @@ import java.util.List;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
 import com.googlecode.streamflyer.support.tokens.Token;
-import com.googlecode.streamflyer.support.tokens.Tokens;
+import com.googlecode.streamflyer.support.tokens.TokensMatcher;
 
 /**
  * A state of the match process. The state is reached if the corresponding {@link #getToken() token} is matched.
@@ -58,8 +58,7 @@ public class State {
         }
 
         // +++ create matcher
-        Tokens nextTokens = new Tokens(nextTokenList);
-        matcher = nextTokens.getMatcher();
+        matcher = new TokensMatcher(nextTokenList);
 
         // +++ create a token processor that logs the found tokens
         // and replaces some text

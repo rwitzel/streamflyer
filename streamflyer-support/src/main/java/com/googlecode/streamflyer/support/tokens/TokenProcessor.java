@@ -8,7 +8,7 @@ import com.googlecode.streamflyer.regex.MatchProcessorResult;
 
 /**
  * This {@link MatchProcessor} processes a matched token (defined by a list of {@link Token tokens}). Must be used
- * together with the matcher produced by {@link Tokens#getMatcher()}.
+ * together with a {@link TokensMatcher}.
  * <p>
  * If you want to adjust the matching behaviour, please overwrite
  * {@link #processToken(Token, int, StringBuilder, int, MatchResult)} in subclasses.
@@ -47,7 +47,7 @@ public class TokenProcessor implements MatchProcessor {
             groupOffset += groupsInToken + 1;
         }
 
-        throw new RuntimeException("never to happen if used with " + Tokens.class);
+        throw new RuntimeException("never to happen if used with " + TokensMatcher.class);
     }
 
     /**

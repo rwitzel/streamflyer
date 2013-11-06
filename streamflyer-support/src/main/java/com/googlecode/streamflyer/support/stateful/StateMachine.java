@@ -4,6 +4,7 @@ import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
+import com.googlecode.streamflyer.support.tokens.DelegatingMatcher;
 
 public class StateMachine implements MatchProcessor {
 
