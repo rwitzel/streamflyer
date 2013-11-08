@@ -24,7 +24,6 @@ import com.googlecode.streamflyer.util.ModificationFactory;
  * This might be useful for reporting modifications.
  * 
  * @author rwoo
- * 
  * @since 28.06.2011
  */
 public class PositionAwareModificationFactory extends

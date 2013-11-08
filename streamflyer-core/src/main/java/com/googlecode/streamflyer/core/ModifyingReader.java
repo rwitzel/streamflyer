@@ -35,7 +35,6 @@ import java.util.Map;
  * {@link #markSupported() Marking} is not supported by this reader.
  * 
  * @author rwoo
- * 
  * @since 06.05.2011
  */
 public class ModifyingReader extends Reader {

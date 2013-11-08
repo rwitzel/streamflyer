@@ -27,7 +27,6 @@ import com.googlecode.streamflyer.util.ModificationFactory;
  * know this package is over-engineered but I could not resist.)
  * 
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public abstract class ModificationFactoryDecorator extends ModificationFactory {

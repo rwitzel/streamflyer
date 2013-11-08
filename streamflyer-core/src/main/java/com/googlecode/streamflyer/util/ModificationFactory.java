@@ -35,7 +35,6 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
  * </ul>
  * 
  * @author rwoo
- * 
  * @since 27.06.2011
  */
 public class ModificationFactory {
