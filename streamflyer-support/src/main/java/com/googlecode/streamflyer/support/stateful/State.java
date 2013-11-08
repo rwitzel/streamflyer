@@ -28,6 +28,16 @@ public class State {
     private Transitions transitions;
 
     /**
+     * A constructor to create an initial state.
+     * 
+     * @param stateName
+     *            A unique name for the state.
+     */
+    public State(String stateName) {
+        this(stateName, "", new DoNothingProcessor());
+    }
+
+    /**
      * If this constructed state is reached, the stream is {@link DoNothingProcessor not modified}.
      * 
      * @param stateName

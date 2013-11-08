@@ -37,10 +37,12 @@ public class StateMachineTest {
 
         // +++ define the states
         // (remember: (1) title and item are optional + (2) a list of items is possible)
+        State state0 = new State("Start"); // the initial state
         State state1 = new State("SectionStart", "<section class='abc'>");
         State state2 = new State("SectionTitle", "(<h1>)([^<>]*)(</h1>)", "$1TITLE_FOUND$3");
         State state3 = new State("ListItem", "(<li>)([^<>]*)(</li>)", "$1LIST_ITEM_FOUND$3");
         State state4 = new State("SectionEnd", "</section>");
+        state0.setTransitions(asList(state1), tokenCollector);
         state1.setTransitions(asList(state2, state3, state4), tokenCollector);
         state2.setTransitions(asList(state3, state4), tokenCollector);
         state3.setTransitions(asList(state3, state4), tokenCollector);
@@ -48,7 +50,7 @@ public class StateMachineTest {
 
         // +++ create a processor that stores the found states and replaces some text
         DelegatingMatcher delegatingMatcher = new DelegatingMatcher();
-        StateMachine stateMachine = new StateMachine(state4, delegatingMatcher);
+        StateMachine stateMachine = new StateMachine(state0, delegatingMatcher);
 
         // +++ create the modifier
         Modifier modifier = new RegexModifier(delegatingMatcher, stateMachine, 1, 2048);
