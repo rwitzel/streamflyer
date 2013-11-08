@@ -16,6 +16,8 @@
  */
 package com.googlecode.streamflyer.internal.thirdparty;
 
+import java.util.Collection;
+
 /**
  * The code of this class is copied from <code>org.apache.commons.lang.Validate</code> 
  * in order to avoid additional dependencies to other projects.
@@ -118,6 +120,18 @@ public class ZzzValidate {
         if (expression == false) {
             throw new IllegalArgumentException(message);
         }
+    }
+
+    /**
+     * Validates that the given collection is not empty.
+     * 
+     * @param collection
+     * @param collectionName
+     */
+    public static void isNotEmpty(Collection<?> collection,
+            String collectionName) {
+        notNull(collection, collectionName + " must not be null");
+        isTrue(!collection.isEmpty(), collectionName + " must not be empty");
     }
 
     //

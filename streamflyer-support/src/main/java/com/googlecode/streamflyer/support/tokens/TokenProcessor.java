@@ -3,6 +3,7 @@ package com.googlecode.streamflyer.support.tokens;
 import java.util.List;
 import java.util.regex.MatchResult;
 
+import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 
@@ -25,6 +26,9 @@ public class TokenProcessor implements MatchProcessor {
 
     public TokenProcessor(List<Token> tokens) {
         super();
+
+        ZzzValidate.isNotEmpty(tokens, "tokens");
+
         this.tokens = tokens;
     }
 

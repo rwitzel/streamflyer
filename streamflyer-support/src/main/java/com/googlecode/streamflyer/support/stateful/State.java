@@ -1,13 +1,10 @@
 package com.googlecode.streamflyer.support.stateful;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.streamflyer.regex.MatchProcessor;
-import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
 import com.googlecode.streamflyer.support.tokens.Token;
-import com.googlecode.streamflyer.support.tokens.TokensMatcher;
 import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 
 /**
@@ -24,11 +21,6 @@ public class State {
      * The token that must be matched to reach this state.
      */
     private Token token;
-
-    /**
-     * The matcher that must match to apply a transition to another state.
-     */
-    private OnStreamMatcher matcher;
 
     /**
      * The transitions that can be applied.
@@ -91,17 +83,8 @@ public class State {
      */
     public void transitionsTo(List<State> endStates, TransitionGuard transitionGuard) {
 
-        // create tokens for the given states
-        List<Token> nextTokenList = new ArrayList<Token>();
-        for (State endState : endStates) {
-            nextTokenList.add(endState.getToken());
-        }
-
-        // create matcher
-        matcher = new TokensMatcher(nextTokenList);
-
         // create the token processor
-        transitions = new Transitions(nextTokenList, endStates, transitionGuard);
+        transitions = new Transitions(endStates, transitionGuard);
     }
 
     /**
@@ -109,14 +92,6 @@ public class State {
      */
     public Token getToken() {
         return token;
-    }
-
-    /**
-     * 
-     * @return Returns the matcher that must be used to find the next state.
-     */
-    public OnStreamMatcher getMatcher() {
-        return matcher;
     }
 
     /**

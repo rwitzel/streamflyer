@@ -1,11 +1,14 @@
 package com.googlecode.streamflyer.support.stateful;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
+import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.support.tokens.Token;
 import com.googlecode.streamflyer.support.tokens.TokenProcessor;
+import com.googlecode.streamflyer.support.tokens.TokensMatcher;
 
 /**
  * Represents the transitions that lead away from a {@link State start state} to the end states.
@@ -34,10 +37,44 @@ public class Transitions extends TokenProcessor {
      */
     private List<State> endStates;
 
-    public Transitions(List<Token> tokens, List<State> endStates, TransitionGuard transitionGuard) {
-        super(tokens);
+    /**
+     * The matcher that has to match before a transition to another state can happen.
+     */
+    private OnStreamMatcher matcher;
+
+    /**
+     * Constructs transitions to the given states.
+     * 
+     * @param endStates
+     *            the states that can be reached by these transitions. Must not be null.
+     * @param transitionGuard
+     *            The guard that is called before a transition is executed. Must not be null.
+     */
+    public Transitions(List<State> endStates, TransitionGuard transitionGuard) {
+        super(mapToTokens(endStates));
         this.endStates = endStates;
         this.transitionGuard = transitionGuard;
+        this.matcher = new TokensMatcher(mapToTokens(endStates));
+    }
+
+    /**
+     * @param states
+     * @return Returns the tokens that belong to the states.
+     */
+    private static List<Token> mapToTokens(List<State> states) {
+        List<Token> tokens = new ArrayList<Token>();
+        for (State state : states) {
+            tokens.add(state.getToken());
+        }
+        return tokens;
+    }
+
+    /**
+     * 
+     * @return Returns the matcher that must be used to find the next state.
+     */
+    public OnStreamMatcher getMatcher() {
+        return matcher;
     }
 
     @Override

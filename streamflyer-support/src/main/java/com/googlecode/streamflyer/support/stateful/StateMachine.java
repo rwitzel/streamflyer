@@ -46,7 +46,7 @@ public class StateMachine implements MatchProcessor {
      */
     protected void changeStateTo(State state) {
         currentState = state;
-        delegatingMatcher.setDelegate(state.getMatcher());
+        delegatingMatcher.setDelegate(state.getTransitions().getMatcher());
         transitions = state.getTransitions();
     }
 
