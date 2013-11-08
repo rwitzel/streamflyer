@@ -16,6 +16,8 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  * Attention! The noMatches are not normalized. In the above mentioned example, the first noMatch could be the first 'x'
  * and the second noMatch could be the second 'x'. If you are familiar with XML: This is similar to text nodes that are
  * created by SAX parsers.
+ * <p>
+ * TODO more examples (the unit tests already provide them)
  * 
  * @author rwoo
  * 
