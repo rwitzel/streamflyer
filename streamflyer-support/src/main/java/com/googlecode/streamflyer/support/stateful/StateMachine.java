@@ -23,20 +23,27 @@ public class StateMachine implements MatchProcessor {
     private State currentState;
 
     /**
-     * The matcher that is used by the {@link RegexModifier}. By changing the delegate we can exchange the regex the
-     * modifier looks for.
-     */
-    private DelegatingMatcher delegatingMatcher;
-
-    /**
      * The transitions that starts from {@link #currentState}.
      */
     private Transitions transitions;
 
-    public StateMachine(State currentState, DelegatingMatcher delegatingMatcher) {
+    /**
+     * The matcher that is used by the {@link RegexModifier}. By changing the delegate we can exchange the regex the
+     * modifier looks for. The matcher looks for the tokens that belong to the end states of {@link #transitions}.
+     */
+    private DelegatingMatcher delegatingMatcher;
+
+    /**
+     * 
+     * @param initialState
+     *            the initial state for the state machine
+     * @param delegatingMatcher
+     *            See {@link #delegatingMatcher}.
+     */
+    public StateMachine(State initialState, DelegatingMatcher delegatingMatcher) {
         super();
         this.delegatingMatcher = delegatingMatcher;
-        changeStateTo(currentState);
+        changeStateTo(initialState);
     }
 
     /**
@@ -46,8 +53,8 @@ public class StateMachine implements MatchProcessor {
      */
     protected void changeStateTo(State state) {
         currentState = state;
-        delegatingMatcher.setDelegate(state.getTransitions().getMatcher());
         transitions = state.getTransitions();
+        delegatingMatcher.setDelegate(state.getTransitions().getMatcher());
     }
 
     @Override
