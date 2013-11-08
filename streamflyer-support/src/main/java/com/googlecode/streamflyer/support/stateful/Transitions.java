@@ -98,26 +98,32 @@ public class Transitions extends TokenProcessor {
     protected MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
-        // +++ find state that belongs to the token
+        // find the state that belongs to the token
         State endState = findStateByToken(endStates, token);
 
         if (endState == null) {
             throw new RuntimeException("never to happen if the class is used according to the class comment");
         }
 
-        // +++ process the token
+        // stop the transition?
         MatchProcessorResult stop = transitionGuard.stopTransition(endState, groupOffset, characterBuffer,
                 firstModifiableCharacterInBuffer, matchResult);
         if (stop != null) {
             return stop;
         }
 
+        // allow the state machine to access the new state
         newState = endState;
 
-        // delegate to the token-specific match processors
+        // process the token (by delegating to the token-specific match processors)
         return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 
+    /**
+     * 
+     * @return If the transition was successful (in terms of stream modification), this methods returns the state the
+     *         state machine should switch to. If the method is called, the state is reset to <code>null</code>.
+     */
     public State pollNewState() {
         try {
             return newState;
