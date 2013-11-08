@@ -22,11 +22,11 @@ public class TokenCollector extends TransitionGuard {
     }
 
     @Override
-    public MatchProcessorResult stopTransition(State nextState, int groupOffset, StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    public MatchProcessorResult stopTransition(State nextState, StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
 
         // log the found token
-        String foundToken = nextState.getToken().getName() + ":" + matchResult.group(groupOffset);
+        String foundToken = nextState.getToken().getName() + ":" + matchResult.group();
         foundTokens.add(foundToken);
 
         // don't stop the transition

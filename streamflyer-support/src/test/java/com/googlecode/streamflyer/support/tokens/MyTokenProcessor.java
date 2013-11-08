@@ -30,11 +30,11 @@ public class MyTokenProcessor extends TokenProcessor {
     }
 
     @Override
-    protected MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    protected MatchProcessorResult processToken(Token token, StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
 
         // +++ save the found token
-        String foundToken = token.getName() + ":" + matchResult.group(groupOffset);
+        String foundToken = token.getName() + ":" + matchResult.group();
         foundTokens.add(foundToken);
 
         // +++ process the token
@@ -49,12 +49,11 @@ public class MyTokenProcessor extends TokenProcessor {
         } else if (!insideSection) {
 
             // do nothing if not inside section!
-            return new DoNothingProcessor().process(characterBuffer, firstModifiableCharacterInBuffer,
-                    new MatchResultWithOffset(matchResult, groupOffset));
+            return new DoNothingProcessor().process(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
 
         }
 
         // delegate to the default token-specific match processors.
-        return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+        return super.processToken(token, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 }

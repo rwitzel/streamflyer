@@ -12,7 +12,7 @@ import com.googlecode.streamflyer.regex.MatchProcessorResult;
  * together with a {@link TokensMatcher}.
  * <p>
  * If you want to adjust the matching behaviour, please overwrite
- * {@link #processToken(Token, int, StringBuilder, int, MatchResult)} in subclasses.
+ * {@link #processToken(Token, StringBuilder, int, MatchResult)} in subclasses.
  * 
  * @author rwoo
  * 
@@ -43,9 +43,9 @@ public class TokenProcessor implements MatchProcessor {
 
             String matchedGroup = matchResult.group(groupOffset);
             if (matchedGroup != null) {
-                // this token is matched! -> process this token + return the
-                // result
-                return processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+                // this token is matched! -> process this token + return the result
+                return processToken(token, characterBuffer, firstModifiableCharacterInBuffer,
+                        new MatchResultWithOffset(matchResult, groupOffset));
             }
 
             groupOffset += groupsInToken + 1;
@@ -58,11 +58,10 @@ public class TokenProcessor implements MatchProcessor {
      * Processes the matched token using {@link Token#getMatchProcessor()}. The token can be found in the match result
      * at the given group offset.
      */
-    protected MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
+    protected MatchProcessorResult processToken(Token token, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
-        return token.getMatchProcessor().process(characterBuffer, firstModifiableCharacterInBuffer,
-                new MatchResultWithOffset(matchResult, groupOffset));
+        return token.getMatchProcessor().process(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 
 }

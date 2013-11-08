@@ -95,8 +95,8 @@ public class Transitions extends TokenProcessor {
     }
 
     @Override
-    protected MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    protected MatchProcessorResult processToken(Token token, StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
 
         // find the state that belongs to the token
         State endState = findStateByToken(endStates, token);
@@ -106,8 +106,8 @@ public class Transitions extends TokenProcessor {
         }
 
         // stop the transition?
-        MatchProcessorResult stop = transitionGuard.stopTransition(endState, groupOffset, characterBuffer,
-                firstModifiableCharacterInBuffer, matchResult);
+        MatchProcessorResult stop = transitionGuard.stopTransition(endState, characterBuffer, firstModifiableCharacterInBuffer,
+                matchResult);
         if (stop != null) {
             return stop;
         }
@@ -116,7 +116,7 @@ public class Transitions extends TokenProcessor {
         newState = endState;
 
         // process the token (by delegating to the token-specific match processors)
-        return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+        return super.processToken(token, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 
     /**
