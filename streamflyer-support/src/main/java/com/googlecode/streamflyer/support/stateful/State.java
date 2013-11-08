@@ -54,15 +54,14 @@ public class State {
     }
 
     /**
-     * If the constructed state is reached the stream then the given {@link MatchProcessor} modifies the stream.
+     * If the constructed state is reached then the given {@link MatchProcessor} modifies the stream.
      * 
      * @param stateName
      *            A unique name for the state.
      * @param regex
      *            In order to reach this state, this regular expression must be matched.
      * @param matchProcessor
-     *            If the constructed state is reached the stream then the given {@link MatchProcessor} modifies the
-     *            stream.
+     *            If the constructed state is reached then the given {@link MatchProcessor} modifies the stream.
      */
     public State(String stateName, String regex, MatchProcessor matchProcessor) {
         super();
