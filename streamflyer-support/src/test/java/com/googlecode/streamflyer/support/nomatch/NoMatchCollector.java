@@ -24,6 +24,7 @@ public class NoMatchCollector extends NoMatch {
         String noMatch = characterBuffer.substring(getStartPosition(), matchResult.start());
 
         noMatchInfos.add(noMatch + "[MATCH]");
+        // System.out.println(noMatchInfos.get(noMatchInfos.size() - 1)); // print info
 
         return super.processNoMatch(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
@@ -36,6 +37,7 @@ public class NoMatchCollector extends NoMatch {
                 firstModifiableCharacterInBuffer + mod.getNumberOfCharactersToSkip());
 
         noMatchInfos.add(noMatch + "[FETCH]");
+        // System.out.println(noMatchInfos.get(noMatchInfos.size() - 1)); // print info
 
         return super.processNoMatch(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit, mod, modifier);
     }

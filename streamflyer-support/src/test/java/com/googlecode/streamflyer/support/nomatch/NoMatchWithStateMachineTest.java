@@ -23,24 +23,25 @@ import com.googlecode.streamflyer.support.util.DelegatingMatcher;
 import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 
 /**
- * Tests {@link NoMatch} and the classes of the same package.
+ * Tests {@link NoMatch} and the classes of the same package together with a {@link StateMachine}.
  * 
  * @author rwoo
  * 
  */
-public class NoMatchTest {
+public class NoMatchWithStateMachineTest {
 
-    private State createState(String stateName, NoMatch pos) {
+    private State createState(String stateName, NoMatch noMatch) {
         // we don't need NoMatchAwareMatchProcessor for the initial state because the initial state is never reached
         return new State(stateName);
     }
 
     private State createState(String stateName, String regex, NoMatch pos) {
-        return new State(stateName, regex, new NoMatchAwareMatchProcessor(new DoNothingProcessor(), pos));
+        return new State(stateName, regex, new NoMatchAwareMatchProcessor(new DoNothingProcessor(), pos, false));
     }
 
     private State createState(String stateName, String regex, String replacement, NoMatch pos) {
-        return new State(stateName, regex, new NoMatchAwareMatchProcessor(new ReplacingProcessor(replacement), pos));
+        return new State(stateName, regex, new NoMatchAwareMatchProcessor(new ReplacingProcessor(replacement), pos,
+                false));
     }
 
     /**
@@ -51,19 +52,19 @@ public class NoMatchTest {
     @Test
     public void testNoMatches() throws Exception {
 
-        NoMatchCollector pos = new NoMatchCollector();
+        NoMatchCollector noMatch = new NoMatchCollector();
 
         List<String> foundTokens = new ArrayList<String>();
         TokenCollector tokenCollector = new TokenCollector(foundTokens);
-        NoMatchAwareTransitionGuard guard = new NoMatchAwareTransitionGuard(tokenCollector, pos);
+        NoMatchAwareTransitionGuard guard = new NoMatchAwareTransitionGuard(tokenCollector, noMatch);
 
         // +++ define the states
         // (remember: (1) title and item are optional + (2) a list of items is possible)
-        State state0 = createState("Start", pos); // the initial state
-        State state1 = createState("SectionStart", "<section class='abc'>", pos);
-        State state2 = createState("SectionTitle", "(<h1>)([^<>]*)(</h1>)", "$1TITLE_FOUND$3", pos);
-        State state3 = createState("ListItem", "(<li>)([^<>]*)(</li>)", "$1LIST_ITEM_FOUND$3", pos);
-        State state4 = createState("SectionEnd", "</section>", pos);
+        State state0 = createState("Start", noMatch); // the initial state
+        State state1 = createState("SectionStart", "<section class='abc'>", noMatch);
+        State state2 = createState("SectionTitle", "(<h1>)([^<>]*)(</h1>)", "$1TITLE_FOUND$3", noMatch);
+        State state3 = createState("ListItem", "(<li>)([^<>]*)(</li>)", "$1LIST_ITEM_FOUND$3", noMatch);
+        State state4 = createState("SectionEnd", "</section>", noMatch);
         state0.setTransitions(asList(state1), guard);
         state1.setTransitions(asList(state2, state3, state4), guard);
         state2.setTransitions(asList(state3, state4), guard);
@@ -77,7 +78,7 @@ public class NoMatchTest {
         // +++ create the modifier
         Modifier modifier = new RegexModifier(delegatingMatcher, stateMachine, 1, 2048);
 
-        modifier = new NoMatchAwareModifier(modifier, pos);
+        modifier = new NoMatchAwareModifier(modifier, noMatch);
 
         String input = "";
         input += "atext01 <section class='abc'>";
@@ -125,7 +126,7 @@ public class NoMatchTest {
         expectedNoMatchInfos += "htext08 <h1>title outside section</h1>";
         expectedNoMatchInfos += "itext09 <li>list item outside section</li>[FETCH]";
 
-        String foundNoMatchInfos = join(pos.getNoMatchInfos(), "");
+        String foundNoMatchInfos = join(noMatch.getNoMatchInfos(), "");
 
         // "[FETCH]" does not make a difference -> remove it
         assertEquals(expectedNoMatchInfos.replaceAll("[FETCH]", ""), foundNoMatchInfos.replaceAll("[FETCH]", ""));

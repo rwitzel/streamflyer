@@ -7,8 +7,8 @@ import com.googlecode.streamflyer.support.stateful.State;
 import com.googlecode.streamflyer.support.stateful.TransitionGuard;
 
 /**
- * This {@link TransitionGuard} delegates to another transition guard and processes a {@link NoMatch noMatch} if the
- * noMatch is not empty.
+ * This {@link TransitionGuard} processes a {@link NoMatch noMatch} if the noMatch is not empty, and then delegates to
+ * the original transition guard.
  * 
  * @author rwoo
  * 
@@ -35,13 +35,8 @@ public class NoMatchAwareTransitionGuard extends TransitionGuard {
             matchResult = noMatch.processNoMatch(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
         }
 
-        if (delegate != null) {
-            // delegate to the real guard
-            return delegate.stopTransition(nextState, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
-        } else {
-            // return the default answer ("don't stop")
-            return super.stopTransition(nextState, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
-        }
+        // delegate to the real guard
+        return delegate.stopTransition(nextState, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 
 }

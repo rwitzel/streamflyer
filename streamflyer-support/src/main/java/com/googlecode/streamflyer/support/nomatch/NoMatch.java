@@ -43,9 +43,9 @@ public class NoMatch {
     }
 
     /**
-     * Called by {@link NoMatchAwareTransitionGuard} before a match (when the noMatch is not empty). By default, we
-     * return the original match result but you are allowed to modify the stream. In the latter case you have to adjust
-     * the returned match result.
+     * Called by {@link NoMatchAwareTransitionGuard} or {@link NoMatchAwareMatchProcessor} before a match (when the
+     * noMatch is not empty). By default, we return the original match result but you are allowed to modify the stream.
+     * In the latter case you have to adjust the returned match result.
      * <p>
      * The end of the noMatch is given by {@link MatchResult#start()}.
      */
