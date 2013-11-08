@@ -17,7 +17,7 @@ import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 public class Token {
 
     /**
-     * A unique ID for the token.
+     * An ID for the token. The ID shall be unique among all tokens used with the {@link TokenProcessor}.
      */
     private String name;
 

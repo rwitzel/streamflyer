@@ -21,7 +21,7 @@ import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 public class State {
 
     /**
-     * The token is must matched to reach this state.
+     * The token that must be matched to reach this state.
      */
     private Token token;
 
@@ -36,7 +36,7 @@ public class State {
     private Transitions transitions;
 
     /**
-     * If the constructed state is reached the stream is {@link DoNothingProcessor not modified}.
+     * If this constructed state is reached, the stream is {@link DoNothingProcessor not modified}.
      * 
      * @param stateName
      *            A unique name for the state.

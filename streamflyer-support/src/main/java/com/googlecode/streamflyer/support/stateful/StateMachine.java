@@ -23,35 +23,45 @@ public class StateMachine implements MatchProcessor {
     private State currentState;
 
     /**
-     * The transition that starts from {@link #currentState}.
+     * The matcher that is used by the {@link RegexModifier}. By changing the delegate we can exchange the regex the
+     * modifier looks for.
      */
-    private Transitions transition;
-
     private DelegatingMatcher delegatingMatcher;
+
+    /**
+     * The transitions that starts from {@link #currentState}.
+     */
+    private Transitions transitions;
 
     public StateMachine(State currentState, DelegatingMatcher delegatingMatcher) {
         super();
         this.delegatingMatcher = delegatingMatcher;
-        transitionTo(currentState);
+        changeStateTo(currentState);
     }
 
-    protected void transitionTo(State state) {
-        delegatingMatcher.setDelegate(state.getMatcher());
-        transition = state.getTransitions();
+    /**
+     * Changes the {@link #currentState} to the given state.
+     * 
+     * @param state
+     */
+    protected void changeStateTo(State state) {
         currentState = state;
+        delegatingMatcher.setDelegate(state.getMatcher());
+        transitions = state.getTransitions();
     }
 
     @Override
     public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
             MatchResult matchResult) {
 
-        MatchProcessorResult result = transition
-                .process(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+        // modify stream
+        MatchProcessorResult result = transitions.process(characterBuffer, firstModifiableCharacterInBuffer,
+                matchResult);
 
-        // look for another next state if the state has been changed
-        State nextState = transition.pollNewState();
-        if (nextState != currentState) {
-            transitionTo(nextState);
+        // change state if needed
+        State newState = transitions.pollNewState();
+        if (newState != currentState) {
+            changeStateTo(newState);
         }
 
         return result;
