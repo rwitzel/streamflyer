@@ -32,12 +32,9 @@ public class MyTokenProcessorTest {
 
         // +++ define the tokens we are looking for
         List<Token> tokenList = new ArrayList<Token>();
-        // we assume the whitespace is normalized so that we can use rather
-        // simple regular expressions
-        String regexPlainText = "[^<>]*";
         tokenList.add(new Token("SectionStart", "<section class='abc'>"));
-        tokenList.add(new Token("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3"));
-        tokenList.add(new Token("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3"));
+        tokenList.add(new Token("SectionTitle", "(<h1>)([^<>]*)(</h1>)", "$1TITLE_FOUND$3"));
+        tokenList.add(new Token("ListItem", "(<li>)([^<>]*)(</li>)", "$1LIST_ITEM_FOUND$3"));
         tokenList.add(new Token("SectionEnd", "</section>"));
         TokensMatcher tokensMatcher = new TokensMatcher(tokenList);
 

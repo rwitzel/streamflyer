@@ -18,18 +18,20 @@ import com.googlecode.streamflyer.support.util.EmbeddedFlagUtil;
 public class Token {
 
     /**
-     * An ID for the token. The ID shall be unique among all tokens used with the {@link TokenProcessor}.
+     * An ID for the token. The ID shall be unique among all tokens used with the {@link TokenProcessor}. Immutable.
      */
     private String name;
 
     /**
      * This regular expression describes how a token can be matched. Flags should be embedded via
-     * {@link EmbeddedFlagUtil}.
+     * {@link EmbeddedFlagUtil}. Immutable.
      */
     private String regex;
 
     /**
-     * The number of capturing groups that are contained in the {@link #regex}.
+     * The number of capturing groups that are contained in the {@link #regex}. Immutable.
+     * <p>
+     * Calculated from {@link #regex} and saved here to improve the performance of a {@link TokenProcessor}.
      */
     private int capturingGroupCount;
 

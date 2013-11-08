@@ -32,7 +32,7 @@ public class EmbeddedFlagUtil {
      * 
      * @param regex
      * @param flags
-     * @return Return the given regex enriched with an embedded flag expression that represents the given flags. If
+     * @return Returns the given regex enriched with an embedded flag expression that represents the given flags. If
      *         there is no flag given, the returned regex is equal to the given regex.
      * 
      */

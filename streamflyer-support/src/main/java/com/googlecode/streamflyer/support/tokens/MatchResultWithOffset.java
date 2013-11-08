@@ -3,9 +3,8 @@ package com.googlecode.streamflyer.support.tokens;
 import java.util.regex.MatchResult;
 
 /**
- * This {@link MatchResult} delegates to another match result but applies a
- * group offset,s i.e the delegate is used with a group number that is increased
- * by the given group offset.
+ * This {@link MatchResult} delegates to another match result but applies a group offset,s i.e the delegate is used with
+ * a group number that is increased by the given group offset.
  * 
  * @author rwoo
  * 
@@ -54,6 +53,7 @@ public class MatchResultWithOffset implements MatchResult {
 
     @Override
     public int groupCount() {
+        // not needed yet by TokenProcessors
         throw new UnsupportedOperationException("not implemented yet");
     }
 
