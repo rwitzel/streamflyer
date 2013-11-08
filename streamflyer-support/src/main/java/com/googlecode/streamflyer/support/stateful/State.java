@@ -68,11 +68,9 @@ public class State {
         this.token = new Token(stateName, regex, matchProcessor);
     }
 
-    public String getStateName() {
-        return token.getName();
-    }
-
     /**
+     * Convenience method.
+     * <p>
      * Sets {@link #transitions} as defined by the reachable states and the transition guard.
      * 
      * @param endStates

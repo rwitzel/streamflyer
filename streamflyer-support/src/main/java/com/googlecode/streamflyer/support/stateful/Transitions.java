@@ -58,6 +58,8 @@ public class Transitions extends TokenProcessor {
     }
 
     /**
+     * (Functional style. Waiting for Java 8.)
+     * 
      * @param states
      * @return Returns the tokens that belong to the states.
      */
@@ -67,6 +69,21 @@ public class Transitions extends TokenProcessor {
             tokens.add(state.getToken());
         }
         return tokens;
+    }
+
+    /**
+     * (Functional style. Waiting for Java 8.)
+     * 
+     * @param states
+     * @return Returns the state that belongs to the given token.
+     */
+    private static State findStateByToken(List<State> states, Token token) {
+        for (State state : states) {
+            if (state.getToken() == token) {
+                return state;
+            }
+        }
+        return null;
     }
 
     /**
@@ -81,26 +98,24 @@ public class Transitions extends TokenProcessor {
     protected MatchProcessorResult processToken(Token token, int groupOffset, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
-        // +++ process the token
-        for (State endState : endStates) {
+        // +++ find state that belongs to the token
+        State endState = findStateByToken(endStates, token);
 
-            if (endState.getStateName().equals(token.getName())) {
-
-                MatchProcessorResult stop = transitionGuard.stopTransition(endState, groupOffset, characterBuffer,
-                        firstModifiableCharacterInBuffer, matchResult);
-                if (stop != null) {
-                    return stop;
-                }
-
-                newState = endState;
-
-                // delegate to the token-specific match processors
-                return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer,
-                        matchResult);
-            }
+        if (endState == null) {
+            throw new RuntimeException("never to happen if the class is used according to the class comment");
         }
 
-        throw new RuntimeException("never to happen if the class is used according to the class comment");
+        // +++ process the token
+        MatchProcessorResult stop = transitionGuard.stopTransition(endState, groupOffset, characterBuffer,
+                firstModifiableCharacterInBuffer, matchResult);
+        if (stop != null) {
+            return stop;
+        }
+
+        newState = endState;
+
+        // delegate to the token-specific match processors
+        return super.processToken(token, groupOffset, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 
     public State pollNewState() {
