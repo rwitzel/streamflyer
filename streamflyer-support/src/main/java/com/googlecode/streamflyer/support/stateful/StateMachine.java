@@ -47,6 +47,13 @@ public class StateMachine implements MatchProcessor {
     }
 
     /**
+     * @return the currentState
+     */
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    /**
      * Changes the {@link #currentState} to the given state.
      * 
      * @param state
