@@ -30,8 +30,8 @@ import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.xml.XmlPrologRidiculouslyLongException;
 
 /**
- * Same semantics as {@link com.googlecode.streamflyer.xml.XmlVersionModifier}
- * but the implementation uses a {@link StatefulModifier}.
+ * Same semantics as {@link com.googlecode.streamflyer.xml.XmlVersionModifier} but the implementation uses a
+ * {@link StatefulModifier}.
  * 
  * @author rwoo
  * 
@@ -39,119 +39,107 @@ import com.googlecode.streamflyer.xml.XmlPrologRidiculouslyLongException;
  */
 public class XmlVersionModifier implements Modifier {
 
-	private StatefulModifier statefulModifier;
+    private StatefulModifier statefulModifier;
 
-	//
-	// constants
-	//
+    //
+    // constants
+    //
 
-	public final int INITIAL_NUMBER_OF_CHARACTERS = 4096;
+    public final int INITIAL_NUMBER_OF_CHARACTERS = 4096;
 
-	//
-	// injected properties
-	//
+    //
+    // injected properties
+    //
 
-	protected ModificationFactory factory;
+    protected ModificationFactory factory;
 
-	protected String xmlVersion;
+    protected String xmlVersion;
 
-	//
-	// constructors
-	//
+    //
+    // constructors
+    //
 
-	public XmlVersionModifier(String xmlVersion, int newNumberOfChars) {
+    public XmlVersionModifier(String xmlVersion, int newNumberOfChars) {
 
-		ZzzValidate.notNull(xmlVersion, "xmlVersion must not be null");
+        ZzzValidate.notNull(xmlVersion, "xmlVersion must not be null");
 
-		this.factory = new ModificationFactory(0, newNumberOfChars);
-		this.xmlVersion = xmlVersion;
+        this.factory = new ModificationFactory(0, newNumberOfChars);
+        this.xmlVersion = xmlVersion;
 
-		// (1) create the initial state: No input read yet.
-		OneTransitionState initialState = new OneTransitionState("initial") {
+        // (1) create the initial state: No input read yet.
+        OneTransitionState initialState = new OneTransitionState("initial") {
 
-			@Override
-			public AfterModification innerModify(StringBuilder characterBuffer,
-					int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+            @Override
+            public AfterModification innerModify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+                    boolean endOfStreamHit) {
 
-				// you never know how many whitespace characters are in the
-				// prolog
-				return factory.modifyAgainImmediately(
-						INITIAL_NUMBER_OF_CHARACTERS,
-						firstModifiableCharacterInBuffer);
-			}
-		};
+                // you never know how many whitespace characters are in the
+                // prolog
+                return factory.modifyAgainImmediately(INITIAL_NUMBER_OF_CHARACTERS, firstModifiableCharacterInBuffer);
+            }
+        };
 
-		// (2) create version modifying state: The modifier has requested to
-		// read the XML prolog. The version of prolog is modified or a prolog is
-		// added if the prolog is missing.
-		OneTransitionState versionModifyingState = new OneTransitionState(
-				"versionModifying") {
+        // (2) create version modifying state: The modifier has requested to
+        // read the XML prolog. The version of prolog is modified or a prolog is
+        // added if the prolog is missing.
+        OneTransitionState versionModifyingState = new OneTransitionState("versionModifying") {
 
-			@Override
-			public AfterModification innerModify(StringBuilder characterBuffer,
-					int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+            @Override
+            public AfterModification innerModify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+                    boolean endOfStreamHit) {
 
-				// (Should we do aware of BOMs here? No. I consider it the
-				// responsibility of the caller to provide characters without
-				// BOM.)
+                // (Should we do aware of BOMs here? No. I consider it the
+                // responsibility of the caller to provide characters without
+                // BOM.)
 
-				Matcher matcher = Pattern
-						.compile(
-								"<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*")
-						.matcher(characterBuffer);
-				if (matcher.matches()) {
+                Matcher matcher = Pattern.compile("<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*").matcher(
+                        characterBuffer);
+                if (matcher.matches()) {
 
-					// replace version in prolog
-					characterBuffer.replace(matcher.start(1), matcher.end(1),
-							XmlVersionModifier.this.xmlVersion);
-				} else {
+                    // replace version in prolog
+                    characterBuffer.replace(matcher.start(1), matcher.end(1), XmlVersionModifier.this.xmlVersion);
+                } else {
 
-					// is there a prolog that is too long?
-					Matcher matcher2 = Pattern.compile("<\\?xml.*").matcher(
-							characterBuffer);
-					if (matcher2.matches()) {
-						// this is not normal at all -> throw exception
-						throw new XmlPrologRidiculouslyLongException(
-								characterBuffer.toString());
-					}
+                    // is there a prolog that is too long?
+                    Matcher matcher2 = Pattern.compile("<\\?xml.*").matcher(characterBuffer);
+                    if (matcher2.matches()) {
+                        // this is not normal at all -> throw exception
+                        throw new XmlPrologRidiculouslyLongException(characterBuffer.toString());
+                    }
 
-					// insert prolog
-					characterBuffer.insert(0, "<?xml version='"
-							+ XmlVersionModifier.this.xmlVersion + "'>");
-				}
+                    // insert prolog
+                    characterBuffer.insert(0, "<?xml version='" + XmlVersionModifier.this.xmlVersion + "'>");
+                }
 
-				return factory.skipEntireBuffer(characterBuffer,
-						firstModifiableCharacterInBuffer, endOfStreamHit);
-			}
-		};
+                return factory.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
+            }
+        };
 
-		// (3) create idle state: The modifier has read the XML prolog, and has
-		// modified it if necessary. Nothing more to do for the modifier.
-		State idleState = new IdleModifierState(factory);
+        // (3) create idle state: The modifier has read the XML prolog, and has
+        // modified it if necessary. Nothing more to do for the modifier.
+        State idleState = new IdleModifierState(factory);
 
-		// (4) link the states: The state transitions are from "initial" to
-		// "version modifying" to "idle"
-		initialState.setNextState(versionModifyingState);
-		versionModifyingState.setNextState(idleState);
+        // (4) link the states: The state transitions are from "initial" to
+        // "version modifying" to "idle"
+        initialState.setNextState(versionModifyingState);
+        versionModifyingState.setNextState(idleState);
 
-		// 5) create the stateful modifier
-		this.statefulModifier = new StatefulModifier(initialState);
-	}
+        // 5) create the stateful modifier
+        this.statefulModifier = new StatefulModifier(initialState);
+    }
 
-	//
-	// override Modifier.*
-	//
+    //
+    // override Modifier.*
+    //
 
-	/**
-	 * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-	 *      int, boolean)
-	 */
-	@Override
-	public AfterModification modify(StringBuilder characterBuffer,
-			int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    /**
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
+     */
+    @Override
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-		// delegate
-		return statefulModifier.modify(characterBuffer,
-				firstModifiableCharacterInBuffer, endOfStreamHit);
-	}
+        // delegate
+        return statefulModifier.modify(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
+    }
 }

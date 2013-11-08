@@ -21,11 +21,9 @@ import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
- * This modifier has a {@link #currentState state}. The actual work of the
- * modifier is delegated to this state object. The state object processes the
- * buffer content, then it {@link State#modify(StringBuilder, int, boolean)
- * returns} the new state and the {@link AfterModification message} to the
- * modifying reader or writer.
+ * This modifier has a {@link #currentState state}. The actual work of the modifier is delegated to this state object.
+ * The state object processes the buffer content, then it {@link State#modify(StringBuilder, int, boolean) returns} the
+ * new state and the {@link AfterModification message} to the modifying reader or writer.
  * 
  * @author rwoo
  * @since 14.09.2011
@@ -47,16 +45,15 @@ public class StatefulModifier implements Modifier {
     }
 
     /**
-     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
         // delegate the work to the state object
-        StatefulAfterModification result = currentState.modify(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        StatefulAfterModification result = currentState.modify(characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit);
 
         // update the state
         currentState = result.getNextState();

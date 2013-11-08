@@ -24,16 +24,13 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.regex.RegexModifier;
 
 /**
- * This modifier deletes all data from the character stream that is not placed
- * between the given start and end tag. This is a bit similar to Perl's or
- * Ruby's range operator.
+ * This modifier deletes all data from the character stream that is not placed between the given start and end tag. This
+ * is a bit similar to Perl's or Ruby's range operator.
  * <p>
- * Additionally, you can choose whether the start or end tags shall be removed
- * from the input as well.
+ * Additionally, you can choose whether the start or end tags shall be removed from the input as well.
  * <p>
- * EXAMPLES: These examples show the impact of the parameters
- * <i>includeStart</i>, <i>includeEnd</i>, and <i>initiallyBeforeEnd</i>.
- * <code><pre>
+ * EXAMPLES: These examples show the impact of the parameters <i>includeStart</i>, <i>includeEnd</i>, and
+ * <i>initiallyBeforeEnd</i>. <code><pre>
                   start end   keep  starts original                    modified 
 task              tag   tag   tags? open?  input                       input
 ---------------   ----- ----- ----- ------ --------------------------- --------------
@@ -57,26 +54,24 @@ public class RangeFilterModifier implements Modifier {
     private StatefulModifier statefulModifier;
 
     /**
-     * The match processor of both given modifiers are replaced with another
-     * one. So you don't have to care about the match processor you have used on
+     * The match processor of both given modifiers are replaced with another one. So you don't have to care about the
+     * match processor you have used on
      * 
      * @param startModifier
      *            Must not be <code>null</code>.
      * @param endModifier
      *            Must not be <code>null</code>.
      * @param includeStart
-     *            True if the start tag shall not be deleted from the input.
-     *            False if the start tag shall be deleted from the input.
+     *            True if the start tag shall not be deleted from the input. False if the start tag shall be deleted
+     *            from the input.
      * @param includeEnd
-     *            True if the end tag shall not be deleted from the input. False
-     *            if the end tag shall be deleted from the input.
+     *            True if the end tag shall not be deleted from the input. False if the end tag shall be deleted from
+     *            the input.
      * @param initiallyBeforeEnd
-     *            True if the given input shall be parsed assuming the input is
-     *            prefixed with an end tag. False if the given input shall be
-     *            parsed assuming the input is prefixed with a start tag.
+     *            True if the given input shall be parsed assuming the input is prefixed with an end tag. False if the
+     *            given input shall be parsed assuming the input is prefixed with a start tag.
      */
-    public RangeFilterModifier(RegexModifier startModifier,
-            RegexModifier endModifier, boolean includeStart,
+    public RangeFilterModifier(RegexModifier startModifier, RegexModifier endModifier, boolean includeStart,
             boolean includeEnd, boolean initiallyBeforeEnd) {
 
         ZzzValidate.notNull(startModifier, "startModifier must not be null");
@@ -85,13 +80,11 @@ public class RangeFilterModifier implements Modifier {
         // *** create two state that will be used by the stateful modifier
 
         // create the state for the end tag
-        RangeFilterState beforeEndState = new RangeFilterState(endModifier,
-                false, !includeEnd);
+        RangeFilterState beforeEndState = new RangeFilterState(endModifier, false, !includeEnd);
         endModifier.setMatchProcessor(beforeEndState);
 
         // create the state for the start tag
-        RangeFilterState beforeStartState = new RangeFilterState(startModifier,
-                true, !includeStart);
+        RangeFilterState beforeStartState = new RangeFilterState(startModifier, true, !includeStart);
         startModifier.setMatchProcessor(beforeStartState);
 
         // *** link the states
@@ -110,15 +103,13 @@ public class RangeFilterModifier implements Modifier {
     }
 
     /**
-     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
         // delegate
-        return statefulModifier.modify(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        return statefulModifier.modify(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
     }
 }

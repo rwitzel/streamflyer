@@ -43,8 +43,8 @@ import com.googlecode.streamflyer.util.StringUtils;
  */
 public class IdleModifierStatePerformanceTest extends TestCase {
 
-	/**
-	 * <code><pre>
+    /**
+     * <code><pre>
 +++ Measurements +++
 Time spent by ModifyingReader: Found seconds 0.424 shall not exceed expected maximum of seconds 1.1 but did exceed
 Overhead   by ModifyingReader: Found seconds 0.194 shall not exceed expected maximum of seconds 0.85 but did exceed
@@ -56,105 +56,94 @@ takes roughly
  - 0.4 seconds using a modifying reader (0.2 seconds overhead), 
  - 1.2 seconds using a modifying writer (0.4 seconds overhead).
 </pre></code>
-	 */
-	public void testOverheadOfDoingNothing() throws Exception {
+     */
+    public void testOverheadOfDoingNothing() throws Exception {
 
-		int size = 10 * 1000 * 1000; // (10M characters, i.e. 20MB)
-		String input = StringUtils.repeat(" ", size);
+        int size = 10 * 1000 * 1000; // (10M characters, i.e. 20MB)
+        String input = StringUtils.repeat(" ", size);
 
-		assertOverheadByReader(input, 0.5, 0.2);
-		assertOverheadByWriter(input, 1.2, 0.4);
-	}
+        assertOverheadByReader(input, 0.5, 0.2);
+        assertOverheadByWriter(input, 1.2, 0.4);
+    }
 
-	private void assertOverheadByReader(String input,
-			double expectedMaxSpentTime, double expectedMaxOverhead)
-			throws Exception {
+    private void assertOverheadByReader(String input, double expectedMaxSpentTime, double expectedMaxOverhead)
+            throws Exception {
 
-		// create reader
-		Reader reader = new ModifyingReader(new BufferedReader(
-				new StringReader(input)), createIdleModifier());
+        // create reader
+        Reader reader = new ModifyingReader(new BufferedReader(new StringReader(input)), createIdleModifier());
 
-		// read the stream into an output stream
-		long start = System.currentTimeMillis();
-		IOUtils.toString(reader);
-		long end = System.currentTimeMillis();
+        // read the stream into an output stream
+        long start = System.currentTimeMillis();
+        IOUtils.toString(reader);
+        long end = System.currentTimeMillis();
 
-		Reader reader2 = new BufferedReader(new StringReader(input));
+        Reader reader2 = new BufferedReader(new StringReader(input));
 
-		// read the stream into an output stream
-		long start2 = System.currentTimeMillis();
-		IOUtils.toString(reader2);
-		long end2 = System.currentTimeMillis();
+        // read the stream into an output stream
+        long start2 = System.currentTimeMillis();
+        IOUtils.toString(reader2);
+        long end2 = System.currentTimeMillis();
 
-		long overhead = (end - start) - (end2 - start2);
+        long overhead = (end - start) - (end2 - start2);
 
-		assertTime(end - start, expectedMaxSpentTime,
-				"Time spent by ModifyingReader:");
-		assertTime(overhead, expectedMaxOverhead,
-				"Overhead   by ModifyingReader:");
-	}
+        assertTime(end - start, expectedMaxSpentTime, "Time spent by ModifyingReader:");
+        assertTime(overhead, expectedMaxOverhead, "Overhead   by ModifyingReader:");
+    }
 
-	private void assertOverheadByWriter(String input,
-			double expectedMaxSpentTime, double expectedMaxOverhead)
-			throws Exception {
+    private void assertOverheadByWriter(String input, double expectedMaxSpentTime, double expectedMaxOverhead)
+            throws Exception {
 
-		// setup: create modifier and writer
-		Writer originalWriter = new StringWriter();
-		ModifyingWriter writer = new ModifyingWriter(originalWriter,
-				createIdleModifier());
+        // setup: create modifier and writer
+        Writer originalWriter = new StringWriter();
+        ModifyingWriter writer = new ModifyingWriter(originalWriter, createIdleModifier());
 
-		// write the stream to an output stream
-		long start = System.currentTimeMillis();
-		for (int index = 0; index < input.length(); index++) {
-			writer.append(input.charAt(index));
-		}
-		writer.flush();
-		writer.close();
-		long end = System.currentTimeMillis();
+        // write the stream to an output stream
+        long start = System.currentTimeMillis();
+        for (int index = 0; index < input.length(); index++) {
+            writer.append(input.charAt(index));
+        }
+        writer.flush();
+        writer.close();
+        long end = System.currentTimeMillis();
 
-		originalWriter.toString();
+        originalWriter.toString();
 
-		Writer writer2 = new StringWriter();
+        Writer writer2 = new StringWriter();
 
-		// read the stream into an output stream
-		long start2 = System.currentTimeMillis();
-		for (int index = 0; index < input.length(); index++) {
-			writer2.append(input.charAt(index));
-		}
-		writer2.flush();
-		writer2.close();
-		long end2 = System.currentTimeMillis();
+        // read the stream into an output stream
+        long start2 = System.currentTimeMillis();
+        for (int index = 0; index < input.length(); index++) {
+            writer2.append(input.charAt(index));
+        }
+        writer2.flush();
+        writer2.close();
+        long end2 = System.currentTimeMillis();
 
-		long overhead = (end - start) - (end2 - start2);
+        long overhead = (end - start) - (end2 - start2);
 
-		assertTime(end - start, expectedMaxSpentTime,
-				"Time spent by ModifyingWriter:");
-		assertTime(overhead, expectedMaxOverhead,
-				"Overhead   by ModifyingWriter:");
-	}
+        assertTime(end - start, expectedMaxSpentTime, "Time spent by ModifyingWriter:");
+        assertTime(overhead, expectedMaxOverhead, "Overhead   by ModifyingWriter:");
+    }
 
-	private Modifier createIdleModifier() {
-		// create the state for the modifier (there is only a single state)
-		// TODO refactor magic number
-		State state = new IdleModifierState(new ModificationFactory(0, 500));
-		return new StatefulModifier(state);
-	}
+    private Modifier createIdleModifier() {
+        // create the state for the modifier (there is only a single state)
+        // TODO refactor magic number
+        State state = new IdleModifierState(new ModificationFactory(0, 500));
+        return new StatefulModifier(state);
+    }
 
-	/**
-	 * @param duration
-	 *            in milliseconds
-	 * @param expectedMaxSeconds
-	 * @param callerDescription
-	 * @throws Exception
-	 */
-	private void assertTime(long duration, double expectedMaxSeconds,
-			String callerDescription) throws Exception {
-		double foundSeconds = duration / 1000.0;
-		String message = String.format(callerDescription
-				+ " Found seconds %s shall not exceed"
-				+ " expected maximum of seconds %s but did exceed",
-				foundSeconds, expectedMaxSeconds);
-		// System.out.println(message);
-		assertTrue(message, foundSeconds <= expectedMaxSeconds);
-	}
+    /**
+     * @param duration
+     *            in milliseconds
+     * @param expectedMaxSeconds
+     * @param callerDescription
+     * @throws Exception
+     */
+    private void assertTime(long duration, double expectedMaxSeconds, String callerDescription) throws Exception {
+        double foundSeconds = duration / 1000.0;
+        String message = String.format(callerDescription + " Found seconds %s shall not exceed"
+                + " expected maximum of seconds %s but did exceed", foundSeconds, expectedMaxSeconds);
+        // System.out.println(message);
+        assertTrue(message, foundSeconds <= expectedMaxSeconds);
+    }
 }

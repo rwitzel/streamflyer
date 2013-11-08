@@ -26,13 +26,12 @@ import com.googlecode.streamflyer.regex.RegexModifier;
 /**
  * An internal class used by {@link RangeFilterModifier}.
  * <p>
- * This state has exactly one other succeeding state. That state will be the
- * next state if the token this state refers to is found.
+ * This state has exactly one other succeeding state. That state will be the next state if the token this state refers
+ * to is found.
  * <p>
  * Additionally, you can define
  * <ul>
- * <li>whether the characters that appear before the found token shall be
- * deleted from the stream,
+ * <li>whether the characters that appear before the found token shall be deleted from the stream,
  * <li>whether the token itself shall be deleted from the stream.
  * 
  * @author rwoo
@@ -46,19 +45,17 @@ public class RangeFilterState extends RegexTransitionState {
     private State nextState;
 
     /**
-     * True if the characters before the token the state refers to shall be
-     * deleted from the character buffer.
+     * True if the characters before the token the state refers to shall be deleted from the character buffer.
      */
     private boolean deleteCharactersBeforeToken;
 
     /**
-     * True if the the token the state refers to shall be deleted from the
-     * character buffer.
+     * True if the the token the state refers to shall be deleted from the character buffer.
      */
     private boolean deleteToken;
 
-    public RangeFilterState(RegexModifier nextTokensRegexModifier,
-            boolean deleteCharactersBeforeToken, boolean deleteToken) {
+    public RangeFilterState(RegexModifier nextTokensRegexModifier, boolean deleteCharactersBeforeToken,
+            boolean deleteToken) {
         super(nextTokensRegexModifier);
 
         this.deleteCharactersBeforeToken = deleteCharactersBeforeToken;
@@ -70,8 +67,8 @@ public class RangeFilterState extends RegexTransitionState {
      *      int, java.util.regex.MatchResult)
      */
     @Override
-    protected State findState(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    protected State findState(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
         return nextState;
     }
 
@@ -80,23 +77,20 @@ public class RangeFilterState extends RegexTransitionState {
      *      int, java.util.regex.MatchResult)
      */
     @Override
-    protected int modifyBuffer(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    protected int modifyBuffer(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
 
         int shiftMatchResult = 0;
 
         // delete characters before token
         if (deleteCharactersBeforeToken) {
-            characterBuffer.delete(firstModifiableCharacterInBuffer,
-                    matchResult.start());
-            shiftMatchResult += matchResult.start()
-                    - firstModifiableCharacterInBuffer;
+            characterBuffer.delete(firstModifiableCharacterInBuffer, matchResult.start());
+            shiftMatchResult += matchResult.start() - firstModifiableCharacterInBuffer;
         }
 
         // delete token
         if (deleteToken) {
-            characterBuffer.delete(matchResult.start() - shiftMatchResult,
-                    matchResult.end() - shiftMatchResult);
+            characterBuffer.delete(matchResult.start() - shiftMatchResult, matchResult.end() - shiftMatchResult);
             shiftMatchResult += matchResult.end() - matchResult.start();
         }
 
@@ -108,24 +102,18 @@ public class RangeFilterState extends RegexTransitionState {
      *      int, boolean, com.googlecode.streamflyer.core.AfterModification)
      */
     @Override
-    protected AfterModification processWithoutMatch(
-            StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit,
-            AfterModification afterModification) {
+    protected AfterModification processWithoutMatch(StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, boolean endOfStreamHit, AfterModification afterModification) {
 
-        if (deleteCharactersBeforeToken
-                && afterModification.getNumberOfCharactersToSkip() > 0) {
+        if (deleteCharactersBeforeToken && afterModification.getNumberOfCharactersToSkip() > 0) {
 
             // delete the characters to skip
-            characterBuffer.delete(
-                    firstModifiableCharacterInBuffer,
-                    firstModifiableCharacterInBuffer
-                            + afterModification.getNumberOfCharactersToSkip());
+            characterBuffer.delete(firstModifiableCharacterInBuffer, firstModifiableCharacterInBuffer
+                    + afterModification.getNumberOfCharactersToSkip());
 
             // modify again immediately (??? TODO please review:
             // MinimumLengthOfLookBehind should be recalculated? and so on...
-            return new AfterModification(0, true,
-                    firstModifiableCharacterInBuffer,
+            return new AfterModification(0, true, firstModifiableCharacterInBuffer,
                     afterModification.getNewNumberOfChars());
         } else {
             return afterModification;

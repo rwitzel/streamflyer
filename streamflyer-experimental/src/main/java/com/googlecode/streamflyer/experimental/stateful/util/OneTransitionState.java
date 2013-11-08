@@ -47,20 +47,18 @@ public abstract class OneTransitionState implements State {
     }
 
     /**
-     * @see com.googlecode.streamflyer.experimental.stateful.State#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.experimental.stateful.State#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public StatefulAfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public StatefulAfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        return new StatefulAfterModification(innerModify(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit), nextState);
+        return new StatefulAfterModification(innerModify(characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit), nextState);
     }
 
-    public abstract AfterModification innerModify(
-            StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit);
+    public abstract AfterModification innerModify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit);
 
     //
     // setter

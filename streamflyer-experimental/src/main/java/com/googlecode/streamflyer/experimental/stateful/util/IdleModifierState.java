@@ -22,8 +22,7 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**
- * This state does not modify the character stream and does not switch to
- * another state.
+ * This state does not modify the character stream and does not switch to another state.
  * 
  * @author rwoo
  * 
@@ -33,7 +32,6 @@ public class IdleModifierState implements State {
 
     private ModificationFactory factory;
 
-
     public IdleModifierState(ModificationFactory factory) {
         super();
 
@@ -42,17 +40,14 @@ public class IdleModifierState implements State {
         this.factory = factory;
     }
 
-
     /**
-     * @see com.googlecode.streamflyer.experimental.stateful.State#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.experimental.stateful.State#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public StatefulAfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public StatefulAfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        return new StatefulAfterModification(factory.skipEntireBuffer(
-                characterBuffer, firstModifiableCharacterInBuffer,
-                endOfStreamHit), this);
+        return new StatefulAfterModification(factory.skipEntireBuffer(characterBuffer,
+                firstModifiableCharacterInBuffer, endOfStreamHit), this);
     }
 }

@@ -46,20 +46,16 @@ public class RangeFilterModifierTest extends TestCase {
 
     public void testRangeFiltered_0_examplesFromJavadoc() throws Exception {
         // extract text of comments
-        assertRangeFilter("my <% comment %> text", " comment ", "<%", "%>",
-                false, false, false);
+        assertRangeFilter("my <% comment %> text", " comment ", "<%", "%>", false, false, false);
 
         // extract comment tags
-        assertRangeFilter("my <% comment %> text", "<% comment %>", "<%", "%>",
-                true, true, false);
+        assertRangeFilter("my <% comment %> text", "<% comment %>", "<%", "%>", true, true, false);
 
         // strip comments
-        assertRangeFilter("my <% comment %> text", "my  text", "%>", "<%",
-                false, false, true);
+        assertRangeFilter("my <% comment %> text", "my  text", "%>", "<%", false, false, true);
 
         // clear comments
-        assertRangeFilter("my <% comment %> text", "my <%%> text", "%>", "<%",
-                true, true, true);
+        assertRangeFilter("my <% comment %> text", "my <%%> text", "%>", "<%", true, true, true);
     }
 
     public void testRangeFiltered_1_initiallyOff() throws Exception {
@@ -88,15 +84,11 @@ public class RangeFilterModifierTest extends TestCase {
         assertRangeFilter("aaXbYcXdYee", "aaXbd", "X", "Y", false, false, true);
     }
 
-    private void assertRangeFilter(String input, String expectedOutput,
-            String startTag, String endTag, boolean includeStart,
-            boolean includeEnd, boolean initiallyOn) throws Exception {
+    private void assertRangeFilter(String input, String expectedOutput, String startTag, String endTag,
+            boolean includeStart, boolean includeEnd, boolean initiallyOn) throws Exception {
 
-        assertOutputByReader(
-                input,
-                expectedOutput,
-                createModifier(startTag, endTag, includeStart, includeEnd,
-                        initiallyOn));
+        assertOutputByReader(input, expectedOutput,
+                createModifier(startTag, endTag, includeStart, includeEnd, initiallyOn));
     }
 
     private RegexModifier createRegexModifier(String regex) {
@@ -108,33 +100,28 @@ public class RangeFilterModifierTest extends TestCase {
         return new RegexModifier(onStreamMatcher, new MatchProcessor() {
 
             @Override
-            public MatchProcessorResult process(StringBuilder characterBuffer,
-                    int firstModifiableCharacterInBuffer,
+            public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
                     MatchResult matchResult) {
-                throw new UnsupportedOperationException(
-                        "this match processor must be replaced with another one");
+                throw new UnsupportedOperationException("this match processor must be replaced with another one");
             }
         }, 12, 345);
     }
 
-    private RangeFilterModifier createModifier(String startTag, String endTag,
-            boolean includeStart, boolean includeEnd, boolean initiallyOn) {
+    private RangeFilterModifier createModifier(String startTag, String endTag, boolean includeStart,
+            boolean includeEnd, boolean initiallyOn) {
 
         RegexModifier startModifier = createRegexModifier(startTag);
         RegexModifier endModifier = createRegexModifier(endTag);
-        RangeFilterModifier rangeFilterModifier = new RangeFilterModifier(
-                startModifier, endModifier, includeStart, includeEnd,
-                initiallyOn);
+        RangeFilterModifier rangeFilterModifier = new RangeFilterModifier(startModifier, endModifier, includeStart,
+                includeEnd, initiallyOn);
 
         return rangeFilterModifier;
     }
 
-    private void assertOutputByReader(String input, String expectedOutput,
-            Modifier modifier) throws Exception {
+    private void assertOutputByReader(String input, String expectedOutput, Modifier modifier) throws Exception {
 
         // create reader
-        Reader reader = new ModifyingReader(new BufferedReader(
-                new StringReader(input)), modifier);
+        Reader reader = new ModifyingReader(new BufferedReader(new StringReader(input)), modifier);
 
         // read the stream into an output stream
         String foundOutput = IOUtils.toString(reader);

@@ -25,16 +25,14 @@ import com.googlecode.streamflyer.core.Modifier;
  * 
  * @since 14.09.2011
  */
-public class XmlVersionModifierTest extends
-		com.googlecode.streamflyer.xml.XmlVersionModifierTest {
+public class XmlVersionModifierTest extends com.googlecode.streamflyer.xml.XmlVersionModifierTest {
 
-	/**
-	 * @see com.googlecode.streamflyer.xml.XmlVersionModifierTest#createModifier(java.lang.String,
-	 *      int)
-	 */
-	@Override
-	protected Modifier createModifier(String newXmlVersion, int newNumberOfChars) {
-		return new XmlVersionModifier(newXmlVersion, newNumberOfChars);
-	}
+    /**
+     * @see com.googlecode.streamflyer.xml.XmlVersionModifierTest#createModifier(java.lang.String, int)
+     */
+    @Override
+    protected Modifier createModifier(String newXmlVersion, int newNumberOfChars) {
+        return new XmlVersionModifier(newXmlVersion, newNumberOfChars);
+    }
 
 }

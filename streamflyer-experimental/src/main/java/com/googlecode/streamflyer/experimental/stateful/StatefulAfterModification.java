@@ -20,8 +20,8 @@ import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
- * The return value of {@link State#modify(StringBuilder, int, boolean)} which
- * contains an {@link AfterModification} and a {@link State}.
+ * The return value of {@link State#modify(StringBuilder, int, boolean)} which contains an {@link AfterModification} and
+ * a {@link State}.
  * 
  * @author rwoo
  * @since 14.09.2011
@@ -42,13 +42,11 @@ public class StatefulAfterModification {
      * @param afterModification
      * @param nextState
      */
-    public StatefulAfterModification(AfterModification afterModification,
-            State nextState) {
+    public StatefulAfterModification(AfterModification afterModification, State nextState) {
         super();
 
         ZzzValidate.notNull(nextState, "nextState must not be null");
-        ZzzValidate.notNull(afterModification,
-                "afterModification must not be null");
+        ZzzValidate.notNull(afterModification, "afterModification must not be null");
 
         this.afterModification = afterModification;
         this.nextState = nextState;
