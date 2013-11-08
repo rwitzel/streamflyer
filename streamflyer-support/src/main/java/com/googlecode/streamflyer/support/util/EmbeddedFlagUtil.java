@@ -40,14 +40,14 @@ public class EmbeddedFlagUtil {
         if (flags == 0) {
             return regex;
         } else {
-            return "(?" + mapFlagsToEmbeddedFlags(regex, flags) + ":" + regex + ")";
+            return "(?" + mapFlagsToEmbeddedFlags(flags) + ":" + regex + ")";
         }
     }
 
     /**
      * See {@link #embedFlags(String, int)}.
      */
-    protected String mapFlagsToEmbeddedFlags(String regex, int flags) {
+    protected String mapFlagsToEmbeddedFlags(int flags) {
         String flagsAsString = "";
         if ((flags & Pattern.CASE_INSENSITIVE) != 0) {
             flagsAsString += "i";
