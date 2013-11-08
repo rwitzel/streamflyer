@@ -109,7 +109,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "State [stateName=" + token.getName() + ", token=" + token + "]";
+        return "State [token=" + token + ", transitions=" + transitions + "]";
     }
 
 }
