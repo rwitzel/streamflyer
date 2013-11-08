@@ -10,7 +10,7 @@ import com.googlecode.streamflyer.support.util.DoNothingProcessor;
 /**
  * A state of the match process. The state is reached if the corresponding {@link #getToken() token} is matched.
  * <p>
- * The state transitions are given by {@link #transitionsTo(List, TransitionGuard)}.
+ * The state transitions can be set via {@link #setTransitions(List, TransitionGuard)}.
  * 
  * @author rwoo
  * 
@@ -74,17 +74,25 @@ public class State {
     }
 
     /**
-     * Defines which transitions are possible.
+     * Sets {@link #transitions} as defined by the reachable states and the transition guard.
      * 
      * @param endStates
      *            the states that can be reached from the this state.
      * @param transitionGuard
      *            this guard can stop the transition or add additional logic to the transition.
      */
-    public void transitionsTo(List<State> endStates, TransitionGuard transitionGuard) {
+    public void setTransitions(List<State> endStates, TransitionGuard transitionGuard) {
+        setTransitions(new Transitions(endStates, transitionGuard));
+    }
 
-        // create the token processor
-        transitions = new Transitions(endStates, transitionGuard);
+    /**
+     * Sets {@link #transitions}.
+     * 
+     * @param transitions
+     *            the transitions to set.
+     */
+    public void setTransitions(Transitions transitions) {
+        this.transitions = transitions;
     }
 
     /**

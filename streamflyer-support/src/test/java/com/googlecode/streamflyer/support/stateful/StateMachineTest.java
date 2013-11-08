@@ -42,10 +42,10 @@ public class StateMachineTest {
         State state2 = new State("SectionTitle", "(<h1>)(" + regexPlainText + ")(</h1>)", "$1TITLE_FOUND$3");
         State state3 = new State("ListItem", "(<li>)(" + regexPlainText + ")(</li>)", "$1LIST_ITEM_FOUND$3");
         State state4 = new State("SectionEnd", "</section>");
-        state1.transitionsTo(asList(state2, state3, state4), tokenCollector);
-        state2.transitionsTo(asList(state3, state4), tokenCollector);
-        state3.transitionsTo(asList(state3, state4), tokenCollector);
-        state4.transitionsTo(asList(state1), tokenCollector);
+        state1.setTransitions(asList(state2, state3, state4), tokenCollector);
+        state2.setTransitions(asList(state3, state4), tokenCollector);
+        state3.setTransitions(asList(state3, state4), tokenCollector);
+        state4.setTransitions(asList(state1), tokenCollector);
 
         // +++ create a processor that stores the found states and replaces some text
         DelegatingMatcher delegatingMatcher = new DelegatingMatcher();
