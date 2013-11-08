@@ -21,7 +21,7 @@ public class DoNothingProcessor implements MatchProcessor {
         int end = matchResult.end();
 
         // if the empty string is matched, then we increase the position
-        // to continue from to avoid endless loops
+        // to avoid endless loops
         // (compare to Matcher.find() where we see the following code:
         // int i = last; if(i == first) i++;
         // in words: set the *from* for the next match at the
