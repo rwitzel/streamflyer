@@ -64,8 +64,18 @@ public class State {
      *            If the constructed state is reached then the given {@link MatchProcessor} modifies the stream.
      */
     public State(String stateName, String regex, MatchProcessor matchProcessor) {
+        this(new Token(stateName, regex, matchProcessor));
+    }
+
+    /**
+     * The constructed state is reached if the given token is matched.
+     * 
+     * @param token
+     *            See {@link #token}
+     */
+    public State(Token token) {
         super();
-        this.token = new Token(stateName, regex, matchProcessor);
+        this.token = token;
     }
 
     /**
