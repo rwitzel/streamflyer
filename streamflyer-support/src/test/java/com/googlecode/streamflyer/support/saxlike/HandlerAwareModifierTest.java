@@ -30,13 +30,13 @@ public class HandlerAwareModifierTest {
         // define tokens but no special match processors!
         // +++ define the tokens we are looking for
         List<Token> tokens = new ArrayList<Token>();
-        tokens.add(new Token("FirstToken", "abc", "REPLACED"));
-        tokens.add(new Token("SecondToken", "def", "REPLACED"));
+        tokens.add(new Token("FirstToken", "ab()c", "REPLACED"));
+        tokens.add(new Token("SecondToken", "d(())e(zzz)?f", "REPLACED"));
 
         // +++ create a token processor that stores the found tokens
         // and replaces some text
         MyHandler handler = new MyHandler(foundParts);
-        HandlerAwareModifier modifier = new HandlerAwareModifier(tokens, handler);
+        HandlerAwareModifier modifier = new HandlerAwareModifier(tokens, handler, 1, 2048);
 
         String input = "xx_abc_yy_def_zz";
 
@@ -57,9 +57,9 @@ public class HandlerAwareModifierTest {
         expectedParts += "SecondToken:def[MATCH]";
         expectedParts += "_zz[BEFORE_FETCH]";
 
-        for (String foundPart : foundParts) {
-            System.out.println(foundPart);
-        }
+//        for (String foundPart : foundParts) {
+//            System.out.println(foundPart);
+//        }
 
         String joinedFoundParts = join(foundParts, "");
 

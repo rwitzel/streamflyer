@@ -107,8 +107,8 @@ public class RangeFilterModifierTest extends TestCase {
         }, 12, 345);
     }
 
-    private RangeFilterModifier createModifier(String startTag, String endTag, boolean includeStart,
-            boolean includeEnd, boolean initiallyOn) {
+    protected Modifier createModifier(String startTag, String endTag, boolean includeStart, boolean includeEnd,
+            boolean initiallyOn) {
 
         RegexModifier startModifier = createRegexModifier(startTag);
         RegexModifier endModifier = createRegexModifier(endTag);

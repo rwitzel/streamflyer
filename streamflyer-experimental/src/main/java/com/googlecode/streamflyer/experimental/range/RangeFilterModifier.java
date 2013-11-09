@@ -46,9 +46,10 @@ clear comments    %>    &lt;%    yes   yes     "my &lt% comment %> text"    "my 
   </pre></code>
  * 
  * @author rwoo
- * 
+ * @deprecated Use alternative RangeFilterModifier.
  * @since 13.09.2011
  */
+@Deprecated
 public class RangeFilterModifier implements Modifier {
 
     private StatefulModifier statefulModifier;

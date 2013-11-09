@@ -25,20 +25,28 @@
       <version>${project.version}</version>
     </dependency>
 
+    
     <!-- add dependency to the tests  -->
     <dependency>
-      <groupId>com.googlecode.streamflyer</groupId>
-      <artifactId>streamflyer-core</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-      <classifier>tests</classifier>
+        <groupId>com.googlecode.streamflyer</groupId>
+        <artifactId>streamflyer-core</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
     </dependency>
-	<dependency>
-	    <groupId>com.googlecode.streamflyer-regex-fast</groupId>
-	    <artifactId>streamflyer-regex-fast</artifactId>
-	    <version>1.0.1</version>
-	</dependency>
-
+    <dependency>
+        <groupId>com.googlecode.streamflyer-regex-fast</groupId>
+        <artifactId>streamflyer-regex-fast</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+    <dependency>
+        <groupId>com.googlecode.streamflyer</groupId>
+        <artifactId>streamflyer-experimental</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+    </dependency>
+    
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>

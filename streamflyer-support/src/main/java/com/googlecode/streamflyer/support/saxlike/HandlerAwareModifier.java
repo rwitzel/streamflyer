@@ -21,7 +21,15 @@ public class HandlerAwareModifier implements Modifier {
 
     private Modifier delegate;
 
-    public HandlerAwareModifier(List<Token> tokens, Handler handler) {
+    public HandlerAwareModifier() {
+        super();
+    }
+
+    public HandlerAwareModifier(List<Token> tokens, Handler handler, int minimumLengthOfLookBehind, int newNumberOfChars) {
+        initialize(tokens, handler, minimumLengthOfLookBehind, newNumberOfChars);
+    }
+
+    protected void initialize(List<Token> tokens, Handler handler, int minimumLengthOfLookBehind, int newNumberOfChars) {
 
         HandlerAwareNoMatch noMatch = new HandlerAwareNoMatch(handler);
 
@@ -31,7 +39,8 @@ public class HandlerAwareModifier implements Modifier {
 
         TokensMatcher tokensMatcher = new TokensMatcher(tokens);
 
-        Modifier modifier = new RegexModifier(tokensMatcher, matchProcessor, 1, 2048);
+        Modifier modifier = new RegexModifier(tokensMatcher, matchProcessor, minimumLengthOfLookBehind,
+                newNumberOfChars);
 
         delegate = new NoMatchAwareModifier(modifier, noMatch);
     }

@@ -3,7 +3,7 @@ package com.googlecode.streamflyer.support.tokens;
 import java.util.regex.MatchResult;
 
 /**
- * This {@link MatchResult} delegates to another match result but applies a group offset,s i.e the delegate is used with
+ * This {@link MatchResult} delegates to another match result but applies a group offset, i.e the delegate is used with
  * a group number that is increased by the given group offset.
  * <p>
  * Please, pay attention to the limited capability of the implementation of {@link #groupCount()}.
@@ -79,4 +79,16 @@ public class MatchResultWithOffset implements MatchResult {
         }
         return groupCount;
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "MatchResultWithOffset [delegate=" + delegate + ", groupOffset=" + groupOffset + ", groupCount="
+                + groupCount + "]";
+    }
+
 }
