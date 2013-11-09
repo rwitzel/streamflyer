@@ -31,9 +31,8 @@ public class HandlerAwareNoMatch extends NoMatch {
         if (newMod != null) {
             return newMod;
         } else {
-            // fall-back to the default
-            return super.processNoMatch(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit, mod,
-                    modifier);
+            // return the original afterModification
+            return mod;
         }
     }
 
@@ -47,8 +46,8 @@ public class HandlerAwareNoMatch extends NoMatch {
         if (newMatchResult != null) {
             return newMatchResult;
         } else {
-            // fall-back to the default
-            return super.processNoMatch(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+            // return the original result
+            return matchResult;
         }
     }
 
