@@ -46,7 +46,7 @@ clear comments    %>    &lt;%    yes   yes     "my &lt% comment %> text"    "my 
   </pre></code>
  * 
  * @author rwoo
- * @deprecated Use alternative RangeFilterModifier.
+ * @deprecated This class is not fully functional yet (look-behind constructs do not work)
  * @since 13.09.2011
  */
 @Deprecated

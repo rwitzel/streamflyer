@@ -16,6 +16,8 @@
 
 package com.googlecode.streamflyer.experimental.range;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.io.StringReader;
@@ -23,9 +25,9 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
@@ -42,8 +44,9 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  * 
  * @since 14.09.2011
  */
-public class RangeFilterModifierTest extends TestCase {
+public class RangeFilterModifierTest {
 
+    @Test
     public void testRangeFiltered_0_examplesFromJavadoc() throws Exception {
         // extract text of comments
         assertRangeFilter("my <% comment %> text", " comment ", "<%", "%>", false, false, false);
@@ -58,6 +61,7 @@ public class RangeFilterModifierTest extends TestCase {
         assertRangeFilter("my <% comment %> text", "my <%%> text", "%>", "<%", true, true, true);
     }
 
+    @Test
     public void testRangeFiltered_1_initiallyOff() throws Exception {
         assertRangeFilter("aaaXbbbYccc", "XbbbY", "X", "Y", true, true, false);
         assertRangeFilter("aaaXbbbYccc", "Xbbb", "X", "Y", true, false, false);
@@ -65,6 +69,7 @@ public class RangeFilterModifierTest extends TestCase {
         assertRangeFilter("aaaXbbbYccc", "bbb", "X", "Y", false, false, false);
     }
 
+    @Test
     public void testRangeFiltered_2_initiallyOn() throws Exception {
         assertRangeFilter("aaXbbbYccc", "aaXbbbY", "X", "Y", true, true, true);
         assertRangeFilter("aaXbbbYccc", "aaXbbb", "X", "Y", true, false, true);
@@ -72,6 +77,7 @@ public class RangeFilterModifierTest extends TestCase {
         assertRangeFilter("aaXbbbYccc", "aaXbbb", "X", "Y", false, false, true);
     }
 
+    @Test
     public void testRangeFiltered_3_twoRangesFound() throws Exception {
         assertRangeFilter("aaXbYcXdYee", "XbYXdY", "X", "Y", true, true, false);
         assertRangeFilter("aaXbYcXdYee", "XbXd", "X", "Y", true, false, false);
@@ -84,7 +90,29 @@ public class RangeFilterModifierTest extends TestCase {
         assertRangeFilter("aaXbYcXdYee", "aaXbd", "X", "Y", false, false, true);
     }
 
-    private void assertRangeFilter(String input, String expectedOutput, String startTag, String endTag,
+    /**
+     * Ignored because not implemented yet.
+     * 
+     * @throws Exception
+     */
+    @Ignore
+    @Test
+    public void testRangeFiltered_4_LookBehindForNewLine_1() throws Exception {
+        assertRangeFilter("aaa\nXbbbYccc", "XbbbY", "^X", "Y", true, true, false);
+    }
+
+    /**
+     * Ignored because not implemented yet.
+     * 
+     * @throws Exception
+     */
+    @Ignore
+    @Test
+    public void testRangeFiltered_4_LookBehindForNewLine_2() throws Exception {
+        assertRangeFilter("\nXbbbYccc", "XbbbY", "^X", "Y", true, true, false);
+    }
+
+    protected void assertRangeFilter(String input, String expectedOutput, String startTag, String endTag,
             boolean includeStart, boolean includeEnd, boolean initiallyOn) throws Exception {
 
         assertOutputByReader(input, expectedOutput,

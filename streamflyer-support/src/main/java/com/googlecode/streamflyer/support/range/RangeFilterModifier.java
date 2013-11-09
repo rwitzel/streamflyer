@@ -8,11 +8,16 @@ import com.googlecode.streamflyer.support.tokens.Token;
 
 /**
  * Same functionality like {@link com.googlecode.streamflyer.experimental.range.RangeFilterModifier} but different
- * implementation
+ * implementation.
+ * <p>
+ * Please keep in mind that if you use look-behind constructs like "^" the filter may not work as expected because the
+ * content outside the range is removed. But the removed content is crucial to match the look-behind construct.
  * 
  * @author rwoo
+ * @deprecated This class is not fully functional yet (look-behind constructs do not work)
  * 
  */
+@Deprecated
 public class RangeFilterModifier extends HandlerAwareModifier {
 
     public RangeFilterModifier(String startRegex, String endRegex, boolean includeStartToken, boolean includeEndToken,
