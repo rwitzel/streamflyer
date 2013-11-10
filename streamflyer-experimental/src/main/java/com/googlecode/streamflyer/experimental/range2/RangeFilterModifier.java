@@ -27,6 +27,8 @@ import com.googlecode.streamflyer.regex.addons.tokens.Token;
  * <p>
  * Please keep in mind that if you use look-behind constructs like "^" the filter may not work as expected because the
  * content outside the range is removed. But the removed content is crucial to match the look-behind construct.
+ * <p>
+ * TODO use a StateMachine instead of a simple TokenProcessor
  * 
  * @author rwoo
  * @deprecated This class is not fully functional yet (look-behind constructs do not work)
