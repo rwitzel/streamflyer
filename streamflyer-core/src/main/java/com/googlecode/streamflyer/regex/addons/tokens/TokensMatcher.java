@@ -28,7 +28,7 @@ import com.googlecode.streamflyer.regex.addons.util.DelegatingMatcher;
  * An {@link OnStreamMatcher} that matches a {@link Token token} of a list of tokens.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class TokensMatcher extends DelegatingMatcher {
 

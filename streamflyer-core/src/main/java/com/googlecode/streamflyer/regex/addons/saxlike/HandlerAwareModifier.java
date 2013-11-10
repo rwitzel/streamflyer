@@ -30,7 +30,7 @@ import com.googlecode.streamflyer.regex.addons.tokens.TokensMatcher;
  * {@link Handler}.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class HandlerAwareModifier implements Modifier {
 

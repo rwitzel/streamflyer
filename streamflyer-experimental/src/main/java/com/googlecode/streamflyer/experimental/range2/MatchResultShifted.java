@@ -24,7 +24,7 @@ import java.util.regex.MatchResult;
  * inserted before the match.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class MatchResultShifted implements MatchResult {
 

@@ -26,21 +26,19 @@ import com.googlecode.streamflyer.regex.addons.tokens.TokenProcessor;
 import com.googlecode.streamflyer.regex.addons.tokens.TokensMatcher;
 
 /**
- * Represents the transitions that lead away from a {@link State start state} to
- * the end states.
+ * Represents the transitions that lead away from a {@link State start state} to the end states.
  * <p>
  * This class is used in conjunction with {@link StateMachine}.
  * 
  * @author rwoo
+ * @since 1.1.0
  */
 public class Transitions extends TokenProcessor {
 
     /**
-     * If the transition is applied, this property contains the end state of the
-     * transition.
+     * If the transition is applied, this property contains the end state of the transition.
      * <p>
-     * This property is reset to null by the state machine as soon as the state
-     * machine updates its current state.
+     * This property is reset to null by the state machine as soon as the state machine updates its current state.
      */
     private State newState;
 
@@ -50,24 +48,22 @@ public class Transitions extends TokenProcessor {
     private TransitionGuard transitionGuard;
 
     /**
-     * This list must contain a state for each token that can be matched by this
-     * token processor.
+     * This list must contain a state for each token that can be matched by this token processor.
      */
     private List<State> endStates;
 
     /**
-     * The matcher that has to match before a transition to another state can
-     * happen.
+     * The matcher that has to match before a transition to another state can happen.
      */
     private OnStreamMatcher matcher;
 
     /**
      * Constructs transitions to the given states.
      * 
-     * @param endStates the states that can be reached by these transitions.
-     *        Must not be null.
-     * @param transitionGuard The guard that is called before a transition is
-     *        executed. Must not be null.
+     * @param endStates
+     *            the states that can be reached by these transitions. Must not be null.
+     * @param transitionGuard
+     *            The guard that is called before a transition is executed. Must not be null.
      */
     public Transitions(List<State> endStates, TransitionGuard transitionGuard) {
         super(mapToTokens(endStates));
@@ -113,21 +109,19 @@ public class Transitions extends TokenProcessor {
     }
 
     @Override
-    protected MatchProcessorResult processToken(Token token,
-            StringBuilder characterBuffer,
+    protected MatchProcessorResult processToken(Token token, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
         // find the state that belongs to the token
         State endState = findStateByToken(endStates, token);
 
         if (endState == null) {
-            throw new RuntimeException(
-                    "never to happen if the class is used according to the class comment");
+            throw new RuntimeException("never to happen if the class is used according to the class comment");
         }
 
         // stop the transition?
-        MatchProcessorResult stop = transitionGuard.stopTransition(endState,
-                characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+        MatchProcessorResult stop = transitionGuard.stopTransition(endState, characterBuffer,
+                firstModifiableCharacterInBuffer, matchResult);
         if (stop != null) {
             return stop;
         }
@@ -137,21 +131,17 @@ public class Transitions extends TokenProcessor {
 
         // process the token (by delegating to the token-specific match
         // processors)
-        return super.processToken(token, characterBuffer,
-                firstModifiableCharacterInBuffer, matchResult);
+        return super.processToken(token, characterBuffer, firstModifiableCharacterInBuffer, matchResult);
     }
 
     /**
-     * @return If the transition was successful (in terms of stream
-     *         modification), this methods returns the state the state machine
-     *         should switch to. If the method is called, the state is reset to
-     *         <code>null</code>.
+     * @return If the transition was successful (in terms of stream modification), this methods returns the state the
+     *         state machine should switch to. If the method is called, the state is reset to <code>null</code>.
      */
     public State pollNewState() {
         try {
             return newState;
-        }
-        finally {
+        } finally {
             newState = null;
         }
     }

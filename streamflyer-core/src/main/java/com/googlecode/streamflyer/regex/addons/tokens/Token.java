@@ -24,32 +24,29 @@ import com.googlecode.streamflyer.regex.addons.util.DoNothingProcessor;
 import com.googlecode.streamflyer.regex.addons.util.EmbeddedFlagUtil;
 
 /**
- * A token that shall be matched via a regular expression in a stream. Each
- * token is associated with a {@link MatchProcessor} which defines how a
- * {@link TokenProcessor} shall process the matched token.
+ * A token that shall be matched via a regular expression in a stream. Each token is associated with a
+ * {@link MatchProcessor} which defines how a {@link TokenProcessor} shall process the matched token.
  * 
  * @author rwoo
+ * @since 1.1.0
  */
 public class Token {
 
     /**
-     * An ID for the token. The ID shall be unique among all tokens used with
-     * the {@link TokenProcessor}. Immutable.
+     * An ID for the token. The ID shall be unique among all tokens used with the {@link TokenProcessor}. Immutable.
      */
     private String name;
 
     /**
-     * This regular expression describes how a token can be matched. Flags
-     * should be embedded via {@link EmbeddedFlagUtil}. Immutable.
+     * This regular expression describes how a token can be matched. Flags should be embedded via
+     * {@link EmbeddedFlagUtil}. Immutable.
      */
     private String regex;
 
     /**
-     * The number of capturing groups that are contained in the {@link #regex}.
-     * Immutable.
+     * The number of capturing groups that are contained in the {@link #regex}. Immutable.
      * <p>
-     * Calculated from {@link #regex} and saved here to improve the performance
-     * of a {@link TokenProcessor}.
+     * Calculated from {@link #regex} and saved here to improve the performance of a {@link TokenProcessor}.
      */
     private int capturingGroupCount;
 
@@ -61,32 +58,32 @@ public class Token {
     /**
      * This constructor should be used only in tests!
      * 
-     * @param regex The regex describes how a token can be matched. Embed flags
-     *        via {@link EmbeddedFlagUtil}.
+     * @param regex
+     *            The regex describes how a token can be matched. Embed flags via {@link EmbeddedFlagUtil}.
      */
     public Token(String regex) {
         this("" + System.currentTimeMillis(), regex, new DoNothingProcessor());
     }
 
     /**
-     * This token matches the given regex but the match processor does
-     * {@link DoNothingProcessor nothing}.
+     * This token matches the given regex but the match processor does {@link DoNothingProcessor nothing}.
      * 
-     * @param name See {@link #name}.
-     * @param regex The regex describes how a token can be matched. Embed flags
-     *        via {@link EmbeddedFlagUtil}.
+     * @param name
+     *            See {@link #name}.
+     * @param regex
+     *            The regex describes how a token can be matched. Embed flags via {@link EmbeddedFlagUtil}.
      */
     public Token(String name, String regex) {
         this(name, regex, new DoNothingProcessor());
     }
 
     /**
-     * This token matches the given regex and {@link ReplacingProcessor
-     * replaces} the match with the replacement.
+     * This token matches the given regex and {@link ReplacingProcessor replaces} the match with the replacement.
      * 
-     * @param name See {@link #name}.
-     * @param regex The regex describes how a token can be matched. Embed flags
-     *        via {@link EmbeddedFlagUtil}.
+     * @param name
+     *            See {@link #name}.
+     * @param regex
+     *            The regex describes how a token can be matched. Embed flags via {@link EmbeddedFlagUtil}.
      * @param replacement
      */
     public Token(String name, String regex, String replacement) {
@@ -94,12 +91,12 @@ public class Token {
     }
 
     /**
-     * This token matches the given regex and the match will be processed with
-     * the given {@link MatchProcessor}.
+     * This token matches the given regex and the match will be processed with the given {@link MatchProcessor}.
      * 
-     * @param name See {@link #name}
-     * @param regex The regex describes how a token can be matched. Embed flags
-     *        via {@link EmbeddedFlagUtil}.
+     * @param name
+     *            See {@link #name}
+     * @param regex
+     *            The regex describes how a token can be matched. Embed flags via {@link EmbeddedFlagUtil}.
      * @param matchProcessor
      */
     public Token(String name, String regex, MatchProcessor matchProcessor) {
@@ -110,8 +107,7 @@ public class Token {
         this.name = name;
         this.regex = regex;
         this.matchProcessor = matchProcessor;
-        this.capturingGroupCount = Pattern.compile(regex).matcher("")
-                .groupCount();
+        this.capturingGroupCount = Pattern.compile(regex).matcher("").groupCount();
     }
 
     public String getName() {
@@ -132,8 +128,7 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token [name=" + name + ", regex=" + regex
-                + ", capturingGroupCount=" + capturingGroupCount
+        return "Token [name=" + name + ", regex=" + regex + ", capturingGroupCount=" + capturingGroupCount
                 + ", matchProcessor=" + matchProcessor + "]";
     }
 

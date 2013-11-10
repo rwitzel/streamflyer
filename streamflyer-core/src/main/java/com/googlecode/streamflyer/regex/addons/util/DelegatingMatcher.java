@@ -21,7 +21,7 @@ import com.googlecode.streamflyer.regex.OnStreamMatcher;
  * This {@link OnStreamMatcher} delegates to another matcher.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class DelegatingMatcher implements OnStreamMatcher {
 

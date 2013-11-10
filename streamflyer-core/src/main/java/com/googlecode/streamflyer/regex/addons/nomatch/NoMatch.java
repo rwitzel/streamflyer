@@ -34,8 +34,9 @@ import com.googlecode.streamflyer.regex.RegexModifier;
  * <p>
  * TODO more examples (the unit tests already provide them)
  * 
- * @author rwoo
  * 
+ * @author rwoo
+ * @since 1.1.0
  */
 public class NoMatch {
 

@@ -28,7 +28,7 @@ import com.googlecode.streamflyer.regex.addons.stateful.StateMachine;
  * the match.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class NoMatchAwareMatchProcessor implements MatchProcessor {
 

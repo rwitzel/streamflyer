@@ -25,7 +25,7 @@ import com.googlecode.streamflyer.regex.addons.nomatch.NoMatch;
  * Helper class for {@link HandlerAwareModifier}.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class HandlerAwareNoMatch extends NoMatch {
 

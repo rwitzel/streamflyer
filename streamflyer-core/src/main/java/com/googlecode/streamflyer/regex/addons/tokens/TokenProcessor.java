@@ -30,7 +30,7 @@ import com.googlecode.streamflyer.regex.MatchProcessorResult;
  * {@link #processToken(Token, StringBuilder, int, MatchResult)} in subclasses.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class TokenProcessor implements MatchProcessor {
 

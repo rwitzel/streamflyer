@@ -23,7 +23,7 @@ import com.googlecode.streamflyer.core.Modifier;
  * modifier. Additionally, it triggers the processing of a noMatch if necessary.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class NoMatchAwareModifier implements Modifier {
 

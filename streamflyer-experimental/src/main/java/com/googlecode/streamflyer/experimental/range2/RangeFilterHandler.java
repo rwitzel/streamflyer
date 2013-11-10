@@ -30,7 +30,7 @@ import com.googlecode.streamflyer.util.ModificationFactory;
  * This {@link Handler} is a helper class for {@link RangeFilterModifier}.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class RangeFilterHandler implements Handler {
 

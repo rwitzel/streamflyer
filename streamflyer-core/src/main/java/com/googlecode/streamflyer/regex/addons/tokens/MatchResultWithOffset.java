@@ -24,7 +24,7 @@ import java.util.regex.MatchResult;
  * Please, pay attention to the limited capability of the implementation of {@link #groupCount()}.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class MatchResultWithOffset implements MatchResult {
 

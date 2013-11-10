@@ -26,7 +26,7 @@ import com.googlecode.streamflyer.regex.addons.stateful.TransitionGuard;
  * the original transition guard.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class NoMatchAwareTransitionGuard extends TransitionGuard {
 

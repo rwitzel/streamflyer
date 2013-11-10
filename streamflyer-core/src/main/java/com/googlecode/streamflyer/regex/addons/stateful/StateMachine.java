@@ -28,7 +28,7 @@ import com.googlecode.streamflyer.regex.addons.util.DelegatingMatcher;
  * {@link State} is reached.
  * 
  * @author rwoo
- * 
+ * @since 1.1.0
  */
 public class StateMachine implements MatchProcessor {
 

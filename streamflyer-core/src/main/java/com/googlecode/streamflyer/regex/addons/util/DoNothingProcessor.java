@@ -25,13 +25,13 @@ import com.googlecode.streamflyer.regex.MatchProcessorResult;
  * This {@link MatchProcessor} does not modify the stream.
  * 
  * @author rwoo
+ * @since 1.1.0
  */
-public class DoNothingProcessor extends AbstractMatchProcessor implements
-        MatchProcessor {
+public class DoNothingProcessor extends AbstractMatchProcessor implements MatchProcessor {
 
     @Override
-    public MatchProcessorResult process(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
 
         return createResult(matchResult, matchResult.end(), true);
     }

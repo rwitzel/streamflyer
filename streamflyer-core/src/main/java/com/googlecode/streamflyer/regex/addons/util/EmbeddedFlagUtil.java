@@ -18,19 +18,17 @@ package com.googlecode.streamflyer.regex.addons.util;
 import java.util.regex.Pattern;
 
 /**
- * This class supports the creation of regular expressions with embedded flag
- * expressions.
+ * This class supports the creation of regular expressions with embedded flag expressions.
  * 
  * @author rwoo
+ * @since 1.1.0
  */
-
 public class EmbeddedFlagUtil {
 
     /**
      * Creates a regular expression with an embedded flag expression.
      * <p>
-     * Supports all flags of JDK7 {@link java.util.regex.Pattern}, i.e. the
-     * following flags:
+     * Supports all flags of JDK7 {@link java.util.regex.Pattern}, i.e. the following flags:
      * <ul>
      * <li>{@link Pattern#CASE_INSENSITIVE}
      * <li>{@link Pattern#UNIX_LINES}
@@ -42,24 +40,20 @@ public class EmbeddedFlagUtil {
      * <p>
      * EXAMPLE:
      * <ul>
-     * <li>For
-     * <code>("abc", Pattern.CASE_INSENSITIVE ^ Pattern.MULTILINE)</code> the
-     * method returns <code>
+     * <li>For <code>("abc", Pattern.CASE_INSENSITIVE ^ Pattern.MULTILINE)</code> the method returns <code>
      *         "(?im:abc)"</code>.</li>
      * <li>For <code>("abc", 0)</code> the method returns <code>"abc"</code>.</li>
      * </ul>
      * 
      * @param regex
      * @param flags
-     * @return Returns the given regex enriched with an embedded flag expression
-     *         that represents the given flags. If there is no flag given, the
-     *         returned regex is equal to the given regex.
+     * @return Returns the given regex enriched with an embedded flag expression that represents the given flags. If
+     *         there is no flag given, the returned regex is equal to the given regex.
      */
     public String embedFlags(String regex, int flags) {
         if (flags == 0) {
             return regex;
-        }
-        else {
+        } else {
             return "(?" + mapFlagsToEmbeddedFlags(flags) + ":" + regex + ")";
         }
     }

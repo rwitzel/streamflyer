@@ -30,7 +30,7 @@ import com.googlecode.streamflyer.regex.addons.tokens.Token;
  * 
  * @author rwoo
  * @deprecated This class is not fully functional yet (look-behind constructs do not work)
- * 
+ * @since 1.1.0
  */
 @Deprecated
 public class RangeFilterModifier extends HandlerAwareModifier {
