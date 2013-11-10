@@ -27,7 +27,6 @@
         <configuration>
           <excludes>
             <exclude>**/*PerformanceTest.java</exclude>
-            <exclude>**/RegexModifierUnitTest.java</exclude>
           </excludes>
         </configuration>
       </plugin>
