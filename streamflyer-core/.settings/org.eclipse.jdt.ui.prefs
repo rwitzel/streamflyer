@@ -1,8 +1,6 @@
-#Tue Oct 05 15:00:42 CEST 2010
 eclipse.preferences.version=1
 editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=true
-formatter_profile=_24translateStyle
-formatter_settings_version=11
+formatter_settings_version=12
 org.eclipse.jdt.ui.exception.name=e
 org.eclipse.jdt.ui.gettersetter.use.is=true
 org.eclipse.jdt.ui.javadoc=true
