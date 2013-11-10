@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
+import com.googlecode.streamflyer.regex.addons.stateful.StateMachine;
 import com.googlecode.streamflyer.util.ModificationFactory;
 import com.googlecode.streamflyer.util.ModifyingReaderFactory;
 import com.googlecode.streamflyer.util.ModifyingWriterFactory;
@@ -30,26 +31,21 @@ import com.googlecode.streamflyer.util.statistics.LineColumnAwareModificationFac
 import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFactory;
 
 /**
- * Finds text that matches a given regular expression. The match is processed by
- * the given {@link MatchProcessor}. The default match processor replaces the
- * matched texts with the configured replacements.
+ * Finds text that matches a given regular expression. The match is processed by the given {@link MatchProcessor}. The
+ * default match processor replaces the matched texts with the configured replacements.
  * <p>
  * <h1>Contents</h1>
  * <p>
  * <b> <a href="#g1">1. How do I use this modifier?</a><br/>
- * <a href="#g2">2. Instead of replacing text I want to do something else when
- * the regular expression matches. How can I do this?</a><br/>
- * <a href="#g3">3. How can I find out the position of the matches within the
- * stream?</a> <br/>
+ * <a href="#g2">2. Instead of replacing text I want to do something else when the regular expression matches. How can I
+ * do this?</a><br/>
+ * <a href="#g3">3. How can I find out the position of the matches within the stream?</a> <br/>
  * <a href="#g4">4. How much memory does the modifier consume?</a><br/>
  * <a href="#g5">5. Which features of Java's Pattern are not supported yet?</a><br/>
  * <a href="#g6">6. Which features of Java's Matcher are not supported yet?</a><br/>
- * <a href="#g7">7. How do I configure RegexModifier if my pattern contains ^ or
- * \b or \B?</a><br/>
- * <a href="#g8">8. What value to choose for the constructor parameter
- * <code>minimumLengthOfLookBehind</code>?</a><br/>
- * <a href="#g9">9. What value to choose for the constructor parameter
- * <code>newNumberOfChars</code>?</a><br/>
+ * <a href="#g7">7. How do I configure RegexModifier if my pattern contains ^ or \b or \B?</a><br/>
+ * <a href="#g8">8. What value to choose for the constructor parameter <code>minimumLengthOfLookBehind</code>?</a><br/>
+ * <a href="#g9">9. What value to choose for the constructor parameter <code>newNumberOfChars</code>?</a><br/>
  * </b> <!-- ++++++++++++++++++++++++++++++ -->
  * <p>
  * <h3 id="g1">1. How do I use this modifier?</h3>
@@ -67,14 +63,13 @@ Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
 // use the modifying reader instead of the original reader
 String output = IOUtils.toString(modifyingReader);
 assertEquals("modify stream", output);</pre></code>
- * <h3 id="g2">2. Instead of replacing text I want to do something else when the
- * regular expression matches. How can I do this?</h3>
+ * <h3 id="g2">2. Instead of replacing text I want to do something else when the regular expression matches. How can I
+ * do this?</h3>
  * <p>
- * Implement your own {@link MatchProcessor}. In the following example the
- * processor prints the matched text on the console.
+ * Implement your own {@link MatchProcessor}. In the following example the processor prints the matched text on the
+ * console.
  * <p>
- * EXAMPLE:
- * <code><pre class="prettyprint lang-java">class MatchPrinter implements MatchProcessor {
+ * EXAMPLE: <code><pre class="prettyprint lang-java">class MatchPrinter implements MatchProcessor {
 
     public MatchProcessorResult process(StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult) {
@@ -88,69 +83,54 @@ assertEquals("modify stream", output);</pre></code>
 }
 // ...
 Modifier myModifier = new RegexModifier("^.*ERROR.*$", Pattern.MULTILINE, new MatchPrinter(), 0, 2048);</pre></code>
- * <h3 id="g3">3. How can I find out the position of the matches within the
- * stream?</h3>
+ * <h3 id="g3">3. How can I find out the position of the matches within the stream?</h3>
  * <p>
- * You must count the characters that you skip. You can do this by subclassing
- * {@link RegexModifier} and overwrite
+ * You must count the characters that you skip. You can do this by subclassing {@link RegexModifier} and overwrite
  * {@link Modifier#modify(StringBuilder, int, boolean)}.
  * <p>
- * You might find {@link LineColumnAwareModificationFactory} and
- * {@link PositionAwareModificationFactory} helpful as well.
+ * You might find {@link LineColumnAwareModificationFactory} and {@link PositionAwareModificationFactory} helpful as
+ * well.
  * <h3 id="g4">4. How much memory does the modifier consume?</h3>
  * <p>
- * The maximum buffer size used by this modifier does not exceed the size of the
- * longest match by factor three. EXAMPLE: Assume in your stream the longest
- * match contains 100K characters. Then the internally used buffer is at no time
- * larger than 300K characters. But this rule does not apply if you use greedy
- * operators. If you use greedy operators, the entire stream content might be
- * loaded into the memory at once. The web page of this project gives <a href=
- * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions"
- * >more details</a>.
+ * The maximum buffer size used by this modifier does not exceed the size of the longest match by factor three. EXAMPLE:
+ * Assume in your stream the longest match contains 100K characters. Then the internally used buffer is at no time
+ * larger than 300K characters. But this rule does not apply if you use greedy operators. If you use greedy operators,
+ * the entire stream content might be loaded into the memory at once. The web page of this project gives <a href=
+ * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions" >more details</a>.
  * <h3 id="#g5">5. Which features of Java's Pattern are not supported yet?</h3>
  * <p>
- * Apart from \G (the boundary matcher that matches the end of the previous
- * match) all other features mentioned in {@link Pattern} are supported.
+ * Apart from \G (the boundary matcher that matches the end of the previous match) all other features mentioned in
+ * {@link Pattern} are supported.
  * <h3 id="#g6">6. Which features of Java's Matcher are not supported yet?</h3>
  * <p>
- * Java's {@link Matcher} allows the user to {@link Matcher#usePattern(Pattern)
- * change} the used pattern. RegexModifier does not enables this out-of-the-box.
- * To implement this feature you must subclass an existing
- * {@link OnStreamMatcher} implementation and connect it to your
- * {@link MatchProcessor}.
+ * Java's {@link Matcher} allows the user to {@link Matcher#usePattern(Pattern) change} the used pattern. RegexModifier
+ * does not enables this out-of-the-box but {@link StateMachine} provides that functionality.
  * <p>
- * Features that are region-related (like anchoring bounds, transparent bounds)
- * and features that determine how to continue the matching are not configurable
- * because they are already setup in an appropriate way by the RegexModifier.
- * <h3 id="#g7">7. How do I configure RegexModifier if my pattern contains ^ or
- * \b or \B?</h3>
+ * Preferences that are region-related (like anchoring bounds, transparent bounds) and preferences that determine how to
+ * continue the matching do not have to be configured because they are already setup in an appropriate way by the
+ * RegexModifier.
+ * <h3 id="#g7">7. How do I configure RegexModifier if my pattern contains ^ or \b or \B?</h3>
  * <p>
- * These pattern constructs require a look-behind. Therefore, set
- * <code>minimumLengthOfLookBehind</code> at least to one.
- * <h3 id="#g8">8. What value to choose for the constructor parameter
- * <code>minimumLengthOfLookBehind</code>?</h3>
+ * These pattern constructs require a look-behind. Therefore, set <code>minimumLengthOfLookBehind</code> at least to
+ * one. As RegexModifier modifies the input, look-behind constructs may not lead to the expected result (see project
+ * page). Therefore, try to replace the look-behind construct with a normal group, like "\n" for "^" and "\W" for "\b".
+ * <h3 id="#g8">8. What value to choose for the constructor parameter <code>minimumLengthOfLookBehind</code>?</h3>
  * <p>
- * If your pattern does not contain zero-width look-behind constructs, then you
- * can choose any value. Zero is recommended.
+ * If your pattern does not contain zero-width look-behind constructs, then you can choose any value. Zero is
+ * recommended.
  * <p>
- * Choose one if your pattern contains zero-width look-behind constructs like ^
- * or \b or \B but not constructs like <code>(?&lt;=X)</code> or
- * <code>(?&lt;!X)</code>.
+ * Choose one if your pattern contains zero-width look-behind constructs like ^ or \b or \B but not constructs like
+ * <code>(?&lt;=X)</code> or <code>(?&lt;!X)</code>.
  * <p>
- * If your pattern contains zero-width look-behind constructs like
- * <code>(?&lt;=X)</code> or <code>(?&lt;!X)</code>, you have to find out how
- * many characters the matcher needs at least to match properly by looking
- * behind. Use this number as value for <code>minimumLengthOfLookBehind</code>.
- * EXAMPLE: Let's say your pattern might check for <code>(?&lt;=a{3})</code> and
- * <code>(?&lt;=b{5})</code> in front of the actual match. Then the appropriate
- * value is five. If you set the value to a lower value, then there is no
- * guarantee that the modifier matches properly.
- * <h3 id="#g9">9. What value to choose for the constructor parameter
- * <code>newNumberOfChars</code>?</h3>
+ * If your pattern contains zero-width look-behind constructs like <code>(?&lt;=X)</code> or <code>(?&lt;!X)</code>, you
+ * have to find out how many characters the matcher needs at least to match properly by looking behind. Use this number
+ * as value for <code>minimumLengthOfLookBehind</code>. EXAMPLE: Let's say your pattern might check for
+ * <code>(?&lt;=a{3})</code> and <code>(?&lt;=b{5})</code> in front of the actual match. Then the appropriate value is
+ * five. If you set the value to a lower value, then there is no guarantee that the modifier matches properly.
+ * <h3 id="#g9">9. What value to choose for the constructor parameter <code>newNumberOfChars</code>?</h3>
  * <p>
- * This value determines how many characters are usually processed at once. If
- * the value is too high or too low, the performance decreases. The optimal
- * value depends on the length and number of matches in the stream.
+ * This value determines how many characters are usually processed at once. If the value is too high or too low, the
+ * performance decreases. The optimal value depends on the length and number of matches in the stream.
  * 
  * @author rwoo
  * @since 18.06.2011
@@ -208,8 +188,8 @@ public class RegexModifier implements Modifier {
     protected MatchProcessor matchProcessor;
 
     /**
-     * The compiled representation of a regular expression. If the regular
-     * expression matches, then a modification shall be carried out.
+     * The compiled representation of a regular expression. If the regular expression matches, then a modification shall
+     * be carried out.
      */
     protected OnStreamMatcher matcher;
 
@@ -220,13 +200,11 @@ public class RegexModifier implements Modifier {
     //
 
     /**
-     * The number of characters that shall be skipped automatically if the
-     * modifier is called the next time.
+     * The number of characters that shall be skipped automatically if the modifier is called the next time.
      * <p>
-     * This property is either zero or one (not greater). If this property is
-     * one, then the modifier tries to match behind the first modifiable
-     * character. If this property is zero, then the modifier tries to match
-     * before the first modifiable character.
+     * This property is either zero or one (not greater). If this property is one, then the modifier tries to match
+     * behind the first modifiable character. If this property is zero, then the modifier tries to match before the
+     * first modifiable character.
      */
     private int unseenCharactersToSkip = 0;
 
@@ -242,109 +220,96 @@ public class RegexModifier implements Modifier {
     }
 
     /**
-     * Like {@link RegexModifier#RegexModifier(String, int, String, int, int)}
-     * but uses defaults for <code>minimumLengthOfLookBehind</code> (1) and
-     * <code>newNumberOfChars</code> (2048).
+     * Like {@link RegexModifier#RegexModifier(String, int, String, int, int)} but uses defaults for
+     * <code>minimumLengthOfLookBehind</code> (1) and <code>newNumberOfChars</code> (2048).
      */
     public RegexModifier(String regex, int flags, String replacement) {
         this(regex, flags, replacement, 1, 2048);
     }
 
     /**
-     * Creates a modifier that matches a regular expression on character streams
-     * and replaces the matches.
+     * Creates a modifier that matches a regular expression on character streams and replaces the matches.
      * <p>
-     * This modifier uses {@link OnStreamStandardMatcher} which is not the
-     * fastest implementation of {@link OnStreamMatcher}. If you want to use a
-     * faster matcher, use
-     * {@link #RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
-     * instead.
+     * This modifier uses {@link OnStreamStandardMatcher} which is not the fastest implementation of
+     * {@link OnStreamMatcher}. If you want to use a faster matcher, use
+     * {@link #RegexModifier(OnStreamMatcher, MatchProcessor, int, int)} instead.
      * <p>
-     * A more convenient use of a {@link RegexModifier} is provided by the
-     * {@link ModifyingReaderFactory} respectively
+     * A more convenient use of a {@link RegexModifier} is provided by the {@link ModifyingReaderFactory} respectively
      * {@link ModifyingWriterFactory}.
      * 
-     * @param regex the regular expression that describe the text that shall be
-     *        replaced. See {@link Pattern#compile(String, int)}.
-     * @param flags the flags that are to use when the regex is applied on the
-     *        character stream. See {@link Pattern#compile(String, int)}.
-     * @param replacement the replacement for the text that is matched via
-     *        <code>regex</code>. See
-     *        {@link Matcher#appendReplacement(StringBuffer, String)}.
-     * @param minimumLengthOfLookBehind See
-     *        {@link RegexModifier#RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
-     *        .
-     * @param newNumberOfChars See
-     *        {@link RegexModifier#RegexModifier(OnStreamMatcher, MatchProcessor, int, int)}
-     *        .
+     * @param regex
+     *            the regular expression that describe the text that shall be replaced. See
+     *            {@link Pattern#compile(String, int)}.
+     * @param flags
+     *            the flags that are to use when the regex is applied on the character stream. See
+     *            {@link Pattern#compile(String, int)}.
+     * @param replacement
+     *            the replacement for the text that is matched via <code>regex</code>. See
+     *            {@link Matcher#appendReplacement(StringBuffer, String)}.
+     * @param minimumLengthOfLookBehind
+     *            See {@link RegexModifier#RegexModifier(OnStreamMatcher, MatchProcessor, int, int)} .
+     * @param newNumberOfChars
+     *            See {@link RegexModifier#RegexModifier(OnStreamMatcher, MatchProcessor, int, int)} .
      */
-    public RegexModifier(String regex, int flags, String replacement,
-            int minimumLengthOfLookBehind, int newNumberOfChars) {
-        this(regex, flags, new ReplacingProcessor(replacement),
-                minimumLengthOfLookBehind, newNumberOfChars);
+    public RegexModifier(String regex, int flags, String replacement, int minimumLengthOfLookBehind,
+            int newNumberOfChars) {
+        this(regex, flags, new ReplacingProcessor(replacement), minimumLengthOfLookBehind, newNumberOfChars);
     }
 
     /**
      * See {@link #RegexModifier(String, int, String, int, int)}.
      */
-    public RegexModifier(String regex, int flags,
-            MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
+    public RegexModifier(String regex, int flags, MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
             int newNumberOfChars) {
 
         Matcher jdkMatcher = Pattern.compile(regex, flags).matcher("");
         jdkMatcher.useTransparentBounds(true);
         jdkMatcher.useAnchoringBounds(false);
-        init(new OnStreamStandardMatcher(jdkMatcher), matchProcessor,
-                minimumLengthOfLookBehind, newNumberOfChars);
+        init(new OnStreamStandardMatcher(jdkMatcher), matchProcessor, minimumLengthOfLookBehind, newNumberOfChars);
     }
 
     /**
-     * Creates a modifier that matches a regular expression on character streams
-     * and does 'something' if matches are found.
+     * Creates a modifier that matches a regular expression on character streams and does 'something' if matches are
+     * found.
      * <p>
      * 
-     * @param matcher Matches a regular expression on a {@link CharSequence}.
-     * @param matchProcessor Defines what to do if the regular expression
-     *        matches some text in the stream.
-     * @param minimumLengthOfLookBehind See
-     *        {@link AfterModification#getNewMinimumLengthOfLookBehind()}.
-     * @param newNumberOfChars See
-     *        {@link AfterModification#getNewNumberOfChars()}. This should not
-     *        be smaller than the length of the characters sequence the
-     *        {@link #pattern} needs to match properly. In case you want to
-     *        match more than once, the value should be higher.
+     * @param matcher
+     *            Matches a regular expression on a {@link CharSequence}.
+     * @param matchProcessor
+     *            Defines what to do if the regular expression matches some text in the stream.
+     * @param minimumLengthOfLookBehind
+     *            See {@link AfterModification#getNewMinimumLengthOfLookBehind()}.
+     * @param newNumberOfChars
+     *            See {@link AfterModification#getNewNumberOfChars()}. This should not be smaller than the length of the
+     *            characters sequence the {@link #pattern} needs to match properly. In case you want to match more than
+     *            once, the value should be higher.
      */
-    public RegexModifier(OnStreamMatcher matcher,
-            MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
+    public RegexModifier(OnStreamMatcher matcher, MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
             int newNumberOfChars) {
 
-        init(matcher, matchProcessor, minimumLengthOfLookBehind,
-                newNumberOfChars);
+        init(matcher, matchProcessor, minimumLengthOfLookBehind, newNumberOfChars);
     }
 
     @SuppressWarnings("hiding")
-    protected void init(OnStreamMatcher matcher, MatchProcessor matchProcessor,
-            int minimumLengthOfLookBehind, int newNumberOfChars) {
+    protected void init(OnStreamMatcher matcher, MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
+            int newNumberOfChars) {
 
-        this.factory = new ModificationFactory(minimumLengthOfLookBehind,
-                newNumberOfChars);
+        this.factory = new ModificationFactory(minimumLengthOfLookBehind, newNumberOfChars);
         this.matchProcessor = matchProcessor;
         this.matcher = matcher;
         this.newNumberOfChars = newNumberOfChars;
     }
-
 
     //
     // interface Modifier
     //
 
     /**
-     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
         // the first position we will match from.
         Integer minFrom = null;
@@ -360,25 +325,19 @@ public class RegexModifier implements Modifier {
                 if (unseenCharactersToSkip > 0) {
 
                     // is there at least one modifiable character in the buffer?
-                    if (minFrom + unseenCharactersToSkip > characterBuffer
-                            .length()) {
+                    if (minFrom + unseenCharactersToSkip > characterBuffer.length()) {
                         // no -> we need more input to skip the characters
 
                         if (endOfStreamHit) {
                             // -> stop
-                            return factory.stop(characterBuffer,
-                                    firstModifiableCharacterInBuffer,
-                                    endOfStreamHit);
-                        }
-                        else {
+                            return factory.stop(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
+                        } else {
                             // -> fetch more input
-                            return factory.fetchMoreInput(0, characterBuffer,
-                                    firstModifiableCharacterInBuffer,
+                            return factory.fetchMoreInput(0, characterBuffer, firstModifiableCharacterInBuffer,
                                     endOfStreamHit);
                         }
 
-                    }
-                    else {
+                    } else {
                         // yes -> increase the *minFrom*
                         minFrom += unseenCharactersToSkip;
                         unseenCharactersToSkip = 0;
@@ -413,14 +372,10 @@ public class RegexModifier implements Modifier {
                 if (matcher.hitEnd() && !endOfStreamHit) {
                     // (match_open) yes, it could -> we need more input
 
-
-                    int numberOfCharactersToSkip = matcher.lastFrom()
-                            - firstModifiableCharacterInBuffer;
-
+                    int numberOfCharactersToSkip = matcher.lastFrom() - firstModifiableCharacterInBuffer;
 
                     // read more input (skip some characters if possible)
-                    AfterModification mod = factory.fetchMoreInput(
-                            numberOfCharactersToSkip, characterBuffer,
+                    AfterModification mod = factory.fetchMoreInput(numberOfCharactersToSkip, characterBuffer,
                             firstModifiableCharacterInBuffer, endOfStreamHit);
 
                     assert __checkpoint( //
@@ -431,18 +386,16 @@ public class RegexModifier implements Modifier {
                             "afterModification", mod);
 
                     return mod;
-                }
-                else {
+                } else {
                     // no -> thus we can use this match -> process the match
 
                     // process the match
                     MatchResult matchResult = matcher; // .toMatchResult()?
                     // (I could pass firstModifiableCharacterInBuffer instead of
                     // minFrom as well)
-                    MatchProcessorResult matchProcessorResult = matchProcessor
-                            .process(characterBuffer, minFrom, matchResult);
-                    minFrom = matchProcessorResult
-                            .getFirstModifiableCharacterInBuffer();
+                    MatchProcessorResult matchProcessorResult = matchProcessor.process(characterBuffer, minFrom,
+                            matchResult);
+                    minFrom = matchProcessorResult.getFirstModifiableCharacterInBuffer();
 
                     // match again without skip? (even for minFrom == maxFrom we
                     // try a match) (minFrom <= maxFrom is needed so that the
@@ -453,8 +406,7 @@ public class RegexModifier implements Modifier {
                     // instead of minFrom <= maxFrom) would also be possible.
                     // This has no impact on the matching and only minimal
                     // impact on the performance)
-                    if (minFrom <= maxFrom
-                            && matchProcessorResult.isContinueMatching()) {
+                    if (minFrom <= maxFrom && matchProcessorResult.isContinueMatching()) {
                         // (match_n_continue) no skip needed yet -> continue
                         // matching on the existing buffer content
 
@@ -468,8 +420,7 @@ public class RegexModifier implements Modifier {
                         // We try the next match on the modified input, i.e.
                         // not match only once -> next loop
                         continue;
-                    }
-                    else {
+                    } else {
 
                         // we shall not continue matching on the
                         // existing buffer content but skip (keep the buffer
@@ -479,19 +430,13 @@ public class RegexModifier implements Modifier {
                         if (minFrom > characterBuffer.length()) {
                             // this happens when we avoid endless loops after
                             // we matched an empty string
-                            unseenCharactersToSkip = minFrom
-                                    - characterBuffer.length();
-                            ZzzAssert.isTrue(unseenCharactersToSkip == 1,
-                                    "unseenCharactersToSkip must be one but was "
-                                            + unseenCharactersToSkip);
-                            numberOfCharactersToSkip = characterBuffer.length()
-                                    - firstModifiableCharacterInBuffer;
+                            unseenCharactersToSkip = minFrom - characterBuffer.length();
+                            ZzzAssert.isTrue(unseenCharactersToSkip == 1, "unseenCharactersToSkip must be one but was "
+                                    + unseenCharactersToSkip);
+                            numberOfCharactersToSkip = characterBuffer.length() - firstModifiableCharacterInBuffer;
+                        } else {
+                            numberOfCharactersToSkip = minFrom - firstModifiableCharacterInBuffer;
                         }
-                        else {
-                            numberOfCharactersToSkip = minFrom
-                                    - firstModifiableCharacterInBuffer;
-                        }
-
 
                         if (numberOfCharactersToSkip == 0) {
 
@@ -507,8 +452,7 @@ public class RegexModifier implements Modifier {
                             // continueAfterModification(...) that chooses the
                             // appropriate action. the following code is always
                             // a MODIFY_AGAIN_IMMEDIATELY
-                            AfterModification mod = factory.fetchMoreInput(
-                                    numberOfCharactersToSkip, characterBuffer,
+                            AfterModification mod = factory.fetchMoreInput(numberOfCharactersToSkip, characterBuffer,
                                     firstModifiableCharacterInBuffer, false);
 
                             assert __checkpoint( //
@@ -519,15 +463,12 @@ public class RegexModifier implements Modifier {
                                     "afterModification", mod);
 
                             return mod;
-                        }
-                        else {
+                        } else {
                             // (match_n_skip) there are characters left in
                             // the buffer -> SKIP
 
-                            AfterModification mod = factory.skipOrStop(
-                                    numberOfCharactersToSkip, characterBuffer,
-                                    firstModifiableCharacterInBuffer,
-                                    endOfStreamHit);
+                            AfterModification mod = factory.skipOrStop(numberOfCharactersToSkip, characterBuffer,
+                                    firstModifiableCharacterInBuffer, endOfStreamHit);
 
                             assert __checkpoint( //
                                     "name", "match_n_skip", //
@@ -541,8 +482,7 @@ public class RegexModifier implements Modifier {
                     }
 
                 }
-            }
-            else {
+            } else {
                 // we haven't found a match
 
                 // By looking for matches (including the empty string) that
@@ -558,12 +498,9 @@ public class RegexModifier implements Modifier {
                         // maxFrom] -> skip the characters from range [from,
                         // maxFrom]
 
-                        int numberOfCharactersToSkip = maxFrom
-                                - firstModifiableCharacterInBuffer;
-                        AfterModification mod = factory.skipOrStop(
-                                numberOfCharactersToSkip, characterBuffer,
-                                firstModifiableCharacterInBuffer,
-                                endOfStreamHit);
+                        int numberOfCharactersToSkip = maxFrom - firstModifiableCharacterInBuffer;
+                        AfterModification mod = factory.skipOrStop(numberOfCharactersToSkip, characterBuffer,
+                                firstModifiableCharacterInBuffer, endOfStreamHit);
 
                         assert __checkpoint( //
                                 "name", "nomatch_eos", //
@@ -574,8 +511,7 @@ public class RegexModifier implements Modifier {
 
                         return mod;
 
-                    }
-                    else {
+                    } else {
                         // (nomatch_fetch) yes > we should fetch more input
                         // (because end of stream is not hit yet)
 
@@ -585,13 +521,9 @@ public class RegexModifier implements Modifier {
                         // skipping the characters in front of lastFrom() and
                         // fetching more input we cannot do anything wrong
 
-
-                        int numberOfCharactersToSkip = matcher.lastFrom()
-                                - firstModifiableCharacterInBuffer;
-                        AfterModification mod = factory.fetchMoreInput(
-                                numberOfCharactersToSkip, characterBuffer,
-                                firstModifiableCharacterInBuffer,
-                                endOfStreamHit);
+                        int numberOfCharactersToSkip = matcher.lastFrom() - firstModifiableCharacterInBuffer;
+                        AfterModification mod = factory.fetchMoreInput(numberOfCharactersToSkip, characterBuffer,
+                                firstModifiableCharacterInBuffer, endOfStreamHit);
 
                         assert __checkpoint( //
                                 "name", "nomatch_fetch", //
@@ -603,16 +535,13 @@ public class RegexModifier implements Modifier {
                         return mod;
                     }
 
-                }
-                else { // matcher.lastFrom() == maxFrom + 1
+                } else { // matcher.lastFrom() == maxFrom + 1
 
                     // (nomatch_skip) no, we are matching not a single character
 
                     // -> skip the characters from range [from, maxFrom]
-                    int numberOfCharactersToSkip = maxFrom
-                            - firstModifiableCharacterInBuffer;
-                    AfterModification mod = factory.skipOrStop(
-                            numberOfCharactersToSkip, characterBuffer,
+                    int numberOfCharactersToSkip = maxFrom - firstModifiableCharacterInBuffer;
+                    AfterModification mod = factory.skipOrStop(numberOfCharactersToSkip, characterBuffer,
                             firstModifiableCharacterInBuffer, endOfStreamHit);
 
                     assert __checkpoint( //
@@ -630,16 +559,14 @@ public class RegexModifier implements Modifier {
     }
 
     /**
-     * This method is called if a certain line of code is reached
-     * ("checkpoint").
+     * This method is called if a certain line of code is reached ("checkpoint").
      * <p>
-     * This method should be called only if the modifier is tested. Otherwise
-     * you might experience performance penalties.
+     * This method should be called only if the modifier is tested. Otherwise you might experience performance
+     * penalties.
      * 
-     * @param checkpointDescription A list of objects describing the checkpoint.
-     *        The objects should be given as name-value-pairs.
-     * @return Returns true. This allows you to use this method as side-effect
-     *         in Java assertions.
+     * @param checkpointDescription
+     *            A list of objects describing the checkpoint. The objects should be given as name-value-pairs.
+     * @return Returns true. This allows you to use this method as side-effect in Java assertions.
      */
     protected boolean __checkpoint(Object... checkpointDescription) {
         // nothing to do here
@@ -673,7 +600,8 @@ public class RegexModifier implements Modifier {
     //
 
     /**
-     * @param matchProcessor The {@link #matchProcessor} to set.
+     * @param matchProcessor
+     *            The {@link #matchProcessor} to set.
      */
     public void setMatchProcessor(MatchProcessor matchProcessor) {
         this.matchProcessor = matchProcessor;
