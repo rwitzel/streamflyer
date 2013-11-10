@@ -83,7 +83,6 @@
           <overview>${streamflyer.parent}/src/main/javadoc/overview/overview.html</overview>
           <linksource>true</linksource>
           <docfilessubdirs>true</docfilessubdirs>
-          <stylesheetfile>${streamflyer.parent}/src/main/javadoc/stylesheet/stylesheet-modified.css</stylesheetfile>
         </configuration>
         <!--  http://maven.apache.org/plugins/maven-javadoc-plugin/examples/aggregate.html#Using_The_aggregate_Goals 
           # generate the aggregated javadoc manually:
@@ -104,7 +103,6 @@
               <linksource>true</linksource>
               <!-- is obviously redundant (but why?) <javadocDirectory>${basedir}/src/main/javadoc</javadocDirectory> -->
               <docfilessubdirs>true</docfilessubdirs>
-              <stylesheetfile>${basedir}/src/main/javadoc/stylesheet/stylesheet-modified.css</stylesheetfile>
               <footer xml:space="preserve"><![CDATA[
      
 <script type='text/javascript'>
