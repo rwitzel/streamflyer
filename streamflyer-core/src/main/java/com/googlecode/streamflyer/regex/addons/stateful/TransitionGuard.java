@@ -21,8 +21,8 @@ import com.googlecode.streamflyer.regex.MatchProcessorResult;
 
 /**
  * A transition guard can be used to stop a {@link Transitions}. By default,
- * transitions are not stopped. Use a subclass when some transitions shall not
- * be executed.
+ * transitions are not stopped. Use a subclass when some transitions shall be
+ * stopped.
  * <p>
  * Apart from that, the guard is a good place to execute logic that shall be
  * executed during the transition, before the new state is reached. The logic

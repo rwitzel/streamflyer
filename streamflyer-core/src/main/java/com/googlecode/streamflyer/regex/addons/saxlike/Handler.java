@@ -29,7 +29,7 @@ import com.googlecode.streamflyer.regex.addons.tokens.TokenProcessor;
  * By implementing a handler like this, you get informed about matched tokens
  * and the text between matched tokens (so-called {@link NoMatch noMatches}),
  * i.e about the entire content of the stream. The noMatches may come in chunks
- * if the character buffer window of the use {@link RegexModifier} is smaller
+ * if the character buffer window of the used {@link RegexModifier} is smaller
  * than the entire text between two tokens.
  * <p>
  * If you are familiar with SAX, you can compare this handler with a SAX
