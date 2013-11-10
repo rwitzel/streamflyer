@@ -27,8 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import junit.framework.ComparisonFailure;
-
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 
 import com.googlecode.streamflyer.core.AfterModification;
