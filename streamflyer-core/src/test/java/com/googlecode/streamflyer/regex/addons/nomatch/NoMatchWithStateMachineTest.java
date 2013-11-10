@@ -36,8 +36,8 @@ import com.googlecode.streamflyer.regex.addons.nomatch.NoMatchAwareMatchProcesso
 import com.googlecode.streamflyer.regex.addons.nomatch.NoMatchAwareModifier;
 import com.googlecode.streamflyer.regex.addons.nomatch.NoMatchAwareTransitionGuard;
 import com.googlecode.streamflyer.regex.addons.stateful.State;
+import com.googlecode.streamflyer.regex.addons.stateful.StateMachine;
 import com.googlecode.streamflyer.regex.addons.stateful.TokenCollector;
-import com.googlecode.streamflyer.regex.addons.tokens.StateMachine;
 import com.googlecode.streamflyer.regex.addons.util.DelegatingMatcher;
 import com.googlecode.streamflyer.regex.addons.util.DoNothingProcessor;
 

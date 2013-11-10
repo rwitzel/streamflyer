@@ -20,7 +20,7 @@ import java.util.regex.MatchResult;
 import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.addons.tokens.StateMachine;
+import com.googlecode.streamflyer.regex.addons.stateful.StateMachine;
 
 /**
  * This {@link MatchProcessor} delegates to another match processor and updates the start position of the next

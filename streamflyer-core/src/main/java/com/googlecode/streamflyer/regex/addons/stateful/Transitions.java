@@ -21,7 +21,6 @@ import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
-import com.googlecode.streamflyer.regex.addons.tokens.StateMachine;
 import com.googlecode.streamflyer.regex.addons.tokens.Token;
 import com.googlecode.streamflyer.regex.addons.tokens.TokenProcessor;
 import com.googlecode.streamflyer.regex.addons.tokens.TokensMatcher;

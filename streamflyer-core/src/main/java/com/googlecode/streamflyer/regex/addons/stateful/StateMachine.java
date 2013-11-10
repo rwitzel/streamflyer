@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.streamflyer.regex.addons.tokens;
+package com.googlecode.streamflyer.regex.addons.stateful;
 
 import java.util.regex.MatchResult;
 
@@ -21,8 +21,6 @@ import com.googlecode.streamflyer.regex.MatchProcessor;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
 import com.googlecode.streamflyer.regex.OnStreamMatcher;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.addons.stateful.State;
-import com.googlecode.streamflyer.regex.addons.stateful.Transitions;
 import com.googlecode.streamflyer.regex.addons.util.DelegatingMatcher;
 
 /**
