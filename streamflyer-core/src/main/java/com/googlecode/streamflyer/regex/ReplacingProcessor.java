@@ -41,7 +41,8 @@ new ReplacingProcessor("aaa$2bbb$1ccc") // replaces each match with "aaa$2bbb$1c
  * @author rwoo
  * @since 18.06.2011
  */
-public class ReplacingProcessor implements MatchProcessor {
+public class ReplacingProcessor extends AbstractMatchProcessor implements
+        MatchProcessor {
 
     //
     // injected properties
@@ -193,23 +194,12 @@ public class ReplacingProcessor implements MatchProcessor {
         int start = matchResult.start();
         int end = matchResult.end();
 
-        // if the empty string is matched, then we increase the position
-        // to avoid endless loops
-        // (compare to Matcher.find() where we see the following code:
-        // int i = last; if(i == first) i++;
-        // in words: set the *from* for the next match at the
-        // end of the last match. if this is equal to the start
-        // of the last match (a match on the empty string(, then
-        // increase the *from* to avoid endless loops)
-        int offset = start == end ? 1 : 0;
-
         if (replacementWithoutGroupReferences != null) {
 
             characterBuffer.delete(start, end);
             characterBuffer.insert(start, replacementWithoutGroupReferences);
-            return new MatchProcessorResult(start
-                    + replacementWithoutGroupReferences.length() + offset, true);
-
+            return createResult(matchResult, start
+                    + replacementWithoutGroupReferences.length(), true);
         }
         else {
 
@@ -233,10 +223,8 @@ public class ReplacingProcessor implements MatchProcessor {
             characterBuffer.delete(start, end);
             characterBuffer.insert(start, replacement);
 
-            return new MatchProcessorResult(start + replacement.length()
-                    + offset, true);
+            return createResult(matchResult, start + replacement.length(), true);
         }
 
     }
-
 }
