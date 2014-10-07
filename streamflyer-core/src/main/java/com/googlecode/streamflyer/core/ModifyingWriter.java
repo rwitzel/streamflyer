@@ -160,6 +160,8 @@ public class ModifyingWriter extends Writer {
         characterBuffer = null;
 
         flush();
+
+        delegate.close();
     }
 
     /**

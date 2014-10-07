@@ -41,6 +41,10 @@ class IdleModifier implements Modifier {
      */
     private int maxCapacityOfCharacterBuffer = 0;
 
+    public IdleModifier() {
+        this(0, 4096, 0);
+    }
+
     public IdleModifier(int minimumLengthOfLookBehind, int newNumberOfChars, int numberOfCharactersToSkip) {
 
         this.factory = new StatisticsModificationFactory(new ModificationFactory(minimumLengthOfLookBehind,

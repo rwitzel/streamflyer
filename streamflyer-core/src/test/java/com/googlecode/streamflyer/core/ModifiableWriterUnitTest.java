@@ -16,14 +16,16 @@
 
 package com.googlecode.streamflyer.core;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
 import java.io.BufferedWriter;
 import java.io.Writer;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.io.output.NullWriter;
+import org.junit.Test;
 
 /**
  * Tests {@link ModifyingWriter}.
@@ -84,6 +86,32 @@ public class ModifiableWriterUnitTest {
         assertTrue("max capacity of character buffer " + modifier.getMaxCapacityOfCharacterBuffer()
                 + " should be smaller than " + (minimumLengthOfLookBehind + newNumberOfChars) * 2 + " but was not",
                 modifier.getMaxCapacityOfCharacterBuffer() <= (minimumLengthOfLookBehind + newNumberOfChars) * 2);
+    }
+
+    @Test
+    public void testCloseUnderlyingWriter() throws Exception {
+
+        // given
+        NullWriter underlyingWriter = mock(NullWriter.class);
+        ModifyingWriter writer = new ModifyingWriter(underlyingWriter, new IdleModifier());
+
+        // when
+        writer.append("some text");
+
+        // then
+        verify(underlyingWriter, never()).close();
+
+        // when
+        writer.flush();
+
+        // then
+        verify(underlyingWriter, never()).close();
+
+        // when
+        writer.close();
+
+        // then
+        verify(underlyingWriter).close();
     }
 
 }
