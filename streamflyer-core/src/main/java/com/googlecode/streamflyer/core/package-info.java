@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 /** This package contains the public API of project streamflyer.
  You find more information in {@link com.googlecode.streamflyer.core.Documentation}. */
 package com.googlecode.streamflyer.core;

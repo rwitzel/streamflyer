@@ -32,21 +32,19 @@ import com.googlecode.streamflyer.xml.XmlVersionModifier;
 import com.googlecode.streamflyer.xml.XmlVersionReader;
 
 /**
- * Provides short-cuts to create {@link ModifyingReader modifying readers} using
- * defaults.
+ * Provides short-cuts to create {@link ModifyingReader modifying readers} using defaults.
  * 
  * @author rwoo
  * @since 27.06.2011
  */
 public class ModifyingReaderFactory {
 
-    public ModifyingReader createInvalidXmlCharacterRemovingReader(
-            InputStream xmlStream) throws IOException {
+    public ModifyingReader createInvalidXmlCharacterRemovingReader(InputStream xmlStream) throws IOException {
         return createInvalidXmlCharacterReplacingReader(xmlStream, "");
     }
 
-    public ModifyingReader createInvalidXmlCharacterReplacingReader(
-            InputStream xmlStream, String replacement) throws IOException {
+    public ModifyingReader createInvalidXmlCharacterReplacingReader(InputStream xmlStream, String replacement)
+            throws IOException {
 
         // buffer stream
         // (is this really necessary to get optimal performance?)
@@ -63,19 +61,17 @@ public class ModifyingReaderFactory {
         boolean dollarZero;
         if (replacement.contains("$0")) {
             dollarZero = true;
-        }
-        else {
+        } else {
             dollarZero = false;
         }
 
         // create the reader that replaces invalid XML characters
-        Modifier modifier = new InvalidXmlCharacterModifier(8192, replacement,
-                xmlVersion, dollarZero);
+        Modifier modifier = new InvalidXmlCharacterModifier(8192, replacement, xmlVersion, dollarZero);
         return new ModifyingReader(xmlVersionReader, modifier);
     }
 
-    public ModifyingReader createXmlVersionModifyingReader(
-            InputStream xmlStream, String newXmlVersion) throws IOException {
+    public ModifyingReader createXmlVersionModifyingReader(InputStream xmlStream, String newXmlVersion)
+            throws IOException {
 
         // buffer stream
         // (is this really necessary to get optimal performance?)
@@ -91,15 +87,12 @@ public class ModifyingReaderFactory {
         return new ModifyingReader(xmlVersionReader, modifier);
     }
 
-    public ModifyingReader createRegexModifyingReader(Reader input,
-            String regex, String replacement) {
+    public ModifyingReader createRegexModifyingReader(Reader input, String regex, String replacement) {
         return createRegexModifyingReader(input, regex, 0, replacement, 0, 8192);
     }
 
-    public ModifyingReader createRegexModifyingReader(Reader input,
-            String regex, int flags, String replacement,
-            int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer) {
+    public ModifyingReader createRegexModifyingReader(Reader input, String regex, int flags, String replacement,
+            int minimumLengthOfLookBehind, int requestedCapacityOfCharacterBuffer) {
 
         // buffer stream
         // (is this really necessary to get optimal performance?)
@@ -108,8 +101,8 @@ public class ModifyingReaderFactory {
         }
 
         // create modifier
-        Modifier modifier = new RegexModifier(regex, flags, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
+        Modifier modifier = new RegexModifier(regex, flags, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer);
 
         // create and return reader
         return new ModifyingReader(input, modifier);

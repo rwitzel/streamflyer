@@ -50,5 +50,4 @@ class Change {
         return numberOfCharactersToDelete;
     }
 
-
 }

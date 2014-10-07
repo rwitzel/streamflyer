@@ -26,14 +26,13 @@ import java.util.Collection;
  * original classes are also available in classpath.  
  */
 
-
 /**
  * <p>
  * This class assists in validating arguments.
  * </p>
  * <p>
- * The class is based along the lines of JUnit. If an argument value is deemed
- * invalid, an IllegalArgumentException is thrown. For example:
+ * The class is based along the lines of JUnit. If an argument value is deemed invalid, an IllegalArgumentException is
+ * thrown. For example:
  * </p>
  * 
  * <pre>
@@ -63,8 +62,7 @@ public class ZzzValidate {
 
     /**
      * <p>
-     * Validate that the specified argument is not <code>null</code>; otherwise
-     * throwing an exception.
+     * Validate that the specified argument is not <code>null</code>; otherwise throwing an exception.
      * 
      * <pre>
      * Validate.notNull(myObject);
@@ -73,8 +71,10 @@ public class ZzzValidate {
      * The message of the exception is &quot;The validated object is null&quot;.
      * </p>
      * 
-     * @param object the object to check
-     * @throws IllegalArgumentException if the object is <code>null</code>
+     * @param object
+     *            the object to check
+     * @throws IllegalArgumentException
+     *             if the object is <code>null</code>
      */
     public static void notNull(Object object) {
         notNull(object, "The validated object is null");
@@ -82,15 +82,17 @@ public class ZzzValidate {
 
     /**
      * <p>
-     * Validate that the specified argument is not <code>null</code>; otherwise
-     * throwing an exception with the specified message.
+     * Validate that the specified argument is not <code>null</code>; otherwise throwing an exception with the specified
+     * message.
      * 
      * <pre>
      * Validate.notNull(myObject, &quot;The object must not be null&quot;);
      * </pre>
      * 
-     * @param object the object to check
-     * @param message the exception message if invalid
+     * @param object
+     *            the object to check
+     * @param message
+     *            the exception message if invalid
      */
     public static void notNull(Object object, String message) {
         if (object == null) {
@@ -100,11 +102,9 @@ public class ZzzValidate {
 
     /**
      * <p>
-     * Validate that the argument condition is <code>true</code>; otherwise
-     * throwing an exception with the specified message. This method is useful
-     * when validating according to an arbitrary boolean expression, such as
-     * validating a primitive number or using your own custom validation
-     * expression.
+     * Validate that the argument condition is <code>true</code>; otherwise throwing an exception with the specified
+     * message. This method is useful when validating according to an arbitrary boolean expression, such as validating a
+     * primitive number or using your own custom validation expression.
      * </p>
      * 
      * <pre>
@@ -112,9 +112,12 @@ public class ZzzValidate {
      * Validate.isTrue(myObject.isOk(), &quot;The object is not OK&quot;);
      * </pre>
      * 
-     * @param expression the boolean expression to check
-     * @param message the exception message if invalid
-     * @throws IllegalArgumentException if expression is <code>false</code>
+     * @param expression
+     *            the boolean expression to check
+     * @param message
+     *            the exception message if invalid
+     * @throws IllegalArgumentException
+     *             if expression is <code>false</code>
      */
     public static void isTrue(boolean expression, String message) {
         if (expression == false) {
@@ -128,8 +131,7 @@ public class ZzzValidate {
      * @param collection
      * @param collectionName
      */
-    public static void isNotEmpty(Collection<?> collection,
-            String collectionName) {
+    public static void isNotEmpty(Collection<?> collection, String collectionName) {
         notNull(collection, collectionName + " must not be null");
         isTrue(!collection.isEmpty(), collectionName + " must not be empty");
     }
@@ -140,15 +142,13 @@ public class ZzzValidate {
 
     public static void isZeroOrPositiveNumber(double number, String variableName) {
         if (number < 0) {
-            throw new IllegalArgumentException(variableName
-                    + " must be a zero or a positive number but was " + number);
+            throw new IllegalArgumentException(variableName + " must be a zero or a positive number but was " + number);
         }
     }
 
     public static void isGreaterThanZero(double number, String variableName) {
         if (number <= 0) {
-            throw new IllegalArgumentException(variableName
-                    + " must be greather than zero but was " + number);
+            throw new IllegalArgumentException(variableName + " must be greather than zero but was " + number);
         }
     }
 }

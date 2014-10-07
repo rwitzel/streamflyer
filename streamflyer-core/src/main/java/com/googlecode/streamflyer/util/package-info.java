@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-
 /** This package contains some classes that ease the use and extension of Streamflyer. */
 package com.googlecode.streamflyer.util;

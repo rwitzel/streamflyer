@@ -23,8 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This reader makes the XML version of the XML document in the character stream
- * available.
+ * This reader makes the XML version of the XML document in the character stream available.
  * 
  * @author rwoo
  * @since 27.06.2011
@@ -53,13 +52,10 @@ public class XmlVersionReader extends BufferedReader {
         // (Should we do aware of BOMs here? No. I consider it the
         // responsibility of the caller to provide characters without BOM.)
 
-        Matcher matcher = Pattern.compile(
-                "<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*")
-                .matcher(prolog);
+        Matcher matcher = Pattern.compile("<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*").matcher(prolog);
         if (matcher.matches()) {
             return matcher.group(1);
-        }
-        else {
+        } else {
             // the default, see class comment.
             return "1.0";
         }
@@ -77,12 +73,10 @@ public class XmlVersionReader extends BufferedReader {
             int read = read(cbuf);
             if (read == -1) {
                 return "";
-            }
-            else {
+            } else {
                 return new String(cbuf, 0, read);
             }
-        }
-        finally {
+        } finally {
             reset();
         }
     }
@@ -92,8 +86,8 @@ public class XmlVersionReader extends BufferedReader {
     //
 
     /**
-     * @return Returns the XML version read from the character stream. If there
-     *         is XML prolog given, then version "1.0" is assumed and returned.
+     * @return Returns the XML version read from the character stream. If there is XML prolog given, then version "1.0"
+     *         is assumed and returned.
      */
     public String getXmlVersion() {
         return xmlVersion;

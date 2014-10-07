@@ -34,8 +34,7 @@ import com.googlecode.catchexception.CatchException;
 public class ReplacingProcessorUnitTest extends TestCase {
 
     public void testCompileReplacement_all() throws Exception {
-        assertCompiledReplacement("12\\345$6789ABC\\\\0\\$DEF", "12345", 6789,
-                "ABC\\0$DEF");
+        assertCompiledReplacement("12\\345$6789ABC\\\\0\\$DEF", "12345", 6789, "ABC\\0$DEF");
     }
 
     public void testCompileReplacement_normalCharacters() throws Exception {
@@ -70,26 +69,22 @@ public class ReplacingProcessorUnitTest extends TestCase {
         assertCompiledReplacement("abc$01def", "abc", 1, "def");
     }
 
-    public void testCompileReplacement_groupReference_invalid()
-            throws Exception {
+    public void testCompileReplacement_groupReference_invalid() throws Exception {
 
         catchException(new ReplacingProcessor()).parseReplacement("hossa$");
 
         assertTrue(caughtException() instanceof IllegalArgumentException);
-        assertEquals("group reference $ without number at the end of the"
-                + " replacement string (hossa$)", CatchException
-                .caughtException().getMessage());
+        assertEquals("group reference $ without number at the end of the" + " replacement string (hossa$)",
+                CatchException.caughtException().getMessage());
     }
 
     /**
      * @param matchProcessor
      * @param expectedParts
      */
-    private void assertCompiledReplacement(String replacement,
-            Object... expectedParts) {
+    private void assertCompiledReplacement(String replacement, Object... expectedParts) {
 
-        List<Object> foundParts = new ReplacingProcessor()
-                .parseReplacement(replacement);
+        List<Object> foundParts = new ReplacingProcessor().parseReplacement(replacement);
         assertEquals(expectedParts.length, foundParts.size());
         for (int index = 0; index < expectedParts.length; index++) {
             assertEquals(expectedParts[index], foundParts.get(index));

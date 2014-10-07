@@ -25,10 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * A {@link Reader} that allows a {@link Modifier} to modify the characters in
- * the underlying stream.
+ * A {@link Reader} that allows a {@link Modifier} to modify the characters in the underlying stream.
  * <p>
  * This class is not synchronized.
  * <p>
@@ -49,60 +47,48 @@ public class ModifyingReader extends Reader {
     protected Reader delegate;
 
     /**
-     * The modifier thats replaces, deletes, inserts characters of the
-     * underlying stream, and manages the buffer size.
+     * The modifier thats replaces, deletes, inserts characters of the underlying stream, and manages the buffer size.
      */
     private Modifier modifier;
-
 
     //
     // properties that represent the mutable state
     //
 
     /**
-     * At its begin the buffer contains unmodifiable characters (might be needed
-     * for look-behind matches as known from regular expression matching). After
-     * the unmodifiable characters the buffer holds the modifiable characters.
-     * See {@link #firstModifiableCharacterInBuffer}.
+     * At its begin the buffer contains unmodifiable characters (might be needed for look-behind matches as known from
+     * regular expression matching). After the unmodifiable characters the buffer holds the modifiable characters. See
+     * {@link #firstModifiableCharacterInBuffer}.
      */
     private StringBuilder characterBuffer;
 
-
     /**
-     * The position of the first character in the {@link #characterBuffer input
-     * buffer} that is modifiable.
+     * The position of the first character in the {@link #characterBuffer input buffer} that is modifiable.
      * <p>
-     * This character and the following characters in {@link #characterBuffer}
-     * can be modified by the {@link #modifier}.
+     * This character and the following characters in {@link #characterBuffer} can be modified by the {@link #modifier}.
      */
     private int firstModifiableCharacterInBuffer;
 
-
     /**
-     * The value is taken from
-     * {@link AfterModification#getNewMinimumLengthOfLookBehind()} after
-     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. The value
-     * is <em>requested</em> by the {@link Modifier}.
+     * The value is taken from {@link AfterModification#getNewMinimumLengthOfLookBehind()} after
+     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. The value is <em>requested</em> by the
+     * {@link Modifier}.
      * <p>
-     * If this value is greater than {@link #firstModifiableCharacterInBuffer},
-     * the modifier is probably faulty.
+     * If this value is greater than {@link #firstModifiableCharacterInBuffer}, the modifier is probably faulty.
      */
     private int minimumLengthOfLookBehind;
 
     /**
-     * The value is the sum of
-     * {@link AfterModification#getNewMinimumLengthOfLookBehind()} and
-     * {@link AfterModification#getNewNumberOfChars()} after
-     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. The value
-     * is <em>requested</em> by the {@link Modifier}.
+     * The value is the sum of {@link AfterModification#getNewMinimumLengthOfLookBehind()} and
+     * {@link AfterModification#getNewNumberOfChars()} after {@link Modifier#modify(StringBuilder, int, boolean)} is
+     * called. The value is <em>requested</em> by the {@link Modifier}.
      */
     private int requestedNumCharactersInBuffer;
 
     /**
-     * The value is initially taken from
-     * {@link AfterModification#getNumberOfCharactersToSkip()} after
-     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. Then
-     * during reading characters from the reader this value is decremented.
+     * The value is initially taken from {@link AfterModification#getNumberOfCharactersToSkip()} after
+     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. Then during reading characters from the reader
+     * this value is decremented.
      */
     private int numberOfCharactersToSkip;
 
@@ -112,16 +98,17 @@ public class ModifyingReader extends Reader {
     private boolean endOfStreamHit = false;
 
     /**
-     * The holds the last {@link AfterModification} provided by the
-     * {@link #modifier}. This property serves debugging purposes only.
+     * The holds the last {@link AfterModification} provided by the {@link #modifier}. This property serves debugging
+     * purposes only.
      */
     private AfterModification lastAfterModificationForDebuggingOnly = null;
 
     /**
-     * @param reader The underlying reader that provides the original, not
-     *        modified characters. For optimal performance choose a
-     *        {@link BufferedReader}.
-     * @param modifier the object that modifies the stream.
+     * @param reader
+     *            The underlying reader that provides the original, not modified characters. For optimal performance
+     *            choose a {@link BufferedReader}.
+     * @param modifier
+     *            the object that modifies the stream.
      */
     public ModifyingReader(Reader reader, Modifier modifier) {
         super();
@@ -141,9 +128,8 @@ public class ModifyingReader extends Reader {
     }
 
     /**
-     * Updates the input buffer according to {@link #minimumLengthOfLookBehind}
-     * and {@link #requestedNumCharactersInBuffer}, and then fills the buffer up
-     * to its capacity.
+     * Updates the input buffer according to {@link #minimumLengthOfLookBehind} and
+     * {@link #requestedNumCharactersInBuffer}, and then fills the buffer up to its capacity.
      */
     private void updateBuffer() throws IOException {
 
@@ -155,23 +141,18 @@ public class ModifyingReader extends Reader {
     }
 
     /**
-     * Deletes those characters at the start of the buffer we do not need any
-     * longer.
+     * Deletes those characters at the start of the buffer we do not need any longer.
      */
     private void removeCharactersInBufferNotNeededAnyLonger() {
 
-        int charactersToDelete = firstModifiableCharacterInBuffer
-                - minimumLengthOfLookBehind;
+        int charactersToDelete = firstModifiableCharacterInBuffer - minimumLengthOfLookBehind;
 
         if (charactersToDelete > 0) {
             characterBuffer.delete(0, charactersToDelete);
             firstModifiableCharacterInBuffer -= charactersToDelete;
-        }
-        else if (charactersToDelete < 0) {
-            onFaultyModifier(-52, charactersToDelete
-                    + " characters to delete but this is not possible ("
-                    + firstModifiableCharacterInBuffer + ","
-                    + minimumLengthOfLookBehind + ")");
+        } else if (charactersToDelete < 0) {
+            onFaultyModifier(-52, charactersToDelete + " characters to delete but this is not possible ("
+                    + firstModifiableCharacterInBuffer + "," + minimumLengthOfLookBehind + ")");
         }
     }
 
@@ -192,9 +173,8 @@ public class ModifyingReader extends Reader {
     }
 
     /**
-     * Reads more characters into the input buffer. This method will block until
-     * the buffer is filled with {@link #requestedNumCharactersInBuffer}
-     * characters , or an I/O error occurs, or the end of the stream is reached.
+     * Reads more characters into the input buffer. This method will block until the buffer is filled with
+     * {@link #requestedNumCharactersInBuffer} characters , or an I/O error occurs, or the end of the stream is reached.
      */
     private void fill() throws IOException {
 
@@ -203,7 +183,6 @@ public class ModifyingReader extends Reader {
             // nothing to do
             return;
         }
-
 
         char[] buffer = new char[length];
         int offset = 0;
@@ -215,8 +194,7 @@ public class ModifyingReader extends Reader {
                 characterBuffer.append(buffer, offset, readChars);
                 offset += readChars;
                 length -= readChars;
-            }
-            else {
+            } else {
                 endOfStreamHit = true;
                 break;
             }
@@ -273,8 +251,7 @@ public class ModifyingReader extends Reader {
 
         if (index == 0 && read == -1) {
             return -1;
-        }
-        else {
+        } else {
             return index;
         }
     }
@@ -295,37 +272,30 @@ public class ModifyingReader extends Reader {
 
                 updateBuffer();
 
-                afterModification = modifier.modify(characterBuffer,
-                        firstModifiableCharacterInBuffer, endOfStreamHit);
+                afterModification = modifier.modify(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
 
                 lastAfterModificationForDebuggingOnly = afterModification;
 
                 // update minimumLengthOfLookBehind
-                minimumLengthOfLookBehind = afterModification
-                        .getNewMinimumLengthOfLookBehind();
+                minimumLengthOfLookBehind = afterModification.getNewMinimumLengthOfLookBehind();
                 if (minimumLengthOfLookBehind > firstModifiableCharacterInBuffer
                         + afterModification.getNumberOfCharactersToSkip()) {
-                    onFaultyModifier(-11, "Requested Look Behind"
-                            + " is impossible because there are not enough "
+                    onFaultyModifier(-11, "Requested Look Behind" + " is impossible because there are not enough "
                             + "characters in the stream.");
                 }
 
                 // update requestedNumCharactersInBuffer
-                requestedNumCharactersInBuffer = minimumLengthOfLookBehind
-                        + afterModification.getNewNumberOfChars();
+                requestedNumCharactersInBuffer = minimumLengthOfLookBehind + afterModification.getNewNumberOfChars();
                 if (requestedNumCharactersInBuffer < minimumLengthOfLookBehind + 1) {
-                    onFaultyModifier(-13, "Requested Capacity"
-                            + " is two small because there must at least one"
-                            + " unread characters available after the "
-                            + "look behind characters characters in the"
+                    onFaultyModifier(-13, "Requested Capacity" + " is two small because there must at least one"
+                            + " unread characters available after the " + "look behind characters characters in the"
                             + " stream.");
                 }
 
                 modifyAgainImmediately = false;
                 // do we have to read at least a single character as there is no
                 // modifiable character left in the character buffer?
-                if (firstModifiableCharacterInBuffer >= characterBuffer
-                        .length() && !endOfStreamHit) {
+                if (firstModifiableCharacterInBuffer >= characterBuffer.length() && !endOfStreamHit) {
                     // yes, we need fresh input ->
                     modifyAgainImmediately = true;
                 }
@@ -337,19 +307,14 @@ public class ModifyingReader extends Reader {
 
             } while (modifyAgainImmediately);
 
-            numberOfCharactersToSkip = afterModification
-                    .getNumberOfCharactersToSkip();
+            numberOfCharactersToSkip = afterModification.getNumberOfCharactersToSkip();
 
-            if (!afterModification.isModifyAgainImmediately()
-                    && numberOfCharactersToSkip == 0 && !endOfStreamHit) {
-                onFaultyModifier(-16, "Not a single characters shall be "
-                        + "skipped but this is not possible of "
-                        + "modifyAgain() returns false and the end of "
-                        + "stream is not reached yet.");
+            if (!afterModification.isModifyAgainImmediately() && numberOfCharactersToSkip == 0 && !endOfStreamHit) {
+                onFaultyModifier(-16, "Not a single characters shall be " + "skipped but this is not possible of "
+                        + "modifyAgain() returns false and the end of " + "stream is not reached yet.");
             }
             numberOfCharactersToSkip--;
-        }
-        else {
+        } else {
             numberOfCharactersToSkip--;
         }
 
@@ -357,11 +322,9 @@ public class ModifyingReader extends Reader {
         if (firstModifiableCharacterInBuffer >= characterBuffer.length()) {
             // yes -> return -1
             return -1;
-        }
-        else {
+        } else {
             // no -> return the next unread character
-            char result = characterBuffer
-                    .charAt(firstModifiableCharacterInBuffer);
+            char result = characterBuffer.charAt(firstModifiableCharacterInBuffer);
 
             firstModifiableCharacterInBuffer++;
 
@@ -398,7 +361,6 @@ public class ModifyingReader extends Reader {
         builder.append("]");
         return builder.toString();
     }
-
 
     //
     // delegating methods

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 /** This package contains some classes to deal with infamous XML streams that
  * contain characters that are allowed in XML 1.1 but not XML 1.0. */
 package com.googlecode.streamflyer.xml;

@@ -26,8 +26,7 @@ import com.googlecode.streamflyer.util.ModificationFactory;
  * @author rwoo
  * @since 28.06.2011
  */
-public class LineColumnAwareModificationFactory extends
-        ModificationFactoryDecorator {
+public class LineColumnAwareModificationFactory extends ModificationFactoryDecorator {
 
     //
     // properties that represent the internal mutable state
@@ -38,15 +37,14 @@ public class LineColumnAwareModificationFactory extends
      * <p>
      * The index of the first line is zero.
      * <p>
-     * The number of lines is aware of aware of the three line endings -
-     * <code>\r</code>, <code>\n</code>, <code>\r\n</code>.
+     * The number of lines is aware of aware of the three line endings - <code>\r</code>, <code>\n</code>,
+     * <code>\r\n</code>.
      */
     protected long currentLine = 0;
 
     /**
-     * The index of the column of the position of the next unread character. The
-     * index of the column is the number of characters read after the last line
-     * break, see {@link #currentLine}.
+     * The index of the column of the position of the next unread character. The index of the column is the number of
+     * characters read after the last line break, see {@link #currentLine}.
      * <p>
      * The index of the first column is zero.
      */
@@ -74,30 +72,26 @@ public class LineColumnAwareModificationFactory extends
     //
 
     @Override
-    public AfterModification fetchMoreInput(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification fetchMoreInput(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.fetchMoreInput(
-                numberOfCharactersToSkip, characterBuffer,
+        AfterModification afterModification = super.fetchMoreInput(numberOfCharactersToSkip, characterBuffer,
                 firstModifiableCharacterInBuffer, endOfStreamHit);
 
-        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(),
-                characterBuffer, firstModifiableCharacterInBuffer);
+        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(), characterBuffer,
+                firstModifiableCharacterInBuffer);
 
         return afterModification;
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#modifyAgainImmediately(int,
-     *      int)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#modifyAgainImmediately(int, int)
      */
     @Override
-    public AfterModification modifyAgainImmediately(int newNumberOfChars,
-            int firstModifiableCharacterInBuffer) {
+    public AfterModification modifyAgainImmediately(int newNumberOfChars, int firstModifiableCharacterInBuffer) {
 
-        AfterModification afterModification = super.modifyAgainImmediately(
-                newNumberOfChars, firstModifiableCharacterInBuffer);
+        AfterModification afterModification = super.modifyAgainImmediately(newNumberOfChars,
+                firstModifiableCharacterInBuffer);
 
         // no characters to skip
 
@@ -105,80 +99,73 @@ public class LineColumnAwareModificationFactory extends
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#skip(int,
-     *      java.lang.StringBuilder, int, boolean)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#skip(int, java.lang.StringBuilder,
+     *      int, boolean)
      */
     @Override
-    public AfterModification skip(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skip(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.skip(
-                numberOfCharactersToSkip, characterBuffer,
+        AfterModification afterModification = super.skip(numberOfCharactersToSkip, characterBuffer,
                 firstModifiableCharacterInBuffer, endOfStreamHit);
 
-        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(),
-                characterBuffer, firstModifiableCharacterInBuffer);
+        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(), characterBuffer,
+                firstModifiableCharacterInBuffer);
 
         return afterModification;
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#skipEntireBuffer(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.util.ModificationFactory#skipEntireBuffer(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification skipEntireBuffer(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification skipEntireBuffer(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.skipEntireBuffer(
-                characterBuffer, firstModifiableCharacterInBuffer,
+        AfterModification afterModification = super.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer,
                 endOfStreamHit);
 
-        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(),
-                characterBuffer, firstModifiableCharacterInBuffer);
+        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(), characterBuffer,
+                firstModifiableCharacterInBuffer);
 
         return afterModification;
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#skipOrStop(int,
-     *      java.lang.StringBuilder, int, boolean)
+     * @see com.googlecode.streamflyer.util.ModificationFactory#skipOrStop(int, java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification skipOrStop(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skipOrStop(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.skipOrStop(
-                numberOfCharactersToSkip, characterBuffer,
+        AfterModification afterModification = super.skipOrStop(numberOfCharactersToSkip, characterBuffer,
                 firstModifiableCharacterInBuffer, endOfStreamHit);
 
-        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(),
-                characterBuffer, firstModifiableCharacterInBuffer);
+        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(), characterBuffer,
+                firstModifiableCharacterInBuffer);
 
         return afterModification;
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#stop(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#stop(java.lang.StringBuilder, int,
+     *      boolean)
      */
     @Override
-    public AfterModification stop(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification stop(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.stop(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        AfterModification afterModification = super.stop(characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit);
 
-        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(),
-                characterBuffer, firstModifiableCharacterInBuffer);
+        onCharactersSkipped(afterModification.getNumberOfCharactersToSkip(), characterBuffer,
+                firstModifiableCharacterInBuffer);
 
         return afterModification;
     }
 
-    protected void onCharactersSkipped(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer, int firstModifiableCharacterInBuffer) {
+    protected void onCharactersSkipped(int numberOfCharactersToSkip, StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer) {
 
         int end = firstModifiableCharacterInBuffer + numberOfCharactersToSkip;
 
@@ -194,14 +181,12 @@ public class LineColumnAwareModificationFactory extends
         if (ch == '\r') {
             currentLine++;
             currentColumn = 0;
-        }
-        else if (ch == '\n') {
+        } else if (ch == '\n') {
             if (lastChar != '\r') {
                 currentLine++;
                 currentColumn = 0;
             }
-        }
-        else {
+        } else {
             currentColumn++;
         }
         lastChar = ch;
@@ -224,6 +209,5 @@ public class LineColumnAwareModificationFactory extends
     public long getCurrentLine() {
         return currentLine;
     }
-
 
 }

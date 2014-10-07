@@ -44,8 +44,8 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     private class MatchPrinter implements MatchProcessor {
 
         @Override
-        public MatchProcessorResult process(StringBuilder characterBuffer,
-                int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+        public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+                MatchResult matchResult) {
 
             // print the matches text
             // System.out.println("match: " + matchResult.group());
@@ -57,8 +57,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testExampleFromRegexModifierJavadoc_OwnMatchProcessor()
-            throws Exception {
+    public void testExampleFromRegexModifierJavadoc_OwnMatchProcessor() throws Exception {
 
         String fakeErrorLog = "1 ERROR aa\n2 WARN bb\n3 ERROR cc";
 
@@ -67,8 +66,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                 fakeErrorLog);
 
         // select the modifier
-        Modifier myModifier = new RegexModifier("^.*ERROR.*$",
-                Pattern.MULTILINE, new MatchPrinter(), 0, 2048);
+        Modifier myModifier = new RegexModifier("^.*ERROR.*$", Pattern.MULTILINE, new MatchPrinter(), 0, 2048);
 
         // create the modifying reader that wraps the original reader
         Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
@@ -86,8 +84,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         Reader originalReader = new StringReader("edit stream");
 
         // select the modifier
-        Modifier myModifier = new RegexModifier("edit stream", 0,
-                "modify stream");
+        Modifier myModifier = new RegexModifier("edit stream", 0, "modify stream");
 
         // create the modifying reader that wraps the original reader
         Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
@@ -104,8 +101,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         Reader originalReader = new StringReader("edit\n\nstream");
 
         // select the modifier
-        Modifier myModifier = new RegexModifier("edit\\s+stream", 0,
-                "modify stream");
+        Modifier myModifier = new RegexModifier("edit\\s+stream", 0, "modify stream");
 
         // create the modifying reader that wraps the original reader
         Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
@@ -129,20 +125,17 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     /**
-     * Asserts that two objects are not equals. Otherwise an
-     * AssertionFailedError is thrown.
+     * Asserts that two objects are not equals. Otherwise an AssertionFailedError is thrown.
      */
     static public void assertNotEquals(Object expected, Object actual) {
         assertTrue(expected != actual || !expected.equals(actual));
     }
 
     @Test
-    public void testExampleFromHomepage_advancedExample_firstImprovement()
-            throws Exception {
+    public void testExampleFromHomepage_advancedExample_firstImprovement() throws Exception {
 
         // select the modifier
-        Modifier myModifier = new RegexModifier("edit stream", 0,
-                "modify stream");
+        Modifier myModifier = new RegexModifier("edit stream", 0, "modify stream");
 
         // test: does not support other whitespace characters
         assertNotEquals("modify\tstream", modify("edit\tstream", myModifier));
@@ -150,8 +143,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertNotEquals("modify\nstream", modify("edit\nstream", myModifier));
 
         // first improvement
-        Modifier myModifier1 = new RegexModifier("edit\\sstream",
-                Pattern.DOTALL, "modify stream");
+        Modifier myModifier1 = new RegexModifier("edit\\sstream", Pattern.DOTALL, "modify stream");
 
         // test: supports other whitespace characters
         assertEquals("modify stream", modify("edit\tstream", myModifier1));
@@ -161,13 +153,10 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testExampleFromHomepage_advancedExample_secondImprovement()
-            throws Exception {
+    public void testExampleFromHomepage_advancedExample_secondImprovement() throws Exception {
 
         // first improvement
-        Modifier myModifier1 = new RegexModifier("edit\\sstream",
-                Pattern.DOTALL, "modify stream");
-
+        Modifier myModifier1 = new RegexModifier("edit\\sstream", Pattern.DOTALL, "modify stream");
 
         // test: does not preserve type of whitespace characters
         assertNotEquals("modify\tstream", modify("edit\tstream", myModifier1));
@@ -175,8 +164,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertNotEquals("modify  stream", modify("edit  stream", myModifier1));
 
         // second improvement
-        Modifier myModifier2 = new RegexModifier("edit(\\s++stream)",
-                Pattern.DOTALL, "modify$1");
+        Modifier myModifier2 = new RegexModifier("edit(\\s++stream)", Pattern.DOTALL, "modify$1");
 
         // test: preserves type of whitespace characters
         assertEquals("modify\tstream", modify("edit\tstream", myModifier2));
@@ -185,48 +173,39 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testExampleFromHomepage_advancedExample_thirdImprovement()
-            throws Exception {
+    public void testExampleFromHomepage_advancedExample_thirdImprovement() throws Exception {
 
         // second improvement
-        Modifier myModifier2 = new RegexModifier("edit(\\s++stream)",
-                Pattern.DOTALL, "modify$1");
+        Modifier myModifier2 = new RegexModifier("edit(\\s++stream)", Pattern.DOTALL, "modify$1");
 
         // test: does not use look-behind
         assertNotEquals("credit stream", modify("credit stream", myModifier2));
 
         // third and final improvement
-        Modifier myModifier3 = new RegexModifier("(?<=\\s)edit(\\s++stream)",
-                Pattern.DOTALL, "modify$1", 1, 2048);
+        Modifier myModifier3 = new RegexModifier("(?<=\\s)edit(\\s++stream)", Pattern.DOTALL, "modify$1", 1, 2048);
 
         // test: uses look-behind
         assertEquals("credit stream", modify("credit stream", myModifier3));
     }
 
     @Test
-    public void testExampleFromHomepage_advancedExample_greedyQuantifierOnDot()
-            throws Exception {
+    public void testExampleFromHomepage_advancedExample_greedyQuantifierOnDot() throws Exception {
 
         // Don't do this! This example uses a greedy quantifier on a dot
-        Modifier myModifier4 = new RegexModifier("edit.*stream", 0,
-                "modify stream");
+        Modifier myModifier4 = new RegexModifier("edit.*stream", 0, "modify stream");
 
         // test: does not find the nearest match
-        assertNotEquals("modify stream modify stream",
-                modify("edit stream edit stream", myModifier4));
+        assertNotEquals("modify stream modify stream", modify("edit stream edit stream", myModifier4));
 
         // modifier with greedy quantifier on whitespace
-        Modifier myModifier5 = new RegexModifier("edit\\s*stream", 0,
-                "modify stream");
+        Modifier myModifier5 = new RegexModifier("edit\\s*stream", 0, "modify stream");
 
         // test: finds the nearest match
-        assertNotEquals("modify stream modify stream",
-                modify("edit stream edit stream", myModifier5));
+        assertNotEquals("modify stream modify stream", modify("edit stream edit stream", myModifier5));
     }
 
     @Test
-    public void testReplacement_OneCharacterReplacedWithAnother()
-            throws Exception {
+    public void testReplacement_OneCharacterReplacedWithAnother() throws Exception {
 
         // once in the middle of the string
         assertReplacement("abcdefghi", "e", "X", "abcdXfghi");
@@ -236,10 +215,8 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         assertReplacement("ebcdeefehe", "e", "X", "XbcdXXfXhX");
     }
 
-
     @Test
-    public void testReplacement_TwoCharactersReplacedWithThreeOthers()
-            throws Exception {
+    public void testReplacement_TwoCharactersReplacedWithThreeOthers() throws Exception {
 
         // once in the middle of the string
         assertReplacement("abcdefghi", "de", "XYZ", "abcXYZfghi");
@@ -250,16 +227,14 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testReplacement_ThreeCharactersReplacedWithTwoOthers()
-            throws Exception {
+    public void testReplacement_ThreeCharactersReplacedWithTwoOthers() throws Exception {
 
         // once in the middle of the string
         assertReplacement("abcDEFghi", "DEF", "XY", "abcXYghi");
 
         // once at the being, at the end, and three times in the middle of the
         // string
-        assertReplacement("DEFbcDEFDEFgDEFhiDEF", "DEF", "XY",
-                "XYbcXYXYgXYhiXY");
+        assertReplacement("DEFbcDEFDEFgDEFhiDEF", "DEF", "XY", "XYbcXYXYgXYhiXY");
     }
 
     @Test
@@ -275,8 +250,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testReplacement_GreedyOp_AttentionThisLoadsTheEntireInputIntoMemory()
-            throws Exception {
+    public void testReplacement_GreedyOp_AttentionThisLoadsTheEntireInputIntoMemory() throws Exception {
 
         assertReplacement("abcDEEFFghi", "D(.*)F", "X$1Y", "abcXEEFYghi");
     }
@@ -285,11 +259,9 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     public void testReplacement_GreedyOp_Vs_ReluctantOp() throws Exception {
 
         // greedy
-        assertReplacement("<x>...</x>...</x>", "<x>(.*)</x>", "<y/>", 0, 6,
-                "<y/>", 0);
+        assertReplacement("<x>...</x>...</x>", "<x>(.*)</x>", "<y/>", 0, 6, "<y/>", 0);
         // reluctant
-        assertReplacement("<x>...</x>...</x>", "<x>(.*?)</x>", "<y/>", 0, 6,
-                "<y/>...</x>", 0);
+        assertReplacement("<x>...</x>...</x>", "<x>(.*?)</x>", "<y/>", 0, 6, "<y/>...</x>", 0);
     }
 
     @Test
@@ -301,8 +273,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
 
         // once at the being, at the end, and three times in the middle of the
         // string
-        assertReplacement("DEbcDEDEcDEgDE", "(?<=c)DE", "XYZ",
-                "DEbcXYZDEcXYZgDE");
+        assertReplacement("DEbcDEDEcDEgDE", "(?<=c)DE", "XYZ", "DEbcXYZDEcXYZgDE");
     }
 
     @Test
@@ -314,8 +285,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
 
         // once at the being, at the end, and three times in the middle of the
         // string
-        assertReplacement("DEfcDEDEfDEfDE", "DE(?=f)", "XYZ",
-                "XYZfcDEXYZfXYZfDE");
+        assertReplacement("DEfcDEDEfDEfDE", "DE(?=f)", "XYZ", "XYZfcDEXYZfXYZfDE");
     }
 
     @Test
@@ -334,8 +304,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testReplacement_endOfStream_matchOnEmptyString_noEndlessLoop()
-            throws Exception {
+    public void testReplacement_endOfStream_matchOnEmptyString_noEndlessLoop() throws Exception {
 
         String regex = "((XXX)|$)";
         String replacement = "YYY";
@@ -350,8 +319,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testReplacement_matchOnEmptyString_noEndlessLoop()
-            throws Exception {
+    public void testReplacement_matchOnEmptyString_noEndlessLoop() throws Exception {
 
         String regex = "()";
         String replacement = "Y";
@@ -366,11 +334,10 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     /**
-     * Defaults: Varies requestedMinimumLengthsOfLookBehind and
-     * requestedCapacityOfCharacterBuffers.
+     * Defaults: Varies requestedMinimumLengthsOfLookBehind and requestedCapacityOfCharacterBuffers.
      */
-    protected void assertReplacement(String input, String regex,
-            String replacement, String expectedOutput) throws Exception {
+    protected void assertReplacement(String input, String regex, String replacement, String expectedOutput)
+            throws Exception {
 
         for (int lookBehind = 0; lookBehind <= 2; lookBehind++) {
 
@@ -380,19 +347,17 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
                     // for a regex with look-behind we need look-behind > 0.
                     // Therefore, we skip this test as the parameter is not
                     // appropriate
-                }
-                else {
-                    assertReplacement(input, regex, replacement, lookBehind,
-                            capacityCharBuf, expectedOutput, 0);
+                } else {
+                    assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, 0);
                 }
             }
         }
     }
 
     /**
-     * @param regex regular expression
-     * @return Returns true if the regular expression contains a look-behind
-     *         construct (rule of thumb applied).
+     * @param regex
+     *            regular expression
+     * @return Returns true if the regular expression contains a look-behind construct (rule of thumb applied).
      */
     private boolean containsLookBehind(String regex) {
         return regex.contains("(?<=") //
@@ -402,36 +367,28 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     }
 
     /**
-     * Defaults: Combines tests for {@link ModifyingReader} and
-     * {@link ModifyingWriter}.
+     * Defaults: Combines tests for {@link ModifyingReader} and {@link ModifyingWriter}.
      * 
-     * @param flags TODO
+     * @param flags
+     *            TODO
      */
-    protected void assertReplacement(String input, String regex,
-            String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput,
-            int flags) throws Exception {
+    protected void assertReplacement(String input, String regex, String replacement, int minimumLengthOfLookBehind,
+            int requestedCapacityOfCharacterBuffer, String expectedOutput, int flags) throws Exception {
 
         // Java: (do we get the same result with Java's Regex package?)
-        assertEquals(
-                expectedOutput,
-                Pattern.compile(regex, flags).matcher(input)
-                        .replaceAll(replacement));
+        assertEquals(expectedOutput, Pattern.compile(regex, flags).matcher(input).replaceAll(replacement));
 
         // Streamflyer:
-        assertReplacementByReader(input, regex, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                expectedOutput, flags);
+        assertReplacementByReader(input, regex, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer, expectedOutput, flags);
 
-        assertReplacementByWriter(input, regex, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                expectedOutput, flags);
+        assertReplacementByWriter(input, regex, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer, expectedOutput, flags);
     }
 
     @Ignore
     @Test
-    public void testLookBehindAfterReplacement_ExampleFromWebpage1()
-            throws Exception {
+    public void testLookBehindAfterReplacement_ExampleFromWebpage1() throws Exception {
 
         String regex = "^a";
         int flags = 0;
@@ -441,14 +398,12 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         int lookBehind = 3;
         int capacityCharBuf = 10;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
 
     @Ignore
     @Test
-    public void testLookBehindAfterReplacement_ExampleFromWebpage2()
-            throws Exception {
+    public void testLookBehindAfterReplacement_ExampleFromWebpage2() throws Exception {
 
         String regex = "(?<=foo)bar";
         int flags = 0;
@@ -458,22 +413,18 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         int lookBehind = 3;
         int capacityCharBuf = 10;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
-
 
     //
     // Q and A - tests that result from questions asked in the discussion group
     //
 
     @Test
-    public void testRemovalAtTheEndOfStream_notUsingMultiLineFlag()
-            throws Exception {
+    public void testRemovalAtTheEndOfStream_notUsingMultiLineFlag() throws Exception {
 
         String endlessAbc = StringUtils.repeat("abc", 10000);
-        String inputPrefix = endlessAbc + "abc\n" + endlessAbc + "abc\n"
-                + endlessAbc;
+        String inputPrefix = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc;
 
         String regex = "abc$";
         int flags = 0;
@@ -483,8 +434,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         int lookBehind = 0;
         int capacityCharBuf = 3;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
 
     @Test
@@ -495,58 +445,47 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         String regex = "abc$";
         int flags = Pattern.MULTILINE;
         String replacement = "";
-        String input = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc
-                + "abc";
-        String expectedOutput = endlessAbc + "\n" + endlessAbc + "\n"
-                + endlessAbc;
+        String input = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc + "abc";
+        String expectedOutput = endlessAbc + "\n" + endlessAbc + "\n" + endlessAbc;
         int lookBehind = 0;
         int capacityCharBuf = 3;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
 
     @Ignore
     @Test
-    public void testRemovalAtTheStartOfStream_notUsingMultiLineFlag()
-            throws Exception {
+    public void testRemovalAtTheStartOfStream_notUsingMultiLineFlag() throws Exception {
 
         String endlessAbc = StringUtils.repeat("abc", 10000);
-        String inputSuffix = "\n" + endlessAbc + "\nabc" + endlessAbc + "\nabc"
-                + endlessAbc;
+        String inputSuffix = "\n" + endlessAbc + "\nabc" + endlessAbc + "\nabc" + endlessAbc;
 
         String regex = "^abc";
         int flags = 0;
         String replacement = "";
-        String input = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc
-                + "abc";
+        String input = endlessAbc + "abc\n" + endlessAbc + "abc\n" + endlessAbc + "abc";
         String expectedOutput = inputSuffix;
         int lookBehind = 1;
         int capacityCharBuf = 3;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
 
     @Ignore
     @Test
-    public void testRemovalAtTheStartOfLine_usingMultiLineFlag()
-            throws Exception {
+    public void testRemovalAtTheStartOfLine_usingMultiLineFlag() throws Exception {
 
         String endlessAbc = StringUtils.repeat("abc", 10000);
 
         String regex = "^abc";
         int flags = Pattern.MULTILINE;
         String replacement = "";
-        String input = "\nabc" + endlessAbc + "\nabc" + endlessAbc + "\nabc"
-                + endlessAbc;
-        String expectedOutput = "\n" + endlessAbc + "\n" + endlessAbc + "\n"
-                + endlessAbc;
+        String input = "\nabc" + endlessAbc + "\nabc" + endlessAbc + "\nabc" + endlessAbc;
+        String expectedOutput = "\n" + endlessAbc + "\n" + endlessAbc + "\n" + endlessAbc;
         int lookBehind = 1;
         int capacityCharBuf = 3;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
 
     //
@@ -554,8 +493,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     //
 
     @Test
-    public void testMatchEmptyStringAtTheEndOfStream_replaceWithNonEmptyString()
-            throws Exception {
+    public void testMatchEmptyStringAtTheEndOfStream_replaceWithNonEmptyString() throws Exception {
 
         String regex = "$";
         String replacement = "yyy";
@@ -565,13 +503,11 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         int lookBehind = 0;
         int capacityCharBuf = 3;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
 
     @Test
-    public void testMatchEmptyStringAtTheEndOfStream_replaceWithEmptyString()
-            throws Exception {
+    public void testMatchEmptyStringAtTheEndOfStream_replaceWithEmptyString() throws Exception {
 
         String regex = "$";
         String replacement = "";
@@ -581,9 +517,7 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
         int lookBehind = 0;
         int capacityCharBuf = 3;
 
-        assertReplacement(input, regex, replacement, lookBehind,
-                capacityCharBuf, expectedOutput, flags);
+        assertReplacement(input, regex, replacement, lookBehind, capacityCharBuf, expectedOutput, flags);
     }
-
 
 }

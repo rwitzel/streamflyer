@@ -27,24 +27,22 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**
- * Replaces the XML version in the XML prolog with the given XML version. Adds
- * an XML prolog if the stream does not contain an XML prolog.
+ * Replaces the XML version in the XML prolog with the given XML version. Adds an XML prolog if the stream does not
+ * contain an XML prolog.
  * <p>
  * <h1>Contents</h1>
  * <p>
  * <b> <a href="#g1">1. How and when do I use this modifier?</a><br/>
- * <a href="#g2">2. Do I have to care about BOMs at the beginning of the
- * stream?</a> <br/>
+ * <a href="#g2">2. Do I have to care about BOMs at the beginning of the stream?</a> <br/>
  * <a href="g3">3. Is there any known limitation?</a> <br/>
  * <a href="#g4">4. How much memory does the modifier consume?</a><br/>
  * </b> <!-- ++++++++++++++++++++++++++++++ -->
  * <p>
  * <h3 id="g1">1. How and when do I use this modifier?</h3>
  * <p>
- * This modifier is an alternative to {@link InvalidXmlCharacterModifier} if you
- * a have characters in an XML stream that are valid for XML 1.1 documents but
- * invalid for XML 1.1 documents. In this case you use this modifier to change
- * the XML version in the prolog of the document.
+ * This modifier is an alternative to {@link InvalidXmlCharacterModifier} if you a have characters in an XML stream that
+ * are valid for XML 1.1 documents but invalid for XML 1.1 documents. In this case you use this modifier to change the
+ * XML version in the prolog of the document.
  * <p>
  * EXAMPLE:
  * <code><pre class="prettyprint lang-java">// choose the input stream to modify
@@ -65,23 +63,20 @@ assertTrue(xml.startsWith("&lt;?xml version='1.1'"));
 </pre></code>
  * <h3 id="g2">2. Do I have to care about BOMs at the beginning of the stream?</h3>
  * <p>
- * Yes, you must use a BOM skipping reader that wraps the input stream. Apache's
- * Commons IO {@link XmlStreamReader} does this for you.
+ * Yes, you must use a BOM skipping reader that wraps the input stream. Apache's Commons IO {@link XmlStreamReader} does
+ * this for you.
  * <h3 id="g3">3. Is there any known limitation?</h3>
  * <p>
- * Yes, this modifier throws a {@link XmlPrologRidiculouslyLongException} if the
- * prolog of the XML document contains more than
- * {@link #INITIAL_NUMBER_OF_CHARACTERS} characters. This can only happen if
- * there is a lot of whitespace within the prolog, which is highly unlikely but
- * not forbidden by the XML specification. You should know that even the
- * <code>XmlReader</code> of Apache Commons which you probably use to detect the
- * encoding cannot deal with such a kind of prolog.
+ * Yes, this modifier throws a {@link XmlPrologRidiculouslyLongException} if the prolog of the XML document contains
+ * more than {@link #INITIAL_NUMBER_OF_CHARACTERS} characters. This can only happen if there is a lot of whitespace
+ * within the prolog, which is highly unlikely but not forbidden by the XML specification. You should know that even the
+ * <code>XmlReader</code> of Apache Commons which you probably use to detect the encoding cannot deal with such a kind
+ * of prolog.
  * <h3 id="#g4">4. How much memory does the modifier consume?</h3>
  * <p>
- * The memory consumption of this modifier during the stream processing is
- * roughly given by the second argument of
- * {@link #XmlVersionModifier(String, int)} but the initial memory consumption
- * is given by {@link #INITIAL_NUMBER_OF_CHARACTERS}.
+ * The memory consumption of this modifier during the stream processing is roughly given by the second argument of
+ * {@link #XmlVersionModifier(String, int)} but the initial memory consumption is given by
+ * {@link #INITIAL_NUMBER_OF_CHARACTERS}.
  * 
  * @author rwoo
  * @since 27.06.2011
@@ -97,8 +92,7 @@ public class XmlVersionModifier implements Modifier {
     /**
      * The internal state of {@link XmlVersionModifier}.
      * <p>
-     * The state transitions are: from {@value #INITIAL} to
-     * {@value #PROLOG_REQUEST} to {@value #NO_LONGER_MODIFYING}.
+     * The state transitions are: from {@value #INITIAL} to {@value #PROLOG_REQUEST} to {@value #NO_LONGER_MODIFYING}.
      */
     private enum XmlVersionModifierState {
         /**
@@ -112,12 +106,10 @@ public class XmlVersionModifier implements Modifier {
         PROLOG_REQUEST,
 
         /**
-         * The modifier has read the XML prolog, modified it if necessary.
-         * Nothing more to do for the modifier.
+         * The modifier has read the XML prolog, modified it if necessary. Nothing more to do for the modifier.
          */
         NO_LONGER_MODIFYING
     }
-
 
     //
     // injected properties
@@ -132,7 +124,6 @@ public class XmlVersionModifier implements Modifier {
     //
 
     private XmlVersionModifierState state = XmlVersionModifierState.INITIAL;
-
 
     //
     // constructors
@@ -151,61 +142,51 @@ public class XmlVersionModifier implements Modifier {
     //
 
     /**
-     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
         switch (state) {
 
         case NO_LONGER_MODIFYING:
 
-            return factory.skipEntireBuffer(characterBuffer,
-                    firstModifiableCharacterInBuffer, endOfStreamHit);
+            return factory.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
 
         case INITIAL:
 
             state = XmlVersionModifierState.PROLOG_REQUEST;
 
             // you never know how many whitespace characters are in the prolog
-            return factory.modifyAgainImmediately(INITIAL_NUMBER_OF_CHARACTERS,
-                    firstModifiableCharacterInBuffer);
+            return factory.modifyAgainImmediately(INITIAL_NUMBER_OF_CHARACTERS, firstModifiableCharacterInBuffer);
 
         case PROLOG_REQUEST:
 
             // (Should we do aware of BOMs here? No. I consider it the
             // responsibility of the caller to provide characters without BOM.)
 
-            Matcher matcher = Pattern.compile(
-                    "<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*")
-                    .matcher(characterBuffer);
+            Matcher matcher = Pattern.compile("<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*").matcher(
+                    characterBuffer);
             if (matcher.matches()) {
 
                 // replace version in prolog
-                characterBuffer.replace(matcher.start(1), matcher.end(1),
-                        xmlVersion);
-            }
-            else {
+                characterBuffer.replace(matcher.start(1), matcher.end(1), xmlVersion);
+            } else {
                 // is there a prolog that is too long?
-                Matcher matcher2 = Pattern.compile("<\\?xml.*").matcher(
-                        characterBuffer);
+                Matcher matcher2 = Pattern.compile("<\\?xml.*").matcher(characterBuffer);
                 if (matcher2.matches()) {
                     // this is not normal at all -> throw exception
-                    throw new XmlPrologRidiculouslyLongException(
-                            characterBuffer.toString());
+                    throw new XmlPrologRidiculouslyLongException(characterBuffer.toString());
                 }
 
                 // insert prolog
-                characterBuffer
-                        .insert(0, "<?xml version='" + xmlVersion + "'>");
+                characterBuffer.insert(0, "<?xml version='" + xmlVersion + "'>");
             }
 
             state = XmlVersionModifierState.NO_LONGER_MODIFYING;
 
-            return factory.skipEntireBuffer(characterBuffer,
-                    firstModifiableCharacterInBuffer, endOfStreamHit);
+            return factory.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
 
         default:
             throw new IllegalStateException("state " + state + " not supported");

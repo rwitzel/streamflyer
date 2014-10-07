@@ -36,32 +36,23 @@ public class XmlVersionReaderTest extends TestCase {
     }
 
     public void testXmlVersion10InProlog() throws Exception {
-        assertXmlVersion("1.0",
-                "<?xml encoding='hossa' version='1.0' standalone='true'");
-        assertXmlVersion("1.0",
-                "<?xml encoding=\"hossa\" version=\"1.0\" standalone=\"true\"");
+        assertXmlVersion("1.0", "<?xml encoding='hossa' version='1.0' standalone='true'");
+        assertXmlVersion("1.0", "<?xml encoding=\"hossa\" version=\"1.0\" standalone=\"true\"");
 
-        assertXmlVersion("1.0",
-                "<?xml encoding='hossa' version = '1.0' standalone='true'");
-        assertXmlVersion("1.0",
-                "<?xml encoding=\"hossa\" version  =  \"1.0\" standalone=\"true\"");
+        assertXmlVersion("1.0", "<?xml encoding='hossa' version = '1.0' standalone='true'");
+        assertXmlVersion("1.0", "<?xml encoding=\"hossa\" version  =  \"1.0\" standalone=\"true\"");
 
     }
 
     public void testXmlVersion11InProlog() throws Exception {
-        assertXmlVersion("1.1",
-                "<?xml encoding='hossa' version='1.1' standalone='true'");
-        assertXmlVersion("1.1",
-                "<?xml encoding=\"hossa\" version=\"1.1\" standalone=\"true\"");
+        assertXmlVersion("1.1", "<?xml encoding='hossa' version='1.1' standalone='true'");
+        assertXmlVersion("1.1", "<?xml encoding=\"hossa\" version=\"1.1\" standalone=\"true\"");
 
-        assertXmlVersion("1.1",
-                "<?xml encoding='hossa' version = '1.1' standalone='true'");
-        assertXmlVersion("1.1",
-                "<?xml encoding=\"hossa\" version  =  \"1.1\" standalone=\"true\"");
+        assertXmlVersion("1.1", "<?xml encoding='hossa' version = '1.1' standalone='true'");
+        assertXmlVersion("1.1", "<?xml encoding=\"hossa\" version  =  \"1.1\" standalone=\"true\"");
     }
 
-    private void assertXmlVersion(String expectedXmlVersion, String xml)
-            throws Exception {
+    private void assertXmlVersion(String expectedXmlVersion, String xml) throws Exception {
         XmlVersionReader reader = new XmlVersionReader(new StringReader(xml));
 
         assertEquals(expectedXmlVersion, reader.getXmlVersion());

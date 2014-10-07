@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 /** This package contains some classes that help you to identify the position
  * in the stream the modifier is currently processing. */
 package com.googlecode.streamflyer.util.statistics;

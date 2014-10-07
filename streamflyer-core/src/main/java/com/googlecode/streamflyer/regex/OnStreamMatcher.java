@@ -19,14 +19,12 @@ package com.googlecode.streamflyer.regex;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 
-
 /**
- * A reduced variant of a {@link Matcher}. Implementations of this interface
- * match a regular expression on a {@link CharSequence}.
+ * A reduced variant of a {@link Matcher}. Implementations of this interface match a regular expression on a
+ * {@link CharSequence}.
  * <p>
- * In comparison to {@link Matcher}, this type provides the method
- * {@link #findUnlessHitEnd(int, int)} that is particularly useful when you want
- * to match a regular expression on a character stream.
+ * In comparison to {@link Matcher}, this type provides the method {@link #findUnlessHitEnd(int, int)} that is
+ * particularly useful when you want to match a regular expression on a character stream.
  * 
  * @author rwoo
  * @since 20.06.2011
@@ -81,20 +79,17 @@ public interface OnStreamMatcher extends MatchResult {
     public void reset(CharSequence input);
 
     /**
-     * Looks for the first position that could be the start of a match that
-     * starts in the range [ <code>from</code> (including), <code>maxFrom</code>
-     * (including)]. If such a position is found, then the method stops and
-     * returns true if the input provides enough characters to make a match.
+     * Looks for the first position that could be the start of a match that starts in the range [ <code>from</code>
+     * (including), <code>maxFrom</code> (including)]. If such a position is found, then the method stops and returns
+     * true if the input provides enough characters to make a match.
      * <p>
-     * ATTENTION! maxFrom can be the position behind(!) the last character of
-     * the input.
+     * ATTENTION! maxFrom can be the position behind(!) the last character of the input.
      * <p>
      * This first position can retrieved via {@link #lastFrom()}.
      * 
      * @param minFrom
      * @param maxFrom
-     * @return Returns true if the method found a match at the position
-     *         {@link #lastFrom()}.
+     * @return Returns true if the method found a match at the position {@link #lastFrom()}.
      */
     public boolean findUnlessHitEnd(int minFrom, int maxFrom);
 
@@ -111,17 +106,14 @@ public interface OnStreamMatcher extends MatchResult {
     /**
      * This property is set by calling {@link #findUnlessHitEnd(int, int)} .
      * <p>
-     * ATTENTION! This property returns maxFrom + 1, if
-     * {@link #findUnlessHitEnd(int, int)} neither has found a match nor has hit
-     * the end of input as long it looked for matches that started somewhere in
-     * the interval [minFrom, maxFrom].
+     * ATTENTION! This property returns maxFrom + 1, if {@link #findUnlessHitEnd(int, int)} neither has found a match
+     * nor has hit the end of input as long it looked for matches that started somewhere in the interval [minFrom,
+     * maxFrom].
      * <p>
-     * ATTENTION! This information is not really helpful when the buffer size is
-     * equal to maxFrom. In this case you cannot say whether the position of
-     * lastFrom is the start of a potential match or not.
+     * ATTENTION! This information is not really helpful when the buffer size is equal to maxFrom. In this case you
+     * cannot say whether the position of lastFrom is the start of a potential match or not.
      * 
-     * @return Returns the last position {@link #findUnlessHitEnd(int, int)} has
-     *         investigated before it returned.
+     * @return Returns the last position {@link #findUnlessHitEnd(int, int)} has investigated before it returned.
      */
     public int lastFrom();
 }

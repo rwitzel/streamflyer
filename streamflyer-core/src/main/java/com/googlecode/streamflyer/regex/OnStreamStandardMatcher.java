@@ -21,10 +21,9 @@ import java.util.regex.Matcher;
 /**
  * Implements {@link OnStreamMatcher} using any JDK > 5.0.
  * <p>
- * This implementation is the slowest implementation of the three
- * implementations - it takes five times as much time as
- * {@link String#replaceAll(String, String)} needs to match and replace data in
- * an character stream that is read entirely into a {@link CharSequence}.
+ * This implementation is the slowest implementation of the three implementations - it takes five times as much time as
+ * {@link String#replaceAll(String, String)} needs to match and replace data in an character stream that is read
+ * entirely into a {@link CharSequence}.
  * 
  * @author rwoo
  * @since 20.06.2011
@@ -53,10 +52,10 @@ public class OnStreamStandardMatcher implements OnStreamMatcher {
     //
 
     /**
-     * @param matcher This matcher SHOULD NOT use
-     *        {@link Matcher#hasAnchoringBounds() anchoring bounds} and SHOULD
-     *        use {@link Matcher#hasTransparentBounds() transparent bounds}.
-     *        Otherwise the desired matching behavior cannot be ensured.
+     * @param matcher
+     *            This matcher SHOULD NOT use {@link Matcher#hasAnchoringBounds() anchoring bounds} and SHOULD use
+     *            {@link Matcher#hasTransparentBounds() transparent bounds}. Otherwise the desired matching behavior
+     *            cannot be ensured.
      */
     public OnStreamStandardMatcher(Matcher matcher) {
         super();

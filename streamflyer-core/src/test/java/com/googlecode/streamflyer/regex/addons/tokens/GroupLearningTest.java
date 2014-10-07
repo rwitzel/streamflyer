@@ -45,8 +45,7 @@ public class GroupLearningTest {
         try {
             assertEquals(null, matcher.group(4));
             fail("IndexOutOfBoundsException expected");
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             // OK, expected exception
         }
     }

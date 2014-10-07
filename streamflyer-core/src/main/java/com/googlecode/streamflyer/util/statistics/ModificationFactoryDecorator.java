@@ -23,8 +23,8 @@ import com.googlecode.streamflyer.util.ModificationFactory;
 /**
  * Abstract decorator for {@link ModificationFactory}.
  * <p>
- * (I wish Java could provide mixins as Scala does ... Sorry, dear reader, I
- * know this package is over-engineered but I could not resist.)
+ * (I wish Java could provide mixins as Scala does ... Sorry, dear reader, I know this package is over-engineered but I
+ * could not resist.)
  * 
  * @author rwoo
  * @since 27.06.2011
@@ -46,53 +46,46 @@ public abstract class ModificationFactoryDecorator extends ModificationFactory {
     //
 
     @Override
-    public AfterModification skip(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skip(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
         // delegate
-        return delegate.skip(numberOfCharactersToSkip, characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        return delegate.skip(numberOfCharactersToSkip, characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit);
 
     }
 
     @Override
-    public AfterModification skipOrStop(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skipOrStop(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
         // delegate
-        return delegate.skipOrStop(numberOfCharactersToSkip, characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
-    }
-
-    @Override
-    public AfterModification fetchMoreInput(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
-
-        // delegate
-        return delegate.fetchMoreInput(numberOfCharactersToSkip,
-                characterBuffer, firstModifiableCharacterInBuffer,
+        return delegate.skipOrStop(numberOfCharactersToSkip, characterBuffer, firstModifiableCharacterInBuffer,
                 endOfStreamHit);
     }
 
     @Override
-    public AfterModification modifyAgainImmediately(int newNumberOfChars,
-            int firstModifiableCharacterInBuffer) {
-
-        // delegate
-        return delegate.modifyAgainImmediately(newNumberOfChars,
-                firstModifiableCharacterInBuffer);
-    }
-
-    @Override
-    public AfterModification stop(StringBuilder characterBuffer,
+    public AfterModification fetchMoreInput(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
         // delegate
-        return delegate.stop(characterBuffer, firstModifiableCharacterInBuffer,
+        return delegate.fetchMoreInput(numberOfCharactersToSkip, characterBuffer, firstModifiableCharacterInBuffer,
                 endOfStreamHit);
+    }
+
+    @Override
+    public AfterModification modifyAgainImmediately(int newNumberOfChars, int firstModifiableCharacterInBuffer) {
+
+        // delegate
+        return delegate.modifyAgainImmediately(newNumberOfChars, firstModifiableCharacterInBuffer);
+    }
+
+    @Override
+    public AfterModification stop(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
+
+        // delegate
+        return delegate.stop(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
     }
 
     /**

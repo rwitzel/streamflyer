@@ -35,8 +35,8 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzAssert;
 import com.googlecode.streamflyer.util.StringUtils;
 
 /**
- * Tests {@link RegexModifier} (white-box tests). These tests may fail if the
- * implementation of {@link RegexModifier} is changed.
+ * Tests {@link RegexModifier} (white-box tests). These tests may fail if the implementation of {@link RegexModifier} is
+ * changed.
  * 
  * @author rwoo
  * @since 23.06.2011
@@ -47,31 +47,26 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
 
         protected List<Object[]> __passedCheckpoints = new ArrayList<Object[]>();
 
-        public RegexModifierWithCheckpoints(OnStreamMatcher matcher,
-                MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
-                int newNumberOfChars) {
-            super(matcher, matchProcessor, minimumLengthOfLookBehind,
-                    newNumberOfChars);
+        public RegexModifierWithCheckpoints(OnStreamMatcher matcher, MatchProcessor matchProcessor,
+                int minimumLengthOfLookBehind, int newNumberOfChars) {
+            super(matcher, matchProcessor, minimumLengthOfLookBehind, newNumberOfChars);
         }
 
         /**
-         * This method is called if a certain line of code is reached
-         * ("checkpoint").
+         * This method is called if a certain line of code is reached ("checkpoint").
          * <p>
-         * This method should be called only if the modifier is tested.
-         * Otherwise you might experience a severe performance penalties.
+         * This method should be called only if the modifier is tested. Otherwise you might experience a severe
+         * performance penalties.
          * 
-         * @param checkpointDescription A list of objects describing the
-         *        checkpoint. The objects should be given as name-value-pairs.
-         * @return Returns true. This allows you to use this method as
-         *         side-effect in Java assertions.
+         * @param checkpointDescription
+         *            A list of objects describing the checkpoint. The objects should be given as name-value-pairs.
+         * @return Returns true. This allows you to use this method as side-effect in Java assertions.
          */
         @Override
         protected boolean __checkpoint(Object... checkpointDescription) {
             for (int index = 0; index < checkpointDescription.length; index = index + 2) {
                 if (checkpointDescription[index + 1] instanceof StringBuilder) {
-                    checkpointDescription[index + 1] = ((StringBuilder) checkpointDescription[index + 1])
-                            .toString();
+                    checkpointDescription[index + 1] = ((StringBuilder) checkpointDescription[index + 1]).toString();
                 }
             }
             return __passedCheckpoints.add(checkpointDescription);
@@ -89,8 +84,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
          */
         @Override
         public String toString() {
-            return super.toString() + "[sizeOf(__passedCheckpoints)="
-                    + __passedCheckpoints.size() + "]";
+            return super.toString() + "[sizeOf(__passedCheckpoints)=" + __passedCheckpoints.size() + "]";
         }
 
     }
@@ -100,8 +94,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
      *      java.lang.String, int, int)
      */
     @Override
-    protected RegexModifier createModifier(String regex, String replacement,
-            int minimumLengthOfLookBehind,
+    protected RegexModifier createModifier(String regex, String replacement, int minimumLengthOfLookBehind,
             int requestedCapacityOfCharacterBuffer, int flags) {
         // create matcher
         OnStreamMatcher matcher = createMatcher(regex, flags);
@@ -121,21 +114,16 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
      *      java.lang.String, java.lang.String, int, int, java.lang.String, int)
      */
     @Override
-    protected RegexModifierWithCheckpoints assertReplacementByReader(
-            String input, String regex, String replacement,
-            int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput,
-            int flags) throws Exception {
+    protected RegexModifierWithCheckpoints assertReplacementByReader(String input, String regex, String replacement,
+            int minimumLengthOfLookBehind, int requestedCapacityOfCharacterBuffer, String expectedOutput, int flags)
+            throws Exception {
 
         System.out.println(String.format("Replacing '%s' " + "with '%s' with "
-                + "buffer size %s (look-behind %s) shall convert\n '%s' to "
-                + "\n '%s'", regex, replacement,
-                requestedCapacityOfCharacterBuffer, minimumLengthOfLookBehind,
-                input, expectedOutput));
+                + "buffer size %s (look-behind %s) shall convert\n '%s' to " + "\n '%s'", regex, replacement,
+                requestedCapacityOfCharacterBuffer, minimumLengthOfLookBehind, input, expectedOutput));
 
-        return (RegexModifierWithCheckpoints) super.assertReplacementByReader(
-                input, regex, replacement, minimumLengthOfLookBehind,
-                requestedCapacityOfCharacterBuffer, expectedOutput, flags);
+        return (RegexModifierWithCheckpoints) super.assertReplacementByReader(input, regex, replacement,
+                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer, expectedOutput, flags);
     }
 
     private void print(List<Object[]> passedCheckpoints) {
@@ -159,8 +147,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
                 String name = "" + passedCheckpoint[index];
                 String value = "" + passedCheckpoint[index + 1];
 
-                System.out.println("  <" + name + ">" + value + "</" + name
-                        + ">");
+                System.out.println("  <" + name + ">" + value + "</" + name + ">");
             }
 
             System.out.println("</checkpoint>");
@@ -190,10 +177,8 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     @SuppressWarnings("unused")
     private void printNice(List<Object[]> passedCheckpoints) {
 
-        System.out
-                .println(String.format("%3s %16s | %3s %5s %s %s", "num",
-                        "name/afterMod", "loB", "buLe", "buffer/skipped chars",
-                        "eos?")); //
+        System.out.println(String.format("%3s %16s | %3s %5s %s %s", "num", "name/afterMod", "loB", "buLe",
+                "buffer/skipped chars", "eos?")); //
 
         //
         int checkpointIndex = 0;
@@ -220,9 +205,8 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
             String characterBuffer = (String) data.get("characterBuffer");
             // System.out.println(characterBuffer + " " + minLen + " " + );
             Boolean endOfStreamHit = (Boolean) data.get("endOfStreamHit");
-            System.out.println(String.format("%3d %16s | %3d %5d '%s' %s",
-                    checkpointIndex, name, minLen, characterBuffer.length(),
-                    characterBuffer.toString(), endOfStreamHit ? "EOS" : "")); //
+            System.out.println(String.format("%3d %16s | %3d %5d '%s' %s", checkpointIndex, name, minLen,
+                    characterBuffer.length(), characterBuffer.toString(), endOfStreamHit ? "EOS" : "")); //
 
             // second line
             if (name.equals("match_n_continue")) {
@@ -239,14 +223,10 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
                 Integer minFrom = (Integer) data.get("minFrom");
                 ZzzAssert.notNull(minFrom);
 
-                String bufferDescription = StringUtils.repeat("_", minLen)
-                        + StringUtils.repeat(">", minFrom - minLen)
-                        + StringUtils.repeat("?", characterBuffer.length()
-                                - minFrom - minLen);
-                System.out.println(String.format("%3s %16s | %3s %5s '%s'", "",
-                        " ", " ", " ", bufferDescription)); //
-            }
-            else {
+                String bufferDescription = StringUtils.repeat("_", minLen) + StringUtils.repeat(">", minFrom - minLen)
+                        + StringUtils.repeat("?", characterBuffer.length() - minFrom - minLen);
+                System.out.println(String.format("%3s %16s | %3s %5s '%s'", "", " ", " ", " ", bufferDescription)); //
+            } else {
                 // second line: 'AfterModification' is returned
                 // - empty,
                 // - type of AfterModification,
@@ -257,31 +237,27 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
                 // the characters behind
                 // - "EOS" if end of stream hit
 
-                AfterModification mod = (AfterModification) data
-                        .get("afterModification");
+                AfterModification mod = (AfterModification) data.get("afterModification");
                 ZzzAssert.notNull(mod);
 
                 String bufferDescription = StringUtils.repeat("_", minLen)
-                        + StringUtils.repeat("X",
-                                mod.getNumberOfCharactersToSkip())
-                        + StringUtils.repeat("?", characterBuffer.length()
-                                - mod.getNumberOfCharactersToSkip() - minLen);
+                        + StringUtils.repeat("X", mod.getNumberOfCharactersToSkip())
+                        + StringUtils
+                                .repeat("?", characterBuffer.length() - mod.getNumberOfCharactersToSkip() - minLen);
                 Integer newMinLen = mod.getNewMinimumLengthOfLookBehind();
                 Integer newCharLen = mod.getNewNumberOfChars();
                 String modificationType = mod.getMessageType();
                 if (modificationType.equals("MODIFY AGAIN IMMEDIATELY")) {
                     modificationType = "MODIFY AGAIN"; // shorten the string
                 }
-                System.out.println(String.format("%3s %16s | %3d %5d '%s'", "",
-                        modificationType, newMinLen, newCharLen,
-                        bufferDescription)); //
+                System.out.println(String.format("%3s %16s | %3d %5d '%s'", "", modificationType, newMinLen,
+                        newCharLen, bufferDescription)); //
             }
         }
     }
 
     @Test
-    public void testReplacement_matchEmptyString_ReplaceWithNothingSoThatNothingToSkip_AtEndStream()
-            throws Exception {
+    public void testReplacement_matchEmptyString_ReplaceWithNothingSoThatNothingToSkip_AtEndStream() throws Exception {
         String regex = "";
         String replacement = "";
         String input = "";
@@ -291,8 +267,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
         assertEquals(expectedOutput, input.replaceAll(regex, replacement));
 
         // System.out.println("Streamflyer...");
-        List<Object[]> passedCheckpoints = assertReplacementByReader(input,
-                regex, replacement, 0, 2, expectedOutput, 0)
+        List<Object[]> passedCheckpoints = assertReplacementByReader(input, regex, replacement, 0, 2, expectedOutput, 0)
                 .__passedCheckpoints();
         print(passedCheckpoints);
     }
@@ -302,8 +277,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
             throws Exception {
 
         // test: match "^bar" in "foobar" - with look-behind
-        RegexModifier modifier = createModifier("^bar", "boom", 1, 100,
-                Pattern.MULTILINE);
+        RegexModifier modifier = createModifier("^bar", "boom", 1, 100, Pattern.MULTILINE);
         StringBuilder charBuf = new StringBuilder("obar");
         modifier.modify(charBuf, 1, false);
         assertEquals("obar", charBuf.toString()); // assert no match
@@ -345,12 +319,10 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testBoundaryMatchers2_dollar_TheEndOfALine_multiline()
-            throws Exception {
+    public void testBoundaryMatchers2_dollar_TheEndOfALine_multiline() throws Exception {
 
         // test: match "foo$" in "foobar"
-        RegexModifier modifier = createModifier("foo$", "hoo", 0, 100,
-                Pattern.MULTILINE);
+        RegexModifier modifier = createModifier("foo$", "hoo", 0, 100, Pattern.MULTILINE);
         StringBuilder charBuf = new StringBuilder("foo");
         AfterModification modification = modifier.modify(charBuf, 0, false);
         // System.out.println(modification);
@@ -375,8 +347,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testBoundaryMatchers3_b_AWordBoundary_AtTheBeginning_correctUsage_withLookBehind()
-            throws Exception {
+    public void testBoundaryMatchers3_b_AWordBoundary_AtTheBeginning_correctUsage_withLookBehind() throws Exception {
 
         // test: match "\bbar" in "foobar" - with look-behind
         RegexModifier modifier = createModifier("\\bbar", "boom", 1, 100, 0);
@@ -398,8 +369,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testBoundaryMatchers3_b_AWordBoundary_AtTheEnd()
-            throws Exception {
+    public void testBoundaryMatchers3_b_AWordBoundary_AtTheEnd() throws Exception {
 
         // test: match "foo\b" in "foobar"
         RegexModifier modifier = createModifier("foo\\b", "hoo", 0, 100, 0);
@@ -429,8 +399,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testBoundaryMatchers3_B_ANonWordBoundary_AtTheBeginning_correctUsage_withLookBehind()
-            throws Exception {
+    public void testBoundaryMatchers3_B_ANonWordBoundary_AtTheBeginning_correctUsage_withLookBehind() throws Exception {
 
         // test: match "\B,,," in "x,,," - with look-behind
         RegexModifier modifier = createModifier("\\B,,,", "boom", 1, 100, 0);
@@ -452,8 +421,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testBoundaryMatchers4_B_ANonWordBoundary_AtTheEnd()
-            throws Exception {
+    public void testBoundaryMatchers4_B_ANonWordBoundary_AtTheEnd() throws Exception {
 
         // test: match "foo\B" in ",,,x"
         RegexModifier modifier = createModifier(",,,\\B", "hoo", 0, 100, 0);
@@ -483,8 +451,7 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     @Test
-    public void testBoundaryMatchers5_A_TheBeginningOfTheInput_correctUsage_withLookBehind()
-            throws Exception {
+    public void testBoundaryMatchers5_A_TheBeginningOfTheInput_correctUsage_withLookBehind() throws Exception {
 
         // test: match "\Abar" in "foobar" - with look-behind
         RegexModifier modifier = createModifier("\\Abar", "boom", 1, 100, 0);
@@ -500,36 +467,29 @@ public class RegexModifierUnitTest extends AbstractRegexModifierTest {
     }
 
     /**
-     * See <a href="http://www.regular-expressions.info/continue.html>Continuing
-     * at The End of The Previous Match</a>
+     * See <a href="http://www.regular-expressions.info/continue.html>Continuing at The End of The Previous Match</a>
      * 
      * @throws Exception
      */
     @Test
-    public void testBoundaryMatchers6_G_TheEndOfThePreviousMatch_MISSING_FEATURE()
-            throws Exception {
+    public void testBoundaryMatchers6_G_TheEndOfThePreviousMatch_MISSING_FEATURE() throws Exception {
 
         // it's nice that this works here but this is because it matches at
         // EVERY position here
         assertReplacementByReader("yzyz", "\\G(y|z)", "x", 1, 1024, "xxxx", 0);
-        assertReplacementByReader("yzyzyzyzyzyz", "\\G(y|z)", "x", 1, 2,
-                "xxxxxxxxxxxx", 0);
+        assertReplacementByReader("yzyzyzyzyzyz", "\\G(y|z)", "x", 1, 2, "xxxxxxxxxxxx", 0);
 
         // there are other cases that are not supported:
         try {
-            assertReplacementByReader("azyzazyz", "(y)|(\\Gz)", "x", 1, 2,
-                    "azxxazxx", 0);
+            assertReplacementByReader("azyzazyz", "(y)|(\\Gz)", "x", 1, 2, "azxxazxx", 0);
             fail("ComparisonFailure expected");
-        }
-        catch (ComparisonFailure e) {
-            assertEquals("expected:<a[zxxaz]xx> but was:<a[xxxax]xx>",
-                    e.getMessage());
+        } catch (ComparisonFailure e) {
+            assertEquals("expected:<a[zxxaz]xx> but was:<a[xxxax]xx>", e.getMessage());
         }
     }
 
     /**
-     * See <a href="http://www.regular-expressions.info/anchors.html">Strings
-     * Ending with a Line Break</a>
+     * See <a href="http://www.regular-expressions.info/anchors.html">Strings Ending with a Line Break</a>
      * 
      * @throws Exception
      */

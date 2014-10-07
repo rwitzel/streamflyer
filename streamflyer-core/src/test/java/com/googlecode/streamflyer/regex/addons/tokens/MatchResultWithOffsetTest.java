@@ -25,8 +25,6 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import com.googlecode.streamflyer.regex.addons.tokens.MatchResultWithOffset;
-
 /**
  * Tests {@link MatchResultWithOffset}.
  * 

@@ -28,9 +28,6 @@ import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.regex.RegexModifier;
 import com.googlecode.streamflyer.regex.ReplacingProcessor;
-import com.googlecode.streamflyer.regex.addons.nomatch.NoMatch;
-import com.googlecode.streamflyer.regex.addons.nomatch.NoMatchAwareMatchProcessor;
-import com.googlecode.streamflyer.regex.addons.nomatch.NoMatchAwareModifier;
 
 /**
  * Tests {@link NoMatch} and the classes of the same package together with a plain {@link RegexModifier}.

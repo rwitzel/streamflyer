@@ -26,8 +26,7 @@ import com.googlecode.streamflyer.util.ModificationFactory;
  * @author rwoo
  * @since 28.06.2011
  */
-public class PositionAwareModificationFactory extends
-        ModificationFactoryDecorator {
+public class PositionAwareModificationFactory extends ModificationFactoryDecorator {
 
     //
     // properties that represent the internal mutable state
@@ -43,22 +42,18 @@ public class PositionAwareModificationFactory extends
         super(delegate);
     }
 
-
     //
     // interface ModificationFactory.* methods
     //
 
     /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#skipOrStop(int,
-     *      java.lang.StringBuilder, int, boolean)
+     * @see com.googlecode.streamflyer.util.ModificationFactory#skipOrStop(int, java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification skipOrStop(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skipOrStop(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.skipOrStop(
-                numberOfCharactersToSkip, characterBuffer,
+        AfterModification afterModification = super.skipOrStop(numberOfCharactersToSkip, characterBuffer,
                 firstModifiableCharacterInBuffer, endOfStreamHit);
 
         currentPosition += afterModification.getNumberOfCharactersToSkip();
@@ -67,16 +62,14 @@ public class PositionAwareModificationFactory extends
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#skip(int,
-     *      java.lang.StringBuilder, int, boolean)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#skip(int, java.lang.StringBuilder,
+     *      int, boolean)
      */
     @Override
-    public AfterModification skip(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skip(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.skip(
-                numberOfCharactersToSkip, characterBuffer,
+        AfterModification afterModification = super.skip(numberOfCharactersToSkip, characterBuffer,
                 firstModifiableCharacterInBuffer, endOfStreamHit);
 
         currentPosition += afterModification.getNumberOfCharactersToSkip();
@@ -89,12 +82,10 @@ public class PositionAwareModificationFactory extends
      *      java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification fetchMoreInput(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification fetchMoreInput(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.fetchMoreInput(
-                numberOfCharactersToSkip, characterBuffer,
+        AfterModification afterModification = super.fetchMoreInput(numberOfCharactersToSkip, characterBuffer,
                 firstModifiableCharacterInBuffer, endOfStreamHit);
 
         currentPosition += afterModification.getNumberOfCharactersToSkip();
@@ -103,15 +94,13 @@ public class PositionAwareModificationFactory extends
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#modifyAgainImmediately(int,
-     *      int)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#modifyAgainImmediately(int, int)
      */
     @Override
-    public AfterModification modifyAgainImmediately(int newNumberOfChars,
-            int firstModifiableCharacterInBuffer) {
+    public AfterModification modifyAgainImmediately(int newNumberOfChars, int firstModifiableCharacterInBuffer) {
 
-        AfterModification afterModification = super.modifyAgainImmediately(
-                newNumberOfChars, firstModifiableCharacterInBuffer);
+        AfterModification afterModification = super.modifyAgainImmediately(newNumberOfChars,
+                firstModifiableCharacterInBuffer);
 
         currentPosition += afterModification.getNumberOfCharactersToSkip();
 
@@ -119,15 +108,13 @@ public class PositionAwareModificationFactory extends
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#skipEntireBuffer(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.util.ModificationFactory#skipEntireBuffer(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification skipEntireBuffer(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification skipEntireBuffer(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.skipEntireBuffer(
-                characterBuffer, firstModifiableCharacterInBuffer,
+        AfterModification afterModification = super.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer,
                 endOfStreamHit);
 
         currentPosition += afterModification.getNumberOfCharactersToSkip();
@@ -136,26 +123,24 @@ public class PositionAwareModificationFactory extends
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#stop(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#stop(java.lang.StringBuilder, int,
+     *      boolean)
      */
     @Override
-    public AfterModification stop(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification stop(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        AfterModification afterModification = super.stop(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        AfterModification afterModification = super.stop(characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit);
 
         currentPosition += afterModification.getNumberOfCharactersToSkip();
 
         return afterModification;
     }
 
-
     //
     // getter methods
     //
-
 
     /**
      * @return Returns the {@link #currentPosition}.
@@ -163,6 +148,5 @@ public class PositionAwareModificationFactory extends
     public long getCurrentPosition() {
         return currentPosition;
     }
-
 
 }

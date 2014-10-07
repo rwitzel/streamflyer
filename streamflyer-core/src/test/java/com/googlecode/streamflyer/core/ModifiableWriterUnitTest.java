@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 import org.apache.commons.io.output.NullWriter;
 
-
 /**
  * Tests {@link ModifyingWriter}.
  * 
@@ -32,25 +31,18 @@ import org.apache.commons.io.output.NullWriter;
  */
 public class ModifiableWriterUnitTest extends TestCase {
 
-    public void testCharacterBufferDoesNotExceedRequestedLength()
-            throws Exception {
+    public void testCharacterBufferDoesNotExceedRequestedLength() throws Exception {
 
-        assertCharacterBufferDoesNotExceedRequestedLength(0, 7, 5, 100000,
-                30000);
-        assertCharacterBufferDoesNotExceedRequestedLength(0, 5, 5, 100000,
-                30000);
+        assertCharacterBufferDoesNotExceedRequestedLength(0, 7, 5, 100000, 30000);
+        assertCharacterBufferDoesNotExceedRequestedLength(0, 5, 5, 100000, 30000);
 
-        assertCharacterBufferDoesNotExceedRequestedLength(3, 7, 5, 100000,
-                30000);
-        assertCharacterBufferDoesNotExceedRequestedLength(3, 5, 5, 100000,
-                30000);
+        assertCharacterBufferDoesNotExceedRequestedLength(3, 7, 5, 100000, 30000);
+        assertCharacterBufferDoesNotExceedRequestedLength(3, 5, 5, 100000, 30000);
     }
 
-
     /**
-     * Asserts that the content of the character buffer is never bigger than the
-     * newNumberOfChars plus the look-behind. Additionally asserts that the
-     * capacity of the character buffer does not exceed twice the size of
+     * Asserts that the content of the character buffer is never bigger than the newNumberOfChars plus the look-behind.
+     * Additionally asserts that the capacity of the character buffer does not exceed twice the size of
      * newNumberOfChars.
      * 
      * @param minimumLengthOfLookBehind
@@ -60,14 +52,11 @@ public class ModifiableWriterUnitTest extends TestCase {
      * @param bufferSize
      * @throws Exception
      */
-    private void assertCharacterBufferDoesNotExceedRequestedLength(
-            int minimumLengthOfLookBehind, int newNumberOfChars,
-            int numberOfCharactersToSkip, int sizeOfInput, int bufferSize)
-            throws Exception {
+    private void assertCharacterBufferDoesNotExceedRequestedLength(int minimumLengthOfLookBehind, int newNumberOfChars,
+            int numberOfCharactersToSkip, int sizeOfInput, int bufferSize) throws Exception {
 
         // setup: create modifier and reader
-        IdleModifier modifier = new IdleModifier(minimumLengthOfLookBehind,
-                newNumberOfChars, numberOfCharactersToSkip);
+        IdleModifier modifier = new IdleModifier(minimumLengthOfLookBehind, newNumberOfChars, numberOfCharactersToSkip);
         ModifyingWriter writer = new ModifyingWriter(new NullWriter(), modifier);
         Writer bufferedWriter = new BufferedWriter(writer, bufferSize);
 
@@ -79,28 +68,18 @@ public class ModifiableWriterUnitTest extends TestCase {
         writer.close();
 
         assertTrue("max requested length of character buffer "
-                + modifier.getFactory().getMaxRequestedNewNumberOfChars()
-                + " should be smaller than " + newNumberOfChars
-                + " but was not", modifier.getFactory()
-                .getMaxRequestedNewNumberOfChars() <= newNumberOfChars);
+                + modifier.getFactory().getMaxRequestedNewNumberOfChars() + " should be smaller than "
+                + newNumberOfChars + " but was not",
+                modifier.getFactory().getMaxRequestedNewNumberOfChars() <= newNumberOfChars);
 
-        assertTrue(
-                "max size of character buffer "
-                        + modifier.getMaxSizeOfCharacterBuffer()
-                        + " should be smaller than "
-                        + (minimumLengthOfLookBehind + newNumberOfChars)
-                        + " but was not",
-                modifier.getMaxSizeOfCharacterBuffer() <= minimumLengthOfLookBehind
-                        + newNumberOfChars);
+        assertTrue("max size of character buffer " + modifier.getMaxSizeOfCharacterBuffer()
+                + " should be smaller than " + (minimumLengthOfLookBehind + newNumberOfChars) + " but was not",
+                modifier.getMaxSizeOfCharacterBuffer() <= minimumLengthOfLookBehind + newNumberOfChars);
 
         // as we know that StringBuilder.ensureCapacity(int) doubles the input
         // size if appropriate, we test for (look-behind + numChars) * 2
-        assertTrue(
-                "max capacity of character buffer "
-                        + modifier.getMaxCapacityOfCharacterBuffer()
-                        + " should be smaller than "
-                        + (minimumLengthOfLookBehind + newNumberOfChars) * 2
-                        + " but was not",
+        assertTrue("max capacity of character buffer " + modifier.getMaxCapacityOfCharacterBuffer()
+                + " should be smaller than " + (minimumLengthOfLookBehind + newNumberOfChars) * 2 + " but was not",
                 modifier.getMaxCapacityOfCharacterBuffer() <= (minimumLengthOfLookBehind + newNumberOfChars) * 2);
     }
 

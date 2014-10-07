@@ -22,7 +22,6 @@ import java.util.regex.MatchResult;
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
-import com.googlecode.streamflyer.regex.addons.saxlike.Handler;
 import com.googlecode.streamflyer.regex.addons.tokens.Token;
 
 public class MyHandler implements Handler {

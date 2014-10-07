@@ -41,27 +41,21 @@ public class XmlVersionModifierTest extends TestCase {
     public void testXmlVersion() throws Exception {
 
         // version in prolog is 1.0
-        assertXmlVersionInProlog("<?xml version='1.0'>", "1.1",
-                "<?xml version='1.1'>");
+        assertXmlVersionInProlog("<?xml version='1.0'>", "1.1", "<?xml version='1.1'>");
 
         // version in prolog is 1.1
-        assertXmlVersionInProlog("<?xml version='1.1'>", "1.0",
-                "<?xml version='1.0'>");
+        assertXmlVersionInProlog("<?xml version='1.1'>", "1.0", "<?xml version='1.0'>");
 
         // no version in prolog
-        assertXmlVersionInProlog("<html version='1.1'>", "1.0",
-                "<?xml version='1.0'><html version='1.1'>");
+        assertXmlVersionInProlog("<html version='1.1'>", "1.0", "<?xml version='1.0'><html version='1.1'>");
 
-        assertXmlVersionInProlog("<html version='1.1'>", "1.1",
-                "<?xml version='1.1'><html version='1.1'>");
+        assertXmlVersionInProlog("<html version='1.1'>", "1.1", "<?xml version='1.1'><html version='1.1'>");
 
         // version in prolog has double quotes
-        assertXmlVersionInProlog("<?xml version=\"1.1\">", "1.0",
-                "<?xml version=\"1.0\">");
+        assertXmlVersionInProlog("<?xml version=\"1.1\">", "1.0", "<?xml version=\"1.0\">");
     }
 
-    public void testXmlVersion_utf8Bom_withoutByteSkippingReader()
-            throws Exception {
+    public void testXmlVersion_utf8Bom_withoutByteSkippingReader() throws Exception {
 
         byte UTF8_BOM_BYTE_1 = (byte) 0xEF;
         byte UTF8_BOM_BYTE_2 = (byte) 0xBB;
@@ -78,11 +72,9 @@ public class XmlVersionModifierTest extends TestCase {
         String inputWithBom = new String(bytesWithUtf8Bom);
         // System.out.println("inputWithBom: " + inputWithBom);
         try {
-            assertXmlVersionInProlog(inputWithBom, "1.1",
-                    "<?xml version='1.1'>");
+            assertXmlVersionInProlog(inputWithBom, "1.1", "<?xml version='1.1'>");
             fail("AssertionError expected");
-        }
-        catch (ComparisonFailure e) {
+        } catch (ComparisonFailure e) {
             // OK
         }
     }
@@ -137,15 +129,12 @@ public class XmlVersionModifierTest extends TestCase {
         assertXmlVersionInProlog(bytesWithBom, "1.1", "<?xml version='1.1'>");
     }
 
-    private void assertXmlVersionInProlog(byte[] input, String newXmlVersion,
-            String expectedProlog) throws Exception {
+    private void assertXmlVersionInProlog(byte[] input, String newXmlVersion, String expectedProlog) throws Exception {
 
-        XmlVersionReader xmlVersionReader = new XmlVersionReader(
-                new XmlStreamReader(new ByteArrayInputStream(input)));
+        XmlVersionReader xmlVersionReader = new XmlVersionReader(new XmlStreamReader(new ByteArrayInputStream(input)));
 
         // create the reader that modifies the XML version
-        ModifyingReader reader = new ModifyingReader(xmlVersionReader,
-                createModifier(newXmlVersion, 5));
+        ModifyingReader reader = new ModifyingReader(xmlVersionReader, createModifier(newXmlVersion, 5));
 
         String actualProlog = IOUtils.toString(reader);
 
@@ -153,38 +142,29 @@ public class XmlVersionModifierTest extends TestCase {
     }
 
     /**
-     * TODO prove that XML encoding detection by Apache commons XmlReader fails
-     * for this document anyway. Then we have 'proven' we don't have a 'real
-     * world' problem here ...
+     * TODO prove that XML encoding detection by Apache commons XmlReader fails for this document anyway. Then we have
+     * 'proven' we don't have a 'real world' problem here ...
      * 
      * @throws Exception
      */
-    public void testXmlVersion_XmlPrologTooLong_manyWhitespaceCharacters()
-            throws Exception {
+    public void testXmlVersion_XmlPrologTooLong_manyWhitespaceCharacters() throws Exception {
 
         String prefix = "<?xml " + StringUtils.repeat("      ", 1000);
         try {
-            assertXmlVersionInProlog(prefix + " version='1.0'>", "1.1", prefix
-                    + " version='1.1'>");
+            assertXmlVersionInProlog(prefix + " version='1.0'>", "1.1", prefix + " version='1.1'>");
             fail("XmlPrologRidiculouslyLongException expected");
-        }
-        catch (XmlPrologRidiculouslyLongException e) {
-            assertTrue(e.getMessage().contains(
-                    "the XML prolog of an XML document is too long:"));
-            assertTrue(e.getMessage().contains(
-                    "<?xml                                         "));
+        } catch (XmlPrologRidiculouslyLongException e) {
+            assertTrue(e.getMessage().contains("the XML prolog of an XML document is too long:"));
+            assertTrue(e.getMessage().contains("<?xml                                         "));
         }
     }
 
-    private void assertXmlVersionInProlog(String input, String newXmlVersion,
-            String expectedProlog) throws Exception {
+    private void assertXmlVersionInProlog(String input, String newXmlVersion, String expectedProlog) throws Exception {
 
-        XmlVersionReader xmlVersionReader = new XmlVersionReader(
-                new StringReader(input));
+        XmlVersionReader xmlVersionReader = new XmlVersionReader(new StringReader(input));
 
         // create the reader that modifies the XML version
-        ModifyingReader reader = new ModifyingReader(xmlVersionReader,
-                createModifier(newXmlVersion, 5));
+        ModifyingReader reader = new ModifyingReader(xmlVersionReader, createModifier(newXmlVersion, 5));
 
         String actualProlog = IOUtils.toString(reader);
 
@@ -209,15 +189,13 @@ public class XmlVersionModifierTest extends TestCase {
         System.arraycopy(bytes, 0, bytesWithBom, 2, bytes.length);
 
         // choose the input stream to modify
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                bytesWithBom);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytesWithBom);
 
         // wrap the input stream by BOM skipping reader
         Reader reader = new XmlStreamReader(inputStream);
 
         // create the reader that changes the XML version to 1.1
-        ModifyingReader modifyingReader = new ModifyingReader(reader,
-                new XmlVersionModifier("1.1", 8192));
+        ModifyingReader modifyingReader = new ModifyingReader(reader, new XmlVersionModifier("1.1", 8192));
 
         // use the modifying reader instead of the original reader
         String xml = IOUtils.toString(modifyingReader);

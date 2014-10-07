@@ -19,8 +19,6 @@ import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
-import com.googlecode.streamflyer.regex.addons.tokens.Token;
-import com.googlecode.streamflyer.regex.addons.tokens.TokenProcessor;
 import com.googlecode.streamflyer.regex.addons.util.DoNothingProcessor;
 
 /**
@@ -47,8 +45,8 @@ public class MyTokenProcessor extends TokenProcessor {
     }
 
     @Override
-    protected MatchProcessorResult processToken(Token token, StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
-            MatchResult matchResult) {
+    protected MatchProcessorResult processToken(Token token, StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
         // +++ save the found token
         String foundToken = token.getName() + ":" + matchResult.group();

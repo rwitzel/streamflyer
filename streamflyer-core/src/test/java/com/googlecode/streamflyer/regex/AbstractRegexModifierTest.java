@@ -43,8 +43,7 @@ public abstract class AbstractRegexModifierTest {
         return new OnStreamStandardMatcher(matcher);
     }
 
-    protected RegexModifier createModifier(String regex, String replacement,
-            int minimumLengthOfLookBehind,
+    protected RegexModifier createModifier(String regex, String replacement, int minimumLengthOfLookBehind,
             int requestedCapacityOfCharacterBuffer, int flags) {
         // create matcher
         OnStreamMatcher matcher = createMatcher(regex, flags);
@@ -59,19 +58,16 @@ public abstract class AbstractRegexModifierTest {
         return modifier;
     }
 
-    protected RegexModifier assertReplacementByReader(String input,
-            String regex, String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput,
-            int flags) throws Exception {
+    protected RegexModifier assertReplacementByReader(String input, String regex, String replacement,
+            int minimumLengthOfLookBehind, int requestedCapacityOfCharacterBuffer, String expectedOutput, int flags)
+            throws Exception {
 
         // create modifier
-        RegexModifier modifier = createModifier(regex, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                flags);
+        RegexModifier modifier = createModifier(regex, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer, flags);
 
         // create reader
-        Reader reader = new ModifyingReader(new BufferedReader(
-                new StringReader(input)), modifier);
+        Reader reader = new ModifyingReader(new BufferedReader(new StringReader(input)), modifier);
 
         // read the stream into an output stream
         String foundOutput = IOUtils.toString(reader);
@@ -79,10 +75,8 @@ public abstract class AbstractRegexModifierTest {
         // compare the expected result with the found result
         if (!expectedOutput.equals(foundOutput)) {
 
-            System.out.println("minimumLengthOfLookBehind: "
-                    + minimumLengthOfLookBehind);
-            System.out.println("requestedCapacityOfCharacterBuffer: "
-                    + requestedCapacityOfCharacterBuffer);
+            System.out.println("minimumLengthOfLookBehind: " + minimumLengthOfLookBehind);
+            System.out.println("requestedCapacityOfCharacterBuffer: " + requestedCapacityOfCharacterBuffer);
 
             assertEquals(expectedOutput, foundOutput);
         }
@@ -90,15 +84,13 @@ public abstract class AbstractRegexModifierTest {
         return modifier;
     }
 
-    protected RegexModifier assertReplacementByWriter(String input,
-            String regex, String replacement, int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer, String expectedOutput,
-            int flags) throws Exception {
+    protected RegexModifier assertReplacementByWriter(String input, String regex, String replacement,
+            int minimumLengthOfLookBehind, int requestedCapacityOfCharacterBuffer, String expectedOutput, int flags)
+            throws Exception {
 
         // create modifier
-        RegexModifier modifier = createModifier(regex, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer,
-                flags);
+        RegexModifier modifier = createModifier(regex, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer, flags);
 
         // setup: create modifier and writer
         StringWriter stringWriter = new StringWriter();
@@ -116,10 +108,8 @@ public abstract class AbstractRegexModifierTest {
         // compare the expected result with the found result
         if (!expectedOutput.equals(foundOutput)) {
 
-            System.out.println("minimumLengthOfLookBehind: "
-                    + minimumLengthOfLookBehind);
-            System.out.println("requestedCapacityOfCharacterBuffer: "
-                    + requestedCapacityOfCharacterBuffer);
+            System.out.println("minimumLengthOfLookBehind: " + minimumLengthOfLookBehind);
+            System.out.println("requestedCapacityOfCharacterBuffer: " + requestedCapacityOfCharacterBuffer);
 
             assertEquals(expectedOutput, foundOutput);
         }

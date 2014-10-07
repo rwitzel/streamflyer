@@ -21,7 +21,6 @@ import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.core.Modifier;
-import com.googlecode.streamflyer.regex.addons.nomatch.NoMatch;
 
 /**
  * Collects the information about noMatches during the stream processing to test them in unit tests.

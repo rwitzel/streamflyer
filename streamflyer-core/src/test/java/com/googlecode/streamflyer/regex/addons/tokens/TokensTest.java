@@ -23,9 +23,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.googlecode.streamflyer.regex.addons.tokens.Token;
-import com.googlecode.streamflyer.regex.addons.tokens.TokensMatcher;
-
 /**
  * Tests {@link TokensMatcher}.
  * 

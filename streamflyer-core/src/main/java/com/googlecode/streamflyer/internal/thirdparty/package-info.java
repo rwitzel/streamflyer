@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-
 /** This package contains third-party classes for internal use only. */
 package com.googlecode.streamflyer.internal.thirdparty;

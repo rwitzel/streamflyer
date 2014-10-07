@@ -23,8 +23,6 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import com.googlecode.streamflyer.regex.addons.util.EmbeddedFlagUtil;
-
 /**
  * Tests {@link EmbeddedFlagUtil}.
  * 

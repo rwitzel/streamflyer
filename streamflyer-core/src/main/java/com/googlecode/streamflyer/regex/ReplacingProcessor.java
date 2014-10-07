@@ -24,8 +24,8 @@ import java.util.regex.Matcher;
 import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
 
 /**
- * This {@link MatchProcessor} replaces the matching text (given by the
- * {@link MatchResult}) with the configured replacement.
+ * This {@link MatchProcessor} replaces the matching text (given by the {@link MatchResult}) with the configured
+ * replacement.
  * <p>
  * The replacement can be defined with the same syntax as defined by
  * {@link Matcher#appendReplacement(StringBuffer, String)}
@@ -41,8 +41,7 @@ new ReplacingProcessor("aaa$2bbb$1ccc") // replaces each match with "aaa$2bbb$1c
  * @author rwoo
  * @since 18.06.2011
  */
-public class ReplacingProcessor extends AbstractMatchProcessor implements
-        MatchProcessor {
+public class ReplacingProcessor extends AbstractMatchProcessor implements MatchProcessor {
 
     //
     // injected properties
@@ -54,8 +53,7 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
     private List<Object> parts = null;
 
     /**
-     * If not null, then the replacement do not uses groups. Then this property
-     * contains the entire replacement.
+     * If not null, then the replacement do not uses groups. Then this property contains the entire replacement.
      */
     private CharSequence replacementWithoutGroupReferences;
 
@@ -84,17 +82,14 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
 
         if (parts.size() == 1 && (parts.get(0) instanceof CharSequence)) {
 
-            this.replacementWithoutGroupReferences = (CharSequence) parts
-                    .get(0);
+            this.replacementWithoutGroupReferences = (CharSequence) parts.get(0);
 
-        }
-        else {
+        } else {
 
             this.replacementWithoutGroupReferences = null;
 
         }
     }
-
 
     /**
      * Package-private for JUnit-tests.
@@ -124,8 +119,7 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
 
                 int groupNumberStartPosition = position;
                 if (groupNumberStartPosition == replacement.length()) {
-                    throw new IllegalArgumentException("group reference $ "
-                            + "without number at the end " + "of the "
+                    throw new IllegalArgumentException("group reference $ " + "without number at the end " + "of the "
                             + "replacement string (" + replacement + ")");
                 }
 
@@ -142,15 +136,12 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
                 // belong to the group reference
 
                 if (position == groupNumberStartPosition) {
-                    throw new IllegalArgumentException(
-                            "invalid reference to group at position "
-                                    + position + " in replacement string "
-                                    + replacement.substring(0, position) + "[]"
-                                    + replacement.substring(position));
+                    throw new IllegalArgumentException("invalid reference to group at position " + position
+                            + " in replacement string " + replacement.substring(0, position) + "[]"
+                            + replacement.substring(position));
                 }
 
-                String groupNumberString = replacement.substring(
-                        groupNumberStartPosition, position);
+                String groupNumberString = replacement.substring(groupNumberStartPosition, position);
                 int groupNumber = Integer.parseInt(groupNumberString);
 
                 compiledReplacement.add(groupNumber);
@@ -181,15 +172,14 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
     }
 
     /**
-     * Replaces the match as given by the {@link MatchResult} with the
-     * configured replacement.
+     * Replaces the match as given by the {@link MatchResult} with the configured replacement.
      * 
-     * @see com.googlecode.streamflyer.regex.MatchProcessor#process(java.lang.StringBuilder,
-     *      int, java.util.regex.MatchResult)
+     * @see com.googlecode.streamflyer.regex.MatchProcessor#process(java.lang.StringBuilder, int,
+     *      java.util.regex.MatchResult)
      */
     @Override
-    public MatchProcessorResult process(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
+    public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult) {
 
         int start = matchResult.start();
         int end = matchResult.end();
@@ -198,10 +188,8 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
 
             characterBuffer.delete(start, end);
             characterBuffer.insert(start, replacementWithoutGroupReferences);
-            return createResult(matchResult, start
-                    + replacementWithoutGroupReferences.length(), true);
-        }
-        else {
+            return createResult(matchResult, start + replacementWithoutGroupReferences.length(), true);
+        } else {
 
             // (1) create replacement
             // (one could set a reasonable value for the initial size of the
@@ -212,8 +200,7 @@ public class ReplacingProcessor extends AbstractMatchProcessor implements
                 if (part instanceof Integer) {
                     // append the value of the referred group
                     replacement.append(matchResult.group((Integer) part));
-                }
-                else {
+                } else {
                     // append the static part
                     replacement.append(part); // part is instance of String
                 }

@@ -21,8 +21,7 @@ package com.googlecode.streamflyer.regex;
 import java.util.regex.MatchResult;
 
 /**
- * Helps to return a {@link MatchProcessorResult} that cannot cause an endless
- * loop.
+ * Helps to return a {@link MatchProcessorResult} that cannot cause an endless loop.
  * 
  * @author rwoo
  * @since 10.11.2013
@@ -30,17 +29,15 @@ import java.util.regex.MatchResult;
 public abstract class AbstractMatchProcessor implements MatchProcessor {
 
     /**
-     * @param matchResult the {@link MatchResult} given to the
-     *        {@link MatchProcessor}.
-     * @param newMatchEnd the position of the end of the matched string after
-     *        the character buffer is modified.
-     * @param continueMatching See
-     *        {@link MatchProcessorResult#isContinueMatching()}
-     * @return Returns a {@link MatchProcessorResult} that cannot cause an
-     *         endless loop.
+     * @param matchResult
+     *            the {@link MatchResult} given to the {@link MatchProcessor}.
+     * @param newMatchEnd
+     *            the position of the end of the matched string after the character buffer is modified.
+     * @param continueMatching
+     *            See {@link MatchProcessorResult#isContinueMatching()}
+     * @return Returns a {@link MatchProcessorResult} that cannot cause an endless loop.
      */
-    protected MatchProcessorResult createResult(MatchResult matchResult,
-            int newMatchEnd, boolean continueMatching) {
+    protected MatchProcessorResult createResult(MatchResult matchResult, int newMatchEnd, boolean continueMatching) {
 
         int matchStart = matchResult.start();
         int matchEnd = matchResult.end();

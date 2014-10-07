@@ -18,11 +18,9 @@ package com.googlecode.streamflyer.core;
 
 import java.util.Map;
 
-
 /**
- * Thrown if an implementation of a {@link Modifier} returns invalid
- * {@link AfterModification messages} to the {@link ModifyingReader} or
- * {@link ModifyingWriter}.
+ * Thrown if an implementation of a {@link Modifier} returns invalid {@link AfterModification messages} to the
+ * {@link ModifyingReader} or {@link ModifyingWriter}.
  * 
  * @author rwoo
  * @since 17.06.2011
@@ -45,8 +43,7 @@ public class FaultyModifierException extends RuntimeException {
      * @param message
      * @param description
      */
-    public FaultyModifierException(String message,
-            Map<String, Object> description) {
+    public FaultyModifierException(String message, Map<String, Object> description) {
         super(message);
         this.description = description;
     }

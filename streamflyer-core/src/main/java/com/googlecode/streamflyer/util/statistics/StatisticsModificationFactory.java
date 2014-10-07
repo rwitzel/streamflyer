@@ -19,9 +19,8 @@ import com.googlecode.streamflyer.core.AfterModification;
 import com.googlecode.streamflyer.util.ModificationFactory;
 
 /**
- * Records some statistics of the usage of the underlying
- * {@link ModificationFactory}. This might be useful for reporting
- * modifications.
+ * Records some statistics of the usage of the underlying {@link ModificationFactory}. This might be useful for
+ * reporting modifications.
  * 
  * @author rwoo
  * @since 28.06.2011
@@ -40,7 +39,6 @@ public class StatisticsModificationFactory extends ModificationFactoryDecorator 
 
     protected int maxRequestedNewNumberOfChars;
 
-
     //
     // constructors
     //
@@ -58,28 +56,22 @@ public class StatisticsModificationFactory extends ModificationFactoryDecorator 
     //
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#modifyAgainImmediately(int,
-     *      int)
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#modifyAgainImmediately(int, int)
      */
     @Override
-    public AfterModification modifyAgainImmediately(int newNumberOfChars,
-            int firstModifiableCharacterInBuffer) {
+    public AfterModification modifyAgainImmediately(int newNumberOfChars, int firstModifiableCharacterInBuffer) {
 
-        return count(super.modifyAgainImmediately(newNumberOfChars,
-                firstModifiableCharacterInBuffer));
+        return count(super.modifyAgainImmediately(newNumberOfChars, firstModifiableCharacterInBuffer));
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#modifyAgainWithMoreInput(java.lang.StringBuilder,
-     *      int)
+     * @see com.googlecode.streamflyer.util.ModificationFactory#modifyAgainWithMoreInput(java.lang.StringBuilder, int)
      */
     @Override
-    public AfterModification fetchMoreInput(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification fetchMoreInput(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        return count(super.fetchMoreInput(numberOfCharactersToSkip,
-                characterBuffer, firstModifiableCharacterInBuffer,
+        return count(super.fetchMoreInput(numberOfCharactersToSkip, characterBuffer, firstModifiableCharacterInBuffer,
                 endOfStreamHit));
     }
 
@@ -88,50 +80,44 @@ public class StatisticsModificationFactory extends ModificationFactoryDecorator 
      *      java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification skipOrStop(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
+    public AfterModification skipOrStop(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        return count(super.skipOrStop(numberOfCharactersToSkip,
-                characterBuffer, firstModifiableCharacterInBuffer,
+        return count(super.skipOrStop(numberOfCharactersToSkip, characterBuffer, firstModifiableCharacterInBuffer,
                 endOfStreamHit));
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#skip(int,
-     *      java.lang.StringBuilder, int, boolean)
-     */
-    @Override
-    public AfterModification skip(int numberOfCharactersToSkip,
-            StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
-
-        return count(super.skip(numberOfCharactersToSkip, characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit));
-    }
-
-    /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#skipEntireBuffer(java.lang.StringBuilder,
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#skip(int, java.lang.StringBuilder,
      *      int, boolean)
      */
     @Override
-    public AfterModification skipEntireBuffer(StringBuilder characterBuffer,
+    public AfterModification skip(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
 
-        return count(super.skipEntireBuffer(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit));
+        return count(super.skip(numberOfCharactersToSkip, characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit));
     }
 
     /**
-     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#stop(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.util.ModificationFactory#skipEntireBuffer(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification stop(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification skipEntireBuffer(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        return count(super.stop(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit));
+        return count(super.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit));
+    }
+
+    /**
+     * @see com.googlecode.streamflyer.util.statistics.ModificationFactoryDecorator#stop(java.lang.StringBuilder, int,
+     *      boolean)
+     */
+    @Override
+    public AfterModification stop(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
+
+        return count(super.stop(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit));
     }
 
     protected AfterModification count(AfterModification afterModification) {
@@ -145,14 +131,11 @@ public class StatisticsModificationFactory extends ModificationFactoryDecorator 
         }
 
         // update maxRequestedNewNumberOfChars
-        if (maxRequestedNewNumberOfChars < afterModification
-                .getNewNumberOfChars()) {
-            maxRequestedNewNumberOfChars = afterModification
-                    .getNewNumberOfChars();
+        if (maxRequestedNewNumberOfChars < afterModification.getNewNumberOfChars()) {
+            maxRequestedNewNumberOfChars = afterModification.getNewNumberOfChars();
         }
 
-        if (afterModification.getNewNumberOfChars() < afterModification
-                .getNewNumberOfChars()) {
+        if (afterModification.getNewNumberOfChars() < afterModification.getNewNumberOfChars()) {
             numMoreInputThanDefault++;
         }
 

@@ -29,8 +29,7 @@ package com.googlecode.streamflyer.xml;
 public class XmlPrologRidiculouslyLongException extends RuntimeException {
 
     public XmlPrologRidiculouslyLongException(String startOfXmlProlog) {
-        super("the XML prolog of an XML document is too long: "
-                + startOfXmlProlog);
+        super("the XML prolog of an XML document is too long: " + startOfXmlProlog);
 
     }
 }

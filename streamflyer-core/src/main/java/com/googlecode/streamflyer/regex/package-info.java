@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 /** This package contains the classes that are needed to apply regular
  * expressions on character streams. The pivotal class is {@link com.googlecode.streamflyer.regex.RegexModifier}. */
 package com.googlecode.streamflyer.regex;

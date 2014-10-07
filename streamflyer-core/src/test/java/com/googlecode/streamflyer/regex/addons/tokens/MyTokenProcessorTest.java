@@ -28,9 +28,6 @@ import org.junit.Test;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.addons.tokens.Token;
-import com.googlecode.streamflyer.regex.addons.tokens.TokenProcessor;
-import com.googlecode.streamflyer.regex.addons.tokens.TokensMatcher;
 
 /**
  * Tests {@link MyTokenProcessor} and {@link TokenProcessor}.

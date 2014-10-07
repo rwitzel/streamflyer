@@ -32,28 +32,24 @@ class PositionOrientedModifier implements Modifier {
     private PositionAwareModificationFactory factory;
 
     /**
-     * Maps positions in streams to modifications that are apply (at the given
-     * position).
+     * Maps positions in streams to modifications that are apply (at the given position).
      */
     private Map<Long, Change> modifications;
-
 
     public PositionOrientedModifier(Map<Long, Change> modifications) {
 
         ZzzValidate.notNull(modifications, "modifications must not be null");
 
         this.modifications = modifications;
-        this.factory = new PositionAwareModificationFactory(
-                new ModificationFactory(3, 10));
+        this.factory = new PositionAwareModificationFactory(new ModificationFactory(3, 10));
     }
 
     /**
-     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
         long currentPosition = factory.getCurrentPosition();
 
@@ -61,64 +57,47 @@ class PositionOrientedModifier implements Modifier {
 
             Change change = modifications.get(currentPosition);
 
-            if (firstModifiableCharacterInBuffer
-                    + change.getNumberOfCharactersToDelete() > characterBuffer
-                        .length()) {
+            if (firstModifiableCharacterInBuffer + change.getNumberOfCharactersToDelete() > characterBuffer.length()) {
 
                 if (endOfStreamHit) {
                     throw new FaultyModifierException("gvgfd", null);
-                }
-                else {
+                } else {
 
-                    return factory.fetchMoreInput(0, characterBuffer,
-                            firstModifiableCharacterInBuffer, endOfStreamHit);
+                    return factory.fetchMoreInput(0, characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
                 }
 
-            }
-            else {
+            } else {
 
                 if (change.getNumberOfCharactersToDelete() > 0) {
 
-                    characterBuffer.delete(
-                            firstModifiableCharacterInBuffer,
-                            firstModifiableCharacterInBuffer
-                                    + change.getNumberOfCharactersToDelete());
+                    characterBuffer.delete(firstModifiableCharacterInBuffer,
+                            firstModifiableCharacterInBuffer + change.getNumberOfCharactersToDelete());
                 }
 
                 if (change.getInsertion() != null) {
-                    characterBuffer.insert(firstModifiableCharacterInBuffer,
-                            change.getInsertion());
+                    characterBuffer.insert(firstModifiableCharacterInBuffer, change.getInsertion());
                 }
 
-                return nextPosition(characterBuffer,
-                        firstModifiableCharacterInBuffer, endOfStreamHit);
+                return nextPosition(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
             }
 
-        }
-        else {
+        } else {
 
-            return nextPosition(characterBuffer,
-                    firstModifiableCharacterInBuffer, endOfStreamHit);
+            return nextPosition(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
         }
     }
 
-    private AfterModification nextPosition(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    private AfterModification nextPosition(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
-        if (endOfStreamHit
-                && characterBuffer.length() - firstModifiableCharacterInBuffer == 0) {
-            return factory.stop(characterBuffer,
-                    firstModifiableCharacterInBuffer, endOfStreamHit);
-        }
-        else {
+        if (endOfStreamHit && characterBuffer.length() - firstModifiableCharacterInBuffer == 0) {
+            return factory.stop(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
+        } else {
             if (characterBuffer.length() - firstModifiableCharacterInBuffer == 0) {
-                return factory.skip(0, characterBuffer,
-                        firstModifiableCharacterInBuffer, endOfStreamHit);
-            }
-            else {
+                return factory.skip(0, characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
+            } else {
                 // skip one character
-                return factory.skip(1, characterBuffer,
-                        firstModifiableCharacterInBuffer, endOfStreamHit);
+                return factory.skip(1, characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
             }
         }
     }

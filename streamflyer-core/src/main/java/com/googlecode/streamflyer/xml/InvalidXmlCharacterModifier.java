@@ -29,17 +29,14 @@ import com.googlecode.streamflyer.util.statistics.LineColumnAwareModificationFac
 import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFactory;
 
 /**
- * This modifier replaces invalid XML characters in an stream that contains an
- * XML document.
+ * This modifier replaces invalid XML characters in an stream that contains an XML document.
  * <p>
  * <h1>Contents</h1>
  * <p>
  * <b> <a href="#g1">1. How do I use this modifier?</a><br/>
- * <a href="#g2">2. In addition to the replacement of the invalid characters I
- * want to record the replacements and sent notifications. How can I do
- * this?</a> <br/>
- * <a href="#g3">3. How can I find out the position of the matches within the
- * stream?</a> <br/>
+ * <a href="#g2">2. In addition to the replacement of the invalid characters I want to record the replacements and sent
+ * notifications. How can I do this?</a> <br/>
+ * <a href="#g3">3. How can I find out the position of the matches within the stream?</a> <br/>
  * <a href="#g4">4. How do I use this class with an {@link InputStream}?</a><br/>
  * <a href="#g5">5. How much memory does the modifier consume?</a><br/>
  * <a href="#g6">6. When should I not use this modifier?</a><br/>
@@ -63,8 +60,7 @@ String actualOutput = IOUtils.toString(modifyingReader);
 
 assertEquals("foobar", actualOutput);</pre></code>
  * <p>
- * EXAMPLE 2. This example shows how to replace the invalid characters with an
- * error message:
+ * EXAMPLE 2. This example shows how to replace the invalid characters with an error message:
  * <code><pre class="prettyprint lang-java">// choose the character stream to modify
 Reader reader = new StringReader("foo\uD8FFbar");
 
@@ -80,35 +76,30 @@ ModifyingReader modifyingReader = new ModifyingReader(reader, modifier);
 String actualOutput = IOUtils.toString(modifyingReader);
 
 assertEquals("foo[INVALID XML CHAR FOUND: U+D8FF]bar", actualOutput);</pre></code>
- * <h3 id="g2">2. In addition to the replacement of the invalid characters I
- * want to record the replacements and sent notifications. How can I do this?</h3>
+ * <h3 id="g2">2. In addition to the replacement of the invalid characters I want to record the replacements and sent
+ * notifications. How can I do this?</h3>
  * <p>
  * Subclass {@link InvalidXmlCharacterModifier} and override
  * {@link InvalidXmlCharacterModifier#replacement(StringBuilder)}.
- * <h3 href="#g3">3. How can I find out the position of the invalid characters
- * within the stream?</h3> <br/>
+ * <h3 href="#g3">3. How can I find out the position of the invalid characters within the stream?</h3> <br/>
  * <p>
- * You must count the characters that you skip. You can do this by subclassing
- * {@link InvalidXmlCharacterModifier} and overwrite
- * {@link Modifier#modify(StringBuilder, int, boolean)}.
+ * You must count the characters that you skip. You can do this by subclassing {@link InvalidXmlCharacterModifier} and
+ * overwrite {@link Modifier#modify(StringBuilder, int, boolean)}.
  * <p>
- * You might find {@link LineColumnAwareModificationFactory} and
- * {@link PositionAwareModificationFactory} helpful as well.
+ * You might find {@link LineColumnAwareModificationFactory} and {@link PositionAwareModificationFactory} helpful as
+ * well.
  * <h3 id="g4">4. How do I use this class with an {@link InputStream}?</h3>
  * <p>
- * See
- * {@link ModifyingReaderFactory#createInvalidXmlCharacterRemovingModifier(java.io.InputStream)}.
+ * See {@link ModifyingReaderFactory#createInvalidXmlCharacterRemovingModifier(java.io.InputStream)}.
  * <h3 id="g5">5. How much memory does the modifier consume?</h3>
  * <p>
- * The memory consumption of this modifier is roughly given by the first
- * argument of
+ * The memory consumption of this modifier is roughly given by the first argument of
  * {@link #InvalidXmlCharacterModifier(int, String, String, boolean)}.
  * <p>
  * <h3 id="g5">6. When should I not use this modifier?</h3>
  * <p>
- * Use {@link XmlVersionModifier} instead of this class if only the (wrong)
- * version in the prolog of the XML document restricts the range of valid
- * characters.
+ * Use {@link XmlVersionModifier} instead of this class if only the (wrong) version in the prolog of the XML document
+ * restricts the range of valid characters.
  * 
  * @author rwoo
  * @since 23.06.2011
@@ -116,8 +107,7 @@ assertEquals("foo[INVALID XML CHAR FOUND: U+D8FF]bar", actualOutput);</pre></cod
 public class InvalidXmlCharacterModifier implements Modifier {
 
     /**
-     * http://www.w3.org/TR/xml/#charsets (referring to the fifth edition of the
-     * specification)
+     * http://www.w3.org/TR/xml/#charsets (referring to the fifth edition of the specification)
      */
     public static final String XML_10_VERSION = "1.0";
 
@@ -125,7 +115,6 @@ public class InvalidXmlCharacterModifier implements Modifier {
      * http://www.w3.org/TR/xml11/#charsets
      */
     public static final String XML_11_VERSION = "1.1";
-
 
     //
     // injected properties
@@ -144,21 +133,19 @@ public class InvalidXmlCharacterModifier implements Modifier {
     protected Matcher matcher;
 
     /**
-     * If this is true, then the string "$0" in the replacement is replaced with
-     * the hexadecimal representation of the XML character.
+     * If this is true, then the string "$0" in the replacement is replaced with the hexadecimal representation of the
+     * XML character.
      */
     protected boolean dollarZero;
-
 
     //
     // constructors
     //
 
     /**
-     * Like
-     * {@link InvalidXmlCharacterModifier#InvalidXmlCharacterModifier(int, String, String, boolean)}
-     * but uses 8192 as default for <code>newNumberOfChars</code> and sets
-     * <code>dollarZero</code> to true if the replacement string contains "$0".
+     * Like {@link InvalidXmlCharacterModifier#InvalidXmlCharacterModifier(int, String, String, boolean)} but uses 8192
+     * as default for <code>newNumberOfChars</code> and sets <code>dollarZero</code> to true if the replacement string
+     * contains "$0".
      */
     public InvalidXmlCharacterModifier(String replacement, String xmlVersion) {
         this(8192, replacement, xmlVersion, replacement.contains("$0"));
@@ -166,14 +153,14 @@ public class InvalidXmlCharacterModifier implements Modifier {
 
     /**
      * @param newNumberOfChars
-     * @param replacement the string that shall replace invalid XML characters.
-     *        This string may contain "$0" which refers to the replaced
-     *        character, see {@link Matcher#replaceAll(String)}
-     * @param xmlVersion Must not be <code>null</code>.
+     * @param replacement
+     *            the string that shall replace invalid XML characters. This string may contain "$0" which refers to the
+     *            replaced character, see {@link Matcher#replaceAll(String)}
+     * @param xmlVersion
+     *            Must not be <code>null</code>.
      * @param dollarZero
      */
-    public InvalidXmlCharacterModifier(int newNumberOfChars,
-            String replacement, String xmlVersion, boolean dollarZero) {
+    public InvalidXmlCharacterModifier(int newNumberOfChars, String replacement, String xmlVersion, boolean dollarZero) {
 
         ZzzValidate.notNull(replacement, "replacement must not be null");
         ZzzValidate.notNull(xmlVersion, "xmlVersion must not be null");
@@ -186,17 +173,13 @@ public class InvalidXmlCharacterModifier implements Modifier {
         Pattern pattern;
         if (XML_10_VERSION.equals(xmlVersion)) {
             pattern = Pattern.compile(getInvalidXmlCharacterRegex_Xml10());
-        }
-        else if (XML_11_VERSION.equals(xmlVersion)) {
+        } else if (XML_11_VERSION.equals(xmlVersion)) {
             pattern = Pattern.compile(getInvalidXmlCharacterRegex_Xml11());
-        }
-        else {
-            throw new IllegalArgumentException("xmlVersion has the illegal "
-                    + "(or unsupported) value " + xmlVersion);
+        } else {
+            throw new IllegalArgumentException("xmlVersion has the illegal " + "(or unsupported) value " + xmlVersion);
         }
         this.matcher = pattern.matcher("");
     }
-
 
     /**
      * <pre>
@@ -206,8 +189,7 @@ public class InvalidXmlCharacterModifier implements Modifier {
      * 
      * [Source: http://www.w3.org/TR/xml/#charsets ]
      * 
-     * @return Returns a regular expression that matches invalid XML 1.0
-     *         characters.
+     * @return Returns a regular expression that matches invalid XML 1.0 characters.
      */
     protected String getInvalidXmlCharacterRegex_Xml10() {
         // Most characters are probably from the range U+0020 -U+D7FF.
@@ -224,8 +206,7 @@ public class InvalidXmlCharacterModifier implements Modifier {
      * 
      * [Source: http://www.w3.org/TR/xml11/#charsets ]
      * 
-     * @return Returns a regular expression that matches invalid XML 1.1
-     *         characters.
+     * @return Returns a regular expression that matches invalid XML 1.1 characters.
      */
     protected String getInvalidXmlCharacterRegex_Xml11() {
         return "[^\\u0001-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]";
@@ -236,16 +217,14 @@ public class InvalidXmlCharacterModifier implements Modifier {
     //
 
     /**
-     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder,
-     *      int, boolean)
+     * @see com.googlecode.streamflyer.core.Modifier#modify(java.lang.StringBuilder, int, boolean)
      */
     @Override
-    public AfterModification modify(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {
+    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            boolean endOfStreamHit) {
 
         matcher.reset(characterBuffer);
-        matcher.region(firstModifiableCharacterInBuffer,
-                characterBuffer.length());
+        matcher.region(firstModifiableCharacterInBuffer, characterBuffer.length());
 
         // String newCharacterBuffer = matcher.replaceAll(replacement);
         // characterBuffer.setLength(0);
@@ -256,15 +235,13 @@ public class InvalidXmlCharacterModifier implements Modifier {
             start = onMatch(characterBuffer);
         }
 
-        return factory.skipEntireBuffer(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        return factory.skipEntireBuffer(characterBuffer, firstModifiableCharacterInBuffer, endOfStreamHit);
     }
 
     /**
      * Replaces the found invalid XML character with the given replacement.
      * <p>
-     * You may override this method to insert some information about invalid
-     * character in to the character buffer.
+     * You may override this method to insert some information about invalid character in to the character buffer.
      * 
      * @param characterBuffer
      */
@@ -296,17 +273,14 @@ public class InvalidXmlCharacterModifier implements Modifier {
             // TODO should I do some caching of chHex to improve performance?
 
             return replacement.replace("$0", chHex);
-        }
-        else {
+        } else {
             return replacement;
         }
     }
 
-
     //
     // override Object.*
     //
-
 
     /**
      * @see java.lang.Object#toString()
@@ -323,6 +297,5 @@ public class InvalidXmlCharacterModifier implements Modifier {
         builder.append("]");
         return builder.toString();
     }
-
 
 }

@@ -21,8 +21,8 @@ import java.util.regex.MatchResult;
 import com.googlecode.streamflyer.core.Modifier;
 
 /**
- * This interface is used by {@link RegexModifier}. This interface defines what
- * to do if the regular expression matches some text in the stream.
+ * This interface is used by {@link RegexModifier}. This interface defines what to do if the regular expression matches
+ * some text in the stream.
  * 
  * @author rwoo
  * @since 18.06.2011
@@ -30,20 +30,19 @@ import com.googlecode.streamflyer.core.Modifier;
 public interface MatchProcessor {
 
     /**
-     * Processes the given match. The match processor is allowed to modify the
-     * given character buffer but it must not modify the characters before the
-     * first modifiable character in the buffer because the characters before
-     * that position are considered unmodifiable.
+     * Processes the given match. The match processor is allowed to modify the given character buffer but it must not
+     * modify the characters before the first modifiable character in the buffer because the characters before that
+     * position are considered unmodifiable.
      * 
-     * @param characterBuffer Must not be <code>null</code>.
-     * @param firstModifiableCharacterInBuffer See the parameter with the same
-     *        name in {@link Modifier#modify(StringBuilder, int, boolean)}.
-     * @param matchResult The match that is found in the given character buffer.
-     *        Must not be <code>null</code>.
-     * @return Returns an {@link MatchProcessorResult object} that describes
-     *         where to continue the matching.
+     * @param characterBuffer
+     *            Must not be <code>null</code>.
+     * @param firstModifiableCharacterInBuffer
+     *            See the parameter with the same name in {@link Modifier#modify(StringBuilder, int, boolean)}.
+     * @param matchResult
+     *            The match that is found in the given character buffer. Must not be <code>null</code>.
+     * @return Returns an {@link MatchProcessorResult object} that describes where to continue the matching.
      */
-    public MatchProcessorResult process(StringBuilder characterBuffer,
-            int firstModifiableCharacterInBuffer, MatchResult matchResult);
+    public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
+            MatchResult matchResult);
 
 }

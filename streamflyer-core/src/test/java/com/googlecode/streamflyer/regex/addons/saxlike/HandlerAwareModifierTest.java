@@ -27,7 +27,6 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.googlecode.streamflyer.core.ModifyingReader;
-import com.googlecode.streamflyer.regex.addons.saxlike.HandlerAwareModifier;
 import com.googlecode.streamflyer.regex.addons.tokens.Token;
 
 /**
@@ -73,9 +72,9 @@ public class HandlerAwareModifierTest {
         expectedParts += "SecondToken:def[MATCH]";
         expectedParts += "_zz[BEFORE_FETCH]";
 
-//        for (String foundPart : foundParts) {
-//            System.out.println(foundPart);
-//        }
+        // for (String foundPart : foundParts) {
+        // System.out.println(foundPart);
+        // }
 
         String joinedFoundParts = join(foundParts, "");
 

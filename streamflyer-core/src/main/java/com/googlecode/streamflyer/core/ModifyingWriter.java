@@ -25,18 +25,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * A {@link Writer} that allows a {@link Modifier} to modify the characters in
- * the underlying stream.
+ * A {@link Writer} that allows a {@link Modifier} to modify the characters in the underlying stream.
  * <p>
  * This class is not synchronized.
  * <p>
- * ATTENTION! This writer flushes only characters that are confirmed by the
- * given {@link Modifier}. EXAMPLE: Assume you wrote 50 bytes to the writer and
- * the modifier confirmed 25 of them by
- * {@link AfterModification#getNumberOfCharactersToSkip() skipping } them, then
- * subsequent flushing will write only these 25 confirmed characters.
+ * ATTENTION! This writer flushes only characters that are confirmed by the given {@link Modifier}. EXAMPLE: Assume you
+ * wrote 50 bytes to the writer and the modifier confirmed 25 of them by
+ * {@link AfterModification#getNumberOfCharactersToSkip() skipping } them, then subsequent flushing will write only
+ * these 25 confirmed characters.
  * 
  * @author rwoo
  * @since 06.05.2011
@@ -50,60 +47,48 @@ public class ModifyingWriter extends Writer {
     protected Writer delegate;
 
     /**
-     * The modifier thats replaces, deletes, inserts characters of the
-     * underlying stream, and manages the buffer size.
+     * The modifier thats replaces, deletes, inserts characters of the underlying stream, and manages the buffer size.
      */
     private Modifier modifier;
-
 
     //
     // properties that represent the mutable state
     //
 
     /**
-     * At its begin the buffer contains unmodifiable characters (might be needed
-     * for look-behind matches as known from regular expression matching). After
-     * the unmodifiable characters the buffer holds the modifiable characters.
-     * See {@link #firstModifiableCharacterInBuffer}.
+     * At its begin the buffer contains unmodifiable characters (might be needed for look-behind matches as known from
+     * regular expression matching). After the unmodifiable characters the buffer holds the modifiable characters. See
+     * {@link #firstModifiableCharacterInBuffer}.
      */
     private StringBuilder characterBuffer;
 
-
     /**
-     * The position of the first character in the {@link #characterBuffer input
-     * buffer} that is modifiable.
+     * The position of the first character in the {@link #characterBuffer input buffer} that is modifiable.
      * <p>
-     * This character and the following characters in {@link #characterBuffer}
-     * can be modified by the {@link #modifier}.
+     * This character and the following characters in {@link #characterBuffer} can be modified by the {@link #modifier}.
      */
     private int firstModifiableCharacterInBuffer;
 
-
     /**
-     * The value is taken from
-     * {@link AfterModification#getNewMinimumLengthOfLookBehind()} after
-     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. The value
-     * is <em>requested</em> by the {@link Modifier}.
+     * The value is taken from {@link AfterModification#getNewMinimumLengthOfLookBehind()} after
+     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. The value is <em>requested</em> by the
+     * {@link Modifier}.
      * <p>
-     * If this value is greater than {@link #firstModifiableCharacterInBuffer},
-     * the modifier is probably faulty.
+     * If this value is greater than {@link #firstModifiableCharacterInBuffer}, the modifier is probably faulty.
      */
     private int minimumLengthOfLookBehind;
 
     /**
-     * The value is the sum of
-     * {@link AfterModification#getNewMinimumLengthOfLookBehind()} and
-     * {@link AfterModification#getNewNumberOfChars()} after
-     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. The value
-     * is <em>requested</em> by the {@link Modifier}.
+     * The value is the sum of {@link AfterModification#getNewMinimumLengthOfLookBehind()} and
+     * {@link AfterModification#getNewNumberOfChars()} after {@link Modifier#modify(StringBuilder, int, boolean)} is
+     * called. The value is <em>requested</em> by the {@link Modifier}.
      */
     private int requestedNumCharactersInBuffer;
 
     /**
-     * The value is initially taken from
-     * {@link AfterModification#getNumberOfCharactersToSkip()} after
-     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. Then
-     * during reading characters from the reader this value is decremented.
+     * The value is initially taken from {@link AfterModification#getNumberOfCharactersToSkip()} after
+     * {@link Modifier#modify(StringBuilder, int, boolean)} is called. Then during reading characters from the reader
+     * this value is decremented.
      */
     private int numberOfCharactersToSkip;
 
@@ -113,15 +98,14 @@ public class ModifyingWriter extends Writer {
     private boolean endOfStreamHit = false;
 
     /**
-     * The holds the last modification provided by the {@link #modifier}. This
-     * property serves debugging purposes only.
+     * The holds the last modification provided by the {@link #modifier}. This property serves debugging purposes only.
      */
     private AfterModification lastAfterModificationForDebuggingOnly = null;
 
     /**
-     * @param writer The underlying writer that provides the original, not
-     *        modified characters. For optimal performance choose a
-     *        {@link BufferedWriter}.
+     * @param writer
+     *            The underlying writer that provides the original, not modified characters. For optimal performance
+     *            choose a {@link BufferedWriter}.
      * @param modifier
      */
     public ModifyingWriter(Writer writer, Modifier modifier) {
@@ -170,8 +154,7 @@ public class ModifyingWriter extends Writer {
         }
 
         // write the remaining bytes to the underlying writer
-        delegate.append(characterBuffer, firstModifiableCharacterInBuffer,
-                characterBuffer.length());
+        delegate.append(characterBuffer, firstModifiableCharacterInBuffer, characterBuffer.length());
 
         // clear same variables (only to tidy up)
         characterBuffer = null;
@@ -181,10 +164,10 @@ public class ModifyingWriter extends Writer {
 
     /**
      * @see java.io.Writer#write(char[], int, int)
-     * @param off the first character in cbuf not appended to characterBuffer
-     *        yet
-     * @param len the number of characters in cbuf not appended to //
-     *        characterBuffer yet
+     * @param off
+     *            the first character in cbuf not appended to characterBuffer yet
+     * @param len
+     *            the number of characters in cbuf not appended to // characterBuffer yet
      */
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
@@ -204,10 +187,8 @@ public class ModifyingWriter extends Writer {
             if (len > requestedNumCharactersInBuffer - characterBuffer.length()) {
                 // yes -> we won't append more characters than are requested (in
                 // order to save memory)
-                numberOfCharactersToAppend = requestedNumCharactersInBuffer
-                        - characterBuffer.length();
-            }
-            else {
+                numberOfCharactersToAppend = requestedNumCharactersInBuffer - characterBuffer.length();
+            } else {
                 // we will append all given characters
                 numberOfCharactersToAppend = len;
             }
@@ -220,8 +201,7 @@ public class ModifyingWriter extends Writer {
             len = len - numberOfCharactersToAppend;
 
             // modify if there are enough characters in the buffer
-            while (characterBuffer.length() >= requestedNumCharactersInBuffer
-                    && modify()) {
+            while (characterBuffer.length() >= requestedNumCharactersInBuffer && modify()) {
                 // loop
             }
 
@@ -229,19 +209,17 @@ public class ModifyingWriter extends Writer {
     }
 
     /**
-     * @return Returns true if some characters are skipped, i.e. written to the
-     *         underlying writer, or the content of the buffer shall be modified
-     *         again immediately.
+     * @return Returns true if some characters are skipped, i.e. written to the underlying writer, or the content of the
+     *         buffer shall be modified again immediately.
      * @throws IOException
      */
     private boolean modify() throws IOException {
-        AfterModification afterModification = modifier.modify(characterBuffer,
-                firstModifiableCharacterInBuffer, endOfStreamHit);
+        AfterModification afterModification = modifier.modify(characterBuffer, firstModifiableCharacterInBuffer,
+                endOfStreamHit);
 
         lastAfterModificationForDebuggingOnly = afterModification;
 
-        numberOfCharactersToSkip = afterModification
-                .getNumberOfCharactersToSkip();
+        numberOfCharactersToSkip = afterModification.getNumberOfCharactersToSkip();
 
         boolean someCharactersSkippedOrModifyAgainImmediately = false;
 
@@ -257,28 +235,21 @@ public class ModifyingWriter extends Writer {
 
             someCharactersSkippedOrModifyAgainImmediately = true;
 
-        }
-        else {
+        } else {
 
             // write away the locked characters
             if (numberOfCharactersToSkip > 0) {
-                int end = firstModifiableCharacterInBuffer
-                        + numberOfCharactersToSkip;
+                int end = firstModifiableCharacterInBuffer + numberOfCharactersToSkip;
                 if (end > characterBuffer.length()) {
-                    onFaultyModifier(-51, String.format("You try to skip "
-                            + "characters that you have not"
-                            + " seen yet(%s %s %s %s)",
-                            firstModifiableCharacterInBuffer,
-                            numberOfCharactersToSkip, characterBuffer.length(),
-                            characterBuffer));
+                    onFaultyModifier(-51, String.format("You try to skip " + "characters that you have not"
+                            + " seen yet(%s %s %s %s)", firstModifiableCharacterInBuffer, numberOfCharactersToSkip,
+                            characterBuffer.length(), characterBuffer));
                 }
 
-                delegate.append(characterBuffer,
-                        firstModifiableCharacterInBuffer, end);
+                delegate.append(characterBuffer, firstModifiableCharacterInBuffer, end);
                 someCharactersSkippedOrModifyAgainImmediately = true;
                 firstModifiableCharacterInBuffer = end;
-            }
-            else { // if (numberOfCharactersToSkip == 0)
+            } else { // if (numberOfCharactersToSkip == 0)
 
                 // This block is usually entered when the modifier decided to do
                 // nothing at the position after the last characters of the
@@ -287,24 +258,19 @@ public class ModifyingWriter extends Writer {
             }
         }
 
-
         // update minimumLengthOfLookBehind
-        minimumLengthOfLookBehind = afterModification
-                .getNewMinimumLengthOfLookBehind();
+        minimumLengthOfLookBehind = afterModification.getNewMinimumLengthOfLookBehind();
         if (minimumLengthOfLookBehind > firstModifiableCharacterInBuffer) {
-            onFaultyModifier(-11, "Requested Look Behind"
-                    + " is impossible because there are not enough "
+            onFaultyModifier(-11, "Requested Look Behind" + " is impossible because there are not enough "
                     + "characters in the stream.");
         }
 
         // update requestedNumCharactersInBuffer
-        requestedNumCharactersInBuffer = minimumLengthOfLookBehind
-                + afterModification.getNewNumberOfChars();
+        requestedNumCharactersInBuffer = minimumLengthOfLookBehind + afterModification.getNewNumberOfChars();
         if (requestedNumCharactersInBuffer < minimumLengthOfLookBehind + 1) {
-            onFaultyModifier(-13, "Requested Capacity"
-                    + " is two small because there must at least one"
-                    + " unread characters available after the "
-                    + "look behind characters characters in the" + " stream.");
+            onFaultyModifier(-13, "Requested Capacity" + " is two small because there must at least one"
+                    + " unread characters available after the " + "look behind characters characters in the"
+                    + " stream.");
         }
 
         updateBuffer();
@@ -313,9 +279,8 @@ public class ModifyingWriter extends Writer {
     }
 
     /**
-     * Updates the input buffer according to {@link #minimumLengthOfLookBehind}
-     * and {@link #requestedNumCharactersInBuffer}, and then fills the buffer up
-     * to its capacity.
+     * Updates the input buffer according to {@link #minimumLengthOfLookBehind} and
+     * {@link #requestedNumCharactersInBuffer}, and then fills the buffer up to its capacity.
      */
     private void updateBuffer() {
 
@@ -326,23 +291,18 @@ public class ModifyingWriter extends Writer {
     }
 
     /**
-     * Deletes those characters at the start of the buffer we do not need any
-     * longer.
+     * Deletes those characters at the start of the buffer we do not need any longer.
      */
     private void removeCharactersInBufferNotNeededAnyLonger() {
 
-        int charactersToDelete = firstModifiableCharacterInBuffer
-                - minimumLengthOfLookBehind;
+        int charactersToDelete = firstModifiableCharacterInBuffer - minimumLengthOfLookBehind;
 
         if (charactersToDelete > 0) {
             characterBuffer.delete(0, charactersToDelete);
             firstModifiableCharacterInBuffer -= charactersToDelete;
-        }
-        else if (charactersToDelete < 0) {
-            onFaultyModifier(-52, charactersToDelete
-                    + " characters to delete but this is not possible ("
-                    + firstModifiableCharacterInBuffer + ","
-                    + minimumLengthOfLookBehind + ")");
+        } else if (charactersToDelete < 0) {
+            onFaultyModifier(-52, charactersToDelete + " characters to delete but this is not possible ("
+                    + firstModifiableCharacterInBuffer + "," + minimumLengthOfLookBehind + ")");
         }
     }
 
@@ -361,7 +321,6 @@ public class ModifyingWriter extends Writer {
         }
 
     }
-
 
     protected void onFaultyModifier(int errorCode, String errorMessage) {
         // should we silently ignore any errors and fallback to a meaningful

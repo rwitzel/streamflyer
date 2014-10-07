@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.regex.MatchResult;
 
 import com.googlecode.streamflyer.regex.MatchProcessorResult;
-import com.googlecode.streamflyer.regex.addons.stateful.State;
-import com.googlecode.streamflyer.regex.addons.stateful.TransitionGuard;
 
 /**
  * This {@link TransitionGuard} does not stop the transition but saves the matched token.
@@ -39,8 +37,8 @@ public class TokenCollector extends TransitionGuard {
     }
 
     @Override
-    public MatchProcessorResult stopTransition(State nextState, StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
-            MatchResult matchResult) {
+    public MatchProcessorResult stopTransition(State nextState, StringBuilder characterBuffer,
+            int firstModifiableCharacterInBuffer, MatchResult matchResult) {
 
         // log the found token
         String foundToken = nextState.getToken().getName() + ":" + matchResult.group();

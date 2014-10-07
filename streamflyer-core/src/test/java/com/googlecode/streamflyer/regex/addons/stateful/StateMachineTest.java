@@ -29,7 +29,6 @@ import org.junit.Test;
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
 import com.googlecode.streamflyer.regex.RegexModifier;
-import com.googlecode.streamflyer.regex.addons.stateful.State;
 import com.googlecode.streamflyer.regex.addons.util.DelegatingMatcher;
 
 /**

@@ -24,8 +24,7 @@ import com.googlecode.streamflyer.core.ModifyingWriter;
 import com.googlecode.streamflyer.regex.RegexModifier;
 
 /**
- * Provides short-cuts to create {@link ModifyingWriter modifying writers} using
- * defaults.
+ * Provides short-cuts to create {@link ModifyingWriter modifying writers} using defaults.
  * 
  * @author rwoo
  * @since 27.06.2011
@@ -33,21 +32,20 @@ import com.googlecode.streamflyer.regex.RegexModifier;
 public class ModifyingWriterFactory {
 
     /**
-     * @param output t
-     * @param regex the r
-     * @param replacement the
+     * @param output
+     *            t
+     * @param regex
+     *            the r
+     * @param replacement
+     *            the
      * @return Returns a writer that replaces the written characters on-the-fly.
      */
-    public ModifyingWriter createRegexModifyingWriter(Writer output,
-            String regex, String replacement) {
-        return createRegexModifyingWriter(output, regex, 0, replacement, 0,
-                8192);
+    public ModifyingWriter createRegexModifyingWriter(Writer output, String regex, String replacement) {
+        return createRegexModifyingWriter(output, regex, 0, replacement, 0, 8192);
     }
 
-    public ModifyingWriter createRegexModifyingWriter(Writer output,
-            String regex, int flags, String replacement,
-            int minimumLengthOfLookBehind,
-            int requestedCapacityOfCharacterBuffer) {
+    public ModifyingWriter createRegexModifyingWriter(Writer output, String regex, int flags, String replacement,
+            int minimumLengthOfLookBehind, int requestedCapacityOfCharacterBuffer) {
 
         // buffer stream
         // (is this really necessary to get optimal performance?)
@@ -56,8 +54,8 @@ public class ModifyingWriterFactory {
         }
 
         // create modifier
-        Modifier modifier = new RegexModifier(regex, flags, replacement,
-                minimumLengthOfLookBehind, requestedCapacityOfCharacterBuffer);
+        Modifier modifier = new RegexModifier(regex, flags, replacement, minimumLengthOfLookBehind,
+                requestedCapacityOfCharacterBuffer);
 
         // create and return Writer
         return new ModifyingWriter(output, modifier);

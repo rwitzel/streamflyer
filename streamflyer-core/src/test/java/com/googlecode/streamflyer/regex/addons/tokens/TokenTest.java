@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.googlecode.streamflyer.regex.addons.tokens.Token;
-
 /**
  * Tests {@link Token}.
  * 
