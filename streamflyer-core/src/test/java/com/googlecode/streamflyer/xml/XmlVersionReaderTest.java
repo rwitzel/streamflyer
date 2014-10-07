@@ -16,6 +16,8 @@
 
 package com.googlecode.streamflyer.xml;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.StringReader;
 
 import junit.framework.TestCase;
@@ -26,8 +28,9 @@ import junit.framework.TestCase;
  * @author rwoo
  * @since 27.06.2011
  */
-public class XmlVersionReaderTest extends TestCase {
+public class XmlVersionReaderTest {
 
+    @Test
     public void testNoXmlVersionInProlog() throws Exception {
         assertXmlVersion("1.0", "<html>");
         assertXmlVersion("1.0", "<html version='1.1'>");
@@ -35,6 +38,7 @@ public class XmlVersionReaderTest extends TestCase {
         assertXmlVersion("1.0", "");
     }
 
+    @Test
     public void testXmlVersion10InProlog() throws Exception {
         assertXmlVersion("1.0", "<?xml encoding='hossa' version='1.0' standalone='true'");
         assertXmlVersion("1.0", "<?xml encoding=\"hossa\" version=\"1.0\" standalone=\"true\"");
@@ -44,6 +48,7 @@ public class XmlVersionReaderTest extends TestCase {
 
     }
 
+    @Test
     public void testXmlVersion11InProlog() throws Exception {
         assertXmlVersion("1.1", "<?xml encoding='hossa' version='1.1' standalone='true'");
         assertXmlVersion("1.1", "<?xml encoding=\"hossa\" version=\"1.1\" standalone=\"true\"");

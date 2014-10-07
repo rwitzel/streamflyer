@@ -16,6 +16,8 @@
 
 package com.googlecode.streamflyer.xml;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -32,8 +34,9 @@ import com.googlecode.streamflyer.core.ModifyingReader;
  * @author rwoo
  * @since 23.06.2011
  */
-public class InvalidXmlCharacterModifierTest extends TestCase {
+public class InvalidXmlCharacterModifierTest {
 
+    @Test
     public void testModify_dollarZero() throws Exception {
 
         assertModify("<INVALID XML CHAR $0>", "a\uD8FFb", "a<INVALID XML CHAR U+D8FF>b", "1.0", 8192, true);
@@ -48,6 +51,7 @@ public class InvalidXmlCharacterModifierTest extends TestCase {
         assertModify("$0", "\uD8FF x \uD8FF y \uD8FF", "U+D8FF x U+D8FF y U+D8FF", "1.0", 8192, true);
     }
 
+    @Test
     public void testModify() throws Exception {
 
         // replace one character with whitespace
@@ -63,6 +67,7 @@ public class InvalidXmlCharacterModifierTest extends TestCase {
         assertModify("", "a\uD8FF\n\uD8FFc", "a\nc", "1.0", 8192, false);
     }
 
+    @Test
     public void testModify_XML_10() throws Exception {
 
         // valid chars
@@ -76,6 +81,7 @@ public class InvalidXmlCharacterModifierTest extends TestCase {
 
     }
 
+    @Test
     public void testModify_XML_11() throws Exception {
 
         // invalid chars
@@ -103,6 +109,7 @@ public class InvalidXmlCharacterModifierTest extends TestCase {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    @Test
     public void testExampleFromHomepage_removeInvalidCharacters() throws Exception {
 
         // choose the character stream to modify
@@ -120,6 +127,7 @@ public class InvalidXmlCharacterModifierTest extends TestCase {
         assertEquals("foobar", actualOutput);
     }
 
+    @Test
     public void testExampleFromHomepage_replaceWithErrorMessage() throws Exception {
 
         // choose the character stream to modify

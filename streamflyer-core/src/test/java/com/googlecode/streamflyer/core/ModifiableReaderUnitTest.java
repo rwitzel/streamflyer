@@ -16,6 +16,8 @@
 
 package com.googlecode.streamflyer.core;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.io.StringReader;
@@ -34,34 +36,39 @@ import org.apache.commons.io.IOUtils;
  * @author rwoo
  * @since 17.06.2011
  */
-public class ModifiableReaderUnitTest extends TestCase {
+public class ModifiableReaderUnitTest {
 
     /**
      * Well, this is not particularly useful...
      * 
      * @throws Exception
      */
+    @Test
     public void testInsertNoCharacters() throws Exception {
         assertModification("abcd", "abcd", 1, insertion(""));
         assertModification("abcd", "abcd", 0, insertion(""));
         assertModification("abcd", "abcd", 4, insertion(""));
     }
 
+    @Test
     public void testInsertTwoCharacters() throws Exception {
         assertModification("abcd", "a<xy>bcd", 1, insertion("<xy>"));
         assertModification("abcd", "<xy>abcd", 0, insertion("<xy>"));
         assertModification("abcd", "abcd<xy>", 4, insertion("<xy>"));
     }
 
+    @Test
     public void testInsertManyCharacters() throws Exception {
         assertModification("abcd", "a<xy12345678901234567890>bcd", 1, insertion("<xy12345678901234567890>"));
     }
 
+    @Test
     public void testDeleteTwoCharacters() throws Exception {
         assertModification("abcd", "ad", 1, deletion(2));
         assertModification("abcd", "cd", 0, deletion(2));
     }
 
+    @Test
     public void testDeleteMoreCharactersThanAreAvailableInStream() throws Exception {
 
         assertFaultyModifierException("abcd", 4, deletion(2), "End of stream"
@@ -73,6 +80,7 @@ public class ModifiableReaderUnitTest extends TestCase {
                 + "delete than are available in the stream.", "endOfStreamHit=true");
     }
 
+    @Test
     public void testReplaceTwoCharactersWithFourCharacters() throws Exception {
         assertModification("abcd", "a<xy>d", 1, replace("<xy>", 2));
         assertModification("abcd", "<xy>cd", 0, replace("<xy>", 2));

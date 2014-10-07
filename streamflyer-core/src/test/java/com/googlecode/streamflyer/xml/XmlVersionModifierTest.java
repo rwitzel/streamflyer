@@ -16,15 +16,18 @@
 
 package com.googlecode.streamflyer.xml;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayInputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
-import junit.framework.ComparisonFailure;
-import junit.framework.TestCase;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.XmlStreamReader;
+import org.junit.ComparisonFailure;
+import org.junit.Test;
 
 import com.googlecode.streamflyer.core.Modifier;
 import com.googlecode.streamflyer.core.ModifyingReader;
@@ -36,8 +39,9 @@ import com.googlecode.streamflyer.util.StringUtils;
  * @author rwoo
  * @since 27.06.2011
  */
-public class XmlVersionModifierTest extends TestCase {
+public class XmlVersionModifierTest {
 
+    @Test
     public void testXmlVersion() throws Exception {
 
         // version in prolog is 1.0
@@ -55,6 +59,7 @@ public class XmlVersionModifierTest extends TestCase {
         assertXmlVersionInProlog("<?xml version=\"1.1\">", "1.0", "<?xml version=\"1.0\">");
     }
 
+    @Test
     public void testXmlVersion_utf8Bom_withoutByteSkippingReader() throws Exception {
 
         byte UTF8_BOM_BYTE_1 = (byte) 0xEF;
@@ -79,6 +84,7 @@ public class XmlVersionModifierTest extends TestCase {
         }
     }
 
+    @Test
     public void testXmlVersion_utf8Bom() throws Exception {
 
         byte UTF8_BOM_BYTE_1 = (byte) 0xEF;
@@ -97,6 +103,7 @@ public class XmlVersionModifierTest extends TestCase {
         assertXmlVersionInProlog(bytesWithBom, "1.1", "<?xml version='1.1'>");
     }
 
+    @Test
     public void testXmlVersion_utf16BeBom() throws Exception {
 
         byte UTF16BE_BOM_BYTE_1 = (byte) 0xFE;
@@ -113,6 +120,7 @@ public class XmlVersionModifierTest extends TestCase {
         assertXmlVersionInProlog(bytesWithBom, "1.1", "<?xml version='1.1'>");
     }
 
+    @Test
     public void testXmlVersion_utf16LeBom() throws Exception {
 
         byte UTF16LE_BOM_BYTE_1 = (byte) 0xFF;
@@ -147,6 +155,7 @@ public class XmlVersionModifierTest extends TestCase {
      * 
      * @throws Exception
      */
+    @Test
     public void testXmlVersion_XmlPrologTooLong_manyWhitespaceCharacters() throws Exception {
 
         String prefix = "<?xml " + StringUtils.repeat("      ", 1000);
@@ -175,6 +184,7 @@ public class XmlVersionModifierTest extends TestCase {
         return new XmlVersionModifier(newXmlVersion, newNumberOfChars);
     }
 
+    @Test
     public void testExampleFromJavadoc() throws Exception {
 
         byte UTF16LE_BOM_BYTE_1 = (byte) 0xFF;

@@ -16,6 +16,8 @@
 
 package com.googlecode.streamflyer.regex;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
 import static com.googlecode.catchexception.CatchException.catchException;
 import static com.googlecode.catchexception.CatchException.caughtException;
 
@@ -31,16 +33,19 @@ import com.googlecode.catchexception.CatchException;
  * @author rwoo
  * @since 18.06.2011
  */
-public class ReplacingProcessorUnitTest extends TestCase {
+public class ReplacingProcessorUnitTest {
 
+    @Test
     public void testCompileReplacement_all() throws Exception {
         assertCompiledReplacement("12\\345$6789ABC\\\\0\\$DEF", "12345", 6789, "ABC\\0$DEF");
     }
 
+    @Test
     public void testCompileReplacement_normalCharacters() throws Exception {
         assertCompiledReplacement("123", "123");
     }
 
+    @Test
     public void testCompileReplacement_escapedLiteral() throws Exception {
         assertCompiledReplacement("\\x", "x");
         assertCompiledReplacement("\\1", "1");
@@ -53,6 +58,7 @@ public class ReplacingProcessorUnitTest extends TestCase {
         assertCompiledReplacement("abc\\\\abc", "abc\\abc");
     }
 
+    @Test
     public void testCompileReplacement_groupReference() throws Exception {
         assertCompiledReplacement("$1", 1);
         assertCompiledReplacement("$9", 9);
@@ -69,6 +75,7 @@ public class ReplacingProcessorUnitTest extends TestCase {
         assertCompiledReplacement("abc$01def", "abc", 1, "def");
     }
 
+    @Test
     public void testCompileReplacement_groupReference_invalid() throws Exception {
 
         catchException(new ReplacingProcessor()).parseReplacement("hossa$");

@@ -16,6 +16,8 @@
 
 package com.googlecode.streamflyer.core;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.BufferedWriter;
 import java.io.Writer;
 
@@ -29,8 +31,9 @@ import org.apache.commons.io.output.NullWriter;
  * @author rwoo
  * @since 17.06.2011
  */
-public class ModifiableWriterUnitTest extends TestCase {
+public class ModifiableWriterUnitTest {
 
+    @Test
     public void testCharacterBufferDoesNotExceedRequestedLength() throws Exception {
 
         assertCharacterBufferDoesNotExceedRequestedLength(0, 7, 5, 100000, 30000);
