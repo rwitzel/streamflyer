@@ -17,11 +17,13 @@
 package com.googlecode.streamflyer.core;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.Writer;
 
 import org.apache.commons.io.output.NullWriter;
@@ -112,6 +114,20 @@ public class ModifiableWriterUnitTest {
 
         // then
         verify(underlyingWriter).close();
+
+        // when
+        writer.close();
+
+        // then
+        // calling close() a second time must not have an effect
+
+        // when
+        try {
+            writer.write("anything");
+            fail(IOException.class.getSimpleName() + " expected");
+        } catch (IOException e) {
+            // then expect IOException
+        }
     }
 
 }

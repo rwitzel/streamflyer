@@ -144,6 +144,10 @@ public class ModifyingWriter extends Writer {
     @Override
     public void close() throws IOException {
 
+        if (endOfStreamHit) {
+            return; // nothing to
+        }
+
         endOfStreamHit = true;
 
         // modify as long as characters are skipped (modify again makes not
