@@ -46,6 +46,7 @@ import com.googlecode.streamflyer.util.statistics.PositionAwareModificationFacto
  * <a href="#g7">7. How do I configure RegexModifier if my pattern contains ^ or \b or \B?</a><br/>
  * <a href="#g8">8. What value to choose for the constructor parameter <code>minimumLengthOfLookBehind</code>?</a><br/>
  * <a href="#g9">9. What value to choose for the constructor parameter <code>newNumberOfChars</code>?</a><br/>
+ * <a href="#g10">10. Can I share RegexModifier instances between threads?</a><br/>
  * </b> <!-- ++++++++++++++++++++++++++++++ -->
  * <p>
  * <h3 id="g1">1. How do I use this modifier?</h3>
@@ -131,6 +132,9 @@ Modifier myModifier = new RegexModifier("^.*ERROR.*$", Pattern.MULTILINE, new Ma
  * <p>
  * This value determines how many characters are usually processed at once. If the value is too high or too low, the
  * performance decreases. The optimal value depends on the length and number of matches in the stream.
+ * <h3 id="#g10">10. Can I share RegexModifier instances between threads?</h3>
+ * <p>
+ * No, a RegexModifier instance is not thread-safe. Use thread-specific instances.
  * 
  * @author rwoo
  * @since 18.06.2011
