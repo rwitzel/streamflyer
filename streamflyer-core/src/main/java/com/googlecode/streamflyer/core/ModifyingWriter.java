@@ -139,10 +139,23 @@ public class ModifyingWriter extends Writer {
     }
 
     /**
+     * Flushes everything. Closes the underlying stream.
+     * 
      * @see java.io.Writer#close()
      */
     @Override
     public void close() throws IOException {
+        close(true);
+    }
+
+    /**
+     * Similar to {@link #close()} but the caller can choose whether or not to close the underlying writer.
+     * 
+     * @param closeUnderlyingWriter
+     *            True if the underlying writer shall be closed as well.
+     * @throws IOException
+     */
+    public void close(boolean closeUnderlyingWriter) throws IOException {
 
         if (endOfStreamHit) {
             return; // nothing to
@@ -165,7 +178,9 @@ public class ModifyingWriter extends Writer {
 
         flush();
 
-        delegate.close();
+        if (closeUnderlyingWriter) {
+            delegate.close();
+        }
     }
 
     /**
