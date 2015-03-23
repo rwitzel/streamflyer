@@ -32,7 +32,7 @@ import com.googlecode.streamflyer.regex.addons.tokens.TokenProcessor;
  * <p>
  * If you are familiar with SAX, you can compare this handler with a SAX handler.
  * <p>
- * EXAMPLE: {@link RangeFilterHandler}, TODO more examples
+ * EXAMPLE: <code>RangeFilterHandler</code>, TODO more examples
  * 
  * @author rwoo
  * @since 1.1.0
@@ -61,8 +61,8 @@ public interface Handler {
      * determined from the method parameters.
      * 
      * @return Returns null if the stream is not modified. Otherwise a match result must be returned that is still valid
-     *         for the modified stream. If you insert or remove characters before the match {@link MatchResultShifted}
-     *         helps you.
+     *         for the modified stream. If you insert or remove characters before the match
+     *         <code>MatchResultShifted</code> helps you.
      */
     public MatchResult processNoMatch(int startPosition, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, MatchResult matchResult);

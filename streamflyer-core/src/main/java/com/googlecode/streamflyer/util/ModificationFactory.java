@@ -30,7 +30,7 @@ import com.googlecode.streamflyer.internal.thirdparty.ZzzValidate;
  * <li>{@link #modifyAgainImmediately(int, int)}
  * <li>{@link #fetchMoreInput(int, StringBuilder, int, boolean)}
  * <li>{@link #skipOrStop(int, StringBuilder, int, boolean)}
- * <li>{@link #stop()}
+ * <li>{@link #stop(StringBuilder, int, boolean)}
  * </ul>
  * 
  * @author rwoo

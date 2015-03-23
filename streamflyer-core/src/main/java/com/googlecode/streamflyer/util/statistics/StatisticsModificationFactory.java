@@ -64,9 +64,6 @@ public class StatisticsModificationFactory extends ModificationFactoryDecorator 
         return count(super.modifyAgainImmediately(newNumberOfChars, firstModifiableCharacterInBuffer));
     }
 
-    /**
-     * @see com.googlecode.streamflyer.util.ModificationFactory#modifyAgainWithMoreInput(java.lang.StringBuilder, int)
-     */
     @Override
     public AfterModification fetchMoreInput(int numberOfCharactersToSkip, StringBuilder characterBuffer,
             int firstModifiableCharacterInBuffer, boolean endOfStreamHit) {

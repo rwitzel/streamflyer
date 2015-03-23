@@ -60,7 +60,7 @@ public class AfterModification {
     //
 
     /**
-     * See {@link ModifyingReader#newMinimumLengthOfLookBehind}.
+     * See <code>ModifyingReader#newMinimumLengthOfLookBehind</code>.
      * <p>
      * The value of this property must be a non-negative number.
      */

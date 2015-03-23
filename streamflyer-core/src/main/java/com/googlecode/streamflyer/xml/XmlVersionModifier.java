@@ -92,7 +92,8 @@ public class XmlVersionModifier implements Modifier {
     /**
      * The internal state of {@link XmlVersionModifier}.
      * <p>
-     * The state transitions are: from {@value #INITIAL} to {@value #PROLOG_REQUEST} to {@value #NO_LONGER_MODIFYING}.
+     * The state transitions are: from <code>INITIAL</code> to <code>PROLOG_REQUEST</code> to
+     * <code>NO_LONGER_MODIFYING</code>.
      */
     private enum XmlVersionModifierState {
         /**

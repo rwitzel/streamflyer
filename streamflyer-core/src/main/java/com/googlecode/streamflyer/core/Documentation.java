@@ -85,8 +85,8 @@ Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
  * <li>{@link XmlVersionModifier}: Changes the version in the prolog of XML files.
  * <li>{@link InvalidXmlCharacterModifier}: Replaces invalid XML characters in XML files or removes them from XML files.
  * <li>
- * {@link com.googlecode.streamflyer.experimental.range.RangeFilterModifier RangeFilterModifier} (experimental module):
- * Removes everything from the stream apart from the content between a start tag and an end tag.
+ * <code>RangeFilterModifier</code> (experimental module): Removes everything from the stream apart from the content
+ * between a start tag and an end tag.
  * </ul>
  * The factories {@link ModifyingReaderFactory} and {@link ModifyingWriterFactory} ease the use of these modifiers.
  * <p>

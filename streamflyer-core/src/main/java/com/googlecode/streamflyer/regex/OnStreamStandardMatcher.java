@@ -77,7 +77,7 @@ public class OnStreamStandardMatcher implements OnStreamMatcher {
         boolean result = parentPattern.matchRoot.match(this, from, text);
      </pre></code>
      * 
-     * @see com.googlecode.streamflyer.regex.OnStreamMatcher#findUntilMatchOrHitEnd(int)
+     * @see com.googlecode.streamflyer.regex.OnStreamMatcher#findUnlessHitEnd(int, int)
      */
     @Override
     public boolean findUnlessHitEnd(int minFrom, int maxFrom) {

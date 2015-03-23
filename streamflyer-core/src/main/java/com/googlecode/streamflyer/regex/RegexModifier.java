@@ -278,15 +278,15 @@ public class RegexModifier implements Modifier {
      * <p>
      * 
      * @param matcher
-     *            Matches a regular expression on a {@link CharSequence}.
+     *            Matches a regular expression on a <code>CharSequence</code>.
      * @param matchProcessor
      *            Defines what to do if the regular expression matches some text in the stream.
      * @param minimumLengthOfLookBehind
      *            See {@link AfterModification#getNewMinimumLengthOfLookBehind()}.
      * @param newNumberOfChars
      *            See {@link AfterModification#getNewNumberOfChars()}. This should not be smaller than the length of the
-     *            characters sequence the {@link #pattern} needs to match properly. In case you want to match more than
-     *            once, the value should be higher.
+     *            characters sequence the pattern needs to match properly. In case you want to match more than once, the
+     *            value should be higher.
      */
     public RegexModifier(OnStreamMatcher matcher, MatchProcessor matchProcessor, int minimumLengthOfLookBehind,
             int newNumberOfChars) {

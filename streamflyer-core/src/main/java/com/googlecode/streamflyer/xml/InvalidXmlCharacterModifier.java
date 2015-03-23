@@ -90,7 +90,7 @@ assertEquals("foo[INVALID XML CHAR FOUND: U+D8FF]bar", actualOutput);</pre></cod
  * well.
  * <h3 id="g4">4. How do I use this class with an {@link InputStream}?</h3>
  * <p>
- * See {@link ModifyingReaderFactory#createInvalidXmlCharacterRemovingModifier(java.io.InputStream)}.
+ * See {@link ModifyingReaderFactory#createInvalidXmlCharacterRemovingReader(InputStream)}.
  * <h3 id="g5">5. How much memory does the modifier consume?</h3>
  * <p>
  * The memory consumption of this modifier is roughly given by the first argument of

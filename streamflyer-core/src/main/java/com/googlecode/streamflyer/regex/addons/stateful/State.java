@@ -72,7 +72,7 @@ public class State {
      * @param regex
      *            In order to reach this state, this regular expression must be matched.
      * @param replacement
-     *            The replacement defines how the text that is matched via {@link #regex} shall be replaced.
+     *            The replacement defines how the text that is matched via <code>regex</code> shall be replaced.
      */
     public State(String stateName, String regex, String replacement) {
         this(stateName, regex, new ReplacingProcessor(replacement));

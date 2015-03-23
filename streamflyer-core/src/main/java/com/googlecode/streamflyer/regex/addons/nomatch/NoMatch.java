@@ -53,7 +53,7 @@ public class NoMatch {
     }
 
     /**
-     * @param startPosition
+     * @param position
      *            the startPosition to set
      */
     public void setStartPosition(int position) {
