@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.rwitzel.streamflyer</groupId>
   <artifactId>streamflyer-parent</artifactId>
-  <version>1.1.4-SNAPSHOT</version>
+  <version>1.2.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>
     Allows editing an input stream
@@ -27,7 +27,7 @@
     the following worked (at least the last time):
     
     mvn clean javadoc:jar install -Psign // just to check that everything is fine
-    mvn versions:set -DnewVersion=1.1.3 -DgenerateBackupPoms=false
+    mvn versions:set -DnewVersion=1.2.0 -DgenerateBackupPoms=false
     mvn clean javadoc:jar deploy -Psign
     
     Remember that the maven-gpg-plugin works only in the native shell. 
