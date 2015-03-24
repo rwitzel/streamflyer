@@ -1,0 +1,2 @@
+com.github.rwitzel.streamflyer:streamflyer-core:jar:1.2.1-SNAPSHOT
+\- commons-io:commons-io:jar:2.4:compile
