@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>streamflyer-parent</artifactId>
-    <groupId>com.googlecode.streamflyer</groupId>
+    <groupId>com.github.rwitzel.streamflyer</groupId>
     <version>1.1.4-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
@@ -17,14 +17,14 @@
   <dependencies>
 
     <dependency>
-      <groupId>com.googlecode.streamflyer</groupId>
+      <groupId>com.github.rwitzel.streamflyer</groupId>
       <artifactId>streamflyer-core</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <!-- add dependency to the tests  -->
     <dependency>
-      <groupId>com.googlecode.streamflyer</groupId>
+      <groupId>com.github.rwitzel.streamflyer</groupId>
       <artifactId>streamflyer-core</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>

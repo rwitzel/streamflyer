@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.github.rwitzel.streamflyer.experimental.range2.RangeFilterModifierTest
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.015 sec

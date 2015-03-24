@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.github.rwitzel.streamflyer.experimental.regexj6.RegexModifierJava6Test
--------------------------------------------------------------------------------
-Tests run: 27, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.406 sec

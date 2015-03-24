@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>streamflyer-parent</artifactId>
-    <groupId>com.googlecode.streamflyer</groupId>
+    <groupId>com.github.rwitzel.streamflyer</groupId>
     <version>1.1.4-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
@@ -20,7 +20,7 @@
   <dependencies>
 
     <dependency>
-      <groupId>com.googlecode.streamflyer</groupId>
+      <groupId>com.github.rwitzel.streamflyer</groupId>
       <artifactId>streamflyer-core</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -28,19 +28,19 @@
     
     <!-- add dependency to the tests  -->
     <dependency>
-        <groupId>com.googlecode.streamflyer</groupId>
+        <groupId>com.github.rwitzel.streamflyer</groupId>
         <artifactId>streamflyer-core</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
     </dependency>
+<!--     <dependency> -->
+<!--         <groupId>com.github.rwitzel.streamflyer-regex-fast</groupId> -->
+<!--         <artifactId>streamflyer-regex-fast</artifactId> -->
+<!--         <version>1.0.1</version> -->
+<!--     </dependency> -->
     <dependency>
-        <groupId>com.googlecode.streamflyer-regex-fast</groupId>
-        <artifactId>streamflyer-regex-fast</artifactId>
-        <version>1.0.1</version>
-    </dependency>
-    <dependency>
-        <groupId>com.googlecode.streamflyer</groupId>
+        <groupId>com.github.rwitzel.streamflyer</groupId>
         <artifactId>streamflyer-experimental</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.github.rwitzel.streamflyer.regex.RegexModifierTest
--------------------------------------------------------------------------------
-Tests run: 27, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.157 sec

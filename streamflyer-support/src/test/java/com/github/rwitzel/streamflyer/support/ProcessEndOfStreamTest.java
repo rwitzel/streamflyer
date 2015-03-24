@@ -37,7 +37,6 @@ import org.junit.Test;
 import com.github.rwitzel.streamflyer.core.ModifyingReader;
 import com.github.rwitzel.streamflyer.regex.RegexModifier;
 import com.github.rwitzel.streamflyer.util.StringUtils;
-import com.googlecode.streamflyer.regex.fast.FastRegexModifier;
 
 public class ProcessEndOfStreamTest {
 
