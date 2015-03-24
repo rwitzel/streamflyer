@@ -11,8 +11,6 @@ The transition of the documentation is not complete yet. The content of the wiki
 [Home](https://github.com/rwitzel/streamflyer/blob/wiki/ProjectHome.md)
 ([page list](https://github.com/rwitzel/streamflyer/tree/wiki))
 
-Attention! The most recent version is built with *Java 8*.
-
 The groupId of the artifacts has been changed: 
 
     <dependency>
