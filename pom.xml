@@ -4,8 +4,13 @@
   <artifactId>streamflyer-parent</artifactId>
   <version>1.1.4-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <description>Allows editing an input stream</description>
-  <url>http://code.google.com/p/streamflyer/</url>
+  <description>
+    Allows editing an input stream
+
+    The new website: https://github.com/rwitzel/streamflyer
+    The old website: http://code.google.com/p/streamflyer/  
+  </description>
+  <url>https://github.com/rwitzel/streamflyer</url>
   <inceptionYear>2011</inceptionYear><!-- used by maven-license-plugin -->
 
   <!--  required by Sonatype OOS hosting -->
@@ -22,7 +27,7 @@
     the following worked (at least the last time):
     
     mvn clean javadoc:jar install -Psign // just to check that everything is fine
-    mvn versions:set -DnewVersion=1.1.3
+    mvn versions:set -DnewVersion=1.1.3 -DgenerateBackupPoms=false
     mvn clean javadoc:jar deploy -Psign
     
     Remember that the maven-gpg-plugin works only in the native shell. 
@@ -339,11 +344,12 @@ else {
   </developers>
 
   <scm>
-    <connection>scm:hg:https://code.google.com/p/streamflyer/</connection>
-    <developerConnection>scm:hg:https://code.google.com/p/streamflyer/</developerConnection>
-    <url>http://code.google.com/p/streamflyer/source/browse/</url>
+    <connection>scm:git:https://github.com/rwitzel/streamflyer.git</connection>
+    <developerConnection>scm:git:git@github.com:rwitzel/streamflyer.git</developerConnection>
+    <url>https://github.com/rwitzel/streamflyer/</url>
+    <tag>HEAD</tag>
   </scm>
-  
+
   <modules>
     <module>streamflyer-core</module>
     <module>streamflyer-experimental</module>

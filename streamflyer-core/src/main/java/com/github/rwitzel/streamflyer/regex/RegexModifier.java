@@ -97,7 +97,7 @@ Modifier myModifier = new RegexModifier("^.*ERROR.*$", Pattern.MULTILINE, new Ma
  * Assume in your stream the longest match contains 100K characters. Then the internally used buffer is at no time
  * larger than 300K characters. But this rule does not apply if you use greedy operators. If you use greedy operators,
  * the entire stream content might be loaded into the memory at once. The web page of this project gives <a href=
- * "http://code.google.com/p/streamflyer/#Advanced_example_with_regular_expressions" >more details</a>.
+ * "https://github.com/rwitzel/streamflyer/blob/wiki/AdvancedRegularExpressionsExample.md" >more details</a>.
  * <h3 id="#g5">5. Which features of Java's Pattern are not supported yet?</h3>
  * <p>
  * Apart from \G (the boundary matcher that matches the end of the previous match) all other features mentioned in

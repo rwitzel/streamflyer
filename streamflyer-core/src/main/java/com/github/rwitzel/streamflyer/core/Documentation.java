@@ -31,7 +31,7 @@ import com.github.rwitzel.streamflyer.xml.XmlVersionModifier;
 
 /**
  * Read this first, before you use Streamflyer. This Javadoc content is also available on the <a
- * href="http://code.google.com/p/streamflyer/">Streamflyer</a> web page.
+ * href="https://github.com/rwitzel/streamflyer/">Streamflyer</a> web page.
  * <p>
  * <h1>Contents</h1>
  * <p>
