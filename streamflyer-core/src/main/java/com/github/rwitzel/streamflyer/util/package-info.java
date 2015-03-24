@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011 rwoo@gmx.de
+ * Copyright (C) 2011 rwitzel75@googlemail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /** This package contains some classes that ease the use and extension of Streamflyer. */
 package com.github.rwitzel.streamflyer.util;

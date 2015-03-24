@@ -242,7 +242,7 @@ else {
             <useDefaultMapping>true</useDefaultMapping>
             <properties>
               <year>${project.inceptionYear}</year>
-              <email>rwoo@gmx.de</email>
+              <email>rwitzel75@googlemail.com</email>
             </properties>
             <encoding>UTF-8</encoding>
           </configuration>
@@ -337,9 +337,9 @@ else {
 
   <developers>
     <developer>
-      <id>rwoo</id>
-      <name>Rod Woo</name>
-      <email>rwoo@gmx.de</email>
+      <id>rwitzel</id>
+      <name>Rodrigo Witzel</name>
+      <email>rwitzel75@googlemail.com</email>
     </developer>
   </developers>
 
