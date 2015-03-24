@@ -3,7 +3,6 @@
 [![Coveralls coverage status](https://img.shields.io/coveralls/rwitzel/streamflyer.svg)](https://coveralls.io/r/rwitzel/streamflyer)
 [![Apache 2](http://img.shields.io/badge/license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
-
 #### Transition from Google Code to GitHub
 
 The project is moved from [Google Code](https://code.google.com/p/streamflyer/) to GitHub recently (2015-03-24).
