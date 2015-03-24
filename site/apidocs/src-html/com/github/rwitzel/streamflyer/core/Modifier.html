@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="de">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/**<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Copyright (C) 2011 rwitzel75@googlemail.com<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * Licensed under the Apache License, Version 2.0 (the "License");<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * you may not use this file except in compliance with the License.<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * You may obtain a copy of the License at<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *         http://www.apache.org/licenses/LICENSE-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *<a name="line.9"></a>
+<span class="sourceLineNo">010</span> * Unless required by applicable law or agreed to in writing, software<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * See the License for the specific language governing permissions and<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * limitations under the License.<a name="line.14"></a>
+<span class="sourceLineNo">015</span> */<a name="line.15"></a>
+<span class="sourceLineNo">016</span>package com.github.rwitzel.streamflyer.core;<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>/**<a name="line.18"></a>
+<span class="sourceLineNo">019</span> * A modifier replaces, deletes, inserts characters in a character stream. This happens in interaction with a<a name="line.19"></a>
+<span class="sourceLineNo">020</span> * &lt;em&gt;stream processor&lt;/em&gt;, i. e. either a {@link ModifyingReader} or a {@link ModifyingWriter}. The modifier can be<a name="line.20"></a>
+<span class="sourceLineNo">021</span> * considered a callback that is called by the stream processor to make the desired modifications. The pivotal part of<a name="line.21"></a>
+<span class="sourceLineNo">022</span> * the interaction between the modifier and the stream processor is a character buffer the stream processor facilitates.<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * That buffer contains the characters of the underlying character stream.<a name="line.23"></a>
+<span class="sourceLineNo">024</span> * &lt;p&gt;<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * Besides the modifications of the buffer, the modifier manages the capacity (size) of the character buffer and<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * {@link AfterModification defines} what the stream processor shall do before the stream processor<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * {@link Modifier#modify(StringBuilder, int, boolean) calls} the modifier the next time.<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * &lt;p&gt;<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * Implementations of this interface should inform the user about its specific memory consumption because the most<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * important feature of modifiers should be their small memory foot-print.<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * <a name="line.31"></a>
+<span class="sourceLineNo">032</span> * @author rwoo<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * @since 06.05.2011<a name="line.33"></a>
+<span class="sourceLineNo">034</span> */<a name="line.34"></a>
+<span class="sourceLineNo">035</span>public interface Modifier {<a name="line.35"></a>
+<span class="sourceLineNo">036</span><a name="line.36"></a>
+<span class="sourceLineNo">037</span>    /**<a name="line.37"></a>
+<span class="sourceLineNo">038</span>     * Processes the characters in the given character buffer, i.e. deletes or replaces or inserts characters, or keeps<a name="line.38"></a>
+<span class="sourceLineNo">039</span>     * the characters as they are.<a name="line.39"></a>
+<span class="sourceLineNo">040</span>     * <a name="line.40"></a>
+<span class="sourceLineNo">041</span>     * @param characterBuffer<a name="line.41"></a>
+<span class="sourceLineNo">042</span>     *            The next characters provided from the modifiable stream. It contains the modifiable characters,<a name="line.42"></a>
+<span class="sourceLineNo">043</span>     *            (optionally) preceded by unmodifiable characters.<a name="line.43"></a>
+<span class="sourceLineNo">044</span>     *            &lt;p&gt;<a name="line.44"></a>
+<span class="sourceLineNo">045</span>     *            The modifier can modify the content of the buffer as appropriate the modifier must not modify the<a name="line.45"></a>
+<span class="sourceLineNo">046</span>     *            unmodifiable characters, i.e. the characters before position<a name="line.46"></a>
+<span class="sourceLineNo">047</span>     *            &lt;code&gt;firstModifiableCharacterInBufferIndex&lt;/code&gt; must not be modified.<a name="line.47"></a>
+<span class="sourceLineNo">048</span>     *            &lt;p&gt;<a name="line.48"></a>
+<span class="sourceLineNo">049</span>     *            Your modifier should manage the {@link StringBuilder#capacity() capacity} of the buffer on its own -<a name="line.49"></a>
+<span class="sourceLineNo">050</span>     *            as the optimal management of the capacity depends on the specific purpose of the modifier.<a name="line.50"></a>
+<span class="sourceLineNo">051</span>     *            &lt;p&gt;<a name="line.51"></a>
+<span class="sourceLineNo">052</span>     *            The given buffer must be never null.<a name="line.52"></a>
+<span class="sourceLineNo">053</span>     * @param firstModifiableCharacterInBuffer<a name="line.53"></a>
+<span class="sourceLineNo">054</span>     *            index of the first modifiable character in the buffer. The index of the first character in the buffer<a name="line.54"></a>
+<span class="sourceLineNo">055</span>     *            is zero. If there is not modifiable character in the buffer, then this value is equal the length of<a name="line.55"></a>
+<span class="sourceLineNo">056</span>     *            the buffer.<a name="line.56"></a>
+<span class="sourceLineNo">057</span>     * @param endOfStreamHit<a name="line.57"></a>
+<span class="sourceLineNo">058</span>     *            True if no more characters can be read from the stream, i.e. the character buffer contains the all the<a name="line.58"></a>
+<span class="sourceLineNo">059</span>     *            characters up to the end of the stream.<a name="line.59"></a>
+<span class="sourceLineNo">060</span>     * @return Returns an object that defines how {@link ModifyingReader} or {@link ModifyingWriter} shall behave before<a name="line.60"></a>
+<span class="sourceLineNo">061</span>     *         calling {@link Modifier#modify(StringBuilder, int, boolean)} again.<a name="line.61"></a>
+<span class="sourceLineNo">062</span>     */<a name="line.62"></a>
+<span class="sourceLineNo">063</span>    public AfterModification modify(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,<a name="line.63"></a>
+<span class="sourceLineNo">064</span>            boolean endOfStreamHit);<a name="line.64"></a>
+<span class="sourceLineNo">065</span>}<a name="line.65"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

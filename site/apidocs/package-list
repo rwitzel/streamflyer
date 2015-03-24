@@ -1,0 +1,16 @@
+com.github.rwitzel.streamflyer.core
+com.github.rwitzel.streamflyer.experimental.range
+com.github.rwitzel.streamflyer.experimental.range2
+com.github.rwitzel.streamflyer.experimental.stateful
+com.github.rwitzel.streamflyer.experimental.stateful.util
+com.github.rwitzel.streamflyer.experimental.xml
+com.github.rwitzel.streamflyer.internal.thirdparty
+com.github.rwitzel.streamflyer.regex
+com.github.rwitzel.streamflyer.regex.addons.nomatch
+com.github.rwitzel.streamflyer.regex.addons.saxlike
+com.github.rwitzel.streamflyer.regex.addons.stateful
+com.github.rwitzel.streamflyer.regex.addons.tokens
+com.github.rwitzel.streamflyer.regex.addons.util
+com.github.rwitzel.streamflyer.util
+com.github.rwitzel.streamflyer.util.statistics
+com.github.rwitzel.streamflyer.xml
