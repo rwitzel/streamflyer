@@ -3,17 +3,17 @@
 [![Coveralls coverage status](https://img.shields.io/coveralls/rwitzel/streamflyer.svg)](https://coveralls.io/r/rwitzel/streamflyer)
 [![Apache 2](http://img.shields.io/badge/license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
-+++ 2015-03-24: Streamflyer [1.2.0](blob/wiki/ReleaseNotes.md) released with a new groupId. New package names everywhere! +++
++++ 2015-03-24: Streamflyer [1.2.0](../../blob/wiki/ReleaseNotes.md) released with a new groupId. New package names everywhere! +++
 
 +++ 2015-03-24: Streamflyer has a new home on GitHub because [Google Code](https://code.google.com/) is closing. +++ 
 
-+++ 2014-10-08: Streamflyer [1.1.3](blob/wiki/ReleaseNotes.md) released. Available in Maven Central. +++
++++ 2014-10-08: Streamflyer [1.1.3](../../blob/wiki/ReleaseNotes.md) released. Available in Maven Central. +++
 
-+++ 2013-11-10: New wiki page: [How to implement a custom modifier](blob/wiki/ImplementCustomModifier.md) for [release 1.1.1](blob/wiki/ReleaseNotes.md) +++
++++ 2013-11-10: New wiki page: [How to implement a custom modifier](../../blob/wiki/ImplementCustomModifier.md) for [release 1.1.1](../../blob/wiki/ReleaseNotes.md) +++
 
 +++ 2013-03-10: Regular expression on `InputStream`: Differences to Java Regex [explained](#look-behind_constructs) +++
 
-![blob/wiki/streamflyer-body.png](blob/wiki//streamflyer-body.png)
+![../../blob/wiki/streamflyer-body.png](../../blob/wiki//streamflyer-body.png)
 
 ## What it does ##
 
@@ -50,14 +50,14 @@ More information about the usage you find in the [API documentation](http://rwit
 
 ## Implement custom modifiers ##
 
-Read [ImplementCustomModifier](blob/wiki/ImplementCustomModifier.md).
+Read [ImplementCustomModifier](../../blob/wiki/ImplementCustomModifier.md).
 
 ## Compatibility to Java's Regular Expressions package ##
 
 [RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/regex/RegexModifier.html) internally uses Java's Regex package. This is why it supports
 pattern flags, quantifiers, capturing groups the same way as Java does. An exception are look-behinds, see Section [Known Limitations](#known_limitations).
 
-There is a small tutorial: [AdvancedRegularExpressionsExample](blob/wiki/AdvancedRegularExpressionsExample.md)
+There is a small tutorial: [AdvancedRegularExpressionsExample](../../blob/wiki/AdvancedRegularExpressionsExample.md)
 
 ## Speed up your regular expressions ##
 
@@ -78,12 +78,12 @@ Streamflyer does not support modifications of byte streams out of the box.
 But you can convert your byte stream to a character stream, wrap the character stream by a modifying character stream, and then convert the character stream back to a byte stream. Don't expect an outstanding performance by this approach.
 
 You find examples for modifying both InputStream and OutputStream on
-[HowToModifyByteStreams](blob/wiki/HowToModifyByteStreams.md).
+[HowToModifyByteStreams](../../blob/wiki/HowToModifyByteStreams.md).
 
 
 ## Download ##
 
-Go to the [Installation page](blob/wiki/Installation.md)
+Go to the [Installation page](../../blob/wiki/Installation.md)
 to get the latest release. This page provides also the Maven coordinates, prerequisites, and information about dependencies to other libraries.
 
 ## Known limitations ##
@@ -128,7 +128,7 @@ This modifier does not work for XML documents with a prolog that contains more t
 
 Questions and suggestions are welcome and can be sent to the [discussion group](http://groups.google.com/group/streamflyer-discuss). Issues can be reported on the  [Issues page](issues) of this project.
 
-Some answered questions can be found in the [FAQ](blob/wiki/FAQ.md).
+Some answered questions can be found in the [FAQ](../../blob/wiki/FAQ.md).
 
 Please give me feedback of any kind. It is highly appreciated.
 
