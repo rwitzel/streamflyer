@@ -25,7 +25,7 @@ import com.github.rwitzel.streamflyer.util.statistics.LineColumnAwareModificatio
 /**
  * <a href="https://groups.google.com/forum/#!topic/streamflyer-discuss/tfoOlLFqLLc">Tracking the line and column
  * number</a>
- * 
+ *
  * @author rwoo
  */
 public class LineColumnOnRegexMatchTest {
@@ -115,4 +115,23 @@ public class LineColumnOnRegexMatchTest {
         assertEquals("line: 781, column: 24", positions.get(3));
     }
 
+    @Test
+    public void testFoundLineAndColumn2() throws Exception {
+
+        PositionSavingMatchProcessor processor = new PositionSavingMatchProcessor();
+        Modifier modifier = new PositionAwareRegexModifier("\\Qfile \\E(.*)\\Q.\\E", 0, processor, 1, 500);
+
+        String input = IOUtils.toString(getClass().getResourceAsStream("LineColumnOnRegexMatchTest2.txt"), "UTF-8");
+
+        Reader reader = new ModifyingReader(new StringReader(input), modifier);
+        IOUtils.toString(reader);
+        reader.close();
+
+        List<String> positions = processor.getMatchPositions();
+        assertEquals(4, positions.size());
+        assertEquals("line: 0, column: 5", positions.get(0));
+        assertEquals("line: 1, column: 8", positions.get(1));
+        assertEquals("line: 2, column: 5", positions.get(2));
+        assertEquals("line: 3, column: 0", positions.get(3));
+    }
 }
