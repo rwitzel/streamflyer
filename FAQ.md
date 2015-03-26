@@ -6,7 +6,7 @@ If you use the flag `Pattern.MULTI_LINE`, then $ and ^ match the end of line, th
 
 If you don't use this flag, then $ and ^ match the end of stream resp. the start of the stream.
 
-Attention! There is an limitation regarding [look-behind constructs](../../#look-behind_constructs) at the moment (Streamflyer version 1.2.0).
+Attention! There is an limitation regarding [look-behind constructs](../../#user-content-look-behind-constructs) at the moment (Streamflyer version 1.2.0).
 
 #### Can I share Modifier instances between threads? ####
 
