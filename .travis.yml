@@ -2,5 +2,5 @@ language: java
 jdk:
   - openjdk6
 
-after_success:
-  - mvn clean test -pl streamflyer-core jacoco:report coveralls:report -Pcoverage
+#after_success:
+#- mvn clean test -pl streamflyer-core jacoco:report coveralls:report -Pcoverage
