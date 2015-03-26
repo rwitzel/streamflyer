@@ -1,6 +1,6 @@
 # Prerequisites #
 
-Streamflyer 1.1.2 is compiled with JDK 1.6.
+Streamflyer 1.2.0 is compiled with source code level 1.6.
 
 
 
