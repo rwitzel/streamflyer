@@ -1,0 +1,794 @@
+Exhumation of Richard III of England
+From Wikipedia, the free encyclopedia
+This is a featured article. Click here for more information.
+
+Richard III, by an unknown artist, late 16th century. The raised right shoulder was a visible sign of Richard's spinal deformity.
+The exhumation of Richard III of England from his burial place within the site of the former Greyfriars Friary Church in the city of Leicester, England, took place in September 2012. The last king of the Plantagenet dynasty, Richard III was killed in the Battle of Bosworth on 22 August 1485, during the Wars of the Roses. His body was taken to Greyfriars Friary in Leicester, where it was buried in a crude grave in the friary church. Following the friary's dissolution in 1538 and its subsequent demolition, Richard's tomb was lost. An account arose that Richard's bones had been thrown into the River Soar at the nearby Bow Bridge.
+
+A search for Richard's body began in August 2012, initiated by the Looking for Richard project with the support of the Richard III Society. The archaeological excavation was led by the University of Leicester Archaeological Services, working in partnership with Leicester City Council. On the first day of the excavation a human skeleton belonging to a man in his thirties was uncovered. It showed signs of severe injuries and had several unusual physical features, most notably a severe curvature of the back. It was exhumed to allow scientific analysis, which found that the man had probably been killed either by a blow from a large bladed weapon, probably a halberd, which cut off the back of his skull and exposed the brain, or by a sword thrust that penetrated all the way through the brain. There were signs of other wounds on the skeleton that had probably occurred after death as "humiliation injuries", inflicted as a form of posthumous revenge.
+
+The age of the bones at death matched that of Richard when he was killed; they were dated to about the period of his death and were mostly consistent with physical descriptions of the king. Preliminary DNA analysis also showed that mitochondrial DNA extracted from the bones matched that of two matrilineal descendants, one 17th-generation and the other 19th-generation, of Richard's sister Anne of York. Taking these findings into account along with other historical, scientific and archaeological evidence, the University of Leicester announced on 4 February 2013 that it had concluded beyond reasonable doubt that the skeleton was that of Richard III.
+
+As a condition of being allowed to disinter the skeleton, the excavators agreed that, if Richard were found, his remains would be reburied in Leicester Cathedral. A controversy arose over whether an alternative reburial site, such as York Minster or Westminster Abbey, would be more suitable. A legal challenge confirmed that there were no public law grounds for the courts to be involved in that decision. The reinterment is scheduled to take place in Leicester on 26 March 2015, during a televised memorial service held in the presence of the Archbishop of Canterbury and senior members of other Christian denominations.
+
+Contents  [hide] 
+1 Death and initial burial
+1.1 Burial site
+2 Looking for Richard
+3 Greyfriars project and excavations
+4 Analysis of the discovery
+4.1 DNA evidence
+4.2 Bones
+4.3 Radiocarbon dating and other scientific analyses
+5 Identification of Richard III and other findings
+6 Plans for reinterment
+6.1 Reburial and commemorations
+7 Reactions
+8 Notes
+9 References
+10 Bibliography
+11 Further reading
+12 External links
+Death and initial burial[edit]
+Main article: Battle of Bosworth
+
+An 1864 conception of Richard III in the Battle of Bosworth
+Richard was killed fighting Henry Tudor in 1485, at the Battle of Bosworth, the last major battle of the Wars of the Roses. The Welsh poet Guto'r Glyn gave the credit for Richard's death to Sir Rhys ap Thomas, a Welsh member of Henry's army who was said to have struck the fatal blow.[1] Following his death, Richard's body was stripped naked and taken to Leicester[2][3] where it was put on public display. The anonymous Ballad of Bosworth says that "in Newarke laid was hee, that many a one might looke on him" – possibly a reference to the church of St Mary-in-the-Newark, a Lancastrian foundation on the outskirts of medieval Leicester.[4] According to the chronicler Polydore Vergil, Henry VII "tarried for two days" in Leicester before moving on to London, and on the same date as Henry's departure – 25 August 1485 – Richard's body was buried "at the convent of Franciscan monks [sic] in Leicester" with "no funeral solemnity".[5] The Warwickshire priest and antiquary John Rous, writing between 1486 and 1491, recorded that Richard had been buried "in the choir of the Friars Minor at Leicester".[5] Although later writers ascribed Richard's burial to other places, the accounts of Vergil and Rous were seen by modern investigators as the most credible.[5]
+
+Burial site[edit]
+Main article: Greyfriars, Leicester
+
+No 1, Grey Friars, County Offices for Leicestershire County Council from 1936 to 1965, occupies the site of the Herrick mansion.
+In 1495, ten years after the burial, Henry VII paid for a marble and alabaster monument to mark Richard's grave.[6] Its cost is recorded in surviving legal papers relating to a dispute over payment, and show that two men received payments of £50 and £10.1s respectively to make and transport the tomb from Nottingham to Leicester.[7] No first-person descriptions of the tomb survive, but Raphael Holinshed wrote in 1577 (perhaps quoting someone who had seen it in person) that it incorporated "a picture of alabaster representing [Richard's] person".[8] Sir George Buck wrote 40 years later that it was "a fair tomb of mingled colour marble adorned with his image".[8] Buck also recorded the epitaph inscribed on the tomb.[8]
+
+Following the dissolution of Greyfriars in 1538, when the friary was demolished, the monument either was destroyed, or slowly decayed as a result of being exposed to the elements. The site of the friary was sold to two Lincolnshire property speculators and was later acquired by Robert Herrick, the Mayor of Leicester. He built a large mansion close to Friary Lane, on a site that is now buried under the modern Grey Friars street, and turned the rest of the land into gardens.[9] Although Richard's monument had evidently disappeared by this time, the site of his grave was still known. The antiquary Christopher Wren (father of Christopher Wren the architect) recorded that Herrick erected a monument on the site of the grave, in the form of a stone pillar three feet (1 m) high carved with the words, "Here lies the Body of Richard III, Some Time King of England."[10] The pillar was visible in 1612 but had disappeared by 1844.[11]
+
+The cartographer and antiquarian John Speed wrote in his Historie of Great Britaine (1611) that local tradition held that Richard's body had been "borne out of the City, and contemptuously bestowed under the end of Bow-Bridge, which giveth passage over a branch of Soare upon the west side of the town."[12] His account was widely accepted by later authors. In 1856 a memorial plaque to Richard III was erected next to the Bow Bridge by a local builder, stating, "Near this spot lie the remains of Richard III the last of the Plantagenets 1485".[13] The discovery in 1862 of a skeleton in the river sediments near the bridge led to claims that Richard's bones had been found, but closer examination showed that they were probably those of a man in his early 20s and therefore not Richard's.[13]
+
+The origin of Speed's claim is unclear; it was not attributed to any source, nor did it have any antecedents in other written accounts.[13] The writer Audrey Strange suggests that the account may be a confused retelling of desecration of the remains of John Wycliffe in nearby Lutterworth in 1428, when a mob disinterred him, burned his bones and threw them into the River Swift.[14] The independent British historian John Ashdown-Hill proposes that Speed made a mistake over the location of Richard's grave and invented the story to account for its absence. If Speed had been to Herrick's property he would surely have seen the commemorative pillar and gardens, but instead he reported that the site was "overgrown with nettles and weeds"[15] and there was no trace of Richard's grave. The map of Leicester drawn by Speed incorrectly shows Greyfriars where the former Blackfriars was, suggesting that he had looked for the grave in the wrong place.[15]
+
+Another local legend arose about Richard's supposed stone coffin, which Speed wrote was "now made a drinking trough for horses at a common Inn". A coffin certainly seems to have existed; John Evelyn recorded it on a visit in 1654, and Celia Fiennes wrote in 1700 that she had seen "a piece of his tombstone [sic] he lay in, which was cut out in exact form for his body to lie in; it remains to be seen at ye Greyhound [Inn] in Leicester but is partly broken." William Hutton found in 1758 that the coffin, which had "not withstood the ravages of time", was now kept at the White Horse Inn on Gallowtree Gate. Although the coffin's location is no longer known, its descriptions do not match the style of late 15th-century coffins, and it is unlikely to have had any connection with Richard. It is more likely that the coffin was salvaged from one of the religious establishments demolished following the Dissolution.[13]
+
+Herrick's mansion, Greyfriars House, remained in the possession of his family until his great-grandson Samuel sold it in 1711. The property was subsequently divided up and sold off in 1740; three years later, New Street was built across the western part of the site. Many burials were discovered when houses were laid out along the street. A new townhouse, 17 Friar Lane, was built on the east part of the site in 1759 and survives today. During the 19th century, the site became increasingly built upon. In 1863 the Alderman Newton's Boys' School built a schoolhouse on part of the site. Herrick's old mansion was demolished in 1871, the present street of Grey Friars was laid though the site in 1873, and more commercial developments, including the Leicester Trustee Savings Bank, were built. In 1915 the rest of the site was acquired by Leicestershire County Council, which built new offices there in the 1920s and 1930s. The council moved out in 1965 when Leicestershire's new County Hall was opened, and Leicester City Council moved in.[13] The rest of the site, where Herrick's garden had once been, was turned into a staff car park in about 1944, but was not otherwise built on.[16]
+
+In 2007, a single-storey building dating from the 1950s was demolished on Grey Friars Street. This gave archaeologists the opportunity to carry out an excavation to see if any trace of the medieval friary could be found. Very little was unearthed, except for a fragment of a post-medieval stone coffin lid. The results of the dig suggested that the remains of the friary church were farther west than previously thought.[17]
+
+Looking for Richard[edit]
+
+Plaques on Bow Bridge, Leicester relating to the story that Richard's bones had been dumped into the River Soar. The small plaque was installed by the Richard III Society in 2005 to refute the statement on the larger plaque, installed in 1856.
+The location of Richard III's body has long been of interest to the members of the Richard III Society, a group established to bring about a reappraisal of the King's tarnished reputation. In 1975 an article by Audrey Strange was published in the Society's journal, The Ricardian, suggesting that the remains were buried under Leicester City Council's car park.[18] This claim was later repeated when, in 1986, historian David Baldwin suggested that the remains were still in the Greyfriars area of the city.[19] He speculated, "It is possible (though now perhaps unlikely) that at some time in the twenty-first century an excavator may yet reveal the slight remains of this famous monarch."[20] In 2004 and 2005, John Ashdown-Hill tracked down two 17th-generation matrilineal descendants of Richard III's sister Anne of York.[21] He also concluded from his knowledge of the layout of Franciscan priories that the ruins of the priory church at Greyfriars were likely to lie under the car park and had not been built over.[22]
+
+Although the Richard III Society remained interested in discussing the possible location of the King's grave, they did not search for Richard's remains. Individual members suggested possible lines of investigation, but neither the University of Leicester nor local historians and archaeologists took up the challenge, probably because it was widely thought that the grave site had been built over or the skeleton had been scattered, as John Speed's account suggested.[23]
+
+In 2004 and 2005, Philippa Langley, secretary of the Scottish Branch of the Richard III Society, carried out her own research in Leicester in connection with a biographical Richard III screenplay. She became convinced that the car park was the key location that needed to be investigated and contacted Ashdown-Hill after hearing of his DNA research.[24] At her urging, he contacted the producers of Channel 4's Time Team archaeology series to propose an excavation of the car park, but they declined to become involved as the dig would take longer than the standard three-day window for Time Team projects. Three years later, another writer, Annette Carson, in her book Richard III: The Maligned King (2008), independently came to the conclusion that his body probably lay under the car park. She joined forces with Langley and Ashdown-Hill to carry out further research,[25] in the course of which she found what she called a "smoking gun" – a medieval map of Leicester showing the Greyfriars Church at the north end of what was now the car park.[26]
+
+In February 2009, Langley, Carson and Ashdown-Hill teamed up with two Richard III Society members – Dr. David Johnson and his wife Wendy – to launch a project with the working title Looking for Richard: In Search of a King, which Langley envisaged as a "landmark TV special".[17] Its premise was a search for Richard's grave "while at the same time telling his real story",[17][27] with an objective "to search for, recover and rebury his mortal remains with the honour, dignity and respect so conspicuously denied following his death at the battle of Bosworth."[28]
+
+The project gained the backing of several key partners – Leicester City Council, Leicester Promotions (responsible for tourist marketing), the University of Leicester, Leicester Cathedral, Darlow Smithson Productions (responsible for the planned TV show) and the Richard III Society.[27] Funding for the initial phase of pre-excavation research came from the Richard III Society's bursary fund and members of the Looking for Richard project,[29] with Leicester Promotions agreeing to pick up the £35,000 cost of the dig. The University of Leicester Archaeological Services – an independent body with offices at the university – was appointed as the project's archaeological contractor.[30]
+
+Greyfriars project and excavations[edit]
+
+Site of Greyfriars, shown superimposed over a modern map of the area. The skeleton of Richard III was recovered in September 2012 from the centre of the choir, shown by a small dot.
+In March 2011 an assessment of the Greyfriars site began to identify where the monastery had stood, and which land might be available for excavation. A desk-based assessment[note 1] was first conducted to determine the archaeological viability of the site, followed by a survey in August 2011 using ground-penetrating radar (GPR).[17] The GPR results were inconclusive; no clear building remains could be identified owing to a layer of disturbed ground and demolition debris just below the surface. The survey was, however, useful in finding modern utilities crossing the site, such as pipes and cables.[31]
+
+Three possible excavation sites were identified: the staff car park of Leicester City Council Social Services, the disused playground of the former Alderman Newton's School and a public car park on New Street. It was decided to open two trenches in the Social Services car park, with an option for a third in the playground.[32] Because most of the Greyfriars site had been built on over the years, only seventeen per cent of its former area was available to excavate; the area to be investigated amounted to just one per cent of the site, owing to the limitations of the project's funding.[33]
+
+The proposed excavation was announced in the June 2012 issue of the Richard III Society's magazine, the Ricardian Bulletin, but a month later one of the main sponsors of the project pulled out leaving a £10,000 funding shortfall; an appeal resulted in members of the several Ricardian groups donating £13,000 in only two weeks.[34] A press conference was held in Leicester on 24 August to announce the start of the work. Archaeologist Richard Buckley admitted the project was a long shot: "We don't know precisely where the church is, let alone where the burial site is."[35] He had earlier told Langley that he thought the odds were "fifty-fifty at best for [finding] the church, and nine-to-one against finding the grave."[36]
+
+Digging began the next day with a trench 1.6 metres (5.2 ft) wide by 30 metres (98 ft) long, running roughly north-south. A layer of modern building debris was removed before the level of the former monastery was reached. Two parallel human leg bones were discovered about 5 metres (16 ft) from the north end of the trench at a depth of about 1.5 metres (4.9 ft), indicating an undisturbed burial.[37] The bones were covered temporarily to protect them while excavations continued further along the trench. A second, parallel trench was dug next day to the south-west.[38] Over the following days, evidence of a series of medieval walls and rooms was uncovered, allowing the archaeologists to pinpoint the area of the friary.[39] It became clear that the bones found on the first day lay inside the east part of the church, possibly the choir, where Richard was said to have been buried.[40] On 31 August, the University of Leicester applied for a licence from the Ministry of Justice to permit the exhumation of up to six sets of human remains. To narrow the search, it was planned that only the remains of men in their thirties, buried within the church, would be exhumed.[39]
+
+The bones found on 25 August were uncovered on 4 September and the grave soil dug back further over the next two days. The feet were missing, and the skull was found in an unusual propped-up position, consistent with the body being put into a grave that was slightly too small.[41] The spine was curved in an S-shape. No sign of a coffin was found; the skeleton's posture suggested the body had not been put in a shroud, but had been hurriedly dumped into the grave and buried. As the bones were lifted from the ground, a piece of rusted iron was found underneath the vertebrae.[42][43] The skeleton's hands were in an unusual position, crossed over the right hip, suggesting they were tied together at the time of burial, though this could not be established definitively.[44] After the exhumation, work continued in the trenches over the following week, before the site was covered with soil to protect it from damage and re-surfaced to restore the car park and the playground to their former condition.[45]
+
+Analysis of the discovery[edit]
+
+The site of Richard III's grave, against a wall in the choir of the former Greyfriars Church
+
+Archaeologists working in a trench in the playground of the former Alderman Newton's School, on the site of the Greyfriars Church, in September 2012
+On 12 September, the University of Leicester team announced that the human remains were a possible candidate for Richard's body, but emphasised the need for caution. There was a range of positive indicators: the body was of an adult male; it was buried beneath the choir of the church; there was severe scoliosis of the spine, possibly making one shoulder higher than the other.[46] An object that appeared to be an arrowhead had been located under the spine and there were severe injuries to the skull.[47][48]
+
+DNA evidence[edit]
+After the exhumation the emphasis shifted from the archaeological excavation to laboratory analysis of the bones that had been recovered. There were several lines of enquiry: Ashdown-Hill had previously used genealogical research to track down matrilineal descendants of Anne of York, Richard's older sister, whose matrilineal line of descent is extant, through her daughter Anne St Leger. Academic Kevin Schürer subsequently traced a second unnamed individual in the same line.[49]
+
+Ashdown-Hill's research came about as a result of a challenge in 2003 to provide a DNA sequence for Richard's sister Margaret, to identify bones that had been found in her burial place, a Franciscan priory church in Mechelen, Belgium. He first tried to extract a mitochondrial DNA sequence from a preserved hair of Edward IV held by the Ashmolean Museum in Oxford. The attempt proved to be unsuccessful, owing to degradation of the DNA. Ashdown-Hill turned instead to genealogical research to identify an all-female-line descendant of Cecily Neville, Richard's mother.[50] After two years' work he found that a British-born woman who emigrated to Canada after World War II, Joy Ibsen (née Brown), was a direct descendant of Richard's sister, Anne of York (and therefore Richard's 16th-generation great-niece).[51][52] Ibsen's mitochondrial DNA was tested and found to belong to mitochondrial DNA Haplogroup J, which by deduction should be Richard's mitochondrial DNA haplogroup.[53] The mtDNA he obtained from Ibsen showed that the Mechelen bones were not those of Margaret.[50]
+
+Joy Ibsen died in 2008. On 24 August 2012, her son Michael Ibsen (born in Canada in 1957, a cabinet maker now based in London)[54][55] gave a mouth-swab sample to the research team to compare against samples from the human remains found at the excavation.[56] Analysts found a mitochondrial DNA match between the exhumed skeleton, Michael Ibsen, and the second unnamed direct maternal line descendant, who shares a relatively rare mitochondrial DNA sequence,[57][58][59] mitochondrial DNA haplogroup J1c2c.[60][61]
+
+The other living female-line relative of Richard III, since named as New Zealander Wendy Duldig, is a 19th-generation descendant of Anne of York; their female lines of descent separated after Anne of York's granddaughter Catherine Manners. Her mitochondrial DNA is a match apart from one mutation.[51]
+
+Despite the matching mitochondrial DNA, geneticist Turi King continued to pursue a link between the paternally-inherited Y-DNA and that of descendants of John of Gaunt, 1st Duke of Lancaster. Four living male-line descendants of Gaunt have been located, and their results are a match to each other. The Y-DNA from the skeleton is somewhat degraded, but proved not to match any of the living male-line relatives, showing that a false-paternity event had happened somewhere in the 19 generations between Richard III and Henry Somerset, 5th Duke of Beaufort; work by Turi King and others has shown that historical rates of false paternity are around 1-2% per generation.[57]
+
+Bones[edit]
+An osteological examination of the bones showed them to be in generally in good condition and largely complete except for the missing feet, which may have been destroyed by Victorian building work. It was immediately apparent that the body had suffered major injuries, and further evidence of wounds was found as the skeleton was cleaned.[44] The skull shows signs of two lethal injuries; the base of the back of the skull had been completely cut away by a bladed weapon, which would have exposed the brain, and another bladed weapon had been thrust through the right side of the skull to impact the inside of the left side through the brain.[62] Elsewhere on the skull, a blow from a pointed weapon had penetrated the crown of the head. Bladed weapons had clipped the skull and sheared off layers of bone, without penetrating it.[63] Other holes in the skull and lower jaw were found to be consistent with dagger wounds to the chin and cheek.[64] The multiple wounds on the King’s skull indicated that he was not wearing his helmet, which he may have removed or lost when he was on foot after his horse had become stuck in the marsh.[65][66] One of the right ribs had been cut by a sharp implement, as had the pelvis.[67] There was no evidence of the withered arm that afflicted the character in William Shakespeare's play Richard III.[68][69]
+
+Taken together, the injuries appear to be a combination of battle wounds, which were the cause of death, followed by post-mortem humiliation wounds inflicted on the corpse. The body wounds show that the corpse had been stripped of its armour, as the stabbed torso would have been protected by a backplate and the pelvis would have been protected by armour. The wounds were made from behind on the back and buttocks while they were exposed to the elements, consistent with the contemporary descriptions of Richard's naked body being tied across a horse with the legs and arms dangling down on either side.[64][67][70] There may have been further flesh wounds not apparent from the bones.[68]
+
+The head wounds are consistent with a 1485 poem by Guto'r Glyn in which a Welsh knight, Sir Rhys ap Thomas, killed Richard and "shaved the boar's head".[71] It had been thought that this was a figurative description of Richard being decapitated, but the skeleton's head had clearly not been severed. Guto's description may instead be a literal account of the injuries that Richard suffered, as the blows sustained to the head would have sliced away much of his scalp and hair and slivers of bone.[71] Other contemporary sources refer explicitly to head injuries and the weapons used to kill Richard; the French chronicler Jean Molinet wrote that "one of the Welshmen then came after him, and struck him dead with a halberd", and the Ballad of Lady Bessie recorded that "they struck his bascinet to his head until his brains came out with blood." Such accounts would certainly fit the damage inflicted on the skull.[70][72]
+
+Sideways curvature of his spine was evident as the skeleton was excavated. It has been attributed to adolescent-onset scoliosis. Although it was probably visible in making his right shoulder higher than the left and reducing his apparent height, it did not preclude an active lifestyle, and would not have caused a hunchback.[73] The bones are those of a male with an age range estimation of 30–34,[66] consistent with Richard, who was 32 when he died.[68]
+
+Radiocarbon dating and other scientific analyses[edit]
+Radiocarbon dating to find the age of the bones came out at between 1430 and 1460[note 2] and 1412–1449[note 3] – both too early for Richard's death in 1485. However, mass spectrometry carried out on the bones found evidence of consumption of much seafood, which is known to make radiocarbon dating samples appear to be older than they really are. A Bayesian analysis found that there was a 68.2% probability that the true date of the bones was between 1475 and 1530, rising to 95.4% for between 1450 and 1540. Although by itself not enough to prove that the skeleton was Richard's, it was consistent with the date of his death.[74] The mass spectrometry result indicating the rich seafood diet was confirmed by a chemical isotope analysis of two teeth, a femur and a rib. From the isotope analysis of carbon, nitrogen and oxygen in the teeth and bones the researchers found that the diet included much freshwater fish and exotic birds such as swan, crane and heron, and a vast quantity of wine — all items at the high end of the luxury market.[75] Close analysis of the soil immediately below the skeleton revealed that the man had been infested with roundworm parasites at the time of his death.[76]
+
+The excavators had found an iron object under his vertebrae, and speculated that in might be an arrowhead that had been embedded in Richard's back. An X-ray analysis of it showed that it was a nail, probably of Romano-British date, that by chance had been in the ground immediately under the grave or was in soil disturbed when it was dug and had nothing to do with the body.[68]
+
+Identification of Richard III and other findings[edit]
+On 4 February 2013, the University of Leicester confirmed that the skeleton was that of Richard III.[77][78][79] The identification was based on mitochondrial DNA evidence, soil analysis, and dental tests, and physical characteristics of the skeleton consistent with contemporary accounts of Richard's appearance. Osteoarchaeologist, Jo Appleby commented: "The skeleton has a number of unusual features: its slender build, the scoliosis, and the battle-related trauma. All of these are highly consistent with the information that we have about Richard III in life and about the circumstances of his death."[77]
+
+Caroline Wilkinson, Professor of Craniofacial Identification at the University of Dundee, led the project to reconstruct the face, commissioned by the Richard III Society.[80] On 11 February 2014, the University of Leicester announced a project headed by Turi King to sequence the entire genome of Richard III and Michael Ibsen – a direct female-line descendant of Richard's sister, Anne of York – whose mitochondrial DNA confirmed the identification of the excavated remains. Richard III is thus the first ancient person with known historical identity whose genome has been sequenced.[81] A study published in Nature in December 2014 confirmed a perfect whole-mitochondrial genome match between Richard's skeleton and Michael Ibsen and and a near-perfect match between Richard and his other confirmed living relative. However, Y chromosome DNA inherited via the male line found no link with five other claimed living relatives, indicating that at least one "false-paternity event" occurred in the generations between Richard and these men. One of these five was found to be unrelated to the other four, showing that another false-paternity event had occurred in the four generations separating them.[82]
+
+The story of the excavation and the subsequent scientific investigation was told in a Channel 4 documentary, Richard III: The King in the Car Park, broadcast on 4 February 2013.[83] It proved a ratings hit for the channel, watched by up to 4.9 million viewers,[84] and won a Royal Television Society award.[85] Channel 4 subsequently screened a follow-up documentary on 27 February 2014, Richard III: The Untold Story, which detailed the scientific and archaeological analyses that led to the identification of the skeleton as Richard III.[84]
+
+
+The July 2013 excavation, which uncovered more of Greyfriars and exhumed several other burials
+The site was re-excavated in July 2013 to learn more about the friary church, before building work on the adjacent disused school building. In a project co-funded by Leicester City Council and the University of Leicester, a single trench about twice the area of the 2012 trenches was excavated. It succeeded in exposing the entirety of the sites of the Greyfriars presbytery and choir sites, confirming archaeologists' earlier hypotheses about the layout of the church's east end. Three burials identified but not excavated in the 2012 project were tackled afresh. One was found to have employed a wooden coffin in a well-dug grave, while a second wooden-coffined burial was found under and astride the choir and presbytery; its position suggests that it pre-dates the church.[86]
+
+A stone coffin found during the 2012 excavation was opened for the first time, revealing a lead coffin inside. An investigation with an endoscope revealed the presence of a skeleton along with some head hair and fragments of a shroud and cord.[86] The skeleton was at first assumed to be male, perhaps that of a knight called Sir William de Moton who was known to have been buried there, but later examination showed it to be of a woman – perhaps a high-ranking benefactress.[87] She may not necessarily have been local, as lead coffins were used to transport corpses over long distances.[86]
+
+Plans for reinterment[edit]
+The University of Leicester's initial plan was to have Richard's body interred in Leicester Cathedral, in keeping with British legal norms which hold that Christian burials excavated by archaeologists should be reburied in the nearest consecrated ground to the original grave.[76] This had been a condition of the licence granted by the Ministry of Justice to exhume any human remains found during the excavation.[88] The present British Royal Family made no claim on the remains – Queen Elizabeth II was reportedly consulted but rejected the idea of a royal burial[76] – so the Ministry of Justice initially confirmed that the University of Leicester would make the final decision on where the bones should be re-buried.[89] David Monteith, Canon Chancellor of Leicester Cathedral, said Richard's skeleton would be reinterred at the cathedral in early 2014 in a "Christian-led but ecumenical service".[90] Monteith said it would not be a formal reburial but rather a service of remembrance, as Richard would already have had a funeral service at the time of burial.[91]
+
+
+Leicester Cathedral, where Richard III was reburied in March 2015
+The choice of burial site was controversial, as there were proposals for Richard to be buried in places which some felt were more fitting for a Roman Catholic and Yorkist monarch. Various online petitions were launched calling for Richard to be buried in places other than Leicester Cathedral; suggested alternatives included Westminster Abbey,[note 4] where 17 other English and British kings are interred; York Minster, which some claimed was Richard's own preferred burial site; the Roman Catholic Arundel Cathedral; or the Leicester car park in which his body was found. Only two of these options received significant public support, with Leicester receiving 3,100 more signatures than York.[76] The issue was discussed in the Houses of Parliament; the Conservative MP and historian Chris Skidmore proposed that a state funeral should be held, while John Mann, the Labour MP for Bassetlaw, suggested that the body should be buried in Worksop in his constituency – halfway between York and Leicester. All of these options were rejected in Leicester, whose mayor retorted: "Those bones leave Leicester over my dead body."[93]
+
+After legal action brought by a group calling itself the "Plantagenet Alliance", representing claimed collateral descendants of Richard, his final resting place remained uncertain for nearly a year.[94] The group, which described itself as "his Majesty's representatives and voice",[86] called for Richard to be buried within York Minster, which they claimed was his "wish".[94][95] The Dean of Leicester called their challenge "disrespectful", and said that the Cathedral would not be investing any more money until the matter was decided.[96] Historians said that there was no evidence that Richard III wanted to be buried in York.[86] Mark Ormrod of the University of York expressed scepticism over the idea that Richard had devised any clear plans for his own burial.[97] The standing of the Plantagenet Alliance was also challenged. Mathematician Rob Eastaway calculated that Richard III may have millions of living collateral descendants, saying that "we should all have the chance to vote on Leicester versus York".[98]
+
+In August 2013 Justice Haddon-Cave granted permission for a judicial review as the original burial plans were found to have ignored the Common Law duty "to consult widely as to how and where Richard III's remains should appropriately be reinterred".[95] The judicial review opened on 13 March 2014 and was expected to last two days [99] but the decision was deferred for four to six weeks. Lady Justice Hallett, sitting with Justice Ouseley and Justice Haddon-Cave, said the court would take time to consider its judgment.[100] On 23 May the High Court ruled that there was "no duty to consult" and that "there was no public law grounds for the court to interfere", so reburial in Leicester could proceed.[101] The litigation cost the defendants £245,000 – far more than the cost of the original investigation.[76]
+
+Reburial and commemorations[edit]
+
+The existing memorial to Richard III in Leicester Cathedral
+In February 2013, Leicester Cathedral announced a procedure and timetable for the reinterment of Richard's remains. The Cathedral planned that he would be buried in a "place of honour" within the cathedral.[102] Initial plans for a flat ledger stone; perhaps modifying the existing memorial stone to Richard installed in the chancel in 1982,[103] proved unpopular. A table tomb was the most popular option among members of the Richard III Society and in polls of Leicester people.[104][105] In June 2014 a final design was announced, in the form of a table tomb of Swaledale fossil stone.[106] Also in June the statue of Richard III that originally stood in Leicester's Castle Gardens was moved to the Cathedral Gardens as part of a redesign which was formally declared open on 5 July 2014.[107]
+
+The reburial will take place as part of a week of events between 22 and 27 March 2015. The sequence of events includes:
+
+Sunday 22 March 2015: Richard's bones were sealed inside a lead-lined ossuary which was placed inside a wooden coffin.[108] The remains were moved from the University of Leicester to Leicester Cathedral via the site of the Battle of Bosworth at Fenn Hill Farm and then through local villages (Dadlington, Sutton Cheney, Bosworth Battlefield Heritage Centre, Market Bosworth) retracing part of Richard's last journey.[76][109] The coffin, made by Michael Ibsen from English oak from the Duchy of Cornwall estate[55] was transferred from a motor hearse to a four-horse drawn hearse for entry into the city of Leicester.[110]
+Monday 23 – Wednesday 25 March 2015: Remains lie in repose in the cathedral. Waiting times to view the coffin were reported to exceed four hours.[111]
+Monday 23 March 2015: Cardinal Vincent Nichols, the Archbishop of Westminster, celebrated Mass for Richard III's soul in Holy Cross Priory, Leicester, the Catholic parish church and Holy Cross Church.
+Thursday 26 March 2015: Reburial in the presence of Archbishop of Canterbury, Justin Welby, and senior members of other Christian denominations. The service, which will be shown live on Channel 4, will include memorial prayers for Richard III and the victims of Bosworth and other conflicts. Actor Benedict Cumberbatch, a distant relative of Richard III, will read a poem written for the service by Carol Ann Duffy.[112][113] The Royal Family will be represented by HRH Sophie, Countess of Wessex.
+Friday 27 March 2015: Unveiling of tomb to the public, followed by commemorations across Leicester.[114]
+Reactions[edit]
+
+One of the galleries in the Richard III visitor centre in Leicester
+After the discovery, Leicester City Council set up a small temporary exhibition on Richard III in the city's medieval guildhall.[115] The council announced that it would create a larger permanent attraction and spent £850,000 to buy the freehold of St Martin's Place, formerly part of Leicester Grammar School, in Peacock Lane, across the road from the cathedral. The site adjoins the car park where the body was found, and overlies the chancel of the Greyfriars Friary Church.[93][116] The building was converted into a £4.5 million visitor centre telling the story of Richard's life, death, burial and rediscovery, with artefacts from the dig including Philippa Langley's Wellington boots and the hard hat and high-visibility jacket worn by archaeologist Mathew Morris on the day when he found Richard's skeleton. Visitors can also see the grave site under a glass floor.[117] The council anticipated that the visitor centre, which opened in July 2014, would attract 100,000 visitors a year.[115]
+
+In Norway, archaeologist Øystein Ekroll hoped that the interest after the discovery of the English king would spill over to Norway. In contrast to England where, with the possible exception of Edward V, all the kings since the 11th century have now been discovered, in Norway around 25 medieval kings are buried in unmarked graves around the country. Ekroll proposed to start with Harald Hardrada, who is most probably buried anonymously in Trondheim, beneath what is today a public road. A previous attempt to exhume Harald in 2006 was blocked by the Norwegian Directorate for Cultural Heritage (Riksantikvaren).[118]
+
+Richard Buckley of the University of Leicester Archaeological Services, who had previously said that he would "eat his hat" if Richard was discovered, fulfilled his promise by eating a hat-shaped cake baked by a colleague.[91] Buckley later said:
+
+Cutting edge research has been used in the project and the work has really only just begun. The discoveries, such as the very precise carbon dating and medical evidence, will serve as a benchmark for other studies. And it is, of course, an incredible story. He's a controversial figure, people love the idea he was found under a car park, the whole thing unfolded in the most amazing way. You couldn't make it up.[119]
+
+---------------
+
+test1 STREAMFLYER test2 STREAMFLYER test3 
+
+England
+From Wikipedia, the free encyclopedia
+This article is about the country. For other uses, see England (disambiguation).
+Page semi-protected
+England
+
+Flag
+Anthem: Various
+Predominantly "God Save the Queen"
+MENU0:00
+Location of  England  (dark green)– in Europe  (green & dark grey)– in the United Kingdom  (green)
+Location of  England  (dark green)
+– in Europe  (green & dark grey)
+– in the United Kingdom  (green)
+Capital
+and largest city    London
+51°30′N 0°7′W
+National language   English
+Regional languages  Cornish
+Ethnic groups (2011)    
+85.4% White
+7.8% Asian
+3.5% Black
+2.3% Mixed
+0.4% Arab
+0.6% Other[1]
+Demonym English
+Sovereign state United Kingdom
+History
+ -  Anglo-Saxon settlement  5th–6th century 
+ -  Unification 10th century 
+ -  Union with Scotland 1 May 1707 
+Area
+ -  Total   130,395 km2
+50,346 sq mi
+Population
+ -  2011 census 53,012,456
+ -  Density 407/km2
+1,054.1/sq mi
+GDP (nominal)   2009 estimate
+ -  Total   $2.68 trillion
+ -  Per capita  $50,566
+Currency    Pound sterling (GBP)
+Time zone   GMT (UTC​)
+ -  Summer (DST)    BST (UTC+1)
+Date format dd/mm/yyyy (AD)
+Drives on the   left
+Calling code    +44
+Patron saint    Saint George
+    Wikisource has original text related to this article:
+England portal
+England Listeni/ˈɪŋɡlənd/ is a country that is part of the United Kingdom.[2][3][4] It shares land borders with Scotland to the north and Wales to the west. The Irish Sea lies northwest of England and the Celtic Sea lies to the southwest. England is separated from continental Europe by the North Sea to the east and the English Channel to the south. The country covers much of the central and southern part of the island of Great Britain, which lies in the North Atlantic; and includes over 100 smaller islands such as the Isles of Scilly, and the Isle of Wight.
+
+The area now called England was first inhabited by modern humans during the Upper Palaeolithic period, but takes its name from the Angles, one of the Germanic tribes who settled during the 5th and 6th centuries. England became a unified state in the 10th century, and since the Age of Discovery, which began during the 15th century, has had a significant cultural and legal impact on the wider world.[5] The English language, the Anglican Church, and English law – the basis for the common law legal systems of many other countries around the world – developed in England, and the country's parliamentary system of government has been widely adopted by other nations.[6] The Industrial Revolution began in 18th-century England, transforming its society into the world's first industrialised nation.[7]
+
+England's terrain mostly comprises low hills and plains, especially in central and southern England. However, there are uplands in the north (for example, the mountainous Lake District, Pennines, and Yorkshire Dales) and in the south west (for example, Dartmoor and the Cotswolds). The capital of England is London, which is the largest metropolitan area in the United Kingdom and the largest urban zone in the European Union by most measures.[nb 1] The population of over 53 million comprises 84% of the population of the United Kingdom, largely concentrated around London, the South East, and conurbations in the Midlands, the North West, the North East and Yorkshire, which each developed as major industrial regions during the 19th century.[8]
+
+The Kingdom of England – which after 1284 included Wales – ceased being a separate sovereign state on 1 May 1707, when the Acts of Union put into effect the terms agreed in the Treaty of Union the previous year, resulting in a political union with the Kingdom of Scotland to create the Kingdom of Great Britain.[9][10] In 1801, Great Britain was united with the Kingdom of Ireland through another Act of Union to become the United Kingdom of Great Britain and Ireland. In 1922 the Irish Free State seceded from the United Kingdom, leading to the latter being renamed the United Kingdom of Great Britain and Northern Ireland.
+
+Contents  [hide] 
+1 Toponymy
+2 History
+2.1 Prehistory and antiquity
+2.2 Middle Ages
+2.3 Early Modern
+2.4 Late Modern and contemporary
+3 Governance
+3.1 Politics
+3.2 Law
+3.3 Regions, counties, and districts
+4 Geography
+4.1 Landscape and rivers
+4.2 Climate
+4.3 Major conurbations
+5 Economy
+5.1 Science and technology
+5.2 Transport
+6 Healthcare
+7 Demographics
+7.1 Population
+7.2 Language
+7.3 Religion
+8 Education
+9 Culture
+9.1 Architecture
+9.2 Folklore
+9.3 Cuisine
+9.4 Visual arts
+9.5 Literature, poetry and philosophy
+9.6 Performing arts
+9.7 Museums, libraries, and galleries
+10 Sports
+11 National symbols
+12 See also
+13 Notes
+14 References
+14.1 Bibliography
+15 External links
+Toponymy
+See also: Toponymy of England
+The name "England" is derived from the Old English name Englaland, which means "land of the Angles".[11] The Angles were one of the Germanic tribes that settled in Great Britain during the Early Middle Ages. The Angles came from the Angeln peninsula in the Bay of Kiel area of the Baltic Sea.[12] According to the Oxford English Dictionary, the first known use of "England" to refer to the southern part of the island of Great Britain occurs in 897, and its modern spelling was first used in 1538.[13]
+
+The earliest attested reference to the Angles occurs in the 1st-century work by Tacitus, Germania, in which the Latin word Anglii is used.[14] The etymology of the tribal name itself is disputed by scholars; it has been suggested that it derives from the shape of the Angeln peninsula, an angular shape.[15] How and why a term derived from the name of a tribe that was less significant than others, such as the Saxons, came to be used for the entire country and its people is not known, but it seems this is related to the custom of calling the Germanic people in Britain Angli Saxones or English Saxons.[16] In Scottish Gaelic, another language which developed on the island of Great Britain, the Saxon tribe gave their name to the word for England (Sasunn);[17] similarly, the Welsh name for the English language is "Saesneg".
+
+An alternative name for England is Albion. The name Albion originally referred to the entire island of Great Britain. The nominally earliest record of the name appears in the Aristotelian Corpus, specifically the 4th century BC De Mundo:[18] "Beyond the Pillars of Hercules is the ocean that flows round the earth. In it are two very large islands called Britannia; these are Albion and Ierne".[18][19] But modern scholar consensus ascribes De Mundo not to Aristotle but to Pseudo-Aristotle, i.e. it was written later in the Graeco-Roman period or afterwards. The word Albion (Ἀλβίων) or insula Albionum has two possible origins. It either derives from a cognate of the Latin albus meaning white, a reference to the white cliffs of Dover, the only part of Britain visible from the European Continent,[20] or from the phrase the "island of the Albiones[21] in the now lost Massaliote Periplus, that is attested through Avienus' Ora Maritima[22] to which the former presumably served as a source. Albion is now applied to England in a more poetic capacity.[23] Another romantic name for England is Loegria, related to the Welsh word for England, Lloegr, and made popular by its use in Arthurian legend.
+
+History
+Main article: History of England
+Prehistory and antiquity
+Main article: Prehistoric Britain
+Sun shining through row of upright standing stones with other stones horizontally on the top.
+Stonehenge, a Neolithic monument
+The earliest known evidence of human presence in the area now known as England was that of Homo antecessor, dating to approximately 780,000 years ago. The oldest proto-human bones discovered in England date from 500,000 years ago.[24] Modern humans are known to have inhabited the area during the Upper Paleolithic period, though permanent settlements were only established within the last 6,000 years.[25][26] After the last ice age only large mammals such as mammoths, bison and woolly rhinoceros remained. Roughly 11,000 years ago, when the ice sheets began to recede, humans repopulated the area; genetic research suggests they came from the northern part of the Iberian Peninsula.[27] The sea level was lower than now and Britain was connected by land bridge to Ireland and Eurasia.[28] As the seas rose, it was separated from Ireland 10,000 years ago and from Eurasia two millennia later.
+
+The Beaker culture arrived around 2,500 BC, introducing drinking and food vessels constructed from clay, as well as vessels used as reduction pots to smelt copper ores.[29] It was during this time that major Neolithic monuments such as Stonehenge and Avebury were constructed. By heating together tin and copper, which were in abundance in the area, the Beaker culture people made bronze, and later iron from iron ores. The development of iron smelting allowed the construction of better ploughs, advancing agriculture (for instance, with Celtic fields), as well as the production of more effective weapons.[30]
+
+Painting of woman, with outstretched arm, in white dress with red cloak and helmet, with other human figures to her right and below her to the left.
+Boudica led an uprising against the Roman Empire
+During the Iron Age, Celtic culture, deriving from the Hallstatt and La Tène cultures, arrived from Central Europe. Brythonic was the spoken language during this time. Society was tribal; according to Ptolemy's Geographia there were around 20 tribes in the area. Earlier divisions are unknown because the Britons were not literate. Like other regions on the edge of the Empire, Britain had long enjoyed trading links with the Romans. Julius Caesar of the Roman Republic attempted to invade twice in 55 BC; although largely unsuccessful, he managed to set up a client king from the Trinovantes.
+
+The Romans invaded Britain in AD 43 during the reign of Emperor Claudius, subsequently conquering much of Britain, and the area was incorporated into the Roman Empire as Britannia province.[31] The best-known of the native tribes who attempted to resist were the Catuvellauni led by Caratacus. Later, an uprising led by Boudica, Queen of the Iceni, ended with Boudica's suicide following her defeat at the Battle of Watling Street.[32] This era saw a Greco-Roman culture prevail with the introduction of Roman law, Roman architecture, sewage systems, many agricultural items and silk.[33][34][35] In the 3rd century, Emperor Septimius Severus died at Eboracum (now York), where Constantine was subsequently proclaimed emperor.[36]
+
+There is debate about when Christianity was first introduced; it was no later than the 4th century, probably much earlier. According to Bede, missionaries were sent from Rome by Eleutherius at the request of the chieftain Lucius of Britain in AD 180, to settle differences as to Eastern and Western ceremonials, which were disturbing the church. There are traditions linked to Glastonbury claiming an introduction through Joseph of Arimathea, while others claim through Lucius of Britain.[37] By 410, during the Decline of the Roman Empire, Britain was left exposed by the End of Roman rule in Britain and the withdrawal of Roman army units, to defend the frontiers in continental Europe and partake in civil wars.[38] Celtic Christian monastic and missionary movements flourished: Patrick (5th-century Ireland) and in the 6th century Brendan (Clonfert), Comgall (Bangor), David (Wales), Aiden (Lindisfarne) and Columba (Iona). This period of Christianity was influenced by ancient Celtic culture in its sensibilities, polity, practices and theology. Local "congregations" were centred in the monastic community and monastic leaders were more like chieftains, as peers, rather than in the more hierarchical system of the Roman-dominated church (see Early Christian Christianity, Brendan Lehane, Constable, London: John Murray Ltd., 1968).
+
+Middle Ages
+Main article: England in the Middle Ages
+Studded and decorated metallic mask of human face.
+Replica of a 7th-century ceremonial helmet from the Kingdom of East Anglia, found at Sutton Hoo
+Roman military withdrawals left Britain open to invasion by pagan, seafaring warriors from north-western continental Europe, chiefly the Angles, Saxons and Jutes who had long raided the coasts of the Roman province and began to settle, initially in the eastern part of the country.[38] Their advance was contained for some decades after the Britons' victory at the Battle of Mount Badon, but subsequently resumed, over-running the fertile lowlands of Britain and reducing the area under Brythonic control to a series of separate enclaves in the more rugged country to the west by the end of the 6th century. Contemporary texts describing this period are extremely scarce, giving rise to its description as a Dark Age. The nature and progression of the Anglo-Saxon settlement of Britain is consequently subject to considerable disagreement. Roman-dominated Christianity had in general disappeared from the conquered territories, but was reintroduced by missionaries from Rome led by Augustine from 597 onwards.[39] Disputes between the Roman- and Celtic-dominated forms of Christianity ended in victory for the Roman tradition at the Council of Whitby (664), which was ostensibly about haircuts and the date of Easter, but more significantly, about the differences in Roman and Celtic forms of authority, theology, and practice (Lehane).
+
+During the settlement period the lands ruled by the incomers seem to have been fragmented into numerous tribal territories, but by the 7th century, when substantial evidence of the situation again becomes available, these had coalesced into roughly a dozen kingdoms including Northumbria, Mercia, Wessex, East Anglia, Essex, Kent and Sussex. Over the following centuries this process of political consolidation continued.[40] The 7th century saw a struggle for hegemony between Northumbria and Mercia, which in the 8th century gave way to Mercian preeminence.[41] In the early 9th century Mercia was displaced as the foremost kingdom by Wessex. Later in that century escalating attacks by the Danes culminated in the conquest of the north and east of England, overthrowing the kingdoms of Northumbria, Mercia and East Anglia. Wessex under Alfred the Great was left as the only surviving English kingdom, and under his successors it steadily expanded at the expense of the kingdoms of the Danelaw. This brought about the political unification of England, first accomplished under Æthelstan in 927 and definitively established after further conflicts by Eadred in 953. A fresh wave of Scandinavian attacks from the late 10th century ended with the conquest of this united kingdom by Sweyn Forkbeard in 1013 and again by his son Cnut in 1016, turning it into the centre of a short-lived North Sea empire that also included Denmark and Norway. However the native royal dynasty was restored with the accession of Edward the Confessor in 1042.
+
+King Henry V at the Battle of Agincourt, 1415.
+King Henry V at the Battle of Agincourt, fought on Saint Crispin's Day and concluded with an English victory against a larger French army in the Hundred Years' War.
+A dispute over the succession to Edward led to the Norman conquest of England in 1066, accomplished by an army led by Duke William of Normandy.[42] The Normans themselves originated from Scandinavia and had settled in Normandy in the late 9th and early 10th centuries.[43] This conquest led to the almost total dispossession of the English elite and its replacement by a new French-speaking aristocracy, whose speech had a profound and permanent effect on the English language.[44]
+
+Subsequently the House of Plantagenet from Anjou inherited the English throne under Henry II, adding England to the budding Angevin Empire of fiefs the family had inherited in France including Aquitaine.[45] They reigned for three centuries, some noted monarchs being Richard I, Edward I, Edward III and Henry V.[45] The period saw changes in trade and legislation, including the signing of the Magna Carta, an English legal charter used to limit the sovereign's powers by law and protect the privileges of freemen. Catholic monasticism flourished, providing philosophers, and the universities of Oxford and Cambridge were founded with royal patronage. The Principality of Wales became a Plantagenet fief during the 13th century[46] and the Lordship of Ireland was given to the English monarchy by the Pope.
+
+During the 14th century, the Plantagenets and the House of Valois both claimed to be legitimate claimants to the House of Capet and with it France; the two powers clashed in the Hundred Years' War.[47] The Black Death epidemic hit England; starting in 1348, it eventually killed up to half of England's inhabitants.[48][49] From 1453 to 1487 civil war occurred between two branches of the royal family—the Yorkists and Lancastrians—known as the Wars of the Roses.[50] Eventually it led to the Yorkists losing the throne entirely to a Welsh noble family the Tudors, a branch of the Lancastrians headed by Henry Tudor who invaded with Welsh and Breton mercenaries, gaining victory at the Battle of Bosworth Field where the Yorkist king Richard III was killed.[51]
+
+Early Modern
+Painting of large bearded man with fur trimmed cloak, wearing a hat.
+King Henry VIII became Supreme Head of the Church of England
+During the Tudor period, the Renaissance reached England through Italian courtiers, who reintroduced artistic, educational and scholarly debate from classical antiquity.[52] England began to develop naval skills, and exploration to the West intensified.[53][54]
+
+Henry VIII broke from communion with the Catholic Church, over issues relating to his divorce, under the Acts of Supremacy in 1534 which proclaimed the monarch head of the Church of England. In contrast with much of European Protestantism, the roots of the split were more political than theological.[nb 2] He also legally incorporated his ancestral land Wales into the Kingdom of England with the 1535–1542 acts. There were internal religious conflicts during the reigns of Henry's daughters, Mary I and Elizabeth I. The former took the country back to Catholicism while the latter broke from it again, forcefully asserting the supremacy of Anglicanism.
+
+Competing with Spain, the first English colony in the Americas was founded in 1585 by explorer Walter Raleigh in Virginia and named Roanoke. The Roanoke colony failed and is known as the lost colony, after it was found abandoned on the return of the late-arriving supply ship.[56] With the East India Company, England also competed with the Dutch and French in the East. In 1588, during the Elizabethan period, an English fleet under Francis Drake defeated an invading Spanish Armada. The political structure of the island changed in 1603, when the King of Scots, James VI, a kingdom which was a longtime rival to English interests, inherited the throne of England as James I — creating a personal union .[57][58] He styled himself King of Great Britain, although this had no basis in English law.[59] Under the auspices of King James VI and I the Authorized King James Version of the Holy Bible was published in 1611. It has not only been ranked with Shakespeare's works as the greatest masterpiece of literature in the English language but also was the standard version of the Bible read by most Protestant Christians for four hundred years, until modern revisions were produced in the 20th century.
+
+Painting of seated male figure, with long black hair wearing a white cape and breeches.
+The English Restoration restored the monarchy under King Charles II and peace after the English Civil War.
+Based on conflicting political, religious and social positions, the English Civil War was fought between the supporters of Parliament and those of King Charles I, known colloquially as Roundheads and Cavaliers respectively. This was an interwoven part of the wider multifaceted Wars of the Three Kingdoms, involving Scotland and Ireland. The Parliamentarians were victorious, Charles I was executed and the kingdom replaced by the Commonwealth. Leader of the Parliament forces, Oliver Cromwell declared himself Lord Protector in 1653; a period of personal rule followed.[60] After Cromwell's death and the resignation of his son Richard as Lord Protector, Charles II was invited to return as monarch in 1660, in a move called the Restoration. It was now constitutionally established that King and Parliament should rule together, though Parliament would have the real power. This was established with the Bill of Rights in 1689. Among the statutes set down were that the law could only be made by Parliament and could not be suspended by the King, also that the King could not impose taxes or raise an army without the prior approval of Parliament.[61] Also since that time, no British monarch has entered the House of Commons when it is sitting, which is annually commemorated at the State Opening of Parliament by the British monarch when the doors of the House of Commons are slammed in the face of the monarch's messenger, symbolising the rights of Parliament and it's independence from the monarch.[62][63] With the founding of the Royal Society in 1660, science was greatly encouraged.
+
+In 1666 the Great Fire of London gutted the City of London but it was rebuilt shortly afterwards[64] with many significant buildings designed by Sir Christopher Wren. In Parliament two factions had emerged — the Tories and Whigs. Though the Tories initially supported Catholic king James II, some of them, along with the Whigs, deposed him in the Revolution of 1688 and invited Dutch prince William of Orange to become William III. Some English people, especially in the north, were Jacobites and continued to support James and his sons. After the parliaments of England and Scotland agreed,[65] the two countries joined in political union, to create the Kingdom of Great Britain in 1707.[57] To accommodate the union, institutions such as the law and national churches of each remained separate.[66]
+
+Late Modern and contemporary
+
+Cotton mills in Manchester, the world's "first industrial city" about 1820.[67]
+A stone factory stands against a vivid blue sky, its reflection mirrored in the waters below.
+Saltaire, West Yorkshire, is a model mill town from the Industrial Revolution, and a World Heritage Site.
+Under the newly formed Kingdom of Great Britain, output from the Royal Society and other English initiatives combined with the Scottish Enlightenment to create innovations in science and engineering, while the enormous growth in British overseas trade protected by the Royal Navy paved the way for the establishment of the British Empire. Domestically it drove the Industrial Revolution, a period of profound change in the socioeconomic and cultural conditions of England, resulting in industrialised agriculture, manufacture, engineering and mining, as well as new and pioneering road, rail and water networks to facilitate their expansion and development.[68] The opening of Northwest England's Bridgewater Canal in 1761 ushered in the canal age in Britain.[69][70] In 1825 the world's first permanent steam locomotive-hauled passenger railway—the Stockton and Darlington Railway—opened to the public.[69]
+
+During the Industrial Revolution, many workers moved from England's countryside to new and expanding urban industrial areas to work in factories, for instance at Manchester and Birmingham, dubbed "Warehouse City" and "Workshop of the World" respectively.[71][72] England maintained relative stability throughout the French Revolution; William Pitt the Younger was British Prime Minister for the reign of George III. During the Napoleonic Wars, Napoleon planned to invade from the south-east. However this failed to manifest and the Napoleonic forces were defeated by the British at sea by Lord Nelson and on land by the Duke of Wellington. The Napoleonic Wars fostered a concept of Britishness and a united national British people, shared with the Scots and Welsh.[73]
+
+A cuboid granite cenotaph.
+The Cenotaph, Whitehall, is a memorial to members of the British Armed Forces who died during the two World Wars.
+London became the largest and most populous metropolitan area in the world during the Victorian era, and trade within the British Empire—as well as the standing of the British military and navy—was prestigious.[74] Political agitation at home from radicals such as the Chartists and the suffragettes enabled legislative reform and universal suffrage.[75] Power shifts in east-central Europe led to World War I; hundreds of thousands of English soldiers died fighting for the United Kingdom as part of the Allies.[nb 3] Two decades later, in World War II, the United Kingdom was again one of the Allies. At the end of the Phoney War, Winston Churchill became the wartime Prime Minister. Developments in warfare technology saw many cities damaged by air-raids during the Blitz. Following the war, the British Empire experienced rapid decolonisation, and there was a speeding up of technological innovations; automobiles became the primary means of transport and Frank Whittle's development of the jet engine led to wider air travel.[77] Residential patterns were altered in England by private motoring, and by the creation of the National Health Service (NHS) in 1948. The UK's NHS provided publicly funded health care to all UK permanent residents free at the point of need, being paid for from general taxation. Combined, these changes prompted the reform of local government in England in the mid-20th century.[78][79]
+
+Since the 20th century there has been significant population movement to England, mostly from other parts of the British Isles, but also from the Commonwealth, particularly the Indian subcontinent.[80] Since the 1970s there has been a large move away from manufacturing and an increasing emphasis on the service industry.[81] As part of the United Kingdom, the area joined a common market initiative called the European Economic Community which became the European Union. Since the late 20th century the administration of the United Kingdom has moved towards devolved governance in Scotland, Wales and Northern Ireland.[82] England and Wales continues to exist as a jurisdiction within the United Kingdom.[83] Devolution has stimulated a greater emphasis on a more English-specific identity and patriotism.[84][85] There is no devolved English government, but an attempt to create a similar system on a sub-regional basis was rejected by referendum.[86]
+
+Governance
+Politics
+Main article: Politics of England
+Photograph of rectangular floodlight building, reflected in water. The building has multiple towers including one at each end. The tower on the right includes an illuminated clock face.
+The Palace of Westminster, the seat of the Parliament of the United Kingdom
+As part of the United Kingdom, the basic political system in England is a constitutional monarchy and parliamentary system.[87] There has not been a Government of England since 1707, when the Acts of Union 1707, putting into effect the terms of the Treaty of Union, joined England and Scotland to form the Kingdom of Great Britain.[65] Before the union England was ruled by its monarch and the Parliament of England. Today England is governed directly by the Parliament of the United Kingdom, although other countries of the United Kingdom have devolved governments.[88] In the House of Commons which is the lower house of the British Parliament based at the Palace of Westminster, there are 532 Members of Parliament (MPs) for constituencies in England, out of the 650 total.[89]
+
+In the United Kingdom general election, 2010 the Conservative Party had won an absolute majority in England's 532 contested seats with 61 seats more than all other parties combined (the Speaker of the House not being counted as a Conservative). However, taking Scotland, Northern Ireland and Wales into account this was not enough to secure an overall majority, resulting in a hung parliament.[90] In order to achieve a majority the Conservative party, headed by David Cameron, entered into a coalition agreement with the third largest party, the Liberal Democrats, led by Nick Clegg. Subsequently the Labour Party leader, Gordon Brown was forced to step down as prime minister[91] and leader of the Labour party, now led by Ed Miliband.
+
+Lines of men wearing large black bearskin hats and red tunics.
+Changing of the Queen's Guard at the royal residence, Buckingham Palace
+As the United Kingdom is a member of the European Union, there are elections held regionally in England to decide who is sent as Members of the European Parliament. The 2009 European Parliament election saw the regions of England elect the following MEPs: 23 Conservatives, ten Labour, nine UK Independence Party (UKIP), nine Liberal Democrats, two Greens and two British National Party (BNP).[92]
+
+Since devolution, in which other countries of the United Kingdom—Scotland, Wales and Northern Ireland—each have their own devolved parliament or assemblies for local issues, there has been debate about how to counterbalance this in England. Originally it was planned that various regions of England would be devolved, but following the proposal's rejection by the North East in a referendum, this has not been carried out.[86]
+
+One major issue is the West Lothian question, in which MPs from Scotland and Wales are able to vote on legislation affecting only England, while English MPs have no equivalent right to legislate on devolved matters.[93] This when placed in the context of England being the only country of the United Kingdom not to have free cancer treatment, prescriptions, residential care for the elderly and free top-up university fees,[94] has led to a steady rise in English nationalism.[95] Some have suggested the creation of a devolved English parliament,[96] while others have proposed simply limiting voting on legislation which only affects England to English MPs.[97]
+
+Law
+Main article: English law
+Ornate grey stone building.
+The Royal Courts of Justice
+The English law legal system, developed over the centuries, is the basis of common law[98] legal systems used in most Commonwealth countries[99] and the United States (except Louisiana). Despite now being part of the United Kingdom, the legal system of the Courts of England and Wales continued, under the Treaty of Union, as a separate legal system from the one used in Scotland. The general essence of English law is that it is made by judges sitting in courts, applying their common sense and knowledge of legal precedent—stare decisis—to the facts before them.[100]
+
+The court system is headed by the Senior Courts of England and Wales, consisting of the Court of Appeal, the High Court of Justice for civil cases, and the Crown Court for criminal cases.[101] The Supreme Court of the United Kingdom is the highest court for criminal and civil cases in England and Wales. It was created in 2009 after constitutional changes, taking over the judicial functions of the House of Lords.[102] A decision of the Supreme Court is binding on every other court in the hierarchy, which must follow its directions.[103]
+
+Crime increased between 1981 and 1995, but fell by 42% in the period 1995–2006.[104] The prison population doubled over the same period, giving it the highest incarceration rate in Western Europe at 147 per 100,000.[105] Her Majesty's Prison Service, reporting to the Ministry of Justice, manages most prisons, housing over 85,000 convicts.[106]
+
+Regions, counties, and districts
+Main article: Subdivisions of England
+See also: Regions of England, Counties of England and Districts of England
+
+image attribution
+Northumberland
+Durham
+Lancashire
+Cheshire
+Derbs.
+Notts.
+Lincolnshire
+Leics.
+Staffs.
+Shropshire
+Warks.
+Northants.
+Norfolk
+Suffolk
+Essex
+Herts.
+Beds.
+Bucks.
+Oxon.
+Glos.
+Somerset
+Wiltshire
+Berkshire
+Kent
+Surrey
+Hampshire
+Dorset
+Devon
+Cornwall
+Heref.
+Worcs.
+Bristol
+East Riding
+of Yorkshire
+Rutland
+Cambs.
+Greater
+London
+Not shown: City of London
+Tyne &
+Wear
+Cumbria
+North Yorkshire
+South
+Yorks.
+West
+Yorkshire
+Greater
+Manc.
+Merseyside
+East
+Sussex
+West
+Sussex
+Isle of
+Wight
+West
+Midlands
+The ceremonial counties
+The subdivisions of England consist of up to four levels of subnational division controlled through a variety of types of administrative entities created for the purposes of local government. The highest tier of local government were the nine regions of England: North East, North West, Yorkshire and the Humber, East Midlands, West Midlands, East, South East, South West, and London. These were created in 1994 as Government Offices, used by the British Government to deliver a wide range of policies and programmes regionally, but there are no elected bodies at this level, except in London, and in 2011 the regional Government offices were abolished.[107] The same boundaries remain in use for electing Members of the European Parliament on a regional basis.
+
+After devolution began to take place in other parts of the United Kingdom it was planned that referendums for the regions of England would take place for their own elected regional assemblies as a counterweight. London accepted in 1998: the London Assembly was created two years later. However, when the proposal was rejected by the northern England devolution referendums, 2004 in the North East, further referendums were cancelled.[86] The regional assemblies outside London were abolished in 2010, and their functions transferred to respective Regional Development Agencies and a new system of local authority leaders' boards.[108]
+
+Below the regional level, all of England is divided into 48 ceremonial counties.[109] These are used primarily as a geographical frame of reference and have developed gradually since the Middle Ages, with some established as recently as 1974.[110] Each has a Lord Lieutenant and High Sheriff; these posts are used to represent the British monarch locally.[109] Outside Greater London and the Isles of Scilly, England is also divided into 83 metropolitan and non-metropolitan counties; these correspond to areas used for the purposes of local government[111] and may consist of a single district or be divided into several.
+
+There are six metropolitan counties based on the most heavily urbanised areas, which do not have county councils.[111] In these areas the principal authorities are the councils of the subdivisions, the metropolitan boroughs. Elsewhere, 27 non-metropolitan "shire" counties have a county council and are divided into districts, each with a district council. They are typically, though not always, found in more rural areas. The remaining non-metropolitan counties are of a single district and usually correspond to large towns or sparsely populated counties; they are known as unitary authorities. Greater London has a different system for local government, with 32 London boroughs, plus the City of London covering a small area at the core governed by the City of London Corporation.[112] At the most localised level, much of England is divided into civil parishes with councils; they do not exist in Greater London.[113]
+
+Geography
+Main article: Geography of England
+Landscape and rivers
+Blue lake between green hills.
+Skiddaw massif, seen from Walla Crag in the Lake District
+Geographically England includes the central and southern two-thirds of the island of Great Britain, plus such offshore islands as the Isle of Wight and the Isles of Scilly. It is bordered by two other countries of the United Kingdom—to the north by Scotland and to the west by Wales. England is closer to the European continent than any other part of mainland Britain. It is separated from France by a 21-mile (34 km)[114] sea gap, though the two countries are connected by the Channel Tunnel near Folkestone.[115] England also has shores on the Irish Sea, North Sea and Atlantic Ocean.
+
+The ports of London, Liverpool, and Newcastle lie on the tidal rivers Thames, Mersey and Tyne respectively. At 220 miles (350 km), the Severn is the longest river flowing through England.[116] It empties into the Bristol Channel and is notable for its Severn Bore tidal waves, which can reach 2 metres (6.6 ft) in height.[117] However, the longest river entirely in England is the Thames, which is 215 miles (346 km) in length.[118] There are many lakes in England; the largest is Windermere, within the aptly named Lake District.[119]
+
+Green hills with trees in the foreground.
+Terrain of Dartmoor, Devon
+In geological terms, the Pennines, known as the "backbone of England", are the oldest range of mountains in the country, originating from the end of the Paleozoic Era around 300 million years ago.[120] Their geological composition includes, among others, sandstone and limestone, and also coal. There are karst landscapes in calcite areas such as parts of Yorkshire and Derbyshire. The Pennine landscape is high moorland in upland areas, indented by fertile valleys of the region's rivers. They contain three national parks, the Yorkshire Dales, Northumberland, and the Peak District. The highest point in England, at 978 metres (3,209 ft), is Scafell Pike in Cumbria.[119] Straddling the border between England and Scotland are the Cheviot Hills.
+
+The English Lowlands are to the south of the Pennines, consisting of green rolling hills, including the Cotswold Hills, Chiltern Hills, North and South Downs—where they meet the sea they form white rock exposures such as the cliffs of Dover. The granite Southwest Peninsula in the West Country includes upland moorland, such as Dartmoor and Exmoor, and enjoys a mild climate; both are national parks.[121]
+
+Climate
+Main article: Climate of England
+England has a temperate maritime climate: it is mild with temperatures not much lower than 0 °C (32 °F) in winter and not much higher than 32 °C (90 °F) in summer.[122] The weather is damp relatively frequently and is changeable. The coldest months are January and February, the latter particularly on the English coast, while July is normally the warmest month. Months with mild to warm weather are May, June, September and October.[122] Rainfall is spread fairly evenly throughout the year.
+
+Important influences on the climate of England are its proximity to the Atlantic Ocean, its northern latitude and the warming of the sea by the Gulf Stream.[122] Rainfall is higher in the west, and parts of the Lake District receive more rain than anywhere else in the country.[122] Since weather records began, the highest temperature recorded was 38.5 °C (101.3 °F) on 10 August 2003 at Brogdale in Kent,[123] while the lowest was −26.1 °C (−15.0 °F) on 10 January 1982 in Edgmond, Shropshire.[124]
+
+[hide]Climate data for England
+Month   Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Year
+Average high °C (°F)    7
+(45)    7
+(45)    10
+(50)    12
+(54)    16
+(61)    19
+(66)    21
+(70)    21
+(70)    18
+(64)    14
+(57)    10
+(50)    7
+(45)    14
+(57)
+Average low °C (°F) 1
+(34)    1
+(34)    3
+(37)    4
+(39)    7
+(45)    10
+(50)    12
+(54)    12
+(54)    10
+(50)    7
+(45)    4
+(39)    2
+(36)    6
+(43)
+Precipitation mm (inches)   83
+(3.27)  60
+(2.36)  64
+(2.52)  59
+(2.32)  58
+(2.28)  62
+(2.44)  63
+(2.48)  69
+(2.72)  70
+(2.76)  92
+(3.62)  88
+(3.46)  87
+(3.43)  855
+(33.66)
+Source: Met Office[125]
+Major conurbations
+See also: List of places in England
+The Greater London Urban Area is by far the largest urban area in England[126] and one of the busiest cities in the world. It is considered a global city and has a population larger than other countries in the United Kingdom besides England itself.[126] Other urban areas of considerable size and influence tend to be in northern England or the English Midlands.[126] There are fifty settlements which have been designated city status in England, while the wider United Kingdom has sixty-six.
+
+While many cities in England are quite large in size, such as Birmingham, Sheffield, Manchester, Liverpool, Leeds, Newcastle, Bradford, Nottingham and others, a large population is not necessarily a prerequisite for a settlement to be afforded city status.[127] Traditionally the status was afforded to towns with diocesan cathedrals and so there are smaller cities like Wells, Ely, Ripon, Truro and Chichester.[127] According to the Office for National Statistics the ten largest, continuous built-up urban areas are:[126]
+
+Rank    Urban area  Population  Major localities
+1   Greater London Urban Area   9,787,426   Greater London, divided into the City of London and 32 London boroughs including Croydon, Barnet, Ealing, Bromley
+2   Greater Manchester Urban Area   2,553,379   Manchester, Salford, Bolton, Stockport, Oldham
+3   West Midlands Urban Area    2,440,986   Birmingham, Wolverhampton, Dudley, Walsall, Aldridge
+4   West Yorkshire Urban Area   1,777,934   Leeds, Bradford, Huddersfield, Wakefield, Halifax
+5   Liverpool Urban Area    864,122 Liverpool, St Helens, Bootle, Huyton-with-Roby
+6   South Hampshire 855,569 Southampton, Portsmouth, Eastleigh, Gosport, Fareham, Havant, Horndean
+7   Tyneside    774,891 Newcastle, North Shields, South Shields, Gateshead, Jarrow
+8   Nottingham Urban Area   729,977 Nottingham, Beeston and Stapleford, Carlton, Long Eaton
+9   Sheffield Urban Area    685,368 Sheffield, Rotherham, Rawmarsh, Killamarsh
+10  Bristol Urban Area  617,280 Bristol, Kingswood, Mangotsfield, Stoke Gifford
+Economy
+Main article: Economy of England
+An aerial photograph of the City of London and its surrounding London boroughs.
+The City of London is the world's largest financial centre[128][129]
+England's economy is one of the largest in the world, with an average GDP per capita of £22,907.[130] Usually regarded as a mixed market economy, it has adopted many free market principles, yet maintains an advanced social welfare infrastructure.[131] The official currency in England is the pound sterling, whose ISO 4217 code is GBP. Taxation in England is quite competitive when compared to much of the rest of Europe – as of 2014 the basic rate of personal tax is 20% on taxable income up to £31,865 above the personal tax-free allowance (normally £10,000), and 40% on any additional earnings above that amount.[132]
+
+The economy of England is the largest part of the UK's economy,[130] which has the 18th highest GDP PPP per capita in the world. England is a leader in the chemical[133] and pharmaceutical sectors and in key technical industries, particularly aerospace, the arms industry, and the manufacturing side of the software industry. London, home to the London Stock Exchange, the United Kingdom's main stock exchange and the largest in Europe, is England's financial centre—100 of Europe's 500 largest corporations are based in London.[134] London is the largest financial centre in Europe, and as of 2014 is the second largest in the world.[135][136]
+
+A grey coloured car.
+The Bentley Mulsanne. Bentley is a well-known English car company.
+The Bank of England, founded in 1694 by Scottish banker William Paterson, is the United Kingdom's central bank. Originally established as private banker to the Government of England, since 1946 it has been a state-owned institution.[137] The Bank has a monopoly on the issue of banknotes in England and Wales, although not in other parts of the United Kingdom. The government has devolved responsibility to the Bank's Monetary Policy Committee for managing the monetary policy of the country and setting interest rates.[138]
+
+England is highly industrialised, but since the 1970s there has been a decline in traditional heavy and manufacturing industries, and an increasing emphasis on a more service industry oriented economy.[81] Tourism has become a significant industry, attracting millions of visitors to England each year. The export part of the economy is dominated by pharmaceuticals, cars (although many English marques are now foreign-owned, such as Land Rover, Lotus, Jaguar and Bentley), crude oil and petroleum from the English parts of North Sea oil along with Wytch Farm, aircraft engines and alcoholic beverages.[139]
+
+Most of the UK's £20 billion aerospace industry is primarily based in England. The wings for the Airbus A380 and the Airbus A350 XWB are designed and manufactured at Airbus UK's world-leading facility in Broughton. GKN Aerospace – an expert in metallic and composite aerostructures is involved in almost every civil and military fixed and rotary wing aircraft in production is based in Redditch.[140]
+
+BAE Systems makes large sections of the Typhoon Eurofighter at its sub-assembly plant in Salmesbury and assembles the aircraft for the RAF at its Warton plant, near Preston. It is also a principal subcontractor on the F35 Joint Strike Fighter - the world's largest single defence project - for which it designs and manufactures a range of components including the aft fuselage, vertical and horizontal tail and wing tips and fuel system. As well as this it manufactures the Hawk, the world's most successful jet training aircraft.[140]
+
+Rolls-Royce PLC is the world's second-largest aero-engine manufacturer. Its engines power more than 30 types of commercial aircraft, and it has more 30,000 engines currently in service across both the civil and defence sectors. With a workforce of over 12,000 people, Derby has the largest concentration of Rolls-Royce employees in the UK. Rolls-Royce also produces low-emission power systems for ships; makes critical equipment and safety systems for the nuclear industry and powers offshore platforms and major pipelines for the oil and gas industry.[140][141]
+
+Much of the UK's space industry is centred on EADS Astrium, based in Stevenage and Portsmouth. The company builds the buses – the underlying structure onto which the payload and propulsion systems are built – for most of the European Space Agency's spacecraft, as well as commercial satellites. The world leader in compact satellite systems, Surrey Satellites, is also part of Astrium.[140] Reaction Engines Limited, the company planning to build Skylon, a single-stage-to-orbit spaceplane using their SABRE rocket engine, a combined-cycle, air-breathing rocket propulsion system is based Culham.
+
+Agriculture is intensive and highly mechanised, producing 60% of food needs with only 2% of the labour force.[142] Two thirds of production is devoted to livestock, the other to arable crops.[143]
+
+Science and technology
+Main articles: List of English inventions and discoveries and Royal Society
+Torso of man with long white hair and dark coloured jacket
+Sir Isaac Newton is one of the most influential figures in the history of science
+Prominent English figures from the field of science and mathematics include Sir Isaac Newton, Michael Faraday, Robert Hooke, Robert Boyle, Joseph Priestley, J. J. Thomson, Charles Babbage, Charles Darwin, Stephen Hawking, Christopher Wren, Alan Turing, Francis Crick, Joseph Lister, Tim Berners-Lee, Paul Dirac, Andrew Wiles and Richard Dawkins. Some experts claim that the earliest concept of a metric system was invented by John Wilkins, the first secretary of the Royal Society, in 1668.[144]
+
+As the birthplace of the Industrial Revolution, England was home to many significant inventors during the late 18th and early 19th centuries. Famous English engineers include Isambard Kingdom Brunel, best known for the creation of the Great Western Railway, a series of famous steamships, and numerous important bridges, hence revolutionising public transport and modern-day engineering.[145] Thomas Newcomen's steam engine helped spawn the Industrial Revolution.[146] The Father of Railways, George Stephenson, built the first public inter-city railway line in the world, the Liverpool and Manchester Railway, which opened in 1830. With his role in the marketing and manufacturing of the steam engine, and invention of modern coinage, Matthew Boulton (business partner of James Watt) is regarded as one of the most influential entrepreneurs in history.[147] The physician Edward Jenner's smallpox vaccine is said to have "saved more lives ... than were lost in all the wars of mankind since the beginning of recorded history."[148][149][150]
+
+Inventions and discoveries of the English include: the jet engine, the first industrial spinning machine, the first computer and the first modern computer, the World Wide Web along with HTML, the first successful human blood transfusion, the motorised vacuum cleaner,[151] the lawn mower, the seat belt, the hovercraft, the electric motor, steam engines, and theories such as the Darwinian theory of evolution and atomic theory. Newton developed the ideas of universal gravitation, Newtonian mechanics, and calculus, and Robert Hooke his eponymously named law of elasticity. Other inventions include the iron plate railway, the thermosiphon, tarmac, the rubber band, the mousetrap, "cat's eye" road marker, joint development of the light bulb, steam locomotives, the modern seed drill and many modern techniques and technologies used in precision engineering.[152]
+
+Transport
+Main article: Transport in England
+Planes congregate by a building.
+London Heathrow Airport has more international passenger traffic than any other airport in the world.[153]
+The Department for Transport is the government body responsible for overseeing transport in England. There are many motorways in England, and many other trunk roads, such as the A1 Great North Road, which runs through eastern England from London to Newcastle[154] (much of this section is motorway) and onward to the Scottish border. The longest motorway in England is the M6, from Rugby through the North West up to the Anglo-Scottish border.[154] Other major routes include: the M1 from London to Leeds, the M25 which encircles London, the M60 which encircles Manchester, the M4 from London to South Wales, the M62 from Liverpool via Manchester to East Yorkshire, and the M5 from Birmingham to Bristol and the South West.[154]
+
+Bus transport across the country is widespread; major companies include National Express, Arriva and Go-Ahead Group. The red double-decker buses in London have become a symbol of England. There is a rapid rail network in two English cities: the London Underground; and the Tyne and Wear Metro in Newcastle, Gateshead and Sunderland.[155] There are several tram networks, such as the Blackpool tramway, Manchester Metrolink, Sheffield Supertram and Midland Metro, and the Tramlink system centred on Croydon in South London.[155]
+
+Rail transport in England is the oldest in the world: passenger railways originated in England in 1825.[156] Much of Britain's 10,000 miles (16,000 km) of rail network lies in England, covering the country fairly extensively, although a high proportion of railway lines were closed in the second half of the 20th century. There are plans to reopen lines such as the Varsity Line between Oxford and Cambridge. These lines are mostly standard gauge (single, double or quadruple track) though there are also a few narrow gauge lines. There is rail transport access to France and Belgium through an undersea rail link, the Channel Tunnel, which was completed in 1994.
+
+England has extensive domestic and international aviation links. The largest airport is London Heathrow, which is the world's busiest airport measured by number of international passengers.[157] Other large airports include Manchester Airport, London Stansted Airport, Luton Airport and Birmingham Airport.[153] By sea there is ferry transport, both local and international, including to Ireland, the Netherlands and Belgium.[158] There are around 4,400 miles (7,100 km) of navigable waterways in England, half of which is owned by the Canal and River Trust,[158] however water transport is very limited. The Thames is the major waterway in England, with imports and exports focused at the Port of Tilbury in the Thames Estuary, one of the United Kingdom's three major ports.[158]
+
+Healthcare
+Main article: Healthcare in England
+Birds I view of a large hospital.
+Queen Elizabeth Hospital Birmingham, an NHS hospital
+The National Health Service (NHS) is the publicly funded healthcare system in England responsible for providing the majority of healthcare in the country. The NHS began on 5 July 1948, putting into effect the provisions of the National Health Service Act 1946. It was based on the findings of the Beveridge Report, prepared by economist and social reformer William Beveridge.[159] The NHS is largely funded from general taxation including National Insurance payments,[160] and it provides most of its services free at the point of use, although there are charges for some people for eye tests, dental care, prescriptions and aspects of personal care.[161]
+
+The government department responsible for the NHS is the Department of Health, headed by the Secretary of State for Health, who sits in the British Cabinet. Most of the expenditure of the Department of Health is spent on the NHS—£98.6 billion was spent in 2008–2009.[162] In recent years the private sector has been increasingly used to provide more NHS services despite opposition by doctors and trade unions.[163] The average life expectancy of people in England is 77.5 years for males and 81.7 years for females, the highest of the four countries of the United Kingdom.[164]
+
+Demographics
+Population
+Main articles: Demographics of England, English people, English diaspora and List of urban areas in the United Kingdom
+Map of England with regions shaded in different shades of blue.
+The metropolitan, non-metropolitan counties and unitary authorities of England, colour-coded to show population
+
+Population of England and Wales by administrative areas. Their size is approximately in proportion to their population. The darker colour the bigger is the real area.
+With over 53 million inhabitants, England is by far the most populous country of the United Kingdom, accounting for 84% of the combined total.[8][165] England taken as a unit and measured against international states has the fourth largest population in the European Union and would be the 25th largest country by population in the world.[166] With a density of 407 people per square kilometre, it would be the second most densely populated country in the European Union after Malta.[167][168]
+
+The English people are a British people.[169] Some genetic evidence suggests that 75–95% descend in the paternal line from prehistoric settlers who originally came from the Iberian Peninsula, as well as a 5% contribution from Angles and Saxons, and a significant Scandinavian (Viking) element.[170][171][172] However, other geneticists place the Germanic estimate up to half.[173][174][175] Over time, various cultures have been influential: Prehistoric, Brythonic,[176] Roman, Anglo-Saxon,[177] Viking(North Germanic),[178] Gaelic cultures, as well as a large influence from Normans. There is an English diaspora in former parts of the British Empire; especially the United States, Canada, Australia, South Africa and New Zealand.[nb 4] Since the late 1990s, many English people have migrated to Spain.[183][184]
+
+Pie chart with main body in blue and multiple smaller segments in other colours.
+2009 estimates of ethnic groups in England[185]
+In 1086, when the Domesday Book was compiled, England had a population of two million. About ten per cent lived in urban areas.[186] By 1801 the population had grown to 8.3 million, and by 1901 had grown to 30.5 million.[187] Due in particular to the economic prosperity of South East England, it has received many economic migrants from the other parts of the United Kingdom.[169] There has been significant Irish migration.[188] The proportion of ethnically European residents totals at 87.50%, including Germans[189] and Poles.[169]
+
+Other people from much further afield in the former British colonies have arrived since the 1950s: in particular, 6% of people living in England have family origins in the Indian subcontinent, mostly India, Pakistan and Bangladesh.[169][189] 2.90% of the population are black, from both the Caribbean and countries in Africa itself, especially former British colonies.[169][189] There is a significant number of Chinese and British Chinese.[169][189] In 2007, 22% of primary school children in England were from ethnic minority families,[190] and in 2011 that figure was 26.5%.[191] About half of the population increase between 1991 and 2001 was due to immigration.[192] Debate over immigration is politically prominent;[193] according to a 2009 Home Office poll, 80% of people want to cap it.[194] The ONS has projected that the population will grow by six million between 2004 and 2029.[195]
+
+Language
+Main articles: English language, English language in England and History of the English language
+
+The English-speaking world. Countries in dark blue have a majority of native speakers. Countries in light blue have English as an official language, de jure or de facto. English is also one of the official languages of the European Union.[196]
+As its name suggests, the English language, today spoken by hundreds of millions of people around the world, originated as the language of England, where it remains the principal tongue today. It is an Indo-European language in the Anglo-Frisian branch of the Germanic family.[197] After the Norman conquest, the Old English language was displaced and confined to the lower social classes as Norman French and Latin were used by the aristocracy.
+
+By the 15th century, English was back in fashion among all classes, though much changed; the Middle English form showed many signs of French influence, both in vocabulary and spelling. During the English Renaissance, many words were coined from Latin and Greek origins.[198] Modern English has extended this custom of flexibility, when it comes to incorporating words from different languages. Thanks in large part to the British Empire, the English language is the world's unofficial lingua franca.[199]
+
+English language learning and teaching is an important economic activity, and includes language schooling, tourism spending, and publishing. There is no legislation mandating an official language for England,[200] but English is the only language used for official business. Despite the country's relatively small size, there are many distinct regional accents, and individuals with particularly strong accents may not be easily understood everywhere in the country.
+
+Cornish, which died out as a community language in the 18th century, is being revived,[201][202][203] and is now protected under the European Charter for Regional or Minority Languages.[204] It is spoken by 0.1% of people in Cornwall,[205] and is taught to some degree in several primary and secondary schools.[206][207] State schools teach students a second language, usually French, German or Spanish.[208] Due to immigration, it was reported in 2007 that around 800,000 school students spoke a foreign language at home,[190] the most common being Punjabi and Urdu.[209] However, following the 2011 census data released by the Office for National Statistics, figures now show that Polish is the main language spoken in England after English.[210]
+
+Religion
+Large yellow stone ornate building with buttresses and square central tower.
+Canterbury Cathedral, seat of the Archbishop of Canterbury
+Main articles: Religion in England and History of Christianity in England
+According to the 2011 census, 59.4% of the population is Christian, 24.7% non-religious, 5% is Muslim while 3.7% of the population belongs to other religions and 7.2 did not give an answer.[211] Christianity is the most widely practised religion in England, as it has been since the Early Middle Ages, although it was first introduced much earlier in Gaelic and Roman times. This Celtic Church was gradually joined to the Catholic hierarchy following the 6th-century Gregorian mission to Kent led by St Augustine. The established church of the realm is Anglicanism,[212] which left communion with Rome in the 1530s when Henry VIII was unable to annul his divorce to the aunt of the king of Spain. The religion regards itself as both Catholic and Reformed.
+
+Icon of man in armour on white horse fighting black dragon to his left.
+Saint George, the patron saint of England
+There are High Church and Low Church traditions, and some Anglicans regard themselves as Anglo-Catholics, following the Tractarian movement. The monarch of the United Kingdom is the Supreme Governor of the church, which has around 26 million baptised members (of whom the vast majority are not regular churchgoers). It forms part of the Anglican Communion with the Archbishop of Canterbury acting as its symbolic worldwide head.[213] Many cathedrals and parish churches are historic buildings of significant architectural importance, such as Westminster Abbey, York Minster, Durham Cathedral, and Salisbury Cathedral.
+
+The 2nd-largest Christian practice is the Latin Rite of the Catholic Church. Since its reintroduction after the Catholic Emancipation, the Church has organised ecclesiastically on an England and Wales basis where there are 4.5 million members (most of whom are English).[214] There has been one Pope from England to date, Adrian IV; while saints Bede and Anselm are regarded as Doctors of the Church.
+
+A form of Protestantism known as Methodism is the third largest Christian practice and grew out of Anglicanism through John Wesley.[215] It gained popularity in the mill towns of Lancashire and Yorkshire, and amongst tin miners in Cornwall.[216] There are other non-conformist minorities, such as Baptists, Quakers, Congregationalists, Unitarians and The Salvation Army.[217]
+
+The patron saint of England is Saint George; his symbolic cross is included in the flag of England, as well as in the Union Flag as part of a combination.[218][218] There are many other English and associated saints; some of the best-known are: Cuthbert, Edmund, Alban, Wilfrid, Aidan, Edward the Confessor, John Fisher, Thomas More, Petroc, Piran, Margaret Clitherow and Thomas Becket. There are non-Christian religions practised. Jews have a history of a small minority on the island since 1070.[219] They were expelled from England in 1290 following the Edict of Expulsion, only to be allowed back in 1656.[219]
+
+Especially since the 1950s, religions from the former British colonies have grown in numbers, due to immigration. Islam is the most common of these, now accounting for around 5% of the population in England.[220] Hinduism, Sikhism and Buddhism are next in number, adding up to 2.8% combined,[220] introduced from India and South East Asia.[220]
+
+Education
+Main articles: Education in England and List of universities in England
+
+The frontage of Warwick School, one of the oldest independent schools in England
+The Department for Education is the government department responsible for issues affecting people in England up to the age of 19, including education.[221] State-run and state-funded schools are attended by approximately 93% of English schoolchildren.[222] Of these, a minority are faith schools (primarily Church of England or Roman Catholic schools). Children who are between the ages of 3 and 5 attend nursery or an Early Years Foundation Stage reception unit within a primary school. Children between the ages of 5 and 11 attend primary school, and secondary school is attended by those aged between 11 and 16. After finishing compulsory education, students take GCSE examinations. Students may then opt to continue into further education for two years. Further education colleges (particularly sixth form colleges) often form part of a secondary school site. A-level examinations are sat by a large number of further education students, and often form the basis of an application to university.
+
+Although most English secondary schools are comprehensive, in some areas there are selective intake grammar schools, to which entrance is subject to passing the eleven plus exam. Around 7.2% of English schoolchildren attend private schools, which are funded by private sources.[223] Standards in state schools are monitored by the Office for Standards in Education, and in private schools by the Independent Schools Inspectorate.[224]
+
+Large yellow stone building with an arched window and two towers at the end nearest the photographer. In the foreground is grass and water with people in a punt.
+King's College, University of Cambridge
+Higher education students normally attend university from age 18 onwards, where they study for an academic degree. There are over 90 universities in England, all but one of which are public institutions. The Department for Business, Innovation and Skills is the government department responsible for higher education in England.[225] Students are generally entitled to student loans to cover the cost of tuition fees and living costs.[nb 5] The first degree offered to undergraduates is the Bachelor's degree, which usually takes three years to complete. Students are then able to work towards a postgraduate degree, which usually takes one year, or towards a doctorate, which takes three or more years.
+
+England's universities include some of the highest-ranked universities in the world; Cambridge University, Imperial College London, Oxford University and University College London are all ranked in the global top 10 in the 2010 QS World University Rankings.[226] The London School of Economics has been described as the world's leading social science institution for both teaching and research.[227] The London Business School is considered one of the world's leading business schools and in 2010 its MBA programme was ranked best in the world by the Financial Times.[228] Academic degrees in England are usually split into classes: first class (1st), upper second class (2:1), lower second class (2:2), third (3rd), and unclassified.
+
+The King's School, Canterbury and King's School, Rochester are the oldest schools in the English-speaking world.[229] Many of England's most well-known schools, such as Winchester College, Eton, St Paul's School, Harrow School and Rugby School are fee-paying institutions.[230]
+
+Culture
+Main articles: Culture of England and English Renaissance
+Architecture
+White stone building with tower topped with a dome. In the foreground are trees and a red rectangular vertical box with windows.
+A red telephone box in front of St Paul's Cathedral, one of the most important buildings of the English Baroque period
+Many ancient standing stone monuments were erected during the prehistoric period, amongst the best-known are Stonehenge, Devil's Arrows, Rudston Monolith and Castlerigg.[231] With the introduction of Ancient Roman architecture there was a development of basilicas, baths, amphitheaters, triumphal arches, villas, Roman temples, Roman roads, Roman forts, stockades and aqueducts.[232] It was the Romans who founded the first cities and towns such as London, Bath, York, Chester and St Albans. Perhaps the best-known example is Hadrian's Wall stretching right across northern England.[232] Another well preserved example is the Roman Baths at Bath, Somerset.[232]
+
+Early Medieval architecture's secular buildings were simple constructions mainly using timber with thatch for roofing. Ecclesiastical architecture ranged from a synthesis of Hiberno—Saxon monasticism,[233][234] to Early Christian basilica and architecture characterised by pilaster-strips, blank arcading, baluster shafts and triangular headed openings. After the Norman conquest in 1066 various Castles in England were created so law lords could uphold their authority and in the north to protect from invasion. Some of the best-known medieval castles are the Tower of London, Warwick Castle, Durham Castle and Windsor Castle.[235]
+
+A castle of square plan surrounded by a water-filled moat. It has round corner towers and a forbidding appearance.
+Bodiam Castle is a 14th-century moated castle near Robertsbridge in East Sussex
+Throughout the Plantagenet era an English Gothic architecture flourished—the medieval cathedrals such as Canterbury Cathedral, Westminster Abbey and York Minster are prime examples.[235] Expanding on the Norman base there was also castles, palaces, great houses, universities and parish churches. Medieval architecture was completed with the 16th-century Tudor style; the four-centred arch, now known as the Tudor arch, was a defining feature as were wattle and daub houses domestically. In the aftermath of the Renaissance a form of architecture echoing classical antiquity, synthesised with Christianity appeared—the English Baroque style, architect Christopher Wren was particularly championed.[236]
+
+Georgian architecture followed in a more refined style, evoking a simple Palladian form; the Royal Crescent at Bath is one of the best examples of this. With the emergence of romanticism during Victorian period, a Gothic Revival was launched—in addition to this around the same time the Industrial Revolution paved the way for buildings such as The Crystal Palace. Since the 1930s various modernist forms have appeared whose reception is often controversial, though traditionalist resistance movements continue with support in influential places.[nb 6]
+
+Folklore
+Main article: English folklore
+Drawing depicting Robin Hood, wearing Lincoln green clothing, and Sir Guy of Gisbourne, wearing brown furs, in a forest preparing to shoot with bows and arrows.
+Robin Hood illustrated in 1912 wearing Lincoln green
+English folklore developed over many centuries. Some of the characters and stories are present across England, but most belong to specific regions. Common folkloric beings include pixies, giants, elves, bogeymen, trolls, goblins and dwarves. While many legends and folk-customs are thought to be ancient, for instance the tales featuring Offa of Angel and Wayland the Smith,[238] others date from after the Norman invasion; Robin Hood and his Merry Men of Sherwood and their battles with the Sheriff of Nottingham being, perhaps, the best known.[239]
+
+During the High Middle Ages tales originating from Brythonic traditions entered English folklore—the Arthurian myth.[240][241][242] These were derived from Anglo-Norman, French and Welsh sources,[241] featuring King Arthur, Camelot, Excalibur, Merlin and the Knights of the Round Table such as Lancelot. These stories are most centrally brought together within Geoffrey of Monmouth's Historia Regum Britanniae.[nb 7] Another early figure from British tradition, King Cole, may have been based on a real figure from Sub-Roman Britain. Many of the tales and pseudo-histories make up part of the wider Matter of Britain, a collection of shared British folklore.
+
+Men in bright red clothing holding sticks in the air.
+The Morris dance, an English folk dance
+Some folk figures are based on semi or actual historical people whose story has been passed down centuries; Lady Godiva for instance was said to have ridden naked on horseback through Coventry, Hereward the Wake was a heroic English figure resisting the Norman invasion, Herne the Hunter is an equestrian ghost associated with Windsor Forest and Great Park and Mother Shipton is the archetypal witch.[244] On 5 November people make bonfires, set off fireworks and eat toffee apples in commemoration of the foiling of the Gunpowder Plot centred on Guy Fawkes. The chivalrous bandit, such as Dick Turpin, is a recurring character, while Blackbeard is the archetypal pirate. There are various national and regional folk activities, participated in to this day, such as Morris dancing, Maypole dancing, Rapper sword in the North East, Long Sword dance in Yorkshire, Mummers Plays, bottle-kicking in Leicestershire, and cheese-rolling at Cooper's Hill.[245] There is no official national costume, but a few are well established such as the Pearly Kings and Queens associated with cockneys, the Royal Guard, the Morris costume and Beefeaters.[246]
+
+Cuisine
+Main article: English cuisine
+Fish and chips.
+Fish and chips is a very popular dish in England
+Since the early modern period the food of England has historically been characterised by its simplicity of approach and a reliance on the high quality of natural produce.[247] During the Middle Ages and through the Renaissance period, English cuisine enjoyed an excellent reputation, though a decline began during the Industrial Revolution with the move away from the land and increasing urbanisation of the populace. The cuisine of England has, however, recently undergone a revival, which has been recognised by the food critics with some good ratings in Restaurant's best restaurant in the world charts.[248] An early book of English recipes is the Forme of Cury from the royal court of Richard II.[249]
+
+An apple pie on a red table cloth, with green apples next to it.
+Apple pie has been consumed in England since the Middle Ages
+Traditional examples of English food include the Sunday roast, featuring a roasted joint (usually beef, lamb, chicken or pork) served with assorted vegetables, Yorkshire pudding, and gravy.[250] Other prominent meals include fish and chips and the full English breakfast (generally consisting of bacon, sausages, grilled tomatoes, fried bread, black pudding, baked beans, mushrooms, and eggs). Various meat pies are consumed such as steak and kidney pie, steak and ale pie, cottage pie, pork pie (the latter usually eaten cold)[250] and the Cornish Pasty.
+
+Sausages are commonly eaten, either as bangers and mash or toad in the hole. Lancashire hotpot is a well known stew in the northwest. Some of the more popular cheeses are Cheddar, Red Leicester and Wensleydale together with Blue Stilton. Many Anglo-Indian hybrid dishes, curries, have been created such as chicken tikka masala and balti. Traditional English dessert dishes include apple pie or other fruit pies; spotted dick - all generally served with custard; and, more recently, sticky toffee pudding. Sweet pastries include scones (either plain or containing dried fruit) served with jam and/or cream, dried fruit loaves, Eccles cakes and mince pies as well as a wide range of sweet or spiced biscuits. Common drinks include tea, whose popularity was increased by Catherine of Braganza,[251] whilst frequently consumed alcoholic drinks include wines, ciders and English beers, such as bitter, mild, stout, and brown ale.[252]
+
+Visual arts
+Main articles: English art and Arts Council England
+A painting of a red haired woman, sitting in a boat, surrounded by trees.
+The Lady of Shalott by John William Waterhouse in the Pre-Raphaelite style
+The earliest known examples are the prehistoric rock and cave art pieces, most prominent in North Yorkshire, Northumberland and Cumbria, but also feature further south, for example at Creswell Crags.[253] With the arrival of Roman culture in the 1st century, various forms of art utilising statues, busts, glasswork and mosaics were the norm. There are numerous surviving artefacts, such as those at Lullingstone and Aldborough.[254] During the Early Middle Ages the style favoured sculpted crosses and ivories, manuscript painting, gold and enamel jewellery, demonstrating a love of intricate, interwoven designs such as in the Staffordshire Hoard discovered in 2009. Some of these blended Gaelic and Anglian styles, such as the Lindisfarne Gospels and Vespasian Psalter.[255] Later Gothic art was popular at Winchester and Canterbury, examples survive such as Benedictional of St. Æthelwold and Luttrell Psalter.[256]
+
+The Tudor era saw prominent artists as part of their court, portrait painting which would remain an enduring part of English art, was boosted by German Hans Holbein, natives such as Nicholas Hilliard built on this.[256] Under the Stuarts, Continental artists were influential especially the Flemish, examples from the period include—Anthony van Dyck, Peter Lely, Godfrey Kneller and William Dobson.[256] The 18th century was a time of significance with the founding of the Royal Academy, a classicism based on the High Renaissance prevailed—Thomas Gainsborough and Joshua Reynolds became two of England's most treasured artists.[256]
+
+The Norwich School continued the landscape tradition, while the Pre-Raphaelite Brotherhood with their vivid and detailed style revived the Early Renaissance style—Holman Hunt, Dante Gabriel Rossetti and John Everett Millais were leaders.[256] Prominent amongst 20th-century artists was Henry Moore, regarded as the voice of British sculpture, and of British modernism in general.[257] Contemporary painters include Lucian Freud, whose work Benefits Supervisor Sleeping in 2008 set a world record for sale value of a painting by a living artist.[258]
+
+Literature, poetry and philosophy
+Main article: English literature
+A man dressed in grey with a beard, holding a rosary, depicted next to a coat of arms.
+Geoffrey Chaucer was an English author, poet and philosopher, best remembered for his unfinished frame narrative The Canterbury Tales.
+Early authors such as Bede and Alcuin wrote in Latin.[259] The period of Old English literature provided the epic poem Beowulf and the secular prose of the Anglo-Saxon Chronicle,[260] along with Christian writings such as Judith, Cædmon's Hymn and hagiographies.[259] Following the Norman conquest Latin continued amongst the educated classes, as well as an Anglo-Norman literature.
+
+Middle English literature emerged with Geoffrey Chaucer, author of The Canterbury Tales, along with Gower, the Pearl Poet and Langland. William of Ockham and Roger Bacon, who were Franciscans, were major philosophers of the Middle Ages. Julian of Norwich, who wrote Revelations of Divine Love, was a prominent Christian mystic. With the English Renaissance literature in the Early Modern English style appeared. William Shakespeare, whose works include Hamlet, Romeo and Juliet, Macbeth, and A Midsummer Night's Dream, remains one of the most championed authors in English literature.[261]
+
+Christopher Marlowe, Edmund Spenser, Philip Sydney, Thomas Kyd, John Donne, and Ben Jonson are other established authors of the Elizabethan age.[262] Francis Bacon and Thomas Hobbes wrote on empiricism and materialism, including scientific method and social contract.[262] Filmer wrote on the Divine Right of Kings. Marvell was the best-known poet of the Commonwealth,[263] while John Milton authored Paradise Lost during the Restoration.
+
+This royal throne of kings, this sceptred isle, this earth of majesty, this seat of Mars, this other Eden, demi-paradise; this fortress, built by nature for herself. This blessed plot, this earth, this realm, this England.
+
+William Shakespeare.[264]
+Some of the most prominent philosophers of the Enlightenment were John Locke, Thomas Paine, Samuel Johnson and Jeremy Bentham. More radical elements were later countered by Edmund Burke who is regarded as the founder of conservatism.[265] The poet Alexander Pope with his satirical verse became well regarded. The English played a significant role in romanticism: Samuel Taylor Coleridge, Lord Byron, John Keats, Mary Shelley, Percy Bysshe Shelley, William Blake and William Wordsworth were major figures.[266]
+
+In response to the Industrial Revolution, agrarian writers sought a way between liberty and tradition; William Cobbett, G. K. Chesterton and Hilaire Belloc were main exponents, while the founder of guild socialism, Arthur Penty, and cooperative movement advocate G. D. H. Cole are somewhat related.[267] Empiricism continued through John Stuart Mill and Bertrand Russell, while Bernard Williams was involved in analytics. Authors from around the Victorian era include Charles Dickens, the Brontë sisters, Jane Austen, George Eliot, Rudyard Kipling, Thomas Hardy, H. G. Wells and Lewis Carroll.[268] Since then England has continued to produce novelists such as George Orwell, D. H. Lawrence, Virginia Woolf, C. S. Lewis, Enid Blyton, Aldous Huxley, Agatha Christie, Terry Pratchett, J. R. R. Tolkien, and J. K. Rowling.[269]
+
+Performing arts
+Main articles: Folk music of England and Music of the United Kingdom
+
+Thomas Tallis' "Lamentations I"
+MENU0:00
+"Greensleeves"
+MENU0:00
+Henry Purcell's "The Queen's Dolour (A Farewell)"
+MENU0:00
+Elgar's "Pomp & Circumstance March No. 1"
+MENU0:00
+The Rolling Stones' "Paint It, Black"
+MENU0:00
+Problems playing these files? See media help.
+The traditional folk music of England is centuries old and has contributed to several genres prominently; mostly sea shanties, jigs, hornpipes and dance music. It has its own distinct variations and regional peculiarities. Wynkyn de Worde printed ballads of Robin Hood from the 16th century are an important artefact, as are John Playford's The Dancing Master and Robert Harley's Roxburghe Ballads collections.[270] Some of the best-known songs are Greensleeves, Pastime with Good Company, Maggie May and Spanish Ladies amongst others. Many nursery rhymes are of English origin such as Twinkle Twinkle Little Star, Roses are red, Jack and Jill, London Bridge Is Falling Down, The Grand Old Duke of York, Hey Diddle Diddle and Humpty Dumpty.[271] Traditional English Christmas carols include "We Wish You a Merry Christmas", "The First Noel" and "God Rest You Merry, Gentlemen".[272]
+
+
+The Beatles are the most commercially successful and critically acclaimed band in the history of music, with sales of over one billion.[273][274][275]
+Early English composers in classical music include Renaissance artists Thomas Tallis and William Byrd, followed up by Henry Purcell from the Baroque period. German-born George Frideric Handel became a British subject[276] and spent most of his composing life in London, creating some of the most well-known works of classical music, The Messiah, Water Music, and Music for the Royal Fireworks. One of his four Coronation Anthems, Zadok the Priest, composed for the coronation of George II, has been performed at every subsequent British coronation, traditionally during the sovereign's anointing. There was a revival in the profile of composers from England in the 20th century led by Edward Elgar, Benjamin Britten, Frederick Delius, Gustav Holst, Ralph Vaughan Williams and others.[277] Present-day composers from England include Michael Nyman, best known for The Piano, and Andrew Lloyd Webber, whose musicals have achieved enormous worldwide success.[278]
+
+In the field of popular music, many English bands and solo artists have been cited as the most influential and best-selling musicians of all time. Acts such as The Beatles, Led Zeppelin, Pink Floyd, Elton John, Queen, Rod Stewart and The Rolling Stones are among the highest selling recording artists in the world.[279] Many musical genres have origins in (or strong associations with) England, such as British invasion, progressive rock, hard rock, Mod, glam rock, heavy metal, Britpop, indie rock, gothic rock, shoegazing, acid house, garage, trip hop, drum and bass and dubstep.[280]
+
+Large outdoor music festivals in the summer and autumn are popular, such as Glastonbury, V Festival, and the Reading and Leeds Festivals. The most prominent opera house in England is the Royal Opera House at Covent Garden.[281] The Proms - a season of orchestral classical concerts held at the Royal Albert Hall in London - is a major cultural event in the English calendar, and takes place yearly.[281] The Royal Ballet is one of the world's foremost classical ballet companies, its reputation built on two prominent figures of 20th-century dance, prima ballerina Margot Fonteyn and choreographer Frederick Ashton.
+
+Museums, libraries, and galleries
+Further information: List of museums in England
+A museum building entrance.
+The Natural History Museum in London
+English Heritage is a governmental body with a broad remit of managing the historic sites, artefacts and environments of England. It is currently sponsored by the Department for Culture, Media and Sport. The charity National Trust for Places of Historic Interest or Natural Beauty holds a contrasting role. 17 of the 25 United Kingdom UNESCO World Heritage Sites fall within England.[282] Some of the best-known of these are: Hadrian's Wall, Stonehenge, Avebury and Associated Sites, Tower of London, Jurassic Coast, Saltaire, Ironbridge Gorge, Studley Royal Park and various others.[283]
+
+There are many museums in England, but perhaps the most notable is London's British Museum. Its collection of more than seven million objects[284] is one of the largest and most comprehensive in the world,[285] sourced from every continent, illustrating and documenting the story of human culture from its beginning to the present. The British Library in London is the national library and is one of the world's largest research libraries, holding over 150 million items in all known languages and formats; including around 25 million books.[286] The most senior art gallery is the National Gallery in Trafalgar Square, which houses a collection of over 2,300 paintings dating from the mid-13th century to 1900.[287] The Tate galleries house the national collections of British and international modern art; they also host the famously controversial Turner Prize.[288]
+
+Sports
+Main article: Sport in England
+The interior of an empty stadium as viewed from its upper tier of seating. The seats are a vivid red and the pitch is a vivid green. The pale grey sky is visible through an opening in the ceiling above the pitch.
+Wembley Stadium, home of the England football team, has a 90,000 capacity. It is the biggest stadium in the UK
+England has a strong sporting heritage, and during the 19th century codified many sports that are now played around the world. Sports originating in England include association football,[289] cricket, rugby union, rugby league, tennis, boxing, badminton, squash,[290] rounders,[291] hockey, snooker, billiards, darts, table tennis, bowls, netball, thoroughbred horseracing, greyhound racing and fox hunting. It has helped the development of golf, sailing and Formula One.
+
+Football is the most popular of these sports. The England national football team, whose home venue is Wembley Stadium, played against Scotland in the first ever international football match in 1872.[292] Referred to as the "home of football" by FIFA, England hosted the 1966 FIFA World Cup, and won the tournament by defeating West Germany 4–2 in the final, with Geoff Hurst scoring a hat-trick.[293]
+
+At club level England is recognised by FIFA as the birthplace of club football, due to Sheffield FC founded in 1857 being the oldest club.[289] The Football Association is the oldest of its kind, with the rules of football first drafted in 1863 by Ebenezer Cobb Morley.[294] The FA Cup and The Football League were the first cup and league competitions respectively. In the modern day the Premier League is the world's most-watched football league,[295] most lucrative,[296] and amongst the elite.[297] As is the case throughout the UK, football in England is renowned for the intense rivalries between clubs and the passion of the supporters, which includes a tradition of football chants, such as, "You're Not Singing Any More" (or it's variant "We Can See You Sneaking Out!"), sung by jubilant fans towards the opposition fans who have gone silent (or left early).[298][299] The European Cup (now UEFA Champions League) has been won by Liverpool, Manchester United, Nottingham Forest, Aston Villa and Chelsea, while Arsenal, and Leeds United have reached the final.[300] Other English clubs have enjoyed success, Tottenham Hotspur, Ipswich Town, Chelsea, and Liverpool have won the UEFA Cup, renamed UEFA Europa League.
+
+Men in cricket whites play upon a green grass cricket field amidst a stadium.
+England on the way to victory against Australia in the 2009 Ashes series at Lord's Cricket Ground
+Cricket is generally thought to have been developed in the early medieval period among the farming and metalworking communities of the Weald.[301] The England cricket team is a composite England and Wales team. One of the game's top rivalries is The Ashes series between England and Australia, contested since 1882. The climax of the 2005 Ashes was viewed by 7.4 million as it was available on terrestrial television.[302] England has hosted four Cricket World Cups (1975, 1979, 1983, 1999) but never won the tournament, reaching the final 3 times. However they have hosted the ICC World Twenty20 in 2009, winning this format in 2010 beating rivals Australia in the final by 7 wickets. In the domestic competition, the County Championship, Yorkshire are by far the most successful club having won the competition 31 times.[303] Lord's Cricket Ground situated in London is sometimes referred to as the "Mecca of Cricket".[304]
+
+William Penny Brookes was prominent in organising the format for the modern Olympic Games. In 1994, then President of the IOC, Juan Antonio Samaranch, laid a wreath on Brooke's grave, and said, "I came to pay homage and tribute to Dr Brookes, who really was the founder of the modern Olympic Games".[305] London has hosted the Summer Olympic Games three times, in 1908, 1948, and 2012. England competes in the Commonwealth Games, held every four years. Sport England is the governing body responsible for distributing funds and providing strategic guidance for sporting activity in England.
+
+White men in grey suits, pale blue shirts and red ties celebrate upon the top floor of an open-top bus. On man holds a golden trophy in the air with one hand.
+The England rugby union team during their victory parade after winning the 2003 Rugby World Cup
+Rugby union originated in Rugby School, Warwickshire in the early 19th century.[306] The England rugby union team won the 2003 Rugby World Cup, the country was one of the host nations of the competition in the 1991 Rugby World Cup and is set to host the 2015 Rugby World Cup.[307] The top level of club participation is the English Premiership. Leicester Tigers, London Wasps, Bath Rugby and Northampton Saints have had success in the Europe-wide Heineken Cup.
+
+Rugby league was born in Huddersfield in 1895. The England national rugby league team are ranked third in the world and first in Europe. Since 2008 England has been a full test nation in lieu of the Great Britain national rugby league team, which won three World Cups but is now retired. Club sides play in Super League, the present-day embodiment of the Rugby Football League Championship. Some of the most successful clubs include Wigan Warriors, St Helens, Leeds Rhinos and Huddersfield Giants; the former three have all won the World Club Challenge previously.
+
+Golf has been prominent in England; due in part to its cultural and geographical ties to Scotland, the home of Golf.[308] There are both professional tours for men and women, in two main tours: the PGA and the European Tour. England has produced grand slam winners: Cyril Walker, Tony Jacklin, Nick Faldo, and Justin Rose in the mens and Laura Davies, Alison Nicholas, and Karen Stupples in the women's. The world's oldest golf tournament, and golf's first major, is The Open Championship, played both in England and Scotland. The biennial golf competition, the Ryder Cup, is named after English businessman Samuel Ryder who sponsored the event and donated the trophy.[309] Nick Faldo is the most successful Ryder Cup player ever, having won the most points (25) of any player on either the European or U.S. teams.[310]
+
+
+Centre Court at Wimbledon. First played in 1877, the Wimbledon Championships is the oldest tennis tournament in the world.[311]
+Tennis was created in Birmingham, England in the late 19th century, and the Wimbledon Championships is the oldest tennis tournament in the world, and widely considered the most prestigious.[312][313] Fred Perry was the last Englishman to win Wimbledon in 1936. He was the first player to win all four Grand Slam singles titles[314] and helped lead the Great Britain team to victory over France in the Davis Cup in 1933. English women who have won Wimbledon include: Ann Haydon Jones won in 1969 and Virginia Wade in 1977.
+
+In boxing, under the Marquess of Queensberry Rules, England has produced many world champions across the weight divisions internationally recognized by the governing bodies. World champions include Bob Fitzsimmons, Ted "Kid" Lewis, Randolph Turpin, Nigel Benn, Chris Eubank, Frank Bruno, Lennox Lewis, Ricky Hatton, Naseem Hamed, Amir Khan, Carl Froch, and David Haye.[315] In women's boxing, Nicola Adams became the world's first woman to win an Olympic boxing Gold medal at the 2012 Summer Olympics.
+
+
+Former Formula One world champion Nigel Mansell driving at Silverstone in 1990. The circuit hosted the first ever Formula One race in 1950
+The 1950 British Grand Prix at Silverstone was the first race in the newly created Formula One World Championship.[316] Since then, England has produced some of the greatest drivers in the sport, including; John Surtees, Stirling Moss, Graham Hill (only driver to have won the Triple Crown), Nigel Mansell (only man to hold F1 and IndyCar titles at the same time), Damon Hill, Lewis Hamilton and Jenson Button.[317] It has manufactured some of the most technically advanced racing cars, and many of today's racing companies choose England as their base of operations for its engineering knowledge and organisation. McLaren Automotive, Williams F1, Team Lotus, Honda, Brawn GP, Benetton, Renault, and Red Bull Racing are all, or have been, located in the south of England. England also has a rich heritage in Grand Prix motorcycle racing, the premier championship of motorcycle road racing, and produced several World Champions across all the various class of motorcycle: Mike Hailwood, John Surtees, Phil Read, Geoff Duke, and Barry Sheene.
+
+Darts is a widely popular sport in England; a professional competitive sport, darts is a traditional pub game. The sport is governed by the World Darts Federation, one of its member organisations is the BDO, which annually stages the Lakeside World Professional Championship, the other being the Professional Darts Corporation (PDC), which runs its own world championship at Alexandra Palace in London. Phil Taylor is widely regarded as the best darts player of all time, having won 187 professional tournaments, and a record 16 World Championships.[318][319] Trina Gulliver is the nine-time Women's World Professional Darts Champion of the British Darts Organisation. Another popular sport commonly associated with pub games is Snooker, and England has produced several world champions, including Steve Davis and Ronnie O'Sullivan.
+
+The English are keen sailors and enjoy competitive sailing; founding and winning some of the worlds most famous and respected international competitive tournaments across the various race formats, including the match race, a regatta, and the America's Cup. England has produced some of the world's greatest sailors, including, Francis Chichester, Herbert Hasler, John Ridgway, Robin Knox-Johnston, Ellen MacArthur, Mike Golding, Paul Goodison, and the most successful Olympic sailor ever Ben Ainslie.[320]
+
+National symbols
+Main article: National symbols of England
+A red shield tapers to its bottom end; on it are three stylised golden lions with blue claws.
+The Royal Arms of England
+The St George's Cross has been the national flag of England since the 13th century. Originally the flag was used by the maritime Republic of Genoa. The English monarch paid a tribute to the Doge of Genoa from 1190 onwards, so that English ships could fly the flag as a means of protection when entering the Mediterranean. A red cross was a symbol for many Crusaders in the 12th and 13th centuries. It became associated with Saint George, along with countries and cities, which claimed him as their patron saint and used his cross as a banner.[321] Since 1606 the St George's Cross has formed part of the design of the Union Flag, a Pan-British flag designed by King James I.[218]
+
+A red and white flower.
+The Tudor rose, England's national floral emblem
+There are numerous other symbols and symbolic artefacts, both official and unofficial, including the Tudor rose, the nation's floral emblem, and the Three Lions featured on the Royal Arms of England. The Tudor rose was adopted as a national emblem of England around the time of the Wars of the Roses as a symbol of peace.[322] It is a syncretic symbol in that it merged the white rose of the Yorkists and the red rose of the Lancastrians—cadet branches of the Plantagenets who went to war over control of the nation. It is also known as the Rose of England.[323] The oak tree is a symbol of England, representing strength and endurance. The Royal Oak symbol and Oak Apple Day commemorate the escape of King Charles II from the grasp of the parliamentarians after his father's execution: he hid in an oak tree to avoid detection before safely reaching exile.
+
+The Royal Arms of England, a national coat of arms featuring three lions, originated with its adoption by Richard the Lionheart in 1198. It is blazoned as gules, three lions passant guardant or and it provides one of the most prominent symbols of England; it is similar to the traditional arms of Normandy. England does not have an official designated national anthem, as the United Kingdom as a whole has God Save the Queen. However, the following are often considered unofficial English national anthems: Jerusalem, Land of Hope and Glory (used for England during the 2002 Commonwealth Games),[324] and I Vow to Thee, My Country. England's National Day is 23 April which is St George's Day: St George is the patron saint of England.[325]
+
+test1 STREAMFLYER test2 STREAMFLYER test3 
+
+See also
+Flag of England.svgEngland portal Flag of the United Kingdom.svgUnited Kingdom portal Europe green light.pngEurope portal Celtic-knot-insquare-39crossings.svgCeltic Studies portal Terrestrial globe.svgGeography portal
+Outline of England
+Notes
+Jump up ^ According to the European Statistical Agency, London is the largest Larger Urban Zone which uses conurbations and areas of high population as its definition. A ranking of population within municipal boundaries places London first. However, the University of Avignon in France claims that Paris is first and London second when including the whole urban area and hinterland, that is the outlying cities as well.
+Jump up ^ As Roger Scruton explains, "The Reformation must not be confused with the changes introduced into the Church of England during the 'Reformation Parliament' of 1529–36, which were of a political rather than a religious nature, designed to unite the secular and religious sources of authority within a single sovereign power: the Anglican Church did not make substantial change in doctrine until later."[55]
+Jump up ^ Figure of 550,000 military deaths is for England and Wales[76]
+Jump up ^ For instance, in 1980 around 50 million Americans claimed English ancestry.[179] In Canada there are around 6.5 million Canadians who claim English ancestry.[180] Around 70% of Australians in 1999 denoted their origins as Anglo-Celtic, a category which includes all peoples from Great Britain and Ireland.[181] Chileans of English descent are somewhat of an anomaly in that Chile itself was never part of the British Empire, but today there are around 420,000 people of English origins living there.[182]
+Jump up ^ Students attending English universities now have to pay tuition fees towards the cost of their education, as do English students who choose to attend university in Scotland. Scottish students attending Scottish universities have their fees paid by the devolved Scottish Parliament.[94]
+Jump up ^ While people such as Norman Foster and Richard Rogers represent the modernist movement, Prince Charles since the 1980s has voiced strong views against it in favour of traditional architecture and put his ideas into practice at his Poundbury development in Dorset.[237] Architects like Raymond Erith, Francis Johnson and Quinlan Terry continued to practice in the classical style.
+Jump up ^ These tales may have come to prominence, at least in part, as an attempt by the Norman ruling elite to legitimise their rule of the British Isles, finding Anglo-Saxon history ill-suited to the task during an era when members of the deposed House of Wessex, especially Edgar the Ætheling and his nephews of the Scottish House of Dunkeld, were still active in the isles.[241][243] Also Michael Wood explains; "Over the centuries the figure of Arthur became a symbol of British history—a way of explaining the matter of Britain, the relationship between the Saxons and the Celts, and a way of exorcising ghosts and healing the wounds of the past."[240]

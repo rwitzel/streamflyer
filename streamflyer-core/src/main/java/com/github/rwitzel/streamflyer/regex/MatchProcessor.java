@@ -36,7 +36,10 @@ public interface MatchProcessor {
      * @param characterBuffer
      *            Must not be <code>null</code>.
      * @param firstModifiableCharacterInBuffer
-     *            See the parameter with the same name in {@link Modifier#modify(StringBuilder, int, boolean)}.
+     *            In comparison to the parameter with the same name in
+     *            {@link Modifier#modify(StringBuilder, int, boolean)} this parameter might be the position at the end
+     *            of the previous match if there is one. (TODO should we rather pass two parameters like 'first char'
+     *            and 'end of previous match' instead of this single parameter?)
      * @param matchResult
      *            The match that is found in the given character buffer. Must not be <code>null</code>.
      * @return Returns an {@link MatchProcessorResult object} that describes where to continue the matching.
