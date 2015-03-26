@@ -6,7 +6,7 @@ If you use the flag `Pattern.MULTI_LINE`, then $ and ^ match the end of line, th
 
 If you don't use this flag, then $ and ^ match the end of stream resp. the start of the stream.
 
-Attention! There is an limitation regarding [look-behind constructs](https://code.google.com/p/streamflyer/#Look-behind_constructs) at the moment (Streamflyer version 1.1.1).
+Attention! There is an limitation regarding [look-behind constructs](../../#look-behind_constructs) at the moment (Streamflyer version 1.2.0).
 
 #### Can I share Modifier instances between threads? ####
 
@@ -30,4 +30,6 @@ Use close(). When you close the writer, the modifier is informed about that and 
 
 The latest version of Streamflyer will contain the additional method `close(closeUnderlyingWriter)`. Pass `false` to this method when you do not want to close the underlying writer.
 
+#### How do I print the correct position (line and column) of a regex match? ####
 
+Look at the support module. There is a working example.

@@ -6,15 +6,14 @@ Streamflyer 1.1.2 is compiled with JDK 1.6.
 
 # Download #
 
-Streamflyer 1.1.2 can be downloaded from [Maven Central](http://search.maven.org/#artifactdetails%7Ccom.googlecode.streamflyer%7Cstreamflyer-core%7C1.1.2%7Cjar) or from the
-[Downloads repository](http://code.google.com/p/streamflyer/source/browse/?repo=downloads).
+Streamflyer 1.2.0 can be downloaded from [Maven Central](http://search.maven.org/#artifactdetails|com.github.rwitzel.streamflyer|streamflyer-core|1.2.0|jar).
 
 The Maven coordinates are
 ```
 <dependency>
-    <groupId>com.googlecode.streamflyer</groupId>
+    <groupId>com.github.rwitzel.streamflyer</groupId>
     <artifactId>streamflyer-core</artifactId>
-    <version>1.1.2</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -23,7 +22,7 @@ The Maven coordinates are
 
 # Dependencies #
 
-Streamflyer 1.1.2 depends on [Commons IO](http://commons.apache.org/io/).
+Streamflyer 1.2.0 depends on [Commons IO](http://commons.apache.org/io/).
 
 The maven coordinates of that dependency are
 
