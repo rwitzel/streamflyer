@@ -11,9 +11,9 @@
 
 +++ 2013-11-10: New wiki page: [How to implement a custom modifier](../../blob/wiki/ImplementCustomModifier.md) for [release 1.1.1](../../blob/wiki/ReleaseNotes.md) +++
 
-+++ 2013-03-10: Regular expression on `InputStream`: Differences to Java Regex [explained](#look-behind_constructs) +++
++++ 2013-03-10: Regular expression on `InputStream`: Differences to Java Regex [explained](#user-content-look-behind-constructs) +++
 
-![../../blob/wiki/streamflyer-body.png](../../blob/wiki//streamflyer-body.png)
+![../../blob/wiki/images/streamflyer-body.png](../../blob/wiki/images/streamflyer-body.png)
 
 ## What it does ##
 
@@ -55,7 +55,7 @@ Read [ImplementCustomModifier](../../blob/wiki/ImplementCustomModifier.md).
 ## Compatibility to Java's Regular Expressions package ##
 
 [RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/regex/RegexModifier.html) internally uses Java's Regex package. This is why it supports
-pattern flags, quantifiers, capturing groups the same way as Java does. An exception are look-behinds, see Section [Known Limitations](#known_limitations).
+pattern flags, quantifiers, capturing groups the same way as Java does. An exception are look-behinds, see Section [Known Limitations](#user-content-known-limitations).
 
 There is a small tutorial: [AdvancedRegularExpressionsExample](../../blob/wiki/AdvancedRegularExpressionsExample.md)
 
@@ -134,8 +134,8 @@ Please give me feedback of any kind. It is highly appreciated.
 
 ## Future enhancements, third party modifiers ##
 
-The next release will change the behaviour of RegexModifier regarding
-[Look-behind constructs](#look-behind_constructs).
+The next major release will change the behaviour of RegexModifier regarding
+[Look-behind constructs](#user-content-look-behind-constructs).
 
 Please let us know if you made a modifier that could be useful for others. Such modifiers could ...
   * [normalize unicode](http://docs.oracle.com/javase/tutorial/i18n/text/normalizerapi.html), i.e. transform characters into their canonical composed or decomposed form
