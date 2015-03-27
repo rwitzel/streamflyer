@@ -7,6 +7,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -74,20 +76,39 @@ public class LineColumnOnRegexMatchTest {
         public MatchProcessorResult process(StringBuilder characterBuffer, int firstModifiableCharacterInBuffer,
                 MatchResult matchResult) {
 
-            String unmatched = characterBuffer.substring(firstCharIndex, matchResult.start());
-            String[] lines = unmatched.split("\r\n|\r|\n");
+            long unmatchedStartLine = fac.getCurrentLine();
+            long unmatchedStartColumn = fac.getCurrentColumn();
+            int unmatchedStart = firstCharIndex;
+            int unmatchedEnd = matchResult.start();
+            String unmatched = characterBuffer.substring(unmatchedStart, unmatchedEnd);
 
-            long lineNumber = fac.getCurrentLine() + lines.length - 1;
-            int columnNumber;
-            if (lines.length == 1) {
-                columnNumber = (int) fac.getCurrentColumn() + matchResult.start() - firstCharIndex;
-            } else {
-                columnNumber = lines[lines.length - 1].length();
-            }
+            String matchPosition = matchPosition(unmatchedStartLine, unmatchedStartColumn, unmatched);
 
-            matchPositions.add("line: " + lineNumber + ", column: " + columnNumber);
+            matchPositions.add(matchPosition);
 
             return super.process(characterBuffer, firstModifiableCharacterInBuffer, matchResult);
+        }
+
+        private String matchPosition(long unmatchedStartLine, long unmatchedStartColumn, String unmatched) {
+
+            Matcher matcher = Pattern.compile("\r\n|\r|\n").matcher(unmatched);
+
+            int numLines = 0;
+            int endOfLastLineBreak = 0;
+            while (matcher.find()) {
+                numLines++;
+                endOfLastLineBreak = matcher.end();
+            }
+
+            long lineNumber = unmatchedStartLine + numLines;
+            long columnNumber;
+            if (numLines == 0) {
+                columnNumber = unmatchedStartColumn + unmatched.length();
+            } else {
+                columnNumber = unmatched.length() - endOfLastLineBreak; // length of last line in 'unmatched'
+            }
+
+            return "line: " + lineNumber + ", column: " + columnNumber;
         }
 
         public List<String> getMatchPositions() {
