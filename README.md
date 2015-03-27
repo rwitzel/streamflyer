@@ -39,14 +39,14 @@ Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
 ```
 
 In this example the chosen
-[Modifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/core/Modifier.html)
+[Modifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/core/Modifier.html)
 replaces the string "edit stream" with "modify stream". You can write your own custom modifier or use a modifier that is shipped with Streamflyer, like the
-[RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/regex/RegexModifier.html)
+[RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/regex/RegexModifier.html)
 that replaces characters by using regular expressions.
 
 The same can be done with a Writer instead of a Reader.
 
-More information about the usage you find in the [API documentation](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/core/Documentation.html).
+More information about the usage you find in the [API documentation](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/core/Documentation.html).
 
 ## Implement custom modifiers ##
 
@@ -54,7 +54,7 @@ Read [ImplementCustomModifier](../../blob/wiki/ImplementCustomModifier.md).
 
 ## Compatibility to Java's Regular Expressions package ##
 
-[RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/regex/RegexModifier.html) internally uses Java's Regex package. This is why it supports
+[RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/regex/RegexModifier.html) internally uses Java's Regex package. This is why it supports
 pattern flags, quantifiers, capturing groups the same way as Java does. An exception are look-behinds, see Section [Known Limitations](#user-content-known-limitations).
 
 There is a small tutorial: [AdvancedRegularExpressionsExample](../../blob/wiki/AdvancedRegularExpressionsExample.md)
@@ -68,8 +68,8 @@ Have a look at [streamflyer-regex-fast](https://github.com/rwitzel/streamflyer-r
 
 Sometimes you have to open XML documents that contain characters that are allowed in XML 1.1 documents but not allowed in XML 1.0 documents. And sometimes you have to open XML documents that contain characters that are entirely forbidden. For these kind of documents some pre-defined modifier exist so that the modified stream can be opened by standard XML parsers:
 
-  * [InvalidXmlCharacterModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/xml/InvalidXmlCharacterModifier.html) - replaces the invalid characters
-  * [XmlVersionModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/xml/XmlVersionModifier.html) - fixes the XML version in the prolog of the XML stream
+  * [InvalidXmlCharacterModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/xml/InvalidXmlCharacterModifier.html) - replaces the invalid characters
+  * [XmlVersionModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/xml/XmlVersionModifier.html) - fixes the XML version in the prolog of the XML stream
 
 
 ## Modify byte streams ##
@@ -141,7 +141,7 @@ Please let us know if you made a modifier that could be useful for others. Such 
   * [normalize unicode](http://docs.oracle.com/javase/tutorial/i18n/text/normalizerapi.html), i.e. transform characters into their canonical composed or decomposed form
   * [include nested content](http://stackoverflow.com/questions/11084382/recursively-replace-regex-find-with-path-in-the-regex), i.e. markup in the stream is replaced with the content of another stream which itself can contain such markup
 
-If you find typos in the [API documentation](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel//streamflyer/core/Documentation.html) let me know.
+If you find typos in the [API documentation](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/core/Documentation.html) let me know.
 
 ## Acknowledgments ##
 
