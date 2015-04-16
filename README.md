@@ -56,7 +56,7 @@ Read [ImplementCustomModifier](../../blob/wiki/ImplementCustomModifier.md).
 ## Compatibility to Java's Regular Expressions package ##
 
 [RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/regex/RegexModifier.html) internally uses Java's Regex package. This is why it supports
-pattern flags, quantifiers, capturing groups the same way as Java does. An exception are look-behinds, see Section [Known Limitations](#user-content-known_limitations).
+pattern flags, quantifiers, capturing groups the same way as Java does. An exception are look-behinds, see Section [Known Limitations](#user-content-known-limitations).
 
 There is a small tutorial: [AdvancedRegularExpressionsExample](../../blob/wiki/AdvancedRegularExpressionsExample.md)
 
