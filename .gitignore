@@ -1,6 +1,8 @@
 /bin/
 /target/
 
+**/*.md.html
+
 **/.classpath
 **/.project
 **/.settings/*

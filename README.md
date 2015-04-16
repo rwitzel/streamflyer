@@ -30,7 +30,7 @@ An example:
 Reader originalReader = ... // this reader is connected to the original data source
 
 // select the modifier of your choice
-Modifier myModifier = new RegexModifier("edit stream", 0, "modify stream");
+Modifier myModifier = new RegexModifier("edit(\\s+)stream", Pattern.CASE_INSENSITIVE, "modify$1stream");
 
 // create the modifying reader that wraps the original reader
 Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
@@ -40,7 +40,8 @@ Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
 
 In this example the chosen
 [Modifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/core/Modifier.html)
-replaces the string "edit stream" with "modify stream". You can write your own custom modifier or use a modifier that is shipped with Streamflyer, like the
+replaces the string "edit stream" with "modify stream" while preserving the white space between *edit* and *stream*.
+You can write your own custom modifier or use a modifier that is shipped with Streamflyer, like the
 [RegexModifier](http://rwitzel.github.io/streamflyer/site/apidocs/index.html?com/github/rwitzel/streamflyer/regex/RegexModifier.html)
 that replaces characters by using regular expressions.
 

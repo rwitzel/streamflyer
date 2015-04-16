@@ -30,9 +30,6 @@ import org.junit.Test;
 import com.github.rwitzel.streamflyer.core.Modifier;
 import com.github.rwitzel.streamflyer.core.ModifyingReader;
 import com.github.rwitzel.streamflyer.core.ModifyingWriter;
-import com.github.rwitzel.streamflyer.regex.MatchProcessor;
-import com.github.rwitzel.streamflyer.regex.MatchProcessorResult;
-import com.github.rwitzel.streamflyer.regex.RegexModifier;
 import com.github.rwitzel.streamflyer.util.StringUtils;
 
 /**
@@ -100,17 +97,17 @@ public class RegexModifierTest extends AbstractRegexModifierTest {
     public void testExampleFromHomepage_usage2() throws Exception {
 
         // choose the character stream to modify
-        Reader originalReader = new StringReader("edit\n\nstream");
+        Reader originalReader = new StringReader("edit\n\nStream");
 
         // select the modifier
-        Modifier myModifier = new RegexModifier("edit\\s+stream", 0, "modify stream");
+        Modifier myModifier = new RegexModifier("edit(\\s+)stream", Pattern.CASE_INSENSITIVE, "modify$1stream");
 
         // create the modifying reader that wraps the original reader
         Reader modifyingReader = new ModifyingReader(originalReader, myModifier);
 
         // use the modifying reader instead of the original reader
         String output = IOUtils.toString(modifyingReader);
-        assertEquals("modify stream", output);
+        assertEquals("modify\n\nstream", output);
     }
 
     private String modify(String input, Modifier myModifier) throws Exception {
