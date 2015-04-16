@@ -147,3 +147,4 @@ If you find typos in the [API documentation](http://rwitzel.github.io/streamflye
 ## Acknowledgments ##
 
 The logo is based on drafts by K. Dabels.
+
