@@ -1,5 +1,5 @@
 
-[![Travis build status](https://travis-ci.org/rwitzel/streamflyer.svg)](https://travis-ci.org/rwitzel/streamflyer)
+[![Travis build status](https://api.travis-ci.org/rwitzel/streamflyer.svg?branch=master)](https://travis-ci.org/rwitzel/streamflyer)
 [![Coveralls coverage status](https://img.shields.io/coveralls/rwitzel/streamflyer.svg)](https://coveralls.io/r/rwitzel/streamflyer)
 [![Apache 2](http://img.shields.io/badge/license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
