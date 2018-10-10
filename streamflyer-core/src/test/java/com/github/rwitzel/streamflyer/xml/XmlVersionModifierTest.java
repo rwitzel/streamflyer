@@ -59,6 +59,10 @@ public class XmlVersionModifierTest {
 
         // version in prolog has double quotes
         assertXmlVersionInProlog("<?xml version=\"1.1\">", "1.0", "<?xml version=\"1.0\">");
+        
+        // string contains trailing newlines
+        assertXmlVersionInProlog("<?xml version=\"1.0\">\n<testResults>\n<tag>value</tag>\n</testResults>", "1.1", "<?xml version=\"1.1\">\n<testResults>\n<tag>value</tag>\n</testResults>");
+        
     }
 
     @Test
