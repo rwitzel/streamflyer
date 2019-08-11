@@ -166,16 +166,16 @@ public class XmlVersionModifier implements Modifier {
             // (Should we do aware of BOMs here? No. I consider it the
             // responsibility of the caller to provide characters without BOM.)
 
-            Matcher matcher = Pattern.compile("<\\?xml[^>]*version\\s*=\\s*['\"]((1.0)|(1.1))['\"].*").matcher(
+            Matcher matcher = Pattern.compile("^<\\?xml[^>]*version\\s*=\\s*['\"](1.[01])['\"]").matcher(
                     characterBuffer);
-            if (matcher.matches()) {
+            if (matcher.find()) {
 
                 // replace version in prolog
                 characterBuffer.replace(matcher.start(1), matcher.end(1), xmlVersion);
             } else {
                 // is there a prolog that is too long?
-                Matcher matcher2 = Pattern.compile("<\\?xml.*").matcher(characterBuffer);
-                if (matcher2.matches()) {
+                Matcher matcher2 = Pattern.compile("^<\\?xml").matcher(characterBuffer);
+                if (matcher2.find()) {
                     // this is not normal at all -> throw exception
                     throw new XmlPrologRidiculouslyLongException(characterBuffer.toString());
                 }
